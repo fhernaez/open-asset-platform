@@ -72,8 +72,8 @@ class Command(BaseCommand):
         password_file = os.environ.get("AUTH_BOOTSTRAP_ADMIN_PASSWORD_FILE", "")
         if not email:
             return False
-        password = ""
-        if password_file and Path(password_file).exists():
+        password = os.environ.get("AUTH_BOOTSTRAP_ADMIN_PASSWORD", "")
+        if not password and password_file and Path(password_file).exists():
             password = Path(password_file).read_text(encoding="utf-8").strip()
         if not password:
             return False

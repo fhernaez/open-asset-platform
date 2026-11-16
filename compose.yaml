@@ -2,7 +2,7 @@ name: oap
 
 x-backend-env: &backend-env
   DJANGO_SETTINGS_MODULE: config.settings
-  DJANGO_SECRET_KEY_FILE: /run/secrets/django_secret
+  DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
   DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,api,frontend}
   DJANGO_CSRF_TRUSTED_ORIGINS: ${DJANGO_CSRF_TRUSTED_ORIGINS:-http://localhost:8080}
   OAP_ENV: ${OAP_ENV:-development}
@@ -11,10 +11,10 @@ x-backend-env: &backend-env
   DB_PORT: "5432"
   DB_NAME: ${DB_NAME:-oap}
   DB_APP_USER: ${DB_APP_USER:-oap_app}
-  DB_APP_PASSWORD_FILE: /run/secrets/db_app_password
+  DB_APP_PASSWORD: ${DB_APP_PASSWORD}
   AUTH_PROVIDER: local
   AUTH_BOOTSTRAP_ADMIN_EMAIL: ${AUTH_BOOTSTRAP_ADMIN_EMAIL:-admin@oap.local}
-  AUTH_BOOTSTRAP_ADMIN_PASSWORD_FILE: /run/secrets/bootstrap_admin_password
+  AUTH_BOOTSTRAP_ADMIN_PASSWORD: ${AUTH_BOOTSTRAP_ADMIN_PASSWORD}
   PLUGINS_BOOTSTRAP_MODE: once
   PLUGIN_MQTT_DEFAULT_ENABLED: ${PLUGIN_MQTT_DEFAULT_ENABLED:-true}
   TELEMETRY_DEFAULT_STORAGE_MODE: ${TELEMETRY_DEFAULT_STORAGE_MODE:-on_change}
@@ -27,9 +27,7 @@ services:
     image: timescale/timescaledb-ha:pg16
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD_FILE: /run/secrets/db_admin_password
-    secrets:
-      - db_admin_password
+      POSTGRES_PASSWORD: ${DB_ADMIN_PASSWORD}
     volumes:
       - db_data:/home/postgres/pgdata/data
     healthcheck:
@@ -48,14 +46,11 @@ services:
       DB_HOST: db
       DB_PORT: "5432"
       DB_ADMIN_USER: postgres
-      DB_ADMIN_PASSWORD_FILE: /run/secrets/db_admin_password
+      DB_ADMIN_PASSWORD: ${DB_ADMIN_PASSWORD}
       DB_NAME: ${DB_NAME:-oap}
       DB_APP_USER: ${DB_APP_USER:-oap_app}
-      DB_APP_PASSWORD_FILE: /run/secrets/db_app_password
+      DB_APP_PASSWORD: ${DB_APP_PASSWORD}
       DB_REQUIRED_EXTENSIONS: ${DB_REQUIRED_EXTENSIONS:-postgis,timescaledb}
-    secrets:
-      - db_admin_password
-      - db_app_password
     depends_on:
       db:
         condition: service_healthy
@@ -71,10 +66,6 @@ services:
       && python manage.py ensure_hypertables"
     environment:
       <<: *backend-env
-    secrets:
-      - db_app_password
-      - django_secret
-      - bootstrap_admin_password
     depends_on:
       db-bootstrap:
         condition: service_completed_successfully
@@ -86,10 +77,6 @@ services:
       context: ./backend
     environment:
       <<: *backend-env
-    secrets:
-      - db_app_password
-      - django_secret
-      - bootstrap_admin_password
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -108,9 +95,6 @@ services:
       sh -c "while true; do python manage.py dispatch_outbox; sleep 5; done"
     environment:
       <<: *backend-env
-    secrets:
-      - db_app_password
-      - django_secret
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -143,9 +127,6 @@ services:
     command: ["python", "manage.py", "mqtt_worker"]
     environment:
       <<: *backend-env
-    secrets:
-      - db_app_password
-      - django_secret
     profiles: ["iot"]
     depends_on:
       migrate:
@@ -153,16 +134,6 @@ services:
       mqtt-broker:
         condition: service_started
     restart: unless-stopped
-
-secrets:
-  db_admin_password:
-    file: ./secrets/db_admin_password.txt
-  db_app_password:
-    file: ./secrets/db_app_password.txt
-  django_secret:
-    file: ./secrets/django_secret.txt
-  bootstrap_admin_password:
-    file: ./secrets/bootstrap_admin_password.txt
 
 volumes:
   db_data:

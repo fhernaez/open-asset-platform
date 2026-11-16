@@ -19,6 +19,7 @@ secrets/
 *.key
 *.sqlite3
 *.db
+*.tsbuildinfo
 .DS_Store
 
 *.tsbuildinfo

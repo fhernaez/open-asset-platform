@@ -1,0 +1,110 @@
+name: oap
+
+services:
+  migrate:
+    image: ghcr.io/fhernaez/open-asset-platform/backend:latest
+    command: >
+      sh -c "python manage.py migrate --noinput
+      && python manage.py bootstrap_config --seed-missing-only
+      && python manage.py ensure_hypertables"
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_NAME: ${DB_NAME}
+      DB_APP_USER: ${DB_APP_USER}
+      DB_APP_PASSWORD: ${DB_APP_PASSWORD}
+      AUTH_BOOTSTRAP_ADMIN_EMAIL: ${AUTH_BOOTSTRAP_ADMIN_EMAIL}
+      AUTH_BOOTSTRAP_ADMIN_PASSWORD: ${AUTH_BOOTSTRAP_ADMIN_PASSWORD}
+      PLUGIN_MQTT_DEFAULT_ENABLED: ${PLUGIN_MQTT_DEFAULT_ENABLED:-true}
+    networks: [iot-net]
+    restart: "no"
+
+  api:
+    image: ghcr.io/fhernaez/open-asset-platform/backend:latest
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
+      DJANGO_CSRF_TRUSTED_ORIGINS: ${DJANGO_CSRF_TRUSTED_ORIGINS}
+      OAP_ENV: ${OAP_ENV:-production}
+      OAP_PUBLIC_URL: ${OAP_PUBLIC_URL}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_NAME: ${DB_NAME}
+      DB_APP_USER: ${DB_APP_USER}
+      DB_APP_PASSWORD: ${DB_APP_PASSWORD}
+      AUTH_PROVIDER: local
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; urllib.request.urlopen('http://localhost:8000/api/v1/health', timeout=5)"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    networks: [iot-net]
+    restart: unless-stopped
+
+  event-worker:
+    image: ghcr.io/fhernaez/open-asset-platform/backend:latest
+    command: >
+      sh -c "while true; do python manage.py dispatch_outbox; sleep 5; done"
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_NAME: ${DB_NAME}
+      DB_APP_USER: ${DB_APP_USER}
+      DB_APP_PASSWORD: ${DB_APP_PASSWORD}
+      AUTH_PROVIDER: local
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    networks: [iot-net]
+    restart: unless-stopped
+
+  telemetry-worker:
+    image: ghcr.io/fhernaez/open-asset-platform/backend:latest
+    command: ["python", "manage.py", "mqtt_worker"]
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_NAME: ${DB_NAME}
+      DB_APP_USER: ${DB_APP_USER}
+      DB_APP_PASSWORD: ${DB_APP_PASSWORD}
+      MQTT_BROKER_URL: ${MQTT_BROKER_URL:-mqtt://mqtt-broker:1883}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      mqtt-broker:
+        condition: service_started
+    networks: [iot-net]
+    restart: unless-stopped
+
+  frontend:
+    image: ghcr.io/fhernaez/open-asset-platform/frontend:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    networks: [iot-net]
+    restart: unless-stopped
+
+  mqtt-broker:
+    image: eclipse-mosquitto:2
+    volumes:
+      - ./infra/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+    ports:
+      - "1883:1883"
+    networks: [iot-net]
+    restart: unless-stopped
+
+networks:
+  iot-net:
+    driver: bridge

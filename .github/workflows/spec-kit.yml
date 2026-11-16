@@ -1,0 +1,13 @@
+name: Spec Kit Consistency
+on:
+  push:
+  pull_request:
+jobs:
+  spec-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create .venv before Python execution
+        run: python3 -m venv .venv
+      - name: Check documentation kit (NOT application)
+        run: .venv/bin/python scripts/check_spec_kit.py

@@ -1,0 +1,5 @@
+# CONTEXT — Inyectar tras SYSTEM, o leer desde AGENTS/CONTEXT
+
+Proyecto OAP: reemplazo modular de capacidades OpenRemote y Atlas CMMS, no integración con sus servidores. Django/DRF/GeoDjango + React; Docker Compose; PostgreSQL/TimescaleDB/PostGIS; sistema de plugins instalado-versus-habilitado, semántica IEC 81346/Brick/Haystack RDF-SHACL, GIS de imágenes/geocoordenadas, MQTT direct with adaptive storage, Modbus/BACnet/HTTP, dashboards, reglas y alertas, CMMS, EMS, Node-RED opcional import/export, ERP externo, IA local y MCP. Python local dentro de `.venv`. DB creada en deploy si no existe. Datos canónicos en PostgreSQL; proyecciones derivadas RDF/series. GUI administra settings persistentes; `.env` solo los defaults iniciales y locks/deploy. Construcción por cortes verticales, pruebas reales y paridad rastreable.
+
+Conectá cada tarea con `docs/requirements/REQUIREMENTS.md`, `docs/quality/GATES.md`, `docs/plan/BUILD_ORDER.md` y el documento específico de CORE o addon. No uses el README como sustituto de esas fuentes.

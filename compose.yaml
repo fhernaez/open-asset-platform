@@ -1,0 +1,168 @@
+name: oap
+
+x-backend-env: &backend-env
+  DJANGO_SETTINGS_MODULE: config.settings
+  DJANGO_SECRET_KEY_FILE: /run/secrets/django_secret
+  DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,api,frontend}
+  DJANGO_CSRF_TRUSTED_ORIGINS: ${DJANGO_CSRF_TRUSTED_ORIGINS:-http://localhost:8080}
+  OAP_ENV: ${OAP_ENV:-development}
+  OAP_PUBLIC_URL: ${OAP_PUBLIC_URL:-http://localhost:8080}
+  DB_HOST: db
+  DB_PORT: "5432"
+  DB_NAME: ${DB_NAME:-oap}
+  DB_APP_USER: ${DB_APP_USER:-oap_app}
+  DB_APP_PASSWORD_FILE: /run/secrets/db_app_password
+  AUTH_PROVIDER: local
+  AUTH_BOOTSTRAP_ADMIN_EMAIL: ${AUTH_BOOTSTRAP_ADMIN_EMAIL:-admin@oap.local}
+  AUTH_BOOTSTRAP_ADMIN_PASSWORD_FILE: /run/secrets/bootstrap_admin_password
+  PLUGINS_BOOTSTRAP_MODE: once
+  PLUGIN_MQTT_DEFAULT_ENABLED: ${PLUGIN_MQTT_DEFAULT_ENABLED:-true}
+  TELEMETRY_DEFAULT_STORAGE_MODE: ${TELEMETRY_DEFAULT_STORAGE_MODE:-on_change}
+  TELEMETRY_DEFAULT_MAX_SAMPLES: ${TELEMETRY_DEFAULT_MAX_SAMPLES:-60}
+  TELEMETRY_DEFAULT_WINDOW: ${TELEMETRY_DEFAULT_WINDOW:-PT1H}
+  MQTT_BROKER_URL: ${MQTT_BROKER_URL:-mqtt://mqtt-broker:1883}
+
+services:
+  db:
+    image: timescale/timescaledb-ha:pg16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_admin_password
+    secrets:
+      - db_admin_password
+    volumes:
+      - db_data:/home/postgres/pgdata/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  db-bootstrap:
+    image: oap-backend:local
+    build:
+      context: ./backend
+    command: ["python", "scripts/ensure_db.py"]
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_ADMIN_USER: postgres
+      DB_ADMIN_PASSWORD_FILE: /run/secrets/db_admin_password
+      DB_NAME: ${DB_NAME:-oap}
+      DB_APP_USER: ${DB_APP_USER:-oap_app}
+      DB_APP_PASSWORD_FILE: /run/secrets/db_app_password
+      DB_REQUIRED_EXTENSIONS: ${DB_REQUIRED_EXTENSIONS:-postgis,timescaledb}
+    secrets:
+      - db_admin_password
+      - db_app_password
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  migrate:
+    image: oap-backend:local
+    build:
+      context: ./backend
+    command: >
+      sh -c "python manage.py migrate --noinput
+      && python manage.py bootstrap_config --seed-missing-only
+      && python manage.py ensure_hypertables"
+    environment:
+      <<: *backend-env
+    secrets:
+      - db_app_password
+      - django_secret
+      - bootstrap_admin_password
+    depends_on:
+      db-bootstrap:
+        condition: service_completed_successfully
+    restart: "no"
+
+  api:
+    image: oap-backend:local
+    build:
+      context: ./backend
+    environment:
+      <<: *backend-env
+    secrets:
+      - db_app_password
+      - django_secret
+      - bootstrap_admin_password
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; urllib.request.urlopen('http://localhost:8000/api/v1/health', timeout=5)"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  event-worker:
+    image: oap-backend:local
+    build:
+      context: ./backend
+    command: >
+      sh -c "while true; do python manage.py dispatch_outbox; sleep 5; done"
+    environment:
+      <<: *backend-env
+    secrets:
+      - db_app_password
+      - django_secret
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  frontend:
+    image: oap-frontend:local
+    build:
+      context: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+  mqtt-broker:
+    image: eclipse-mosquitto:2
+    profiles: ["iot"]
+    volumes:
+      - ./infra/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+    ports:
+      - "1883:1883"
+    restart: unless-stopped
+
+  telemetry-worker:
+    image: oap-backend:local
+    build:
+      context: ./backend
+    command: ["python", "manage.py", "mqtt_worker"]
+    environment:
+      <<: *backend-env
+    secrets:
+      - db_app_password
+      - django_secret
+    profiles: ["iot"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      mqtt-broker:
+        condition: service_started
+    restart: unless-stopped
+
+secrets:
+  db_admin_password:
+    file: ./secrets/db_admin_password.txt
+  db_app_password:
+    file: ./secrets/db_app_password.txt
+  django_secret:
+    file: ./secrets/django_secret.txt
+  bootstrap_admin_password:
+    file: ./secrets/bootstrap_admin_password.txt
+
+volumes:
+  db_data:

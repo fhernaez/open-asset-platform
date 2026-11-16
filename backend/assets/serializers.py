@@ -1,0 +1,78 @@
+from __future__ import annotations
+
+from rest_framework import serializers
+
+from assets.models import Asset, AssetAttribute, AssetType, Unit
+
+
+class UnitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Unit
+        fields = ["symbol", "name", "quantity"]
+
+
+class AssetTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AssetType
+        fields = ["id", "tenant", "project", "name", "code", "description", "schema", "created_at"]
+        read_only_fields = ["tenant", "project"]
+
+
+class AssetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Asset
+        fields = [
+            "id",
+            "tenant",
+            "project",
+            "name",
+            "external_ref",
+            "asset_type",
+            "parent",
+            "status",
+            "metadata",
+            "created_at",
+        ]
+        read_only_fields = ["tenant", "project"]
+
+
+class AssetAttributeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AssetAttribute
+        fields = [
+            "id",
+            "tenant",
+            "project",
+            "asset",
+            "name",
+            "code",
+            "value_type",
+            "unit",
+            "description",
+            "storage_datapoint",
+            "history_enabled",
+            "history_policy_override",
+            "metadata",
+            "created_at",
+        ]
+        read_only_fields = ["tenant", "project"]
+
+    def validate(self, attrs):
+        override = attrs.get("history_policy_override")
+        if override is not None and not isinstance(override, dict):
+            raise serializers.ValidationError({"history_policy_override": "must be an object"})
+        mode = (override or {}).get("mode")
+        if mode is not None and mode not in {
+            "all",
+            "on_change",
+            "min_interval",
+            "fixed_n_per_window",
+            "aggregate_window",
+        }:
+            raise serializers.ValidationError({"history_policy_override": "invalid mode"})
+        # storageDatapoint is the UI alias of history_enabled (internal source of truth).
+        if "history_enabled" in attrs and "storage_datapoint" not in attrs:
+            attrs["storage_datapoint"] = attrs["history_enabled"]
+        if "storage_datapoint" in attrs and "history_enabled" not in attrs:
+            attrs["history_enabled"] = attrs["storage_datapoint"]
+        return attrs

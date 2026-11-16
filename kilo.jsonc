@@ -1,0 +1,9 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  // Reglas del proyecto; agentes definidos en .kilo/agents/*.md. Modelos: elegir en UI.
+  "instructions": [
+    ".kilo/rules/*.md",
+    "AGENTS.md",
+    "CONTEXT.md"
+  ]
+}

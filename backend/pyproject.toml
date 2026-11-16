@@ -1,0 +1,20 @@
+[project]
+name = "oap-backend"
+version = "0.1.0"
+description = "Open Asset Platform backend (Django/DRF)"
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["migrations", ".venv", "node_modules"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["B008", "UP017"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings_test"
+python_files = ["test_*.py", "tests.py", "*_tests.py"]
+addopts = "-ra"
+testpaths = ["tests"]

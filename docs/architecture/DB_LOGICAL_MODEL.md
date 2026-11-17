@@ -6,14 +6,14 @@
 ## Integridad
 - `Asset.id UUID` PK; `tenant_id`, `project_id` y `revision` con índices.
 - `AssetAttribute UNIQUE(asset_id,key)` si no versionado por key; `ExternalRef UNIQUE(tenant,source,external_id)`.
-- `TelemetryHistory` hypertable partition by time, index `(tenant_id, attribute_id, ts desc)`, `source_event_id` dedupe lógica; Timescale constraints deben incluir columna time donde lo requieran; diseñar key conforme versión.
+- `TelemetryHistory` tabla indexada por `(attribute_id, ts desc)` con `source_event_id` dedupe lógica; particionado nativo por tiempo es opción de escalado posterior, no una dependencia.
 - `StoragePolicyState` requiere atomicidad per-attribute/window/policy_version para cuota N. Su serialización debe estar en DB o partición worker formal, no variable global de Python.
 - `PluginActivation UNIQUE(plugin,scope,scope_id)`, `PluginSetting` con revisión ETag.
 - `WorkOrder` tiene tenant/asset FK lógica por servicio/constraint; status transition audit y `WorkRequest` idempotency.
 - `RDFProjectionCheckpoint` con tenant, seq, version; jamás autoridad de cambio.
 
 ## Migraciones
-Schema migration versionada desde Django; Timescale hypertable y PostGIS extensión vía `RunSQL` reversible cuando viable, con validación de extensión disponible en `db-bootstrap`. No usar `migrate --run-syncdb` como sustituto. Renovar índices con conciencia del costo de datos; sin `DROP` a menos que upgrade plan lo avale.
+Schema migration versionada desde Django; PostGIS extensión vía `RunSQL` reversible cuando viable, con validación de extensión disponible en `db-bootstrap`. No usar `migrate --run-syncdb` como sustituto. Renovar índices con conciencia del costo de datos; sin `DROP` a menos que upgrade plan lo avale.
 
 ## Benchmarks
 Explain Plan para 1e6 points y 100k assets, probar query hist policy, join filtrada tenant y index selectivity. Backup real y restore.

@@ -2,7 +2,7 @@
 """Idempotent DB bootstrap (db-bootstrap one-shot service).
 
 Creates the application role and database if they are missing, then installs the
-required extensions (postgis, timescaledb) and schemas. Safe to run on a fresh
+required extensions (postgis) and schemas. Safe to run on a fresh
 volume or on a pre-existing cluster that lacks the OAP database. It never drops
 or alters existing databases/roles and uses an advisory lock to serialize
 concurrent runs. Exits non-zero if a required extension cannot be installed.
@@ -106,7 +106,7 @@ def main() -> int:
     dbname = _env("DB_NAME", "oap")
     app_user = _env("DB_APP_USER", "oap_app")
     app_password = _read_secret("DB_APP_PASSWORD", "DB_APP_PASSWORD_FILE")
-    extensions = [e.strip() for e in _env("DB_REQUIRED_EXTENSIONS", "postgis,timescaledb").split(",") if e.strip()]
+    extensions = [e.strip() for e in _env("DB_REQUIRED_EXTENSIONS", "postgis").split(",") if e.strip()]
 
     for value, label in ((dbname, "DB_NAME"), (app_user, "DB_APP_USER")):
         _validate_identifier(value, label)

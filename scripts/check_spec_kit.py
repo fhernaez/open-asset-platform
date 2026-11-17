@@ -18,7 +18,7 @@ for p in required:
     elif len(path.read_text(encoding='utf8').strip())<100:fail.append('TOO_SHORT: '+p)
 required_terms = {
 'docs/core/TELEMETRY_POLICY.md':['on_change','storageDatapoint','max_samples','Attribute','Node-RED','restart'],
-'docs/infrastructure/DB_BOOTSTRAP.md':['docker compose','db-bootstrap','timescaledb','postgis','volumen','idempotente'],
+ 'docs/infrastructure/DB_BOOTSTRAP.md':['docker compose','db-bootstrap','postgis','volumen','idempotente'],
 'docs/plan/BUILD_ORDER.md':['S00','S09','G4','G9'],
 'AGENTS.md':['.venv','Django','MQTT','Gates' if False else 'gates'],
 }

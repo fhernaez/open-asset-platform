@@ -12,7 +12,7 @@ Browser React MapLibre dashboards admin plugins
      | HTTPS/OIDC/session
 Django DRF + ASGI CORE -----> websocket/SSE subscription
      | ORM transactions/outbox
-     +----> PostgreSQL PostGIS TimescaleDB
+     +----> PostgreSQL PostGIS
      +----> semantic projection worker --> RDF (rebuildable)
      +----> notification/CMMS/rules workers
      +----> plugins in-process: CMMS BMS EMS Analytics
@@ -33,13 +33,13 @@ Los procesos IoT no dependen de las solicitudes HTTP. Las colas no garantizan ex
 - **Integrations**: conectores externos con contratos, secretos, mapeos y salud.
 
 ## 5. Regla única de autoridad
-`Asset.id` UUID inmutable es identificador canónico. El equipo físico, la función y la ubicación son objetos/relaciones diferenciados. No usar la referencia IEC como PK. PostgreSQL guarda master y estados transaccionales; Timescale es el almacenamiento de muestras aceptadas; RDF es proyección eventual reconstruible con watermark y reintentos. Node-RED guarda flujos, no inventario maestro. ERP compra/factura, OAP solicitud de recurso y referencia externa.
+`Asset.id` UUID inmutable es identificador canónico. El equipo físico, la función y la ubicación son objetos/relaciones diferenciados. No usar la referencia IEC como PK. PostgreSQL guarda master, estados transaccionales y muestras aceptadas (histórico); RDF es proyección eventual reconstruible con watermark y reintentos. Node-RED guarda flujos, no inventario maestro. ERP compra/factura, OAP solicitud de recurso y referencia externa.
 
 ## 6. Composición y operación
 La imagen Django incluye apps CORE y addons Django autorizados; `INSTALLED_APPS` se fija al build/arranque. El plugin manager persiste `PluginDefinition`, `PluginActivation`, `PluginSettings`, health y audit y puede habilitar por tenant/proyecto sin editar Python importado. Instalar nuevo código o cambiar modelos requiere release+migración+restart. Drivers no confiables, asistentes, MCP, gateways se aíslan como servicios Docker. Frontend shell registra extensiones mediante `UIExtensionManifest` versionado (menús, rutas, widgets, formularios, capas).
 
 ## 7. Datos y DB
-PostgreSQL con extensiones `postgis`, `timescaledb` (según imagen auditada); tipos `jsonb`, relaciones y constraint; índice compuesto `(tenant_id, project_id, id)` según tablas. Bigint/UUID para muestras. Hypertables con index `(tenant_id, attribute_id, ts DESC)`, tiempo en UTC y dedupe por source/event ID; tabla current value separada. Retención y agregados sólo cuando su licencia/versión lo permitan. Ver `docs/infrastructure/DB_BOOTSTRAP.md` y `docs/core/TELEMETRY_POLICY.md`.
+PostgreSQL con extensión `postgis` (imagen auditada); tipos `jsonb`, relaciones y constraints; índice compuesto `(tenant_id, project_id, id)` según tablas. UUID para muestras. Tabla de historial con índice `(attribute_id, ts DESC)`, tiempo en UTC y dedupe por source/event ID; tabla current value separada. Retención por borrado de ventanas vencidas (ver `docs/infrastructure/DB_BOOTSTRAP.md` y `docs/core/TELEMETRY_POLICY.md`).
 
 ## 8. Protocolos
 MQTT directo e integrado (sin Node-RED) con agent profiles. Workers de ingesta actualizan current value, evalúan reglas/alarma y A CONTINUACIÓN aplican StoragePolicy. Modbus TCP/RTU, BACnet/IP, HTTP/WS, SNMP y Edge según etapas; drivers de seguridad física separados. Provisionamiento/Discovery, punto ↔ equipo semántico, ACL por dispositivo, quality flags, QoS y retry. No prometer soportar absolutamente todo protocolo sin especificar gateway.
@@ -57,7 +57,7 @@ Primer despliegue: monolito modular + workers separados, no microservicios por e
 Docker Compose base + perfiles; esquema datos primero: DB init idempotente con volumen nuevo Y existente, migrations/versionado, seed de plugins once, api/web, workers. Healthcheck para DB; migrator one-shot `service_completed_successfully`; no migrations al iniciar cada worker. Backup antes de upgrade, expand/contract en migraciones, rollback de código con compatibilidad, restauración probada. Las configuraciones administrativas persisten por encima de defaults env; locks de seguridad env siempre prevalecen.
 
 ## 13. FOSS + documentación pública
-Revisar licencias de cada paquete, assets UI, modelos IA y Timescale funcionalidades. Licencia OAP definida en ADR tras auditoría; cualquier reutilización AGPL conserva obligaciones. No copiar descripciones enteras ni código de características solo comerciales. GitHub almacena `docs/`, infraestructura, código, tests, CI, migrations y SBOM. Secretos/volúmenes no versionados.
+Revisar licencias de cada paquete, assets UI, modelos IA y extensiones Postgres. Licencia OAP definida en ADR tras auditoría; cualquier reutilización AGPL conserva obligaciones. No copiar descripciones enteras ni código de características solo comerciales. GitHub almacena `docs/`, infraestructura, código, tests, CI, migrations y SBOM. Secretos/volúmenes no versionados.
 
 ## 14. Criterios globales de aceptación
 G0 especificaciones, G1 sandbox+DB+stack, G2 modelo/tenant, G3 plugin toggles/restart, G4 MQTT on_change/N período, G5 CMMS, G6 GIS/semántica, G7 protocolos+reglas, G8 integraciones+MCP, G9 seguridad/performance/restore/paridad. Definidos y bloqueantes en `docs/quality/GATES.md`. Sin tests ejecutados, status BLOCKED.

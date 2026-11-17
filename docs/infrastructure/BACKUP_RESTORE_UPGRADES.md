@@ -1,7 +1,7 @@
 # Operación: backup, restauración y upgrades
 
 ## Backup y protección
-Backup PostgreSQL consistente incluyendo schemas, timescale metadata, roles/schema y app configuration; copiar archivos/uploads y exportar version de plugins, schemas y modelo semántico. Encriptar respaldos y configurar retención. No incluir secretos en claro ni confiar solo en volume snapshots sin pruebas.
+Backup PostgreSQL consistente incluyendo schemas, extensiones, roles/schema y app configuration; copiar archivos/uploads y exportar version de plugins, schemas y modelo semántico. Encriptar respaldos y configurar retención. No incluir secretos en claro ni confiar solo en volume snapshots sin pruebas.
 
 ## Restauración ensayada
 Restore en stack aislado con misma versión de DB+extensiones, migrar si procede, validar total assets/orders/telemetry, sample policies, geo placements, plugin toggles, RDF projection watermark, permisos y health. No ejecutar restore sobre producción sin revisión de impacto.

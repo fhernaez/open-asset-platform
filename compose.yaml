@@ -24,7 +24,7 @@ x-backend-env: &backend-env
 
 services:
   db:
-    image: timescale/timescaledb-ha:pg16
+    image: postgis/postgis:16-3.4
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${DB_ADMIN_PASSWORD}
@@ -50,7 +50,7 @@ services:
       DB_NAME: ${DB_NAME:-oap}
       DB_APP_USER: ${DB_APP_USER:-oap_app}
       DB_APP_PASSWORD: ${DB_APP_PASSWORD}
-      DB_REQUIRED_EXTENSIONS: ${DB_REQUIRED_EXTENSIONS:-postgis,timescaledb}
+      DB_REQUIRED_EXTENSIONS: ${DB_REQUIRED_EXTENSIONS:-postgis}
     depends_on:
       db:
         condition: service_healthy
@@ -62,8 +62,7 @@ services:
       context: ./backend
     command: >
       sh -c "python manage.py migrate --noinput
-      && python manage.py bootstrap_config --seed-missing-only
-      && python manage.py ensure_hypertables"
+      && python manage.py bootstrap_config --seed-missing-only"
     environment:
       <<: *backend-env
     depends_on:

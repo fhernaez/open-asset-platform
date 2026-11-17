@@ -49,4 +49,4 @@ COUNT=$(cat /tmp/oap_g4_count.txt | tr -d '[:space:]')
 echo "[G4] Verify Node-RED service is not running"
 docker compose ps --format '{{.Service}}' | grep -q nodered && fail "nodered should not be running" || true
 
-echo "[PASS G4] Direct MQTT on_change ingest persisted to TimescaleDB without Node-RED (count=$COUNT)."
+echo "[PASS G4] Direct MQTT on_change ingest persisted to PostgreSQL without Node-RED (count=$COUNT)."

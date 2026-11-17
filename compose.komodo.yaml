@@ -12,7 +12,7 @@ services:
       DB_NAME: ${DB_NAME}
       DB_APP_USER: ${DB_APP_USER}
       DB_APP_PASSWORD: ${DB_APP_PASSWORD}
-      DB_REQUIRED_EXTENSIONS: ${DB_REQUIRED_EXTENSIONS:-postgis,timescaledb}
+      DB_REQUIRED_EXTENSIONS: ${DB_REQUIRED_EXTENSIONS:-postgis}
     networks: [iot-net]
     restart: "no"
 
@@ -20,8 +20,7 @@ services:
     image: ghcr.io/fhernaez/open-asset-platform/backend:latest
     command: >
       sh -c "python manage.py migrate --noinput
-      && python manage.py bootstrap_config --seed-missing-only
-      && python manage.py ensure_hypertables"
+      && python manage.py bootstrap_config --seed-missing-only"
     environment:
       DJANGO_SETTINGS_MODULE: config.settings
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}

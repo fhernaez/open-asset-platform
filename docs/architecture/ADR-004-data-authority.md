@@ -6,7 +6,7 @@ Estado: **Propuesta aceptada para especificación**, su implementación queda pe
 Inventario único, muestras y RDF con proyecciones. Integraciones nunca duplican masters ni escriben tablas internas.
 
 ## Decisión
-PostgreSQL master, Timescale series, RDF derivado; ERP autoridad transacciones comerciales; Node-RED flujos.
+PostgreSQL master, series, RDF derivado; ERP autoridad transacciones comerciales; Node-RED flujos.
 
 ## Consecuencias
 - Contratos públicos versionados; métricas y documentación deben evolucionar con código.

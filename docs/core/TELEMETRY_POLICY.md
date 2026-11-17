@@ -33,7 +33,7 @@ Las propiedades son diseño de OAP, no claims sobre APIs de terceros. Modes admi
 - Heartbeat es muestra opcional de continuidad tras máximo silencio, su impacto en N/T es claro y por defecto NO elude la cuota. Eventos de alarmas críticos no dependen de esta política.
 
 ## 4. Límite N muestras por ventana T
-- Configuración `N` entero >=1, `T` duración ISO 8601 o sintaxis estricta (ej. `PT1H`) con UTC y límites operativos. `count=0` únicamente si significa disabled y validado; no tratar como unlimited. Política `hard_cap` se aplica por `(tenant, attribute, policy_version, time_bucket)` con límites atómicos al paralelizar.
+- Configuración `N` entero >=1, `T` duración ISO 8601 o sintaxis estricta (ej. `PT1H`) con UTC y límites operativos. `count=0` únicamente si significa disabled y validado; no tratar como unlimited. Política `hard_cap` se aplica por `(tenant, attribute, policy_version, ventana)` con límites atómicos al paralelizar.
 - Default recomendado: ventanas fijas UTC con inicio `[floor(event_time / T)*T, ... )`; para políticas rolling/sliding se diseñará variante aparte; UI explica diferencia.
 - Combinación con `on_change`: solo cambios significativos son candidatos y aun así no se guardan más de N. `mode=all` + cap N descarta muestras que excedan; `fixed_n_per_window` reserva ranuras temporales (no garantía de N si no hay eventos) y selecciona muestra más representativa por slot.
 - `strategy=first` guarda primeras N; `latest` necesita buffer/upsert por ranura (especificar hasta dónde admite retrasos) y `uniform` distribuye los slots; no vender `latest` si solo se descartan tras N. Alternativa `aggregate_window` materializa min/max/avg/count/last con quality y timestamp, no se mezcla con raw sin contrato.
@@ -47,7 +47,7 @@ MQTT input -> authenticate/authorize device & tenant -> decode/validate schema
  -> update last_observed + last_valid (transactional or consistent)
  -> rules/alarms/live events on all valid observed samples
  -> evaluate history_enabled & effective agent/attribute StoragePolicy
- -> persist accepted samples to TimescaleDB (batched/idempotent)
+ -> persist accepted samples to PostgreSQL (batched/idempotent)
  -> update persisted baseline/window counters
  -> emit counters accepted/skipped_same/skipped_quota/skipped_invalid/late/replay
 ```

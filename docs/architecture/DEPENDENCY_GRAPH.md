@@ -4,7 +4,7 @@
 flowchart TD
   UI[React frontend] --> API[Django REST+ASGI]
   API --> CORE[Identity Projects Assets Events]
-  CORE --> DB[(PostgreSQL PostGIS TimescaleDB)]
+  CORE --> DB[(PostgreSQL PostGIS)]
   API --> SP[Spatial/Semantics]
   SP --> CORE
   SP --> RDF[RDF projection worker]

@@ -4,13 +4,18 @@
   "files": [
     {
       "path": ".env.example",
-      "bytes": 2989,
-      "sha256": "6aa668116cd5c4064d1870f4d6747e092542169adf8d2ebbda0adb63d28dc1b8"
+      "bytes": 3081,
+      "sha256": "97184733c2f5f57240fae0dacb7c63dd00f835a41a331e992f0a56e8d4e9ca0d"
     },
     {
       "path": ".env.test.example",
       "bytes": 378,
       "sha256": "912738b2108376d58231b4e2b4d249533a012ec95fcdb970502ea7a892eb8d1e"
+    },
+    {
+      "path": ".github/workflows/build-images.yml",
+      "bytes": 1058,
+      "sha256": "fa65f9a6bca03395cdc7fb76e2aea204f1d86db07e5dc6d15507623c73bf3fef"
     },
     {
       "path": ".github/workflows/spec-kit.yml",
@@ -19,8 +24,13 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 214,
-      "sha256": "53f3e8f9f3a1b2399b136a055a10ca5b8bbe439850988143bbe52384272767a1"
+      "bytes": 248,
+      "sha256": "3daedb711b899c868400fdace11e35201ca967934025de196ca6ab4a0ebc6a77"
+    },
+    {
+      "path": ".kilo/.gitignore",
+      "bytes": 107,
+      "sha256": "1ff25b005585f501edf16194863ece8eef55d50d46eed6322095aabdf6eafb40"
     },
     {
       "path": ".kilo/agents/architecture-auditor.md",
@@ -44,8 +54,8 @@
     },
     {
       "path": ".kilo/agents/iot-telemetry.md",
-      "bytes": 1111,
-      "sha256": "76f3e930e19a711e4b37faa0cc1168e77bf77160e4586434c0af249160695457"
+      "bytes": 1110,
+      "sha256": "979bbc0a763a00578cfea59dd219a3d04b01d997570ce34ffee92b4591940ff1"
     },
     {
       "path": ".kilo/agents/oap-lead.md",
@@ -114,13 +124,13 @@
     },
     {
       "path": ".kilo/rules/03-data.md",
-      "bytes": 507,
-      "sha256": "69ef5a5edde140cc1bc2cf8c0371b8fa426eb40af855be1085d9235fd1999ff6"
+      "bytes": 493,
+      "sha256": "b0a6111db96e4d5540644d9a0b3a84c28d5731eaf32f1bf4cd63ed358b6d2c2c"
     },
     {
       "path": ".kilo/rules/04-foss.md",
-      "bytes": 409,
-      "sha256": "14f19b7c635b0848b803a7ed292615f0470c9eaeef74992c2135baf2e3744d8b"
+      "bytes": 401,
+      "sha256": "1cb08201b87a9b4faaa1074ef7f014cfbf3eaec865f01d205888d7985c2bc9d1"
     },
     {
       "path": ".kilo/rules/05-qa.md",
@@ -139,13 +149,13 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 4364,
-      "sha256": "def07ce0d63accc00135b1b95eca8a4995f18c1ba449be65220d7bf67bc8dddb"
+      "bytes": 4342,
+      "sha256": "ceb246f22c3f780a249f3993836d8dd463e5182e0e1ad484b3db758e16253abb"
     },
     {
       "path": "CONTEXT.md",
-      "bytes": 3165,
-      "sha256": "66c348378710086b64eb0102b3fa526276010fe22572ce839d716e91d4accb63"
+      "bytes": 3170,
+      "sha256": "6ca81f2cccaa0a6afae772218c8359ce3222f144491b0a4e4d8b1923ad7a9841"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -154,8 +164,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 5058,
-      "sha256": "d1837b8a047f918238f2f6668890e65cf65660788b02aec90c46ad3d768f1c76"
+      "bytes": 5044,
+      "sha256": "a1eb2f7e43076516eda3d93ac7d091010efb79f5e9af56d9a7dd370db3798278"
     },
     {
       "path": "docs/START_HERE.md",
@@ -194,8 +204,8 @@
     },
     {
       "path": "docs/architecture/ADR-004-data-authority.md",
-      "bytes": 1290,
-      "sha256": "388410d4eb3d3f06940b5000cf5fb72408e20399644f5e8ce56847e85e55979d"
+      "bytes": 1280,
+      "sha256": "ce9d0b66e7a69abd4348a694049dd22fbae2af3c009b5642628451c384ef262f"
     },
     {
       "path": "docs/architecture/ADR-005-telemetry-policies.md",
@@ -238,29 +248,34 @@
       "sha256": "6c0a155ea0ff8c3c9854485c7d3e8e81433fc6eb0f2d3251d918d76e95794f25"
     },
     {
+      "path": "docs/architecture/ADR-013-plain-postgres-no-timescaledb.md",
+      "bytes": 2491,
+      "sha256": "338cd6064869014d59a86981cd2f7f4d95b6c2642cb5719653edd3334a210c47"
+    },
+    {
       "path": "docs/architecture/C4_DATAFLOWS.md",
-      "bytes": 2073,
-      "sha256": "dde5f8846347029bf3517a355396f14da74828128ae1ee2fe4513eb97d7f4368"
+      "bytes": 2058,
+      "sha256": "18f8ab4a7ce5fe58fe3f42d8dd88984fb433a2eb4ef396b0966e7c4e243b7fa5"
     },
     {
       "path": "docs/architecture/DB_LOGICAL_MODEL.md",
-      "bytes": 2091,
-      "sha256": "e24a3969370facc1bede156695b806ea8ff375fd15b99f0cdda40eb566b7c333"
+      "bytes": 2027,
+      "sha256": "66cab6b69f0075d4e28d7c292b022674c0a878b7a5d2741be23f6dc23649ee44"
     },
     {
       "path": "docs/architecture/DEPENDENCY_GRAPH.md",
-      "bytes": 1320,
-      "sha256": "821423c9d1f49af2e83cefdf0cee84202e89c975dd7d60ca57ccaac50144d861"
+      "bytes": 1308,
+      "sha256": "e63cdfe71199aa46abe41984fa95f2e69622d74e50cd7c52a9d3fcd2005a9cbb"
     },
     {
       "path": "docs/architecture/FEATURE_COMPLETENESS_POLICY.md",
-      "bytes": 1392,
-      "sha256": "5dd30fd47754906d9aeb6211de0af6e6f225702f47f034120392353979bccdaa"
+      "bytes": 1382,
+      "sha256": "2f912f1154792fa496c1c347b72bf8ec1065aac5394a9cc2c011df18e41e2021"
     },
     {
       "path": "docs/architecture/MASTER_ARCHITECTURE.md",
-      "bytes": 7537,
-      "sha256": "bddb8387bca24498bf0e1e3ecbc0c2b3a8a92e57c6813f74b5e0351692078412"
+      "bytes": 7444,
+      "sha256": "a5d18d6893532956f4d6ca3262cf05c1f1ac1c59cf3f1fde93077dce8e5e287c"
     },
     {
       "path": "docs/contracts/ASSET_SEMANTIC_SCHEMA.md",
@@ -314,88 +329,88 @@
     },
     {
       "path": "docs/core/API_REALTIME.md",
-      "bytes": 2769,
-      "sha256": "98dc85fa952c857a1ffaebed0cb1b054c4377725f20c79bfbdf0154443da0ed1"
+      "bytes": 2759,
+      "sha256": "3fa2c41c6d2e52bc66e3e750962785870b27aaff2321816b8104fdf91d334f20"
     },
     {
       "path": "docs/core/ASSET_REGISTRY.md",
-      "bytes": 3189,
-      "sha256": "3f9f157445832b7228c6699b53c791ae7d4d5d3c0dbb60597f9fc056deb97ef8"
+      "bytes": 3179,
+      "sha256": "f735286137fe608f47dfccee67a7c2e22ef518869e0b8b6c63dd0481783d6e37"
     },
     {
       "path": "docs/core/ATTRIBUTES_COMMANDS.md",
-      "bytes": 2978,
-      "sha256": "61ddb0296a7568ee5ee42f1e1e325e33051c377eae1c8578ecb9d6257909b48f"
+      "bytes": 2968,
+      "sha256": "8fbb3878e24cd4311b98dac9adaf475da11efbf1600381e233815692083d2e86"
     },
     {
       "path": "docs/core/CONFIGURATION_SECRETS.md",
-      "bytes": 3036,
-      "sha256": "183bedbd78e2cb11ed96c320bac6d8e4b5831cad32acf70c61154bfb97649cfb"
+      "bytes": 3026,
+      "sha256": "a2e5ed6ca2b73cdb48ef9fbb6e868935059bc5dfb583aa2fc9ea19233feadd90"
     },
     {
       "path": "docs/core/DASHBOARDS_UI.md",
-      "bytes": 2873,
-      "sha256": "b85a78462695c901d81884decf4c4c83619ab5755e699a5fc26f2757d8a15dc0"
+      "bytes": 2863,
+      "sha256": "caf6fef1c5c212351401826c8fc240ee186356c1a5387405743b7b654acdfa3a"
     },
     {
       "path": "docs/core/EDGE_PROVISIONING.md",
-      "bytes": 2773,
-      "sha256": "560f4ed4620945d3017ebc9df5b2e193c64d40ad1c16e6b91ab4b412e7b761dd"
+      "bytes": 2763,
+      "sha256": "0d14a03b54636b473608b1c8b30895012b6ae3abe1c60a5822890ee6a78ebd07"
     },
     {
       "path": "docs/core/EVENTS_OUTBOX.md",
-      "bytes": 2870,
-      "sha256": "ae8888eecbfcdb2042981c903db8b9c49c15ce045c2eb0d8225066687806369b"
+      "bytes": 2860,
+      "sha256": "70979259036750510f9c43df3aeea679a343a8faf8cf6fda12065c9441e93fde"
     },
     {
       "path": "docs/core/IDENTITY_AUTHZ.md",
-      "bytes": 2963,
-      "sha256": "5fb4b7b3f2d168aa0e9cb459b3c91f687993c49c29c043e23ca25398958260fa"
+      "bytes": 2953,
+      "sha256": "7a387b84448756aca22c820cdfc0fd857415a803c7c6274d6478ecf5ced719a6"
     },
     {
       "path": "docs/core/NOTIFICATIONS.md",
-      "bytes": 2707,
-      "sha256": "1ce257c9ad220bfcc3e3017350ca31244d2bdc43adc07487d928f4918b1018df"
+      "bytes": 2697,
+      "sha256": "11b06da909038a42286495dfb049a5f88a4a38e0748a33cb8255cb926fae7352"
     },
     {
       "path": "docs/core/PLUGIN_MANAGER.md",
-      "bytes": 3213,
-      "sha256": "4c83961d53c80c6661d4439ffe743b5082b6af8c085b0eb3451ede912d328409"
+      "bytes": 3203,
+      "sha256": "ecf1872478c120b15cac657703a960430f8f9e6f2697bdbc47d325a0236f7207"
     },
     {
       "path": "docs/core/PROJECTS_TENANTS.md",
-      "bytes": 3154,
-      "sha256": "7c43c1b8def2d6d507c9e0dcbd7f727b06fb65c416eafeac98883ab377afc8e0"
+      "bytes": 3144,
+      "sha256": "f081f0d96fa193cfc023966f3804e0922f497f10ae12f5d934517fef36d44b59"
     },
     {
       "path": "docs/core/RULES_ALARMS.md",
-      "bytes": 3047,
-      "sha256": "104e46b2586929ef96704ee466c4c23480a792b087e3b6346ba3a678894facf6"
+      "bytes": 3040,
+      "sha256": "8bd43b37e00b9e8f9c54590b8f78570f0fe16433c9e8aa3d45f432a141d7bc31"
     },
     {
       "path": "docs/core/SEMANTICS_81346_BRICK_HAYSTACK.md",
-      "bytes": 3188,
-      "sha256": "b7be0cde7398e1e97b555b44387fa67cdec0a61da0c642560b6986ef93770247"
+      "bytes": 3178,
+      "sha256": "c3068a8cef26892cad4ff050041734081aeda8f569c95743c146114e1082474f"
     },
     {
       "path": "docs/core/SPATIAL_SCENES.md",
-      "bytes": 3129,
-      "sha256": "93f1c87c585fbf649ac0926d7390e2e7d900801a84cf57414f60d641901c71c9"
+      "bytes": 3119,
+      "sha256": "cf712eb2b422489ed594938464f9fa7f190ed0b1243432d349c58e6e304f23b8"
     },
     {
       "path": "docs/core/TELEMETRY_POLICY.md",
-      "bytes": 10446,
-      "sha256": "8ed4b7fd860b4986c45de545dc07d69a3b606774947843a7487967407858319a"
+      "bytes": 10441,
+      "sha256": "2fd690c91386793c589c32897fc0148d58bb275107777168f616f6a83c420034"
     },
     {
       "path": "docs/evidence/IMPLEMENTATION_STATUS.md",
-      "bytes": 678,
-      "sha256": "cfccf9d61dc5e1d376f7bd5dfb9513da62c3db8613f9fe2e9c2d8e8bde9d22e7"
+      "bytes": 4600,
+      "sha256": "3a2add41e2348e7bff53d04674db28e5928f890d364701d4c9fc169d4bf3f9c9"
     },
     {
       "path": "docs/evidence/TASK_LOG.md",
-      "bytes": 373,
-      "sha256": "41610d83b285d5656210fc1a6b98379d23cb65031cc5d7d7c3a074c15f6d8ad8"
+      "bytes": 2799,
+      "sha256": "64d1afcddb367cd324f98fb79a50136ba0954c6ab77e27db5914658122a6bac9"
     },
     {
       "path": "docs/evidence/TEST_EVIDENCE_TEMPLATE.md",
@@ -404,18 +419,18 @@
     },
     {
       "path": "docs/infrastructure/BACKUP_RESTORE_UPGRADES.md",
-      "bytes": 1416,
-      "sha256": "99d891ddd7bb3aad7cd6a11b2b68c7f8fe8647d7f179e565490745b407dabd2f"
+      "bytes": 1409,
+      "sha256": "8cf063649ed13d39e0feb060860242391cceff02ef50dcf70dd2d1964ed9caf3"
     },
     {
       "path": "docs/infrastructure/DB_BOOTSTRAP.md",
-      "bytes": 5296,
-      "sha256": "6eb6f61d0e3fe6ecceb0b75d3f7cf51a1dd50fb6d9752324ee2a4d4faf00d20b"
+      "bytes": 5226,
+      "sha256": "31806a9eb3b071032f6d2a487d73a24a64e22a618513873cec71a304f31e3e63"
     },
     {
       "path": "docs/infrastructure/DOCKER_COMPOSE.md",
-      "bytes": 2301,
-      "sha256": "0916da988128a6fbe1f329ba17c216fa9d209e3b71276b0b348064d21586220f"
+      "bytes": 2291,
+      "sha256": "94dbc1899e3a7ff1b9eb448e20ef4a5cb70236057cc278579019c661efa94795"
     },
     {
       "path": "docs/infrastructure/ENV_POLICY.md",
@@ -424,23 +439,23 @@
     },
     {
       "path": "docs/infrastructure/GITHUB_CI_RELEASE.md",
-      "bytes": 1530,
-      "sha256": "34f22731a6b23dc539117036c2051a6ef71444f0ead97306790cd47146f147e3"
+      "bytes": 1520,
+      "sha256": "5a14947188ffe459b8bb6a47826b5c582e5f6f7b53830c8c5d4b1276893db7f7"
     },
     {
       "path": "docs/infrastructure/VENV_AND_PYTHON.md",
-      "bytes": 1619,
-      "sha256": "052d7faacf85e899d2ed737888307d9774c7470eae33d04bcbef34bb6a926f65"
+      "bytes": 1617,
+      "sha256": "c9c945f20a4483060cd7e7fe0ac28cd82c827ef626751e3d42a60a13081d27ff"
     },
     {
       "path": "docs/legal/LICENSING_AND_CLEAN_ROOM.md",
-      "bytes": 1796,
-      "sha256": "c00d2c5ca2eb2e39294eee558372f9d982fe310bfef18446d653f90f9ad34d88"
+      "bytes": 1820,
+      "sha256": "372aaf10925d0d814993ba265ff2145486eb16a1bea7ea6be4b0ba4ab6cdf7f9"
     },
     {
       "path": "docs/plan/BUILD_ORDER.md",
-      "bytes": 4662,
-      "sha256": "43cb2ea4a9fbb788951d520c3d45b069ac083a6065594d21bfa4ed7618fd87e0"
+      "bytes": 4660,
+      "sha256": "0fe24bece2f54676d9239ee3c7ff1485625d3f29f368fe53cfb2b79903a3e565"
     },
     {
       "path": "docs/plan/FEATURE_BACKLOG.md",
@@ -464,8 +479,8 @@
     },
     {
       "path": "docs/plugins/ai_assistant/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 3191,
-      "sha256": "cd3322a2befbe5593590634a7b2efb6a71f167ad95afa3dcf4e74e5463c57773"
+      "bytes": 3151,
+      "sha256": "3fd2686ca47278d5e6dc29c532aa2693c5503947be6af70f3bcce8f186548e3d"
     },
     {
       "path": "docs/plugins/ai_assistant/MANIFEST.md",
@@ -494,8 +509,8 @@
     },
     {
       "path": "docs/plugins/analytics/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 2955,
-      "sha256": "d59e9732b888c78a1b452ad5958bb2b458e708804f4bf71d92b6d4277946ffec"
+      "bytes": 2915,
+      "sha256": "b0e115c819d06f7385eb42d30ebcba604fe49646b280e7442f0951667f60ca18"
     },
     {
       "path": "docs/plugins/analytics/MANIFEST.md",
@@ -524,8 +539,8 @@
     },
     {
       "path": "docs/plugins/bacnet/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 3018,
-      "sha256": "098498db928cc1603ea47de3adcc4367e6eb5400fa5584e5719b483dfe940c33"
+      "bytes": 2978,
+      "sha256": "89dee7cb8d39f3c640cd05a4546fc5b574a8c9dac116c928215ffdf3dc26d7ae"
     },
     {
       "path": "docs/plugins/bacnet/MANIFEST.md",
@@ -554,8 +569,8 @@
     },
     {
       "path": "docs/plugins/bms/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 3111,
-      "sha256": "24cc1b3ab748640fafd9d38e3274b5c04dc6f5cc1dc84eca36f312744610ff79"
+      "bytes": 3071,
+      "sha256": "d62b034449c5af555f6a0b52d3d5ed87b7e0b317b5cb50a744883e3598630f7d"
     },
     {
       "path": "docs/plugins/bms/MANIFEST.md",
@@ -584,8 +599,8 @@
     },
     {
       "path": "docs/plugins/cmms/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 3725,
-      "sha256": "c284a503fe2d4471667e0ee84ead45a7fc8730acd41342f583ccd3aa93881776"
+      "bytes": 3685,
+      "sha256": "72cb7de4a0b9e60c54becac4b6399c345a6945111d8bdbfac9a825c48b65e4f4"
     },
     {
       "path": "docs/plugins/cmms/MANIFEST.md",
@@ -614,8 +629,8 @@
     },
     {
       "path": "docs/plugins/dashboards/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 2968,
-      "sha256": "bceefadb5d382d6469f5f74cdbf1dd4202406d5e05e15818ad5ef5639c60b891"
+      "bytes": 2928,
+      "sha256": "2e72bdb7a10adf830ded124974426d99758b989f4b83b28d3d8fe531792b5d21"
     },
     {
       "path": "docs/plugins/dashboards/MANIFEST.md",
@@ -644,8 +659,8 @@
     },
     {
       "path": "docs/plugins/edge/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 2968,
-      "sha256": "90744c54f9a82b72c631ba6c8221d6e03a26542dd4e3ca5df017680c411ebecb"
+      "bytes": 2928,
+      "sha256": "b6dff195915a8726e0bd0c8c1ca17fd5475c1aaedd48802964ebe97fb104b125"
     },
     {
       "path": "docs/plugins/edge/MANIFEST.md",
@@ -674,8 +689,8 @@
     },
     {
       "path": "docs/plugins/ems/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 3090,
-      "sha256": "d157649f04e8aeac565b63073f2cf5707c9c717e22b8761f59ab6b5f2c4f43cd"
+      "bytes": 3050,
+      "sha256": "eb60f02525a9ac303e011a60bc37c56c9a488c96a4788a88fdf46e42c56b7696"
     },
     {
       "path": "docs/plugins/ems/MANIFEST.md",
@@ -704,8 +719,8 @@
     },
     {
       "path": "docs/plugins/erp/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 2965,
-      "sha256": "44f10102f2847af495fd0e85b95c9d62a6b4cb79edaf724568241458c218f9ab"
+      "bytes": 2925,
+      "sha256": "958be46c7d96cf80840d5f9a41ea80d4645516673246e08979dd2f1b45b88bdc"
     },
     {
       "path": "docs/plugins/erp/MANIFEST.md",
@@ -734,8 +749,8 @@
     },
     {
       "path": "docs/plugins/http_ws/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 2998,
-      "sha256": "164da1c969aef689db435a1aaf8d1b8026319535eee91745ebb9d29fece1c73a"
+      "bytes": 2958,
+      "sha256": "8df76418430513e02ed1dbaf9f2ef20687cd40c618b10e8b4e63ceeebde3bb1f"
     },
     {
       "path": "docs/plugins/http_ws/MANIFEST.md",
@@ -764,8 +779,8 @@
     },
     {
       "path": "docs/plugins/inventory/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 3321,
-      "sha256": "24ed369a6297978fdd434681975816cc812978543eb19dcb15c3f2957d398d99"
+      "bytes": 3281,
+      "sha256": "f91cbd3d7025adf9ff14bb5ec1b398e9dee7bf97653db328fd3f05007ef14ae3"
     },
     {
       "path": "docs/plugins/inventory/MANIFEST.md",
@@ -794,8 +809,8 @@
     },
     {
       "path": "docs/plugins/mcp_server/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 2991,
-      "sha256": "0168af4d42b2faeb1a15c62e5425a85aab33948fcf7ee1d3c39892e9cea4fa8d"
+      "bytes": 2951,
+      "sha256": "74583a1c505e01b707cf5ee3a91aa6c41114759f5fdd47c691bb80922ec34a6c"
     },
     {
       "path": "docs/plugins/mcp_server/MANIFEST.md",
@@ -824,8 +839,8 @@
     },
     {
       "path": "docs/plugins/modbus/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 3053,
-      "sha256": "ed5c061a18162a3a3340d4e8b68686aabbf854f706ee6e64ed8bf4ea0b80be93"
+      "bytes": 3013,
+      "sha256": "7f7226651d5094b93923337ada631b601ca88836c705c3c337987ae10f67cf6a"
     },
     {
       "path": "docs/plugins/modbus/MANIFEST.md",
@@ -854,8 +869,8 @@
     },
     {
       "path": "docs/plugins/mqtt/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 3323,
-      "sha256": "5f0bcc86f03d3071dac914e03c71661ca9034b56bdfd95e4e3c02d5d0c2111f9"
+      "bytes": 3283,
+      "sha256": "8b9d9c077fb02b670a994ba36aacaafb3901a4d43e1b18f7b3b13ef94c10591c"
     },
     {
       "path": "docs/plugins/mqtt/MANIFEST.md",
@@ -864,13 +879,13 @@
     },
     {
       "path": "docs/plugins/mqtt/OPERATIONS_AND_API.md",
-      "bytes": 6257,
-      "sha256": "11c9c2dfe59377e750ae29ce016f091a071c28f4896e2843d3d96ca572eeb2fd"
+      "bytes": 6258,
+      "sha256": "e0374c8126bfd615e94b136573ebc12617b721b9706ad67d09cb3ad69473d8af"
     },
     {
       "path": "docs/plugins/mqtt/SPEC.md",
-      "bytes": 4726,
-      "sha256": "00a8bf995fcf77014585f1c619201175ca13fbfc9171fdfcfb8f1d12bb364427"
+      "bytes": 4727,
+      "sha256": "957b5976a826eeeb619b7761788cf1f20efe451377a0963d7eac91f279226eec"
     },
     {
       "path": "docs/plugins/mqtt/TEST_SCENARIOS.md",
@@ -884,8 +899,8 @@
     },
     {
       "path": "docs/plugins/nodered/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 3174,
-      "sha256": "6e83525843054fa3e618015acc8afbcc26a1744fd29095a4204b621e6b0097f0"
+      "bytes": 3134,
+      "sha256": "5c4a82fb5c5c6cab5ec5b41c142270672cee044ae354790de4f3caeab302bfea"
     },
     {
       "path": "docs/plugins/nodered/MANIFEST.md",
@@ -914,8 +929,8 @@
     },
     {
       "path": "docs/plugins/protocol_extensions/DATABASE_AND_MIGRATIONS.md",
-      "bytes": 3044,
-      "sha256": "30b757102bb061115720711b514fe20ded205222c239834849f047643fb8de7d"
+      "bytes": 3004,
+      "sha256": "c04c2d26690e60bc7cd459d4ada74361081ff036f4f15f190a91bbd1e7a6d052"
     },
     {
       "path": "docs/plugins/protocol_extensions/MANIFEST.md",
@@ -944,13 +959,13 @@
     },
     {
       "path": "docs/quality/DB_BOOTSTRAP_CASES.md",
-      "bytes": 1751,
-      "sha256": "1194f012f777edd67171438ca111c786180e88f9bc700dcd87faa777b9cac039"
+      "bytes": 1728,
+      "sha256": "cb3bb3faa6521161940ba8bf8030c8241250321892ddf5744243701053674673"
     },
     {
       "path": "docs/quality/DEFINITION_OF_DONE.md",
-      "bytes": 1066,
-      "sha256": "13fef0454ef5de30770a63d7d2dc6aaee4b04e550143c8ff0b7b33d3637fba31"
+      "bytes": 1056,
+      "sha256": "b4bf97c11275a6b88b1bf6bbb10c552826068e874557d6df059d75cdb5d98e34"
     },
     {
       "path": "docs/quality/FRONTEND_E2E.md",
@@ -964,13 +979,13 @@
     },
     {
       "path": "docs/quality/PERFORMANCE_OBSERVABILITY.md",
-      "bytes": 1499,
-      "sha256": "3668fc36b481a4a7db78b51d0274b15fb677dbff9dd7aa9263be339e6806f94e"
+      "bytes": 1497,
+      "sha256": "e64cdefeab27294b264f8a3b5c70dae06902718c4f82b6238dd1eb73b734c575"
     },
     {
       "path": "docs/quality/QUALITY_PLAN.md",
-      "bytes": 1339,
-      "sha256": "3d33cf43ad5948d4b12f4244916577891ff3b65ea3fee058ed47a32a87cd6b99"
+      "bytes": 1329,
+      "sha256": "b09573b921b3ae14af514dfd27e729f8a6b3c409df454a94fd290d3a8bc1fb74"
     },
     {
       "path": "docs/quality/SECURITY_TESTS.md",
@@ -979,8 +994,8 @@
     },
     {
       "path": "docs/quality/TELEMETRY_CASES.md",
-      "bytes": 3375,
-      "sha256": "8c01005a8cf6c5a876acf2cdd6367ef41d883537ee54631c738ff5724309df64"
+      "bytes": 3371,
+      "sha256": "fcb6b85045da608b3a266afef909e195064535e871fa55745540b0a3a09ef1fe"
     },
     {
       "path": "docs/quality/TEST_DATA.md",
@@ -994,8 +1009,8 @@
     },
     {
       "path": "docs/requirements/PARITY_OPENREMOTE.md",
-      "bytes": 1878,
-      "sha256": "e8ad7c57db49228134e6958a14078432c85e7e560ecd30659b052321ceacc577"
+      "bytes": 1877,
+      "sha256": "b6481d0e440e01385192087bdc52a5b3937d653a66768b3225af4dc09d2bd88e"
     },
     {
       "path": "docs/requirements/REQUIREMENTS.md",
@@ -1029,13 +1044,13 @@
     },
     {
       "path": "kilo.jsonc",
-      "bytes": 175,
-      "sha256": "3d392c3876f666cf2df7a7c00699b0ecf34c62f7b21dc70c56b8819c42fa63e4"
+      "bytes": 223,
+      "sha256": "f7528f3fa9355ef8329cbc111d23ced006d7acd3ada0e889fbf61d5971bbd408"
     },
     {
       "path": "prompts/CONTEXT.md",
-      "bytes": 1041,
-      "sha256": "afb7935393d338e22d2d2a187e168f7a2bf8de66cd9f99192a7ecda67ef5cad2"
+      "bytes": 1029,
+      "sha256": "aaddd3be8087ff024fb3323fff2184b5da3dfad11e2eb54114ea1a9d792aa451"
     },
     {
       "path": "prompts/INITIAL_USER_PROMPT.md",
@@ -1049,8 +1064,8 @@
     },
     {
       "path": "scripts/check_spec_kit.py",
-      "bytes": 2536,
-      "sha256": "75669d0745c5f19997c3ccfe137d6f08c984df4379fc4c34e67610891fc4b303"
+      "bytes": 2523,
+      "sha256": "88bf3a44f494200d2d9cec08c7d59f0d659ffd5763c91440abd3206b3be8f441"
     },
     {
       "path": "scripts/create_venv.sh",
@@ -1058,9 +1073,39 @@
       "sha256": "273b4cb30387dfa56578de75adfceff9a9bf0de3b1d7b8d1c8df6cc5a5d32fb3"
     },
     {
+      "path": "scripts/gates/G1.sh",
+      "bytes": 2091,
+      "sha256": "c0a2bbabad01b1c3efcc01298772f334337d5fc47bef2cf327304fec6a0a6027"
+    },
+    {
+      "path": "scripts/gates/G2.sh",
+      "bytes": 1890,
+      "sha256": "7a526e39dbceaab21109c5ab24a2f166d65b105cb437211965969507b94a86e6"
+    },
+    {
+      "path": "scripts/gates/G3.sh",
+      "bytes": 1530,
+      "sha256": "535ca29b7836d8dd8f784cfd566692ea2bc56761cdf2210e108a5c3c5c635ae9"
+    },
+    {
+      "path": "scripts/gates/G4.sh",
+      "bytes": 3017,
+      "sha256": "8f2c32bc0ed909e2a4002e5e3a4da6c1bc1165f4add7bd3d929e77a42ebd8a43"
+    },
+    {
+      "path": "scripts/gen_dev_secrets.sh",
+      "bytes": 792,
+      "sha256": "5bc44929770942947e74920a76728046647d3a2bfc4b73ef9c57a00de6f6a190"
+    },
+    {
       "path": "scripts/quality_gate.sh",
-      "bytes": 1819,
-      "sha256": "e65400de4401a33b1829614b509e29a5228c2063f2f5f72ad91241b42839b0a7"
+      "bytes": 1610,
+      "sha256": "3b6ae1d82ecaa3012eb86bd1dfffbcde56955c325e7416578ed7e7cb8ba08aa2"
+    },
+    {
+      "path": "scripts/update_manifest.py",
+      "bytes": 1884,
+      "sha256": "68696a50a5b28620f6556a7cf361d8379909b9df8b188588f4e9f1f65016a106"
     }
   ]
 }

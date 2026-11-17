@@ -82,7 +82,7 @@ class TelemetryPoint(models.Model):
     class Meta:
         db_table = "telemetry_telemetrypoint"
         indexes = [
-            models.Index(fields=["tenant_id", "attribute_id", "-ts"]),
+            models.Index(fields=["attribute_id", "-ts"], name="telemetrypoint_attr_ts_idx"),
         ]
         constraints = [
             models.UniqueConstraint(fields=["attribute_id", "dedupe_key"], name="uq_telemetrypoint_dedupe"),

@@ -3,7 +3,7 @@
 ## CI en cada PR
 1. Validar estructura de specification kit y links internos.
 2. Crear `.venv` en runner ANTES de cualquier instalación Python, instalar lock, Django check, Ruff, mypy.
-3. DB service PostgreSQL Timescale/PostGIS para integración; correr migrations + pytest unit/integration/contract y coverage.
+3. DB service PostgreSQL/PostGIS para integración; correr migrations + pytest unit/integration/contract y coverage.
 4. Node frontend npm ci/lock, ESLint, tsc, vitest y Playwright contra stack test.
 5. Docker Compose config/build/smoke, test DB first create y idempotencia en CI aislado (nunca run destructive contra volúmenes reales).
 6. Security: Bandit/Semgrep si pertinente, pip-audit, npm audit, Trivy imágenes, secret scanner, SBOM/licencias; fail críticos/alto según política.

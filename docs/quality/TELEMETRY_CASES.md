@@ -1,6 +1,6 @@
 # Casos deterministas para almacenar solo cambios y máximo N/T
 
-**Setup test:** stack Compose aislado con PostgreSQL/TimescaleDB, broker MQTT, telemetry-worker, Django API, current store, Redis/queue sólo si elegida, fixtures JSON. Crear Agent A en tenant T y atributos `temp`, `state`, `pressure`, cada uno con id real, policy persistida. Confirmar `storageDatapoint=true` y policies efectivas vía API ANTES de publicar. Conteos: SQL real history + API current + counters de worker + reglas live; no usar mocks como evidencia de integración.
+**Setup test:** stack Compose aislado con PostgreSQL/PostGIS, broker MQTT, telemetry-worker, Django API, current store, Redis/queue sólo si elegida, fixtures JSON. Crear Agent A en tenant T y atributos `temp`, `state`, `pressure`, cada uno con id real, policy persistida. Confirmar `storageDatapoint=true` y policies efectivas vía API ANTES de publicar. Conteos: SQL real history + API current + counters de worker + reglas live; no usar mocks como evidencia de integración.
 
 | Test ID | Setup | Input | Resultado EXACTO esperado |
 |---|---|---|---|

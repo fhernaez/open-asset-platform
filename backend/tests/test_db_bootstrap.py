@@ -1,6 +1,6 @@
 """Unit tests for the idempotent DB bootstrap orchestration (SQL execution mocked).
 
-The real PostgreSQL/TimescaleDB run is covered by the Docker integration gate
+The real PostgreSQL/PostGIS run is covered by the Docker integration gate
 (scripts/gates/G1.sh), which cannot execute in this sandbox (Docker daemon
 lacks unshare/mount privileges). These tests verify the bootstrap control flow.
 """
@@ -23,7 +23,7 @@ def bootstrap_module(monkeypatch, tmp_path):
     monkeypatch.setenv("DB_APP_PASSWORD_FILE", str(app_pw))
     monkeypatch.setenv("DB_NAME", "oap")
     monkeypatch.setenv("DB_APP_USER", "oap_app")
-    monkeypatch.setenv("DB_REQUIRED_EXTENSIONS", "postgis,timescaledb")
+    monkeypatch.setenv("DB_REQUIRED_EXTENSIONS", "postgis")
     monkeypatch.setenv("DB_HOST", "localhost")
     monkeypatch.setenv("DB_PORT", "5432")
 
@@ -69,7 +69,7 @@ def test_bootstrap_creates_role_db_extensions(bootstrap_module):
     assert rc == 0
     assert calls["role"] == 1
     assert calls["db"] == 1
-    assert calls["extensions"] == ["postgis", "timescaledb"]
+    assert calls["extensions"] == ["postgis"]
     assert calls["lock"] == 1
     assert calls["unlock"] == 1
 

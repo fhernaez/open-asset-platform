@@ -10,7 +10,7 @@ La especificación debe guiar una implementación completa, pero ningún agente 
 - Exportar nombres en Turtle no constituye ontología validada Brick/Haystack.
 - Un wrapper de APIs OpenRemote en paralelo no cumple el objetivo autónomo.
 - Plugin toggle que no persiste reinicio no cumple administración extensible.
-- Levantar Django sin DB extensions no cumple Timescale+PostGIS.
+- Levantar Django sin DB extensions no cumple PostGIS.
 
 ## Auditoría y cobertura
 Mantener un test por capacidad y subcapacidad, señalar unsupported explícitamente, no liberar “100% parity” si quedan UNKNOWN/NOT IMPLEMENTED. Un hito puede ser MVP PASS con backlog abierto; ese status debe comunicar sin ambigüedad lo que funciona.

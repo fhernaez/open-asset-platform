@@ -8,7 +8,7 @@ flowchart LR
   I --> V[Validate and Normalize]
   V --> C[Latest State and Rules]
   C --> P{Storage Policy}
-  P -->|Accepted| T[(TimescaleDB)]
+  P -->|Accepted| T[(PostgreSQL)]
   P -->|Filtered| X[Drop Metrics and Counters]
   C --> A[Alerts and Live Subscriptions]
   T --> Q[History API]
@@ -36,7 +36,7 @@ flowchart TD
   M --> S[Seed defaults once]
   S --> API[Django API/web/workers]
 ```
-`db-bootstrap` valida extensiones disponibles, roles/DB, scripts y permisos, aborta explícitamente si falta TimescaleDB o PostGIS.
+`db-bootstrap` valida extensiones disponibles, roles/DB, scripts y permisos, aborta explícitamente si falta PostGIS.
 
 ## Flujo import/export Node-RED
 1. Export JSON o Admin API (solo entorno test/autorizado) → parser estructural → propuesta de assets/points/relations → dedupe `external_ref` → preview diff/confirm → registro canónico.

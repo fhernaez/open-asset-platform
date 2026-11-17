@@ -27,7 +27,7 @@ Configuración clara y auditada: variables de deployment, defaults iniciales, aj
 2. Exponer servicios de dominio transaccionales; emitir eventos outbox versionados en los cambios relevantes.
 3. Añadir serializers/DRF endpoints con permisos por objeto, filtros, paginación, errores y OpenAPI.
 4. Añadir UI React de este flujo con loading/error/empty/disabled states y traducción ES/EN; no usar admin Django como único frontend definitivo.
-5. Crear tests unitarios (invariantes), integración PostgreSQL/Timescale/PostGIS cuando corresponda y E2E para acciones visibles.
+5. Crear tests unitarios (invariantes), integración PostgreSQL/PostGIS cuando corresponda y E2E para acciones visibles.
 6. Releer `docs/architecture/MASTER_ARCHITECTURE.md` y contratos relacionados; adjuntar evidencia al gate sin falsas afirmaciones.
 
 ## Tests contractuales y de aceptación obligatorios

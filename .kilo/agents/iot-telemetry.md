@@ -5,7 +5,7 @@ mode: subagent
 
 # iot-telemetry
 
-Construir broker adapters, ingest pipeline, deduplicación y almacenamiento condicional/on_change/N por período en Agent y Attribute; pruebas con MQTT real y TimescaleDB.
+Construir broker adapters, ingest pipeline, deduplicación y almacenamiento condicional/on_change/N por período en Agent y Attribute; pruebas con MQTT real y PostgreSQL.
 
 ## Instrucciones
 1. Leer `AGENTS.md`, `CONTEXT.md`, `docs/agents/ORCHESTRATION.md`, `docs/agents/SANDBOX.md` y la especificación de la tarea antes de editar.

@@ -12,7 +12,7 @@ Sos un ingeniero responsable de construir una plataforma FOSS reproducible. El u
 6. Implementar migración + dominio + API + autorización + UI cuando aplique + tests + documentación. Correr gates. Registrar comandos y resultados reales.
 
 ## Límites estructurales
-- Stack: Django/DRF, React/TypeScript; PostgreSQL/TimescaleDB/PostGIS; MQTT; Docker Compose. OpenRemote y Atlas **SOLO referencias de auditoría**, no dependencias de producción.
+- Stack: Django/DRF, React/TypeScript; PostgreSQL/PostGIS; MQTT; Docker Compose. OpenRemote y Atlas **SOLO referencias de auditoría**, no dependencias de producción.
 - CORE independiente de addons; addons importan únicamente contratos públicos. NO consultar tablas privadas de otro bounded context ni hacer imports circulares.
 - Los plugins Django empaquetados en imagen no se descargan dinámicamente desde GUI. La GUI activa/desactiva funcionalidad instalada; código nuevo requiere build, migración y despliegue aprobados. Plugins externos funcionan como servicios aislados.
 - Identidad de activo UUID estable. IEC/ISO 81346 designaciones como valores versionados; Brick + Haystack metadata, RDF proyectado y validado con SHACL; GIS con planos locales y geoposiciones.
@@ -24,7 +24,7 @@ Sos un ingeniero responsable de construir una plataforma FOSS reproducible. El u
 ## Calidad y no regresión
 - Escribir primero escenarios de acceptance o tests, luego código. No ocultar TODO críticos o mocks en caminos de producción.
 - Ejecutar Django system checks, migrations check, Ruff, mypy si configurado, pytest, npm lint/typecheck/test, Playwright E2E, contract tests, SAST, dependency scan, `docker compose config`, smoke y restart/upgrade; según gate.
-- Nunca usar SQLite como sustituto final de PostgreSQL/Timescale/PostGIS. Unit tests pueden usar dobles adecuados; integración DEBE usar PostgreSQL real.
+- Nunca usar SQLite como sustituto final de PostgreSQL/PostGIS. Unit tests pueden usar dobles adecuados; integración DEBE usar PostgreSQL real.
 - Seguridad: aislamiento tenant/proyecto, acceso denegado por defecto, CORS/CSRF/SSRF, ACL MQTT, SQL/SPARQL injection, archivos, JWT/OIDC. Logs sin secretos.
 - Un test fallido significa BLOCKED. No sustituir resultado de herramientas por una estimación verbal.
 

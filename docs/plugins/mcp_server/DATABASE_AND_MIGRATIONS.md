@@ -9,7 +9,7 @@
 4. `McpApproval(proposal,approver,expiry)` — owner `mcp_server`, must define UUID PK, project/tenant FKs when appropriate, indexes, validity and audit/version fields.
 
 ## Convenciones de persistencia
-- Cada tabla owner de plugin tiene UUID PK (o clave Timescale compuesta donde exija la extensión), `tenant_id`, `project_id` cuando los datos pertenezcan a un proyecto, `created_at`, `updated_at`, `revision`, `created_by` y `deleted_at` sólo para eliminación lógica cuando aplique.
+- Cada tabla owner de plugin tiene UUID PK (o clave compuesta), `tenant_id`, `project_id` cuando los datos pertenezcan a un proyecto, `created_at`, `updated_at`, `revision`, `created_by` y `deleted_at` sólo para eliminación lógica cuando aplique.
 - FK y restricciones de unicidad se diseñan con scope, no se aceptan IDs de otro tenant ni `ON DELETE CASCADE` que elimine historial técnico.
 - Datos externos usan `(tenant, connector, external_id)` unique; replays y retries idempotentes; no doble alta de activos/órdenes/requisiciones.
 - Campos sensibles referencian secretos gestionados fuera de DB; no conservar tokens en JSON arbitrarios.
@@ -23,5 +23,5 @@
 
 ## Índices y pruebas migratorias
 - `tenant_id + project_id + created_at` para listas; `(external_system, external_id)` único en el scope correcto; indexes de estado/fecha para workflows.
-- Aplicar migraciones sobre base NUEVA y RESTAURADA, con `makemigrations --check --dry-run` en `.venv` y base PostgreSQL/TimescaleDB real. Medir locks de migración en tablas con registros.
+- Aplicar migraciones sobre base NUEVA y RESTAURADA, con `makemigrations --check --dry-run` en `.venv` y base PostgreSQL/PostGIS real. Medir locks de migración en tablas con registros.
 - Upgrade debe conservar estado, settings y referencia a activos; rollback de código sólo con schema compatible.

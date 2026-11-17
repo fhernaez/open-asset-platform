@@ -9,7 +9,7 @@
 - Evidencia comando + exit code + fixture + logs reales, QA firmó PASS. No tests skipeados sin bloqueo.
 
 ## Hito
-- Todos los acceptance IDs de etapa PASS en Compose de test contra PostgreSQL/Timescale/PostGIS reales.
+- Todos los acceptance IDs de etapa PASS en Compose de test contra PostgreSQL/PostGIS reales.
 - Smoke E2E con frontend real, health, no cambios de schema fuera de migraciones.
 - Riesgos/limitaciones documentados y aprobados para siguiente etapa.
 

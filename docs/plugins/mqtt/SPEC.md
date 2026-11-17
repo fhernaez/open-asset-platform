@@ -22,7 +22,7 @@ Conexión directa de agentes MQTT a brokers y devices; tópicos, JSONPath, trans
 
 ## Historias de usuario y workflows de extremo a extremo
 1. Admin registra broker TLS/ACL y agente con defaults on_change + N/1h; configura topic JSONPath y prueba preview sin escribir histórico.
-2. El broker entrega payload -> validate/schema/type/unit -> current+rules -> StoragePolicy -> Timescale; el agente no delega sampling en Node-RED.
+2. El broker entrega payload -> validate/schema/type/unit -> current+rules -> StoragePolicy -> PostgreSQL; el agente no delega sampling en Node-RED.
 3. Publish de command solamente mediante CommandService, topics allowlisted, TTL, retries y ACK si disponible.
 4. Autodiscovery crea propuesta de assets/attributes, no provisiona a tenant ni publica comandos sin confirmación.
 

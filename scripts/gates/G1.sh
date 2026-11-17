@@ -35,13 +35,12 @@ code=$(curl -s -o /tmp/oap_g1_health.json -w "%{http_code}" http://localhost:808
 cat /tmp/oap_g1_health.json
 
 echo "[G1] Extensions present"
-docker compose exec -T db psql -U postgres -d oap -tAc "SELECT extname FROM pg_extension WHERE extname IN ('postgis','timescaledb') ORDER BY 1" | tee /tmp/oap_g1_ext.txt
+docker compose exec -T db psql -U postgres -d oap -tAc "SELECT extname FROM pg_extension WHERE extname IN ('postgis') ORDER BY 1" | tee /tmp/oap_g1_ext.txt
 grep -q postgis /tmp/oap_g1_ext.txt || fail "postgis missing"
-grep -q timescaledb /tmp/oap_g1_ext.txt || fail "timescaledb missing"
 
 echo "[G1] Idempotency: re-run up + restart, no re-creation, same role/db"
 docker compose up -d --wait 2>&1
 docker compose restart db db-bootstrap 2>&1 || true
 docker compose logs db-bootstrap | grep -q "role_created=False db_created=False" || fail "second run was not idempotent"
 
-echo "[PASS G1] Bootstrap + idempotency verified on real PostgreSQL/TimescaleDB/PostGIS."
+echo "[PASS G1] Bootstrap + idempotency verified on real PostgreSQL/PostGIS."

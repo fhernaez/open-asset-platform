@@ -10,7 +10,7 @@
 | Identity | realms, service accounts, auth, roles, users | CORE Identity | matrix RBAC tenant deny | TO_AUDIT |
 | Edge | gateways, offline operations, sync and provisioning | Edge | partition/replay/conflict | TO_AUDIT |
 | APIs | HTTP/REST, MQTT, WS | API/Gateways | contract+auth+rate | TO_AUDIT |
-| Persistence | datapoint retention, event history, metadata | TimescaleDB | durability+recovery+policy | TO_AUDIT |
+| Persistence | datapoint retention, event history, metadata | PostgreSQL | durability+recovery+policy | TO_AUDIT |
 | Manager UI | asset tree, attribute configuration, maps, users, rule editor | React shell | E2E workflows | TO_AUDIT |
 | Commercial/hosted differences | verificar solo con fuentes autorizadas | implementaciones originales | spec independiente | TO_AUDIT |
 

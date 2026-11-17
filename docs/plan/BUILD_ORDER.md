@@ -9,7 +9,7 @@ Cada etapa produce un sistema usable y probado; dependencias deben estar PASS an
 | S01 | Django/DRF + React app, Docker images, DB bootstrap roles/db/extensiones/migrate, login health | S00 | G1 |
 | S02 | Tenants/Projects/AuthZ/Asset/Attributes/REST/OpenAPI/UI CRUD/outbox | S01 | G2 |
 | S03 | Plugin registry, env seed-once, admin GUI toggle/locks/deps/restart | S02 | G3 |
-| S04 | MQTT agent/broker, direct ingest, current+Timescale policies on_change N/T agent+attribute | S03 | G4 |
+| S04 | MQTT agent/broker, direct ingest, current+history policies on_change N/T agent+attribute | S03 | G4 |
 | S05 | CMMS request/workorder/plans/checklists/time+Inventory | S04 | G5 |
 | S06 | IEC 81346/Brick/Haystack RDF/SHACL + SpatialScenes two images/GIS + dashboards | S05 | G6 |
 | S07 | Rules/alarms, command safety, BMS/EMS, simulators Modbus/BACnet/HTTP, edge | S06 | G7 |

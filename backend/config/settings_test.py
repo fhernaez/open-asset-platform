@@ -1,7 +1,7 @@
 """Test settings: override the database with SQLite (a test double).
 
 Unit tests never run against PostgreSQL; integration tests exercise the real
-PostgreSQL/TimescaleDB stack via Docker (see scripts/gates).
+PostgreSQL/PostGIS stack via Docker (see scripts/gates).
 """
 
 from __future__ import annotations

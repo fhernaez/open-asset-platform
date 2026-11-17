@@ -5,7 +5,7 @@ Construir desde cero una plataforma modular, autohospedable, FOSS y dockerizada,
 
 ## Decisiones cerradas
 1. Framework Python: **Django + Django REST Framework**, no FastAPI como framework principal. Integración ASGI si se justifica. Python local **SIEMPRE** en `.venv` creado primero.
-2. Base de datos: **PostgreSQL con TimescaleDB y PostGIS**; autocreación e inicialización en primer despliegue Docker. La BD única es autoridad operacional; RDF es proyección semántica reconstruible.
+2. Base de datos: **PostgreSQL con PostGIS** (tablas regulares); autocreación e inicialización en primer despliegue Docker. La BD única es autoridad operacional; RDF es proyección semántica reconstruible.
 3. Modelo: IEC/ISO 81346 + Brick + Haystack, ontología de extensiones propia (`oap:`), validación SHACL, representaciones RDF y semántica/versionado.
 4. GIS: escenas y capas a partir de una o múltiples imágenes (locales o georreferenciadas) y coordenadas geográficas (MapLibre y mapas opcionales). Referencia estable a activos.
 5. Plugins: CORE pequeño y estable, addons BMS, EMS, CMMS, conectores MQTT/BACnet/Modbus/HTTP/Node-RED/ERP, asistente local, MCP. Habilitación desde `.env` al bootstrap y posteriormente GUI persistida; nunca sobrescribir en restart.

@@ -4,7 +4,7 @@
 Version del contrato: `SPEC-1.0`; idioma de la documentación: español. Código y APIs en inglés. Los agentes deben trabajar incrementalmente, ejecutar pruebas y dejar evidencia; nunca afirmar paridad antes de comprobarla.
 
 ## Resultado buscado
-Plataforma autohospedada, distribuible como Docker, independiente de OpenRemote y Atlas en tiempo de ejecución. Nuevo backend **Django/DRF + GeoDjango**, frontend **React/TypeScript**, **PostgreSQL + TimescaleDB + PostGIS**, broker MQTT, workers y addons activables desde administración. Reimplementar por especificación las capacidades de referencia OpenRemote y Atlas CMMS; no retirar ni puentear restricciones de licencias ajenas: implementar capacidades originales y cumplir licencias FOSS. Multitenancy, motor de reglas, BMS/EMS, CMMS, RDF/SHACL, IEC/ISO 81346 + Brick + Haystack, GIS/planos, Node-RED bidireccional opcional, ERP externo, asistente local y servidor MCP.
+Plataforma autohospedada, distribuible como Docker, independiente de OpenRemote y Atlas en tiempo de ejecución. Nuevo backend **Django/DRF + GeoDjango**, frontend **React/TypeScript**, **PostgreSQL + PostGIS**, broker MQTT, workers y addons activables desde administración. Reimplementar por especificación las capacidades de referencia OpenRemote y Atlas CMMS; no retirar ni puentear restricciones de licencias ajenas: implementar capacidades originales y cumplir licencias FOSS. Multitenancy, motor de reglas, BMS/EMS, CMMS, RDF/SHACL, IEC/ISO 81346 + Brick + Haystack, GIS/planos, Node-RED bidireccional opcional, ERP externo, asistente local y servidor MCP.
 
 ## Primer uso: NO comenzar creando 100 módulos vacíos
 1. Extraer el contenido **en la raíz** del workspace, asegurando `AGENTS.md`, `CONTEXT.md`, `kilo.jsonc` y `.kilo/` en raíz.

@@ -8,7 +8,7 @@
 - Diagnostics: correlation ID, sanitised logs, retries and trace, observable status in UI.
 - Test: add unit, integration with real backend and E2E if user-facing.
 
-### Flow 2: El broker entrega payload -> validate/schema/type/unit -> current+rules -> StoragePolicy -> Timescale; el agente no delega sampling en Node-RED.
+### Flow 2: El broker entrega payload -> validate/schema/type/unit -> current+rules -> StoragePolicy -> PostgreSQL; el agente no delega sampling en Node-RED.
 - Preconditions: plugin installed and enabled, authentication and tenant/project scope verified, required dependency healthy.
 - Positive path: validate inputs, execute through public DomainService, persist transactionally and emit versioned event.
 - Negative path: invalid type, wrong tenant, duplicate request, unavailable dependency, concurrent edit -> reject/queue without partial side effect.

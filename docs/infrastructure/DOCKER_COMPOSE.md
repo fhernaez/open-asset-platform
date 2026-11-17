@@ -3,7 +3,7 @@
 ## Servicios y perfiles
 | Servicio | Perfil | Función |
 |---|---|---|
-| `db` | base | PostgreSQL Timescale/PostGIS con volumen persistente |
+| `db` | base | PostgreSQL/PostGIS con volumen persistente |
 | `db-bootstrap` | base | role/DB/extensiones idempotente, one-shot |
 | `migrate` | base | Django migraciones + seed de defaults, one-shot |
 | `api` | base | Django/DRF endpoints+auth+admin |

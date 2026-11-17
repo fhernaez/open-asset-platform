@@ -4486,7 +4486,6 @@ components:
         tenant:
           type: string
           format: uuid
-          readOnly: true
         name:
           type: string
           maxLength: 200
@@ -4630,7 +4629,6 @@ components:
         tenant:
           type: string
           format: uuid
-          readOnly: true
         name:
           type: string
           maxLength: 200
@@ -4654,7 +4652,6 @@ components:
       - created_at
       - id
       - name
-      - tenant
     SourceEnum:
       enum:
       - env

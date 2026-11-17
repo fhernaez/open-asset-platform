@@ -334,8 +334,8 @@
     },
     {
       "path": "docs/contracts/openapi.yaml",
-      "bytes": 133206,
-      "sha256": "ce610f499061d4b037fb3657467f700d3ab2e55a8f963ddbf647667ad743b4b4"
+      "bytes": 133141,
+      "sha256": "27e1fa2282a15b95f0b2c2b808df0c51af874c245d902726dc7122b4ba78cc9d"
     },
     {
       "path": "docs/core/API_REALTIME.md",
@@ -419,8 +419,8 @@
     },
     {
       "path": "docs/evidence/TASK_LOG.md",
-      "bytes": 4064,
-      "sha256": "65e9287260d646ccd4afbc511a99845b27214f07a446adf289b89e75a171b8aa"
+      "bytes": 4337,
+      "sha256": "a62c7e9340c8e2cae9f8d92392e52c1744ff882b2cfcd82485da95f9533a15b7"
     },
     {
       "path": "docs/evidence/TEST_EVIDENCE_TEMPLATE.md",

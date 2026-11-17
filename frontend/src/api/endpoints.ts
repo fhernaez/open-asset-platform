@@ -9,8 +9,22 @@ export function listTenants(): Promise<Paginated<Tenant>> {
   return apiFetch<Paginated<Tenant>>("/platform/tenants/");
 }
 
+export function createTenant(input: { name: string; slug: string }): Promise<Tenant> {
+  return apiFetch<Tenant>("/platform/tenants/", {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
+}
+
 export function listProjects(tenantId: string): Promise<Paginated<Project>> {
   return apiFetch<Paginated<Project>>(`/platform/projects/?tenant=${tenantId}`);
+}
+
+export function createProject(input: { tenant: string; name: string; code: string }): Promise<Project> {
+  return apiFetch<Project>("/platform/projects/", {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
 }
 
 export interface CreateAssetInput {

@@ -49,6 +49,10 @@ class ProjectViewSet(TenantScopedViewSet):
 
     def perform_create(self, serializer):
         tenant = serializer.validated_data.get("tenant")
+        if tenant is None:
+            from core.errors import ValidationError
+
+            raise ValidationError("tenant is required to create a project.")
         require_membership(self.request.user, tenant, "platform.manage")
         project = serializer.save(tenant=tenant)
         AuditService.record(
@@ -60,6 +64,7 @@ class ProjectViewSet(TenantScopedViewSet):
         )
 
     def perform_update(self, serializer):
+        serializer.validated_data.pop("tenant", None)
         project = serializer.save()
         AuditService.record(
             actor=self.request.user,

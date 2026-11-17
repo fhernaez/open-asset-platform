@@ -20,6 +20,8 @@ import { useState } from "react";
 import {
   createAsset,
   createAttribute,
+  createProject,
+  createTenant,
   listAssets,
   listAttributes,
   listProjects,
@@ -39,8 +41,12 @@ export default function AssetsPage() {
   const [tenantId, setTenantId] = useState<string>();
   const [projectId, setProjectId] = useState<string>();
   const [createOpen, setCreateOpen] = useState(false);
+  const [tenantModalOpen, setTenantModalOpen] = useState(false);
+  const [projectModalOpen, setProjectModalOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [createForm] = Form.useForm();
+  const [tenantForm] = Form.useForm();
+  const [projectForm] = Form.useForm();
   const [attrForm] = Form.useForm();
 
   const tenants = useQuery({ queryKey: ["tenants"], queryFn: () => listTenants() });
@@ -66,6 +72,29 @@ export default function AssetsPage() {
     onError: (err) => message.error(err instanceof Error ? err.message : "Error al crear activo"),
   });
 
+  const tenantMutation = useMutation({
+    mutationFn: createTenant,
+    onSuccess: () => {
+      message.success("Organización creada");
+      setTenantModalOpen(false);
+      tenantForm.resetFields();
+      queryClient.invalidateQueries({ queryKey: ["tenants"] });
+    },
+    onError: (err) => message.error(err instanceof Error ? err.message : "Error al crear organización"),
+  });
+
+  const projectMutation = useMutation({
+    mutationFn: createProject,
+    onSuccess: (project) => {
+      message.success("Proyecto creado");
+      setProjectModalOpen(false);
+      projectForm.resetFields();
+      queryClient.invalidateQueries({ queryKey: ["projects", tenantId] });
+      setProjectId(project.id);
+    },
+    onError: (err) => message.error(err instanceof Error ? err.message : "Error al crear proyecto"),
+  });
+
   function onCreate(values: { name: string; external_ref: string }) {
     if (!tenantId) return;
     createMutation.mutate({
@@ -74,6 +103,15 @@ export default function AssetsPage() {
       name: values.name,
       external_ref: values.external_ref,
     });
+  }
+
+  function onTenantCreate(values: { name: string; slug: string }) {
+    tenantMutation.mutate(values);
+  }
+
+  function onProjectCreate(values: { name: string; code: string }) {
+    if (!tenantId) return;
+    projectMutation.mutate({ tenant: tenantId, ...values });
   }
 
   return (
@@ -93,6 +131,9 @@ export default function AssetsPage() {
           }}
           options={(tenants.data?.results ?? []).map((t) => ({ value: t.id, label: t.name }))}
         />
+        <Button icon={<PlusOutlined />} onClick={() => setTenantModalOpen(true)}>
+          Nueva organización
+        </Button>
         <Select
           style={{ minWidth: 240 }}
           placeholder="Proyecto (opcional)"
@@ -103,6 +144,9 @@ export default function AssetsPage() {
           onChange={(value) => setProjectId(value)}
           options={(projects.data?.results ?? []).map((p) => ({ value: p.id, label: p.name }))}
         />
+        <Button icon={<PlusOutlined />} disabled={!tenantId} onClick={() => setProjectModalOpen(true)}>
+          Nuevo proyecto
+        </Button>
         <Button
           icon={<ReloadOutlined />}
           onClick={() => queryClient.invalidateQueries({ queryKey: ["assets"] })}
@@ -132,6 +176,40 @@ export default function AssetsPage() {
           },
         ]}
       />
+
+      <Modal
+        title="Nueva organización"
+        open={tenantModalOpen}
+        onCancel={() => setTenantModalOpen(false)}
+        onOk={() => tenantForm.submit()}
+        confirmLoading={tenantMutation.isPending}
+      >
+        <Form form={tenantForm} layout="vertical" onFinish={onTenantCreate}>
+          <Form.Item name="name" label="Nombre" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="slug" label="Slug" rules={[{ required: true, pattern: /^[a-z0-9-]+$/ }]}>
+            <Input />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      <Modal
+        title="Nuevo proyecto"
+        open={projectModalOpen}
+        onCancel={() => setProjectModalOpen(false)}
+        onOk={() => projectForm.submit()}
+        confirmLoading={projectMutation.isPending}
+      >
+        <Form form={projectForm} layout="vertical" onFinish={onProjectCreate}>
+          <Form.Item name="name" label="Nombre" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="code" label="Código" rules={[{ required: true, pattern: /^[a-z0-9-]+$/ }]}>
+            <Input />
+          </Form.Item>
+        </Form>
+      </Modal>
 
       <Modal
         title="Crear activo"

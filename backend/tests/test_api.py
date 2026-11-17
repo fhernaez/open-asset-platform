@@ -89,3 +89,19 @@ def test_admin_without_membership_creates_asset(api, tenant, project, platform_a
     assert create.status_code == 201, create.data
     assert str(create.data["tenant"]) == str(tenant.id)
     assert str(create.data["project"]) == str(project.id)
+
+
+def test_admin_creates_tenant_and_project(api, platform_admin):
+    api.force_authenticate(user=platform_admin)
+    tenant_resp = api.post(
+        "/api/v1/platform/tenants/", {"name": "Hotel Demo", "slug": "hotel-demo"}, format="json"
+    )
+    assert tenant_resp.status_code == 201, tenant_resp.data
+    tenant_id = tenant_resp.data["id"]
+    project_resp = api.post(
+        "/api/v1/platform/projects/",
+        {"tenant": tenant_id, "name": "Torre A", "code": "torre-a"},
+        format="json",
+    )
+    assert project_resp.status_code == 201, project_resp.data
+    assert str(project_resp.data["tenant"]) == str(tenant_id)

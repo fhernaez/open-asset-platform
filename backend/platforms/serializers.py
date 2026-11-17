@@ -15,7 +15,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ["id", "tenant", "name", "code", "description", "lifecycle_status", "timezone", "created_at"]
-        read_only_fields = ["tenant"]
+        extra_kwargs = {"tenant": {"required": False}}
 
 
 class MembershipSerializer(serializers.ModelSerializer):

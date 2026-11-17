@@ -75,3 +75,17 @@ def test_asset_crud_audit(api, tenant, project, member_user):
         format="json",
     )
     assert attr.status_code == 201, attr.data
+
+
+def test_admin_without_membership_creates_asset(api, tenant, project, platform_admin):
+    # Regression: the bootstrap admin has no Membership; creation must work when
+    # tenant/project are provided explicitly (previous read_only serializer broke this).
+    api.force_authenticate(user=platform_admin)
+    create = api.post(
+        "/api/v1/assets/assets/",
+        {"tenant": str(tenant.id), "project": str(project.id), "name": "AHU-1", "external_ref": "AHU-1"},
+        format="json",
+    )
+    assert create.status_code == 201, create.data
+    assert str(create.data["tenant"]) == str(tenant.id)
+    assert str(create.data["project"]) == str(project.id)

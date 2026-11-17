@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
+    "drf_spectacular",
     # OAP bounded contexts (dependency order: core -> platform -> events -> assets -> telemetry -> plugins -> mqtt)
     "core",
     "platforms",
@@ -144,6 +145,7 @@ REST_FRAMEWORK = {
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.URLPathVersioning",
     "DEFAULT_VERSION": "v1",
     "ALLOWED_VERSIONS": ["v1"],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 from datetime import timedelta  # noqa: E402
@@ -152,6 +154,15 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=int(os.environ.get("AUTH_ACCESS_MINUTES", "30"))),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=int(os.environ.get("AUTH_REFRESH_DAYS", "7"))),
     "AUTH_HEADER_TYPES": ("Bearer",),
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Open Asset Platform API",
+    "DESCRIPTION": (
+        "Contratos REST versionados de OAP. Generado con drf-spectacular; "
+        "regenerar con `manage.py spectacular --file docs/contracts/openapi.yaml --validate`."
+    ),
+    "VERSION": "1.0.0",
 }
 
 # --- CORS ---------------------------------------------------------------

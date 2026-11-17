@@ -49,8 +49,8 @@
     },
     {
       "path": ".kilo/agents/frontend-ux.md",
-      "bytes": 1065,
-      "sha256": "1937d03878dfab6fb3d9aa63d08ca09102d6fe97a8b3c790ef5e4f1b56f16bf6"
+      "bytes": 1313,
+      "sha256": "1d52c449af8f1c4715980fa6100e2a02f2dda451eabba6c40b396cffa6527bc5"
     },
     {
       "path": ".kilo/agents/iot-telemetry.md",
@@ -149,13 +149,13 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 4342,
-      "sha256": "ceb246f22c3f780a249f3993836d8dd463e5182e0e1ad484b3db758e16253abb"
+      "bytes": 5422,
+      "sha256": "69134e3142b05e1d66277c798b0907c7247670fb014de22b1c45f53472145eb0"
     },
     {
       "path": "CONTEXT.md",
-      "bytes": 3170,
-      "sha256": "6ca81f2cccaa0a6afae772218c8359ce3222f144491b0a4e4d8b1923ad7a9841"
+      "bytes": 3714,
+      "sha256": "6f61d0f5198b6ff91730d4b1fb427c0fb0da1600b0c6490859f05b8f024bacb1"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -308,6 +308,11 @@
       "sha256": "9ae014bc56161a48d62dddddd18ca5bbbb562aaaa51afa225865ee79316c32a6"
     },
     {
+      "path": "docs/contracts/OPENAPI_CONTRACTS.md",
+      "bytes": 2149,
+      "sha256": "8d83ebc504a7ca17c3279d6c9f34165372719c940e388fbb5261028cddb8dce9"
+    },
+    {
       "path": "docs/contracts/PLUGIN_CONTRACT.md",
       "bytes": 3916,
       "sha256": "db3a950c636726d5176c609dac52f2bca663a3fd55f1394f1ff781739eba6a03"
@@ -326,6 +331,11 @@
       "path": "docs/contracts/TELEMETRY_SCHEMA.md",
       "bytes": 2282,
       "sha256": "ed05ad92808f01446d724d6e4bdeb099a9ce2c66b5b8ae62ee04d456a61fb54a"
+    },
+    {
+      "path": "docs/contracts/openapi.yaml",
+      "bytes": 133206,
+      "sha256": "ce610f499061d4b037fb3657467f700d3ab2e55a8f963ddbf647667ad743b4b4"
     },
     {
       "path": "docs/core/API_REALTIME.md",
@@ -404,13 +414,13 @@
     },
     {
       "path": "docs/evidence/IMPLEMENTATION_STATUS.md",
-      "bytes": 4600,
-      "sha256": "3a2add41e2348e7bff53d04674db28e5928f890d364701d4c9fc169d4bf3f9c9"
+      "bytes": 6343,
+      "sha256": "2d60e34b59196f8ff2d6768a8ccb944f12f380b64c1760eee74367879152453d"
     },
     {
       "path": "docs/evidence/TASK_LOG.md",
-      "bytes": 2799,
-      "sha256": "64d1afcddb367cd324f98fb79a50136ba0954c6ab77e27db5914658122a6bac9"
+      "bytes": 4064,
+      "sha256": "65e9287260d646ccd4afbc511a99845b27214f07a446adf289b89e75a171b8aa"
     },
     {
       "path": "docs/evidence/TEST_EVIDENCE_TEMPLATE.md",
@@ -454,13 +464,13 @@
     },
     {
       "path": "docs/plan/BUILD_ORDER.md",
-      "bytes": 4660,
-      "sha256": "0fe24bece2f54676d9239ee3c7ff1485625d3f29f368fe53cfb2b79903a3e565"
+      "bytes": 5195,
+      "sha256": "915fcd51e85921998989f05078180bb75dcc9c8dca96622cb55fdfd568766111"
     },
     {
       "path": "docs/plan/FEATURE_BACKLOG.md",
-      "bytes": 1899,
-      "sha256": "c94c83befe17cca01b24dce8ba882b640f87f6304c171e0d8d969455f127a1ab"
+      "bytes": 3581,
+      "sha256": "a48a2b8f79b16b4798173d134d75498240e29791672c13fd06513c38aea2b9c8"
     },
     {
       "path": "docs/plan/IMPLEMENTATION_STORY_TEMPLATE.md",
@@ -1004,28 +1014,28 @@
     },
     {
       "path": "docs/requirements/PARITY_ATLAS.md",
-      "bytes": 1711,
-      "sha256": "4eeeedc8c91c0a71f529d069562b523a16044a561f8fe0ffdfd5dba8880a6a00"
+      "bytes": 4439,
+      "sha256": "7388c3d35d12da1b2c83a7413f591da86edea7459250f5748695686cc8154211"
     },
     {
       "path": "docs/requirements/PARITY_OPENREMOTE.md",
-      "bytes": 1877,
-      "sha256": "b6481d0e440e01385192087bdc52a5b3937d653a66768b3225af4dc09d2bd88e"
+      "bytes": 4700,
+      "sha256": "52e8d5aa253a4ff2dd119802f64167f800953fbfe2eb25c7882f90fd2aaab6ed"
     },
     {
       "path": "docs/requirements/REQUIREMENTS.md",
-      "bytes": 4852,
-      "sha256": "95b4bdb3c20e3186931f3bdf3f1dda57391f94adc83304187341f8c2529b5833"
+      "bytes": 13666,
+      "sha256": "884cf5ad5693d5ff14a2f56279d9fb6a7ae4ca13d114ea73fdea9a3b9facde02"
     },
     {
       "path": "docs/requirements/SOURCE_TO_FEATURE.md",
-      "bytes": 1487,
-      "sha256": "5b8f79f1eebfe214b523c9dcc5fad8faf7d5df088381bb688b70fc4e478d93f0"
+      "bytes": 2741,
+      "sha256": "99895dc210af7af51fcfb73a0ec3c3d9276b1f5dd5290babcbcb41823200a718"
     },
     {
       "path": "docs/requirements/TRACEABILITY.md",
-      "bytes": 4055,
-      "sha256": "78064cc04f1e0c2b7ed26e4a2cbcfa1f840764faf095eea587494c99e8aaf6dc"
+      "bytes": 8975,
+      "sha256": "ae4100a39632babaf8120d0179f7f5950ad7127af22ef1e8e642be7fe3614d5d"
     },
     {
       "path": "docs/research/CODE_GRAPH_RUNBOOK.md",
@@ -1033,9 +1043,14 @@
       "sha256": "d0b365b501d26540bf8695a6a2efd1939310ba8a92e808c9338fec5913fc4aa9"
     },
     {
+      "path": "docs/research/GRAPH_SOURCE_INDEX.md",
+      "bytes": 5719,
+      "sha256": "d579e303fe9b52215a64fdeb6297ee6315bd4b1e2fad41a4cbd7445efede2309"
+    },
+    {
       "path": "docs/research/REFERENCE_LOCK.md",
-      "bytes": 1539,
-      "sha256": "f438ec040169a30597a6655b11687dc1e4357fed5c1be5e3224bb6f315832690"
+      "bytes": 3026,
+      "sha256": "3e9c78ce170055f8543329e2e49b6de27dfb163e3e0c5265cc29d9754fcca70b"
     },
     {
       "path": "docs/research/VERIFIED_PUBLIC_REFERENCES.md",
@@ -1049,8 +1064,8 @@
     },
     {
       "path": "prompts/CONTEXT.md",
-      "bytes": 1029,
-      "sha256": "aaddd3be8087ff024fb3323fff2184b5da3dfad11e2eb54114ea1a9d792aa451"
+      "bytes": 1701,
+      "sha256": "8133cf9a2482d40b486ab0fd8a68fa824fb75a68d20c41091ced72f5f3475bb3"
     },
     {
       "path": "prompts/INITIAL_USER_PROMPT.md",

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from datetime import datetime
 
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
@@ -28,6 +30,7 @@ class AttributeTelemetryViewSet(viewsets.ViewSet):
     permission_required = "telemetry.view"
     lookup_value_regex = "[0-9a-fA-F-]{36}"
 
+    @extend_schema(responses={"200": OpenApiTypes.OBJECT})
     @action(detail=True, methods=["get"], url_path="current")
     def current(self, request, pk=None):
         attribute = _get_attribute(pk)
@@ -37,6 +40,7 @@ class AttributeTelemetryViewSet(viewsets.ViewSet):
             return Response({"attribute_id": pk, "value": None, "quality": "unknown"}, status=200)
         return Response(data)
 
+    @extend_schema(responses={"200": OpenApiTypes.OBJECT})
     @action(detail=True, methods=["get"], url_path="history")
     def history(self, request, pk=None):
         attribute = _get_attribute(pk)
@@ -65,12 +69,14 @@ class AttributeTelemetryViewSet(viewsets.ViewSet):
             }
         )
 
+    @extend_schema(responses={"200": OpenApiTypes.OBJECT})
     @action(detail=True, methods=["get"], url_path="stats")
     def stats(self, request, pk=None):
         attribute = _get_attribute(pk)
         self.check_object_permissions(request, attribute)
         return Response(HistoryService.stats(pk))
 
+    @extend_schema(responses={"200": OpenApiTypes.OBJECT})
     @action(detail=True, methods=["get"], url_path="policy/effective")
     def policy_effective(self, request, pk=None):
         attribute = _get_attribute(pk)
@@ -82,6 +88,7 @@ class IngestView(APIView):
     permission_classes = [IsAuthenticated, TenantScopedPermission]
     permission_required = "telemetry.ingest"
 
+    @extend_schema(request=IngestEventSerializer, responses={"200": OpenApiTypes.OBJECT})
     def post(self, request):
         serializer = IngestEventSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

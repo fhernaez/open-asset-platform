@@ -16,9 +16,12 @@ Construir desde cero una plataforma modular, autohospedable, FOSS y dockerizada,
 10. Docker Compose primero, imágenes publicables en GitHub, código y documentación versionados, CI con pruebas y checks de seguridad; no prometer upgrades sin pruebas.
 
 ## Interpretaciones de alcance
-- “Todas las funcionalidades” se trata como **meta de paridad** y backlog exhaustivo con pruebas, no como una única entrega monolítica. Se deben verificar capacidades efectivamente presentes en repositorios de referencia y distinguir features comerciales no publicadas.
+- “Todas las funcionalidades” se trata como **meta de paridad** con inventario por commit verificado (auditoría ejecutada 2026-11-17: `openremote/core` @ `6d46b473`, `Grashjs/cmms` @ `06abfe35`; ver `docs/research/REFERENCE_LOCK.md`, `GRAPH_SOURCE_INDEX.md` y matrices `PARITY_OPENREMOTE.md`/`PARITY_ATLAS.md`).
+- Requisitos normativos: esquema `OAP-MOD-NNN` por bounded context en `docs/requirements/REQUIREMENTS.md` + estados en `TRACEABILITY.md` (SPECIFIED/PARTIAL/DONE).
+- Frontend: rebuild total con Ant Design + ECharts + mocks MSW + Playwright; pantallas sin backend real se ocultan o marcan "disponible en etapa X" (feature flags por gate).
+- Validación real (PostgreSQL/Mosquitto, E2E) en el server del usuario con scripts/checklist; el sandbox solo unit/lint/build.
 - Ninguna dependencia AGPL/TSL/comercial se introduce sin revisión de licencia. La implementación propietaria no se libera “quitando restricciones”.
 - El sistema maestro no puede duplicar ID de activos con Node-RED, CMMS o gateways. Cada actor tiene autoridad clara sobre sus datos.
 
 ## Leer antes de codificar
-`docs/core/TELEMETRY_POLICY.md` > `docs/infrastructure/DB_BOOTSTRAP.md` > `docs/contracts/PLUGIN_CONTRACT.md` > `docs/quality/GATES.md` > módulo específico y sus tests. No substituir documentación por supuestos.
+`docs/requirements/REQUIREMENTS.md` > `docs/core/TELEMETRY_POLICY.md` > `docs/infrastructure/DB_BOOTSTRAP.md` > `docs/contracts/PLUGIN_CONTRACT.md` > `docs/quality/GATES.md` > módulo específico y sus tests. No substituir documentación por supuestos.

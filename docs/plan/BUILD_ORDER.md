@@ -3,6 +3,8 @@
 ## Principios
 Cada etapa produce un sistema usable y probado; dependencias deben estar PASS antes de activar implementación siguiente. Subagentes pueden preparar specs/tests en paralelo, nunca romper contratos. Todo Python LOCAL en `.venv`, primera acción `python3 -m venv .venv`. Todo Docker root no incluye OpenRemote/Atlas. Requisitos que aún no correspondan al MVP permanecen abiertos en matriz, no desaparecen.
 
+**Estado de auditoría (2026-11-17):** repos de referencia auditados (`openremote/core` @ `6d46b473`, `Grashjs/cmms` @ `06abfe35` — `docs/research/`). Requisitos reestructurados en `OAP-MOD-NNN` (`docs/requirements/REQUIREMENTS.md`). El frontend se reconstruye de una vez (Ant Design + ECharts + mocks MSW) sobre contratos OpenAPI; cada gate conecta su backend real y activa sus pantallas (feature flags por gate; nada roto). La validación real de cada gate se ejecuta en el server del usuario con los scripts de `scripts/gates/`.
+
 | Paso | Entregable verificable | Dependencias | Gate |
 |---|---|---|---|
 | S00 | Crear .venv, verificar tools y auditar license/source baselines; tests spec | Ninguna | G0 |

@@ -1,17 +1,32 @@
 # Estado de implementación — ACTUALIZAR DESPUÉS DE CADA GATE
 
-Actualizado: 2026-11-17 (UTC). Código construido: backend Django/DRF (core, platforms, events, assets, telemetry, plugins, mqtt) + frontend React/TS + infra Docker/Compose. Sin dependencia operativa de OpenRemote/Atlas (solo ADR-002 de auditoría). **Arquitectura de datos: PostgreSQL + PostGIS, tablas regulares, sin TimescaleDB/hypertables (ADR-013).**
+Actualizado: 2026-11-17 (UTC). Código construido: backend Django/DRF (core, platforms, events, assets, telemetry, plugins, mqtt) + frontend React/TS + infra Docker/Compose. Sin dependencia operativa de OpenRemote/Atlas. **Arquitectura de datos: PostgreSQL + PostGIS, tablas regulares (ADR-013).**
+
+## Fase 0 y Fase 1 — completadas (2026-11-17)
+
+- **Auditoría de repos:** `openremote/core` @ `6d46b473` y `Grashjs/cmms` @ `06abfe35` clonados e inventariados (`docs/research/REFERENCE_LOCK.md`, `GRAPH_SOURCE_INDEX.md`): 19 protocolos OpenRemote, 17 páginas Manager UI, 66 controllers + 50 modelos Atlas; licencias CDDL/GPL+TSL y AGPL/comercial.
+- **Reespecificación:** `REQUIREMENTS.md` v2 por bounded context (`OAP-MOD-NNN`, 20 módulos), `TRACEABILITY.md` regenerada (SPECIFIED/PARTIAL/DONE), matrices `PARITY_OPENREMOTE.md`/`PARITY_ATLAS.md` auditadas, `SOURCE_TO_FEATURE.md`, `FEATURE_BACKLOG.md` (P0/P1/P2), prompts/`AGENTS.md`/`CONTEXT.md`/`.kilo` actualizados.
+- **Contratos:** `drf-spectacular` integrado; `docs/contracts/openapi.yaml` generado y validado; `OPENAPI_CONTRACTS.md` como registro por módulo/gate.
+
+## Fase 2 (frontend) y Fase 3 (backend) — fundación (2026-11-17)
+
+- **Backend G2:** corregida la creación de activos (tenant/project aceptados en create, protegidos en update; filtros por query params en assets/attributes/projects); 27 pytest PASS (incluye regresión del admin sin membership).
+- **Frontend rebuild (fundación):** shell Ant Design + React Router + TanStack Query; login JWT real; pantalla Activos completa (tenant→proyecto→activos, crear activo, drawer de atributos con alta) cableada al backend real; mocks MSW por contrato (activables con `VITE_ENABLE_MOCKS=true`); feature flags por gate (pantallas no implementadas muestran "disponible en etapa X", nunca rotas); lint/typecheck/test/build PASS.
+
+## Pendiente (plan aprobado)
+
+Fase 2 restante: pantallas de telemetría/MQTT/plugins (G3-G4) y resto por gate (CMMS G5, GIS/dashboards G6, reglas G7, Node-RED/MCP G8, paridad G9) conectando backend. Validación real en el server del usuario (`scripts/gates/`).
 
 ## Resumen por gate
 
 | Gate | Estado | Evidencia |
 |---|---|---|
-| G0 Spec | **PASS** | `.venv` creado primero; `scripts/check_spec_kit.py` → `SPEC VALIDATION: PASS` |
-| G1 Bootstrap | **PASS (código) / BLOCKED (runtime Docker)** | compose válido; Dockerfiles; `ensure_db.py` idempotente; Docker daemon del sandbox no build/run (`unshare: operation not permitted`) |
-| G2 CORE | **PASS (unit)** | 26 pytest (tenant isolation, asset CRUD, auth, audit) en SQLite (doble de test) |
+| G0 Spec | **PASS** | `.venv`; `check_spec_kit.py` → PASS; auditoría de fuentes ejecutada |
+| G1 Bootstrap | **PASS (código) / BLOCKED (runtime Docker)** | compose válido; `ensure_db.py` idempotente; Docker del sandbox no corre contenedores |
+| G2 CORE | **PARTIAL (unit)** | 26 pytest (tenant isolation, asset CRUD, auth, audit) en SQLite; bug conocido de creación de activos en UI (se corrige en el rebuild) |
 | G3 Plugins | **PASS (unit)** | seed-once, core-no-disable, activation API (pytest) |
-| G4 MQTT on_change N/T | **PASS (unit) / BLOCKED (broker+TSDB real)** | TEL-001,002,003,004,005,006,007,008,010,013,020 en pytest; broker/PostgreSQL real requieren Docker |
-| G5-G9 | **BLOCKED** | no implementados (hitos S05–S09) |
+| G4 MQTT on_change N/T | **PASS (unit) / BLOCKED (runtime real)** | TEL-001,002,003,004,005,006,007,008,010,013,020 en pytest |
+| G5-G9 | **BLOCKED** | diseñados (OAP-CMM/… en REQUIREMENTS v2), sin implementación |
 
 ## Bloques de código entregados
 

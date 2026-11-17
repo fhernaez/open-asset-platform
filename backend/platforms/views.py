@@ -40,6 +40,13 @@ class ProjectViewSet(TenantScopedViewSet):
     tenant_field = "tenant_id"
     queryset = Project.objects.select_related("tenant").all()
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        tenant_id = self.request.query_params.get("tenant")
+        if tenant_id:
+            qs = qs.filter(tenant_id=tenant_id)
+        return qs
+
     def perform_create(self, serializer):
         tenant = serializer.validated_data.get("tenant")
         require_membership(self.request.user, tenant, "platform.manage")

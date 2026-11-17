@@ -38,14 +38,24 @@ class AssetTypeViewSet(TenantScopedViewSet):
             tenant=obj.tenant,
         )
 
+    def perform_update(self, serializer):
+        serializer.validated_data.pop("tenant", None)
+        serializer.validated_data.pop("project", None)
+        obj = serializer.save()
+        AuditService.record(
+            actor=self.request.user,
+            action="assettype.update",
+            resource_type="assettype",
+            resource_id=str(obj.id),
+            tenant=obj.tenant,
+        )
+
     def _tenant_for_request(self):
-        from platforms.models import Membership
+        from platforms.models import Membership, Tenant
 
-        tenant_id = self.request.data.get("tenant") or self.request.query_params.get("tenant")
-        if tenant_id:
-            from platforms.models import Tenant
-
-            return Tenant.objects.get(id=tenant_id)
+        tenant = self.request.data.get("tenant")
+        if tenant:
+            return Tenant.objects.get(id=tenant)
         membership = Membership.objects.filter(user=self.request.user, is_active=True).first()
         return membership.tenant if membership else None
 
@@ -57,13 +67,24 @@ class AssetViewSet(TenantScopedViewSet):
     tenant_field = "tenant_id"
     queryset = Asset.objects.select_related("asset_type", "parent").all()
 
-    def get_permissions(self):
-        perms = super().get_permissions()
-        return perms
+    def get_queryset(self):
+        qs = super().get_queryset()
+        tenant_id = self.request.query_params.get("tenant")
+        project_id = self.request.query_params.get("project")
+        if tenant_id:
+            qs = qs.filter(tenant_id=tenant_id)
+        if project_id:
+            qs = qs.filter(project_id=project_id)
+        return qs
 
     def perform_create(self, serializer):
         tenant = self._resolve_tenant(serializer.validated_data)
         require_membership(self.request.user, tenant, "assets.manage")
+        project = serializer.validated_data.get("project")
+        if project is not None and project.tenant_id != tenant.id:
+            from core.errors import ValidationError
+
+            raise ValidationError("project must belong to the asset tenant.")
         asset = serializer.save(tenant=tenant)
         AuditService.record(
             actor=self.request.user,
@@ -74,6 +95,8 @@ class AssetViewSet(TenantScopedViewSet):
         )
 
     def perform_update(self, serializer):
+        serializer.validated_data.pop("tenant", None)
+        serializer.validated_data.pop("project", None)
         asset = serializer.save()
         AuditService.record(
             actor=self.request.user,
@@ -84,11 +107,11 @@ class AssetViewSet(TenantScopedViewSet):
         )
 
     def _resolve_tenant(self, data):
-        from platforms.models import Membership, Tenant
+        from platforms.models import Membership
 
-        tenant_id = data.get("tenant") or getattr(self.request, "tenant_id", None)
-        if tenant_id:
-            return Tenant.objects.get(id=tenant_id)
+        tenant = data.get("tenant")
+        if tenant is not None:
+            return tenant
         membership = Membership.objects.filter(user=self.request.user, is_active=True).first()
         if not membership:
             from core.errors import PermissionDeniedError
@@ -104,8 +127,23 @@ class AssetAttributeViewSet(TenantScopedViewSet):
     tenant_field = "tenant_id"
     queryset = AssetAttribute.objects.select_related("asset", "unit").all()
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        asset_id = self.request.query_params.get("asset")
+        if asset_id:
+            qs = qs.filter(asset_id=asset_id)
+        return qs
+
     def perform_create(self, serializer):
-        attr = serializer.save(tenant=self._tenant_for_asset(serializer.validated_data))
+        asset = serializer.validated_data.get("asset")
+        if asset is None:
+            from core.errors import ValidationError
+
+            raise ValidationError("asset is required.")
+        require_membership(self.request.user, asset.tenant, "assets.manage")
+        serializer.validated_data.pop("tenant", None)
+        serializer.validated_data.pop("project", None)
+        attr = serializer.save(tenant=asset.tenant, project=asset.project)
         AuditService.record(
             actor=self.request.user,
             action="attribute.create",
@@ -114,6 +152,14 @@ class AssetAttributeViewSet(TenantScopedViewSet):
             tenant=attr.tenant,
         )
 
-    def _tenant_for_asset(self, data):
-        asset = data.get("asset")
-        return asset.tenant
+    def perform_update(self, serializer):
+        serializer.validated_data.pop("tenant", None)
+        serializer.validated_data.pop("project", None)
+        attr = serializer.save()
+        AuditService.record(
+            actor=self.request.user,
+            action="attribute.update",
+            resource_type="attribute",
+            resource_id=str(attr.id),
+            tenant=attr.tenant,
+        )

@@ -15,7 +15,10 @@ class AssetTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = AssetType
         fields = ["id", "tenant", "project", "name", "code", "description", "schema", "created_at"]
-        read_only_fields = ["tenant", "project"]
+        extra_kwargs = {
+            "tenant": {"required": False},
+            "project": {"required": False, "allow_null": True},
+        }
 
 
 class AssetSerializer(serializers.ModelSerializer):
@@ -33,7 +36,10 @@ class AssetSerializer(serializers.ModelSerializer):
             "metadata",
             "created_at",
         ]
-        read_only_fields = ["tenant", "project"]
+        extra_kwargs = {
+            "tenant": {"required": False},
+            "project": {"required": False, "allow_null": True},
+        }
 
 
 class AssetAttributeSerializer(serializers.ModelSerializer):
@@ -55,7 +61,10 @@ class AssetAttributeSerializer(serializers.ModelSerializer):
             "metadata",
             "created_at",
         ]
-        read_only_fields = ["tenant", "project"]
+        extra_kwargs = {
+            "tenant": {"required": False},
+            "project": {"required": False, "allow_null": True},
+        }
 
     def validate(self, attrs):
         override = attrs.get("history_policy_override")

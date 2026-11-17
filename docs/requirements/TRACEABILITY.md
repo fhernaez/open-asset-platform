@@ -65,12 +65,14 @@ Regenerada 2026-11-17 tras la reestructuración de `REQUIREMENTS.md`. Estados ho
 | OAP-DSH-001 | dashboards | G6 | docs/plugins/dashboards/SPEC.md | — | SPECIFIED |
 | OAP-DSH-002 | dashboards | G6 | docs/plugins/dashboards/SPEC.md | — | SPECIFIED |
 | OAP-DSH-003 | dashboards | G6 | docs/plugins/dashboards/SPEC.md | — | SPECIFIED |
-| OAP-MQT-001 | mqtt | G4 | docs/plugins/mqtt/SPEC.md | mqtt/ | PARTIAL (unit) |
-| OAP-MQT-002 | mqtt | G4 | docs/plugins/mqtt/SPEC.md | mqtt/services.py | PARTIAL (unit) |
-| OAP-MQT-003 | mqtt | G4 | docs/plugins/mqtt/SPEC.md | mqtt/services.py | PARTIAL (unit) |
-| OAP-MQT-004 | mqtt | G4 | docs/plugins/mqtt/SPEC.md | telemetry/storage.py | PARTIAL (unit) |
-| OAP-MQT-005 | mqtt | G4 | docs/plugins/mqtt/SPEC.md | telemetry/storage.py | PARTIAL (unit) |
-| OAP-MQT-006 | mqtt | G4 | docs/plugins/mqtt/SPEC.md | mqtt/worker | PARTIAL (unit) |
+| OAP-CON-001 | connectivity | G4 | docs/architecture/ADR-014 | mqtt/ (legacy) | PARTIAL (unit) |
+| OAP-CON-002 | connectivity | G4 | docs/architecture/ADR-014 | mqtt/services.py (legacy) | PARTIAL (unit) |
+| OAP-CON-003 | connectivity | G4 | docs/plugins/mqtt/SPEC.md | mqtt/worker (legacy) | PARTIAL (unit) |
+| OAP-CON-004 | connectivity | G7 | docs/plugins/modbus/SPEC.md | — | SPECIFIED |
+| OAP-CON-005 | connectivity | G9 | docs/plugins/protocol_extensions/SPEC.md | — | SPECIFIED |
+| OAP-CON-006 | connectivity | G4 | docs/architecture/ADR-014 | mqtt/ (legacy) | PARTIAL |
+| OAP-CON-007 | connectivity | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/storage.py | PARTIAL (unit) |
+| OAP-CON-008 | connectivity | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/storage.py | PARTIAL (unit) |
 | OAP-PRO-001 | modbus | G7 | docs/plugins/modbus/SPEC.md | — | SPECIFIED |
 | OAP-PRO-002 | bacnet | G7 | docs/plugins/bacnet/SPEC.md | — | SPECIFIED |
 | OAP-PRO-003 | http | G7 | docs/plugins/http_ws/SPEC.md | — | SPECIFIED |

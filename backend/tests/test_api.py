@@ -105,3 +105,63 @@ def test_admin_creates_tenant_and_project(api, platform_admin):
     )
     assert project_resp.status_code == 201, project_resp.data
     assert str(project_resp.data["tenant"]) == str(tenant_id)
+
+
+def test_asset_type_template_creates_attributes(api, tenant, project, platform_admin):
+    from assets.models import AssetAttribute
+
+    api.force_authenticate(user=platform_admin)
+    type_resp = api.post(
+        "/api/v1/assets/types/",
+        {
+            "tenant": str(tenant.id),
+            "name": "Unidad de tratamiento de aire",
+            "code": "ahu",
+            "kind": "standard",
+            "schema": {
+                "attributes": [
+                    {"code": "temp", "name": "Temperatura", "value_type": "number", "storage_datapoint": True},
+                    {"code": "mode", "name": "Modo", "value_type": "string"},
+                ]
+            },
+        },
+        format="json",
+    )
+    assert type_resp.status_code == 201, type_resp.data
+    type_id = type_resp.data["id"]
+
+    asset_resp = api.post(
+        "/api/v1/assets/assets/",
+        {
+            "tenant": str(tenant.id),
+            "project": str(project.id),
+            "name": "AHU-1",
+            "external_ref": "AHU-1",
+            "asset_type": type_id,
+        },
+        format="json",
+    )
+    assert asset_resp.status_code == 201, asset_resp.data
+    asset_id = asset_resp.data["id"]
+
+    codes = sorted(
+        AssetAttribute.objects.filter(asset_id=asset_id).values_list("code", flat=True)
+    )
+    assert codes == ["mode", "temp"]
+    temp = AssetAttribute.objects.get(asset_id=asset_id, code="temp")
+    assert temp.storage_datapoint is True
+
+
+def test_gateway_type_kind(api, tenant, platform_admin):
+    api.force_authenticate(user=platform_admin)
+    create = api.post(
+        "/api/v1/assets/types/",
+        {"tenant": str(tenant.id), "name": "Gateway MQTT", "code": "gateway-mqtt", "kind": "gateway", "schema": {}},
+        format="json",
+    )
+    assert create.status_code == 201, create.data
+    assert create.data["kind"] == "gateway"
+    listing = api.get("/api/v1/assets/types/?kind=gateway")
+    assert listing.status_code == 200
+    kinds = {r["kind"] for r in listing.data["results"]}
+    assert kinds == {"gateway"}

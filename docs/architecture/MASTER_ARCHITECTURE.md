@@ -23,7 +23,8 @@ Los procesos IoT no dependen de las solicitudes HTTP. Las colas no garantizan ex
 
 ## 4. Bounded contexts
 - **Platform**: organización, proyecto, identidad, permisos, configuración, auditoría, extensión.
-- **Asset Registry**: activos/productos/funciones/ubicaciones, identificadores históricos, tipologías, puntos y relaciones.
+- **Asset Registry**: activos/productos/funciones/ubicaciones, identificadores históricos, tipologías (incl. tipo `gateway`), puntos y relaciones.
+- **Connectivity**: gateways por protocolo (MQTT/Modbus/OPC-UA/BACnet/SNMP/CAN) como activos especiales, bindings genéricas gateway→atributo (dirección + mapeo), adapters del worker de ingesta (ADR-014).
 - **Semantics**: IEC 81346 referencia/aspectos, tipos Brick/Haystack, ontologías extensibles, RDF, SHACL.
 - **Spatial**: escenas/CRS/capas/transformaciones/placements; complementa, no sustituye ubicación semántica.
 - **Telemetry**: ingesta, calidad, estado actual y series retenidas; historial por política configurable agente/atributo.
@@ -46,6 +47,23 @@ MQTT directo e integrado (sin Node-RED) con agent profiles. Workers de ingesta a
 
 ## 9. API, UI y MCP
 DRF OpenAPI v1, versiones de eventos, problem details unificado, paginación y filtros por proyecto. WebSockets/SSE se autentican y filtran antes de publicar. React/TypeScript con dashboards editor, mapa escena/mapa, gestor activos, alarmas, administración plugin y assistant UI. MCP es vista de herramientas de dominio con scopes, consentimiento y aprobación; no acceso directo DB ni comandos físicos arbitrarios. UI/REST/MCP comparten la misma autorización de negocio.
+
+### 9.1 Navegación (menú canónico — ADR-014)
+
+El menú se define aquí y se deriva a `frontend/src/features/flags.ts`; las specs y prompts lo referencian (fuente única):
+
+1. **Activos** — árbol, tipologías (incl. `gateway`), plantillas, atributos, designaciones.
+2. **Conectividad** — gateways por protocolo, bindings, discovery, estado de workers.
+3. **Telemetría** — current, historial, stats de ingesta, políticas de almacenamiento.
+4. **Dashboards** — builder, widgets (línea/gauge/card/tabla), widget de mapa (plano+geo).
+5. **Mapas** — escenas por imágenes, capas, MapLibre geo, placement de activos.
+6. **Reglas** — reglas/alarmas/schedules/editor de flujos.
+7. **CMMS** — mantenimiento.
+8. **Integraciones** — Node-RED, ERP.
+9. **IA/MCP** — asistente local, MCP.
+10. **Administración** — plugins, usuarios/roles/realms, settings, auditoría, logs.
+
+Regla: una sección sin implementación real se muestra "disponible en etapa X" (feature flags por gate); nunca controles rotos.
 
 ## 10. Seguridad operacional
 Autenticación OIDC o local inicial segura; RBAC+ABAC tenant/project, roles y token scopes; política fail-closed. Comandos a actuadores: validación límites/rangos, interlocks, TTL, idempotencia, doble confirmación donde corresponda, permisos, visibilidad de fallos y auditoría. Pruebas HIL antes de puesta en producción. Errores/telemetría no deben inundar almacenamiento por efectos en cascada.

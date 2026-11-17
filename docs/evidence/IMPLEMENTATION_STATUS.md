@@ -4,18 +4,19 @@ Actualizado: 2026-11-17 (UTC). Código construido: backend Django/DRF (core, pla
 
 ## Fase 0 y Fase 1 — completadas (2026-11-17)
 
-- **Auditoría de repos:** `openremote/core` @ `6d46b473` y `Grashjs/cmms` @ `06abfe35` clonados e inventariados (`docs/research/REFERENCE_LOCK.md`, `GRAPH_SOURCE_INDEX.md`): 19 protocolos OpenRemote, 17 páginas Manager UI, 66 controllers + 50 modelos Atlas; licencias CDDL/GPL+TSL y AGPL/comercial.
-- **Reespecificación:** `REQUIREMENTS.md` v2 por bounded context (`OAP-MOD-NNN`, 20 módulos), `TRACEABILITY.md` regenerada (SPECIFIED/PARTIAL/DONE), matrices `PARITY_OPENREMOTE.md`/`PARITY_ATLAS.md` auditadas, `SOURCE_TO_FEATURE.md`, `FEATURE_BACKLOG.md` (P0/P1/P2), prompts/`AGENTS.md`/`CONTEXT.md`/`.kilo` actualizados.
-- **Contratos:** `drf-spectacular` integrado; `docs/contracts/openapi.yaml` generado y validado; `OPENAPI_CONTRACTS.md` como registro por módulo/gate.
+- **Auditoría de repos:** `openremote/core` @ `6d46b473`, `Grashjs/cmms` @ `06abfe35` y ampliación: ThingsBoard @ `80c1c615`, EdgeX (compose + device-mqtt/modbus/rest/virtual/snmp), Node-RED @ `f613ba10`, Grafana @ `f0b5ff91` — inventariados en `docs/research/` (`REFERENCE_LOCK.md`, `GRAPH_SOURCE_INDEX.md`, `RESEARCH_PATTERNS.md`).
+- **Reespecificación:** `REQUIREMENTS.md` v2 (`OAP-MOD-NNN`, 20 módulos), `TRACEABILITY.md`, matrices PARITY auditadas, `SOURCE_TO_FEATURE.md`, `FEATURE_BACKLOG.md`.
+- **Arquitectura v2 (2026-11-17):** menú canónico de 10 secciones en `MASTER_ARCHITECTURE.md` §9.1; **ADR-014** (Conectividad: Gateway como tipo de activo + bindings genéricas, reemplaza OAP-MQT→OAP-CON); **ADR-015** (dashboards con widget de mapa plano+geo, escenas GIS por imágenes). Orden de construcción reordenado en `BUILD_ORDER.md` (Activos→Conectividad/Telemetría→Plugins→Dashboards→Mapas→CMMS→Reglas→Integraciones→G9).
+- **Contratos:** `drf-spectacular`; `docs/contracts/openapi.yaml`; `OPENAPI_CONTRACTS.md`.
 
-## Fase 2 (frontend) y Fase 3 (backend) — fundación (2026-11-17)
+## C1 — Tipologías y plantillas (2026-11-17)
 
-- **Backend G2:** corregida la creación de activos (tenant/project aceptados en create, protegidos en update; filtros por query params en assets/attributes/projects); 27 pytest PASS (incluye regresión del admin sin membership).
-- **Frontend rebuild (fundación):** shell Ant Design + React Router + TanStack Query; login JWT real; pantalla Activos completa (tenant→proyecto→activos, crear activo, drawer de atributos con alta) cableada al backend real; mocks MSW por contrato (activables con `VITE_ENABLE_MOCKS=true`); feature flags por gate (pantallas no implementadas muestran "disponible en etapa X", nunca rotas); lint/typecheck/test/build PASS.
+- Backend: `AssetType.kind` (standard/gateway) + filtros por tenant/kind; plantillas de atributos (`schema.attributes`) aplicadas al crear activo con tipología; migración `assets/0004`.
+- Frontend: Activos ahora con pestañas **Activos | Tipologías**; editor de tipologías con atributos de plantilla dinámicos; select de tipología en crear activo; 30 pytest PASS.
 
 ## Pendiente (plan aprobado)
 
-Fase 2 restante: pantallas de telemetría/MQTT/plugins (G3-G4) y resto por gate (CMMS G5, GIS/dashboards G6, reglas G7, Node-RED/MCP G8, paridad G9) conectando backend. Validación real en el server del usuario (`scripts/gates/`).
+C2 Conectividad (app `connectivity` reemplaza `mqtt`, gateway/bindings UI, adapters MQTT→Modbus) → Plugins UI → Dashboards (ADR-015) → Mapas/GIS → CMMS → Reglas → Integraciones/IA → G9. Validación real en el server del usuario.
 
 ## Resumen por gate
 

@@ -1,5 +1,5 @@
 import { apiFetch } from "../api/client";
-import type { Asset, AssetAttribute, Health, Paginated, Project, Tenant } from "../api/types";
+import type { Asset, AssetAttribute, AssetType, Health, Paginated, Project, Tenant } from "../api/types";
 
 export function health(): Promise<Health> {
   return apiFetch<Health>("/health");
@@ -32,6 +32,31 @@ export interface CreateAssetInput {
   project: string | null;
   name: string;
   external_ref: string;
+  asset_type?: string | null;
+}
+
+export interface CreateAssetTypeInput {
+  tenant: string;
+  name: string;
+  code: string;
+  kind: "standard" | "gateway";
+  description?: string;
+  schema: { attributes?: { code: string; name?: string; value_type: string; storage_datapoint?: boolean }[] };
+}
+
+export function listAssetTypes(params: { tenant?: string; kind?: string } = {}): Promise<Paginated<AssetType>> {
+  const query = new URLSearchParams();
+  if (params.tenant) query.set("tenant", params.tenant);
+  if (params.kind) query.set("kind", params.kind);
+  const qs = query.toString();
+  return apiFetch<Paginated<AssetType>>(`/assets/types/${qs ? `?${qs}` : ""}`);
+}
+
+export function createAssetType(input: CreateAssetTypeInput): Promise<AssetType> {
+  return apiFetch<AssetType>("/assets/types/", {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
 }
 
 export function listAssets(params: { tenant?: string; project?: string } = {}): Promise<Paginated<Asset>> {

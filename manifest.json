@@ -124,8 +124,8 @@
     },
     {
       "path": ".kilo/rules/03-data.md",
-      "bytes": 493,
-      "sha256": "b0a6111db96e4d5540644d9a0b3a84c28d5731eaf32f1bf4cd63ed358b6d2c2c"
+      "bytes": 599,
+      "sha256": "d9db98712eb45d0d44ab9e2a51383dd48ef0589456da36c0769524f438d8ab27"
     },
     {
       "path": ".kilo/rules/04-foss.md",
@@ -253,6 +253,16 @@
       "sha256": "338cd6064869014d59a86981cd2f7f4d95b6c2642cb5719653edd3334a210c47"
     },
     {
+      "path": "docs/architecture/ADR-014-connectivity-gateway-navigation.md",
+      "bytes": 2575,
+      "sha256": "540ff9e9af39921036511f78ca78188c54654a95c11676f6014b1dbd93d1d43c"
+    },
+    {
+      "path": "docs/architecture/ADR-015-dashboards-map-widgets.md",
+      "bytes": 1896,
+      "sha256": "a4ddf591577e11397e63725b2a4fe494cdb88f9205e01ca20d5bd7fb5f64add2"
+    },
+    {
       "path": "docs/architecture/C4_DATAFLOWS.md",
       "bytes": 2058,
       "sha256": "18f8ab4a7ce5fe58fe3f42d8dd88984fb433a2eb4ef396b0966e7c4e243b7fa5"
@@ -274,8 +284,8 @@
     },
     {
       "path": "docs/architecture/MASTER_ARCHITECTURE.md",
-      "bytes": 7444,
-      "sha256": "a5d18d6893532956f4d6ca3262cf05c1f1ac1c59cf3f1fde93077dce8e5e287c"
+      "bytes": 8695,
+      "sha256": "5ebc7992693f13402df6004a4c871c2b8e2ea86068d03f58802feae6fb9fee83"
     },
     {
       "path": "docs/contracts/ASSET_SEMANTIC_SCHEMA.md",
@@ -309,8 +319,8 @@
     },
     {
       "path": "docs/contracts/OPENAPI_CONTRACTS.md",
-      "bytes": 2149,
-      "sha256": "8d83ebc504a7ca17c3279d6c9f34165372719c940e388fbb5261028cddb8dce9"
+      "bytes": 2332,
+      "sha256": "b914d9fd67d5c1e6c71ac5609098a9e86027457b46259bb76c4cecbef7dbd0f9"
     },
     {
       "path": "docs/contracts/PLUGIN_CONTRACT.md",
@@ -334,8 +344,8 @@
     },
     {
       "path": "docs/contracts/openapi.yaml",
-      "bytes": 133141,
-      "sha256": "27e1fa2282a15b95f0b2c2b808df0c51af874c245d902726dc7122b4ba78cc9d"
+      "bytes": 133472,
+      "sha256": "fa623cf97e795ed1aadfffa65f629641a458ab5cafddddb4278cde1a3169a663"
     },
     {
       "path": "docs/core/API_REALTIME.md",
@@ -464,13 +474,13 @@
     },
     {
       "path": "docs/plan/BUILD_ORDER.md",
-      "bytes": 5195,
-      "sha256": "915fcd51e85921998989f05078180bb75dcc9c8dca96622cb55fdfd568766111"
+      "bytes": 5773,
+      "sha256": "40937187a253a0dbfc46a44ecd1acc19d83eaeb20f0cef45e145e694e647144e"
     },
     {
       "path": "docs/plan/FEATURE_BACKLOG.md",
-      "bytes": 3581,
-      "sha256": "a48a2b8f79b16b4798173d134d75498240e29791672c13fd06513c38aea2b9c8"
+      "bytes": 3755,
+      "sha256": "6738486fbf83e7b82706be83d603c3caf0526cd648100b7d90e091010fae3fb1"
     },
     {
       "path": "docs/plan/IMPLEMENTATION_STORY_TEMPLATE.md",
@@ -1024,8 +1034,8 @@
     },
     {
       "path": "docs/requirements/REQUIREMENTS.md",
-      "bytes": 13666,
-      "sha256": "884cf5ad5693d5ff14a2f56279d9fb6a7ae4ca13d114ea73fdea9a3b9facde02"
+      "bytes": 14769,
+      "sha256": "60c420938e63e15458400209c2709670019678951d5e8923f7a1113250f33123"
     },
     {
       "path": "docs/requirements/SOURCE_TO_FEATURE.md",
@@ -1034,8 +1044,8 @@
     },
     {
       "path": "docs/requirements/TRACEABILITY.md",
-      "bytes": 8975,
-      "sha256": "ae4100a39632babaf8120d0179f7f5950ad7127af22ef1e8e642be7fe3614d5d"
+      "bytes": 9230,
+      "sha256": "eb06c8fa0cb7b7a43fcdaf0188167ffcb77485487c15b27a928df2f6ac2c0e11"
     },
     {
       "path": "docs/research/CODE_GRAPH_RUNBOOK.md",
@@ -1049,8 +1059,13 @@
     },
     {
       "path": "docs/research/REFERENCE_LOCK.md",
-      "bytes": 3026,
-      "sha256": "3e9c78ce170055f8543329e2e49b6de27dfb163e3e0c5265cc29d9754fcca70b"
+      "bytes": 5695,
+      "sha256": "8449f5e233d729164ff6e2862a4dae03fc9c0f818cb57a8ed7dd3e6fe7223614"
+    },
+    {
+      "path": "docs/research/RESEARCH_PATTERNS.md",
+      "bytes": 3615,
+      "sha256": "7d394a2fe50bc467368da3b1903dc7eca6d79951064e228849970d27e8fd70ca"
     },
     {
       "path": "docs/research/VERIFIED_PUBLIC_REFERENCES.md",
@@ -1064,8 +1079,8 @@
     },
     {
       "path": "prompts/CONTEXT.md",
-      "bytes": 1701,
-      "sha256": "8133cf9a2482d40b486ab0fd8a68fa824fb75a68d20c41091ced72f5f3475bb3"
+      "bytes": 1861,
+      "sha256": "9337a05aca3afc957095f495492d0a7406e8a13b17c8b6559b5ed07bc85197fb"
     },
     {
       "path": "prompts/INITIAL_USER_PROMPT.md",
@@ -1074,8 +1089,8 @@
     },
     {
       "path": "prompts/SYSTEM.md",
-      "bytes": 2629,
-      "sha256": "a090936724a3506fa39a20ceb1be05bff6efa17bfc675188c6359a24cb9727b6"
+      "bytes": 2849,
+      "sha256": "8fefce0a039ada5cb2e65c3bb3fd7c347067b7ab8bf36cf9812c58a154ae7e1d"
     },
     {
       "path": "scripts/check_spec_kit.py",

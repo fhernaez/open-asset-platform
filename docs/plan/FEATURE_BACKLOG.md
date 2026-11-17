@@ -1,6 +1,6 @@
-# Backlog estructurado de funcionalidades — v2 (auditado 2026-11-17)
+# Backlog estructurado de funcionalidades — v3 (2026-11-17)
 
-Prioridades re-evaluadas con el inventario real de `openremote/core` @ `6d46b473` y `Grashjs/cmms` @ `06abfe35` (ver `GRAPH_SOURCE_INDEX.md`).
+Prioridades re-evaluadas con la auditoría ampliada (OpenRemote, Atlas, ThingsBoard, EdgeX, Node-RED, Grafana — `docs/research/`). Orden de construcción (v2): Activos → Conectividad/Telemetría → Plugins → Dashboards → Mapas/GIS → CMMS → Reglas → Integraciones/IA → G9 (ver `BUILD_ORDER.md` y ADR-014/015).
 
 ## Plataforma y data (OAP-PLT / OAP-ASS / OAP-OPS)
 

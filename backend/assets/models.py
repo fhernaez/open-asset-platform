@@ -20,8 +20,13 @@ class Unit(models.Model):
 
 
 class AssetType(TenantScopedModel):
+    class Kind(models.TextChoices):
+        STANDARD = "standard"
+        GATEWAY = "gateway"
+
     name = models.CharField(max_length=200)
     code = models.SlugField(max_length=80)
+    kind = models.CharField(max_length=16, choices=Kind.choices, default=Kind.STANDARD)
     description = models.TextField(blank=True, default="")
     schema = models.JSONField(default=dict, blank=True)
 

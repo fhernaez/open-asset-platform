@@ -28,6 +28,16 @@ class AssetTypeViewSet(TenantScopedViewSet):
     tenant_field = "tenant_id"
     queryset = AssetType.objects.all()
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        tenant_id = self.request.query_params.get("tenant")
+        kind = self.request.query_params.get("kind")
+        if tenant_id:
+            qs = qs.filter(tenant_id=tenant_id)
+        if kind:
+            qs = qs.filter(kind=kind)
+        return qs
+
     def perform_create(self, serializer):
         obj = serializer.save(tenant=self._tenant_for_request())
         AuditService.record(
@@ -86,6 +96,9 @@ class AssetViewSet(TenantScopedViewSet):
 
             raise ValidationError("project must belong to the asset tenant.")
         asset = serializer.save(tenant=tenant)
+        from assets.services import apply_type_template
+
+        apply_type_template(asset)
         AuditService.record(
             actor=self.request.user,
             action="asset.create",

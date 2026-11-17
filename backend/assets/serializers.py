@@ -14,11 +14,27 @@ class UnitSerializer(serializers.ModelSerializer):
 class AssetTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = AssetType
-        fields = ["id", "tenant", "project", "name", "code", "description", "schema", "created_at"]
+        fields = ["id", "tenant", "project", "name", "code", "kind", "description", "schema", "created_at"]
         extra_kwargs = {
             "tenant": {"required": False},
             "project": {"required": False, "allow_null": True},
         }
+
+    def validate_schema(self, value):
+        if value is None:
+            return {}
+        if not isinstance(value, dict):
+            raise serializers.ValidationError("schema must be an object.")
+        attributes = value.get("attributes")
+        if attributes is not None:
+            if not isinstance(attributes, list):
+                raise serializers.ValidationError("schema.attributes must be a list.")
+            for item in attributes:
+                if not isinstance(item, dict) or not item.get("code") or not item.get("value_type"):
+                    raise serializers.ValidationError(
+                        "each schema.attributes item needs code and value_type."
+                    )
+        return value
 
 
 class AssetSerializer(serializers.ModelSerializer):

@@ -11,6 +11,7 @@ import {
   Select,
   Space,
   Table,
+  Tabs,
   Tag,
   Typography,
   message,
@@ -19,15 +20,17 @@ import type { FormInstance } from "antd";
 import { useState } from "react";
 import {
   createAsset,
+  createAssetType,
   createAttribute,
   createProject,
   createTenant,
   listAssets,
+  listAssetTypes,
   listAttributes,
   listProjects,
   listTenants,
 } from "../api/endpoints";
-import type { Asset } from "../api/types";
+import type { Asset, AssetType } from "../api/types";
 
 const VALUE_TYPES = [
   { value: "number", label: "Número" },
@@ -37,6 +40,18 @@ const VALUE_TYPES = [
 ];
 
 export default function AssetsPage() {
+  return (
+    <Tabs
+      defaultActiveKey="assets"
+      items={[
+        { key: "assets", label: "Activos", children: <AssetsTab /> },
+        { key: "types", label: "Tipologías", children: <AssetTypesTab /> },
+      ]}
+    />
+  );
+}
+
+function AssetsTab() {
   const queryClient = useQueryClient();
   const [tenantId, setTenantId] = useState<string>();
   const [projectId, setProjectId] = useState<string>();
@@ -53,6 +68,11 @@ export default function AssetsPage() {
   const projects = useQuery({
     queryKey: ["projects", tenantId],
     queryFn: () => listProjects(tenantId ?? ""),
+    enabled: Boolean(tenantId),
+  });
+  const assetTypes = useQuery({
+    queryKey: ["asset-types", tenantId],
+    queryFn: () => listAssetTypes({ tenant: tenantId }),
     enabled: Boolean(tenantId),
   });
   const assets = useQuery({
@@ -95,13 +115,14 @@ export default function AssetsPage() {
     onError: (err) => message.error(err instanceof Error ? err.message : "Error al crear proyecto"),
   });
 
-  function onCreate(values: { name: string; external_ref: string }) {
+  function onCreate(values: { name: string; external_ref: string; asset_type?: string }) {
     if (!tenantId) return;
     createMutation.mutate({
       tenant: tenantId,
       project: projectId ?? null,
       name: values.name,
       external_ref: values.external_ref,
+      asset_type: values.asset_type ?? null,
     });
   }
 
@@ -116,9 +137,6 @@ export default function AssetsPage() {
 
   return (
     <Space direction="vertical" size="large" style={{ width: "100%" }}>
-      <Typography.Title level={4} style={{ margin: 0 }}>
-        Activos
-      </Typography.Title>
       <Space wrap>
         <Select
           style={{ minWidth: 240 }}
@@ -147,10 +165,7 @@ export default function AssetsPage() {
         <Button icon={<PlusOutlined />} disabled={!tenantId} onClick={() => setProjectModalOpen(true)}>
           Nuevo proyecto
         </Button>
-        <Button
-          icon={<ReloadOutlined />}
-          onClick={() => queryClient.invalidateQueries({ queryKey: ["assets"] })}
-        >
+        <Button icon={<ReloadOutlined />} onClick={() => queryClient.invalidateQueries({ queryKey: ["assets"] })}>
           Refrescar
         </Button>
         <Button type="primary" icon={<PlusOutlined />} disabled={!tenantId} onClick={() => setCreateOpen(true)}>
@@ -225,6 +240,16 @@ export default function AssetsPage() {
           <Form.Item name="external_ref" label="Referencia externa" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
+          <Form.Item name="asset_type" label="Tipología">
+            <Select
+              allowClear
+              placeholder="Sin tipología"
+              options={(assetTypes.data?.results ?? []).map((t) => ({
+                value: t.id,
+                label: t.kind === "gateway" ? `${t.name} (gateway)` : t.name,
+              }))}
+            />
+          </Form.Item>
         </Form>
       </Modal>
 
@@ -236,6 +261,143 @@ export default function AssetsPage() {
           attrForm.resetFields();
         }}
       />
+    </Space>
+  );
+}
+
+function AssetTypesTab() {
+  const queryClient = useQueryClient();
+  const [tenantId, setTenantId] = useState<string>();
+  const [createOpen, setCreateOpen] = useState(false);
+  const [form] = Form.useForm();
+
+  const tenants = useQuery({ queryKey: ["tenants"], queryFn: () => listTenants() });
+  const types = useQuery({
+    queryKey: ["asset-types", tenantId],
+    queryFn: () => listAssetTypes({ tenant: tenantId }),
+    enabled: Boolean(tenantId),
+  });
+
+  const createMutation = useMutation({
+    mutationFn: createAssetType,
+    onSuccess: () => {
+      message.success("Tipología creada");
+      setCreateOpen(false);
+      form.resetFields();
+      queryClient.invalidateQueries({ queryKey: ["asset-types", tenantId] });
+    },
+    onError: (err) => message.error(err instanceof Error ? err.message : "Error al crear tipología"),
+  });
+
+  function onCreate(values: {
+    name: string;
+    code: string;
+    kind: string;
+    attributes?: { code: string; name?: string; value_type: string; storage_datapoint?: boolean }[];
+  }) {
+    if (!tenantId) return;
+    createMutation.mutate({
+      tenant: tenantId,
+      name: values.name,
+      code: values.code,
+      kind: (values.kind as "standard" | "gateway") ?? "standard",
+      schema: { attributes: values.attributes ?? [] },
+    });
+  }
+
+  return (
+    <Space direction="vertical" size="large" style={{ width: "100%" }}>
+      <Space wrap>
+        <Select
+          style={{ minWidth: 240 }}
+          placeholder="Organización"
+          loading={tenants.isLoading}
+          value={tenantId}
+          onChange={(value) => setTenantId(value)}
+          options={(tenants.data?.results ?? []).map((t) => ({ value: t.id, label: t.name }))}
+        />
+        <Button type="primary" icon={<PlusOutlined />} disabled={!tenantId} onClick={() => setCreateOpen(true)}>
+          Nueva tipología
+        </Button>
+      </Space>
+
+      <Table<AssetType>
+        rowKey="id"
+        dataSource={types.data?.results ?? []}
+        loading={types.isLoading}
+        pagination={{ pageSize: 20 }}
+        columns={[
+          { title: "Código", dataIndex: "code" },
+          { title: "Nombre", dataIndex: "name" },
+          {
+            title: "Tipo",
+            dataIndex: "kind",
+            render: (value: string) => (value === "gateway" ? <Tag color="purple">gateway</Tag> : <Tag>estándar</Tag>),
+          },
+          {
+            title: "Atributos de plantilla",
+            render: (_, record) => record.schema?.attributes?.length ?? 0,
+          },
+        ]}
+      />
+
+      <Modal
+        title="Nueva tipología"
+        open={createOpen}
+        onCancel={() => setCreateOpen(false)}
+        onOk={() => form.submit()}
+        confirmLoading={createMutation.isPending}
+        width={720}
+      >
+        <Form form={form} layout="vertical" onFinish={onCreate} initialValues={{ kind: "standard" }}>
+          <Space.Compact block>
+            <Form.Item name="name" label="Nombre" rules={[{ required: true }]} style={{ flex: 1 }}>
+              <Input />
+            </Form.Item>
+            <Form.Item name="code" label="Código" rules={[{ required: true, pattern: /^[a-z0-9-]+$/ }]} style={{ flex: 1 }}>
+              <Input />
+            </Form.Item>
+            <Form.Item name="kind" label="Tipo" style={{ width: 160 }}>
+              <Select
+                options={[
+                  { value: "standard", label: "Estándar" },
+                  { value: "gateway", label: "Gateway" },
+                ]}
+              />
+            </Form.Item>
+          </Space.Compact>
+
+          <Typography.Text strong>Atributos de plantilla (se crean al crear un activo con esta tipología)</Typography.Text>
+          <Form.List name="attributes">
+            {(fields, { add, remove }) => (
+              <div style={{ marginTop: 12 }}>
+                {fields.map((field) => (
+                  <Space key={field.key} align="baseline" style={{ display: "flex", marginBottom: 8 }}>
+                    <Form.Item name={[field.name, "code"]} rules={[{ required: true }]} style={{ marginBottom: 0 }}>
+                      <Input placeholder="código" />
+                    </Form.Item>
+                    <Form.Item name={[field.name, "name"]} style={{ marginBottom: 0 }}>
+                      <Input placeholder="nombre" />
+                    </Form.Item>
+                    <Form.Item name={[field.name, "value_type"]} initialValue="number" rules={[{ required: true }]} style={{ marginBottom: 0 }}>
+                      <Select style={{ width: 120 }} options={VALUE_TYPES} />
+                    </Form.Item>
+                    <Form.Item name={[field.name, "storage_datapoint"]} valuePropName="checked" initialValue={true} style={{ marginBottom: 0 }}>
+                      <Checkbox>store</Checkbox>
+                    </Form.Item>
+                    <Button type="text" danger onClick={() => remove(field.name)}>
+                      Quitar
+                    </Button>
+                  </Space>
+                ))}
+                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                  Agregar atributo
+                </Button>
+              </div>
+            )}
+          </Form.List>
+        </Form>
+      </Modal>
     </Space>
   );
 }

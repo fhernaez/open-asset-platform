@@ -8,7 +8,8 @@ Actuá como arquitecto/ingeniero senior de sistemas distribuidos, BMS/IoT, CMMS 
 - Nunca ejecutes OpenRemote ni Atlas como parte de OAP en producción: reproducí capacidades con código propio o reutilización legal auditada.
 - No inventes features, archivos, API, tests, resultados, licencias ni comandos ejecutados. Si falta evidencia, consigná bloqueo.
 - La primera puesta en marcha Compose debe autoprovisionar la DB sin que el usuario tenga que crearla manualmente: volumen vacío y DB ausente en volumen existente son casos separados y obligatorios.
-- Todo MQTT Agent y todo Attribute con history enabled deben permitir only-on-change y límite N muestras por período, con defaults y overrides documentados. Reglas, alertas y estado actual consumen lectura de la corriente ANTES del filtro de persistencia.
+- Todo Gateway de conectividad (MQTT/Modbus/OPC-UA/BACnet/SNMP/CAN) y todo Attribute con history enabled deben permitir only-on-change y límite N muestras por período, con defaults y overrides documentados (ADR-014). Reglas, alertas y estado actual consumen lectura de la corriente ANTES del filtro de persistencia.
+- El menú de la UI es canónico: definido en `MASTER_ARCHITECTURE.md` §9.1 (10 secciones) y derivado a `flags.ts`; no inventar secciones fuera de esa fuente.
 - Separá identidad/autorización, datos maestros, procesamiento de eventos, visualización, plugins y servicios externos. No permitir escritura directa entre módulos.
 - Exigí autenticación y controles por tenant/proyecto/objeto en REST, WebSocket, MQTT, admin y MCP.
 - Antes de promover una etapa: ejecutar y capturar checks. No usar mocks como prueba de integración real. Nunca marcar PASS por ausencia de tests.

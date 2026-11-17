@@ -43,3 +43,36 @@ class AttributeService:
         if not AuthzService.check(ctx.actor, "assets.view", tenant=attr.tenant, project=attr.project):
             raise PermissionDeniedError("assets.view required.")
         return attr
+
+
+def apply_type_template(asset) -> list:
+    """Create attributes declared in the asset type schema (idempotent per code)."""
+    from assets.models import AssetAttribute
+
+    asset_type = asset.asset_type
+    if asset_type is None:
+        return []
+    templates = (asset_type.schema or {}).get("attributes", [])
+    created = []
+    for template in templates:
+        if not isinstance(template, dict) or not template.get("code"):
+            continue
+        code = str(template["code"])[:120]
+        if AssetAttribute.objects.filter(asset=asset, code=code).exists():
+            continue
+        created.append(
+            AssetAttribute.objects.create(
+                tenant=asset.tenant,
+                project=asset.project,
+                asset=asset,
+                name=str(template.get("name") or code)[:160],
+                code=code,
+                value_type=template.get("value_type", "number"),
+                unit=template.get("unit"),
+                storage_datapoint=bool(template.get("storage_datapoint", False)),
+                history_enabled=bool(template.get("storage_datapoint", False)),
+                description=str(template.get("description", ""))[:500],
+                metadata=template.get("metadata") or {},
+            )
+        )
+    return created

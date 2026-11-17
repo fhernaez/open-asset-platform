@@ -25,6 +25,24 @@ export interface Asset {
   metadata: Record<string, unknown>;
 }
 
+export interface AssetTypeTemplateAttribute {
+  code: string;
+  name?: string;
+  value_type: string;
+  storage_datapoint?: boolean;
+}
+
+export interface AssetType {
+  id: string;
+  name: string;
+  code: string;
+  kind: "standard" | "gateway";
+  description: string;
+  schema: {
+    attributes?: AssetTypeTemplateAttribute[];
+  };
+}
+
 export interface AssetAttribute {
   id: string;
   asset: string;

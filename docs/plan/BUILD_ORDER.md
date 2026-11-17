@@ -3,7 +3,9 @@
 ## Principios
 Cada etapa produce un sistema usable y probado; dependencias deben estar PASS antes de activar implementación siguiente. Subagentes pueden preparar specs/tests en paralelo, nunca romper contratos. Todo Python LOCAL en `.venv`, primera acción `python3 -m venv .venv`. Todo Docker root no incluye OpenRemote/Atlas. Requisitos que aún no correspondan al MVP permanecen abiertos en matriz, no desaparecen.
 
-**Estado de auditoría (2026-11-17):** repos de referencia auditados (`openremote/core` @ `6d46b473`, `Grashjs/cmms` @ `06abfe35` — `docs/research/`). Requisitos reestructurados en `OAP-MOD-NNN` (`docs/requirements/REQUIREMENTS.md`). El frontend se reconstruye de una vez (Ant Design + ECharts + mocks MSW) sobre contratos OpenAPI; cada gate conecta su backend real y activa sus pantallas (feature flags por gate; nada roto). La validación real de cada gate se ejecuta en el server del usuario con los scripts de `scripts/gates/`.
+**Estado de auditoría (2026-11-17):** repos de referencia auditados (`openremote/core` @ `6d46b473`, `Grashjs/cmms` @ `06abfe35`, más ThingsBoard/EdgeX/Node-RED/Grafana — `docs/research/`). Requisitos reestructurados en `OAP-MOD-NNN` (`docs/requirements/REQUIREMENTS.md`). El frontend se reconstruye de una vez (Ant Design + ECharts + mocks MSW) sobre contratos OpenAPI; cada gate conecta su backend real y activa sus pantallas (feature flags por gate; nada roto). La validación real de cada gate se ejecuta en el server del usuario con los scripts de `scripts/gates/`.
+
+**Orden de construcción (v2, reordenado 2026-11-17 por prioridad del usuario):** S01 fundaciones → S02 Activos completo (tipologías/plantillas) → **S04 Conectividad+Telemetría** (ADR-014: gateway como tipo de activo, bindings genéricas, adapters MQTT→Modbus) → S03 Plugins UI → **S06 Dashboards+Mapas/GIS** (ADR-015: builder, widgets, widget de mapa plano+geo) → S05 CMMS → S07 Reglas/BMS/EMS/Protocolos → S08 Integraciones/IA → S09 paridad/hardening. El menú sigue `MASTER_ARCHITECTURE.md` §9.1 (10 secciones).
 
 | Paso | Entregable verificable | Dependencias | Gate |
 |---|---|---|---|

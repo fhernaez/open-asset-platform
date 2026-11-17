@@ -4,7 +4,9 @@ Reestructuración 2026-11-17 a partir de la auditoría de `openremote/core` @ `6
 
 ## Módulos
 
-`OAP-OPS` Operaciones · `OAP-PLT` Platform/Identity · `OAP-ASS` Asset Registry · `OAP-TEL` Telemetría · `OAP-SEM` Semántica · `OAP-GIS` Espacial · `OAP-RUL` Reglas/Comandos · `OAP-CMM` CMMS · `OAP-BMS` BMS · `OAP-EMS` Energía · `OAP-DSH` Dashboards · `OAP-MQT` MQTT · `OAP-PRO` Protocolos/Edge · `OAP-NRD` Node-RED · `OAP-ERP` ERP · `OAP-AIM` IA/MCP · `OAP-UI` Frontend · `OAP-SEC` Seguridad · `OAP-QLY` Calidad · `OAP-FOSS` Legal.
+`OAP-OPS` Operaciones · `OAP-PLT` Platform/Identity · `OAP-ASS` Asset Registry · `OAP-CON` Conectividad · `OAP-TEL` Telemetría · `OAP-SEM` Semántica · `OAP-GIS` Espacial · `OAP-RUL` Reglas/Comandos · `OAP-CMM` CMMS · `OAP-BMS` BMS · `OAP-EMS` Energía · `OAP-DSH` Dashboards · `OAP-PRO` Protocolos/Edge · `OAP-NRD` Node-RED · `OAP-ERP` ERP · `OAP-AIM` IA/MCP · `OAP-UI` Frontend · `OAP-SEC` Seguridad · `OAP-QLY` Calidad · `OAP-FOSS` Legal.
+
+Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un protocolo del módulo Conectividad; los IDs legados se mantienen como alias en `TRACEABILITY.md`).
 
 ## OAP-OPS — Operaciones y despliegue
 
@@ -44,6 +46,19 @@ Reestructuración 2026-11-17 a partir de la auditoría de `openremote/core` @ `6
 | OAP-ASS-003 | Vínculos agente↔atributo (links de protocolo) | G4 | VS (OpenRemote AttributeLink) |
 | OAP-ASS-004 | Plantillas de activos y bulk import | G6 | VS (OpenRemote asset templates; Atlas ImportController) |
 
+## OAP-CON — Conectividad (ADR-014; reemplaza OAP-MQT)
+
+| ID | Descripción verificable | Gate | Fuente |
+|---|---|---|---|
+| OAP-CON-001 | `Gateway` como tipo de activo especial con atributos de conexión tipados (protocolo, host, puerto, TLS, secreto, polling) | G4 | VS (OpenRemote AgentLink; ThingsBoard profiles/integrations; EdgeX device services) |
+| OAP-CON-002 | `GatewayBinding` genérica: gateway→asset→atributo con dirección (topic/registro) y mapeo JSONPath | G4 | NR (generalización de MqttBinding) |
+| OAP-CON-003 | Worker multi-adapter con registro por protocolo; adapter MQTT directo sin Node-RED | G4 | VS (OpenRemote mqtt protocol) |
+| OAP-CON-004 | Adapter Modbus RTU/TCP (lectura/escritura segura, polling) | G7 | VS (OpenRemote modbus; EdgeX device-modbus-go) |
+| OAP-CON-005 | Adapters OPC-UA, BACnet, SNMP, CAN (P2, declarados SPECIFIED hasta implementarse) | G9 | VS (OpenRemote snmp; EdgeX device-snmp-go; BACnet no existe en EdgeX) |
+| OAP-CON-006 | Discovery y health de gateways/bindings | G4 | VS (OpenRemote gateway capabilities) |
+| OAP-CON-007 | Policy default por gateway + override por atributo (storageDatapoint) | G4 | NR (antes OAP-MQT-002/003) |
+| OAP-CON-008 | Máximo N muestras por ventana T por gateway/atributo, state y alarmas ANTES del filtro | G4 | NR (antes OAP-MQT-004/005) |
+
 ## OAP-TEL — Telemetría y almacenamiento
 
 | ID | Descripción verificable | Gate | Fuente |
@@ -68,7 +83,7 @@ Reestructuración 2026-11-17 a partir de la auditoría de `openremote/core` @ `6
 
 | ID | Descripción verificable | Gate | Fuente |
 |---|---|---|---|
-| OAP-GIS-001 | Escenas por imágenes locales (planos) con capas, CRS y placement de activos | G6 | VS (OpenRemote or-map + page-map; Atlas FloorPlan) |
+| OAP-GIS-001 | Escenas por imágenes locales (planos) con capas, placement por clic sobre el plano o lat/lng, overlays de estado (ADR-015) | G6 | VS (OpenRemote or-map + page-map; Atlas FloorPlan; ThingsBoard Image Map) |
 | OAP-GIS-002 | Geo capa MapLibre + PostGIS con overlays de estado; offline | G6 | NR (diseño propio OAP) |
 
 ## OAP-RUL — Reglas, alarmas y comandos
@@ -117,17 +132,6 @@ Reestructuración 2026-11-17 a partir de la auditoría de `openremote/core` @ `6
 | OAP-DSH-002 | Visualizador GIS embebido en dashboards | G6 | VS (OpenRemote or-map) |
 | OAP-DSH-003 | Insights/analytics con muestras decimadas honestas (gap/quality) | G6 | VS (OpenRemote insights app) |
 
-## OAP-MQT — Agente MQTT
-
-| ID | Descripción verificable | Gate | Fuente |
-|---|---|---|---|
-| OAP-MQT-001 | Broker/agente nativo: subscribe/publish/discovery, TLS/ACL | G4 | VS (OpenRemote mqtt protocol) |
-| OAP-MQT-002 | Policy default on_change configurable por agente | G4 | NR |
-| OAP-MQT-003 | Override por atributo con storageDatapoint=true | G4 | NR |
-| OAP-MQT-004 | Máximo N valores por ventana T por agente/atributo | G4 | NR |
-| OAP-MQT-005 | State y alarmas procesan cada evento antes del storage filter | G4 | NR |
-| OAP-MQT-006 | Ingesta directa sin Node-RED | G4 | NR |
-
 ## OAP-PRO — Protocolos, Edge y Provisioning
 
 | ID | Descripción verificable | Gate | Fuente |
@@ -169,7 +173,7 @@ Reestructuración 2026-11-17 a partir de la auditoría de `openremote/core` @ `6
 | OAP-UI-002 | Pantallas completas contra contratos OpenAPI + mocks MSW | G2 | NR |
 | OAP-UI-003 | Feature flags por gate: pantalla sin backend real queda oculta o "disponible en etapa X"; nunca rota | G2 | NR |
 | OAP-UI-004 | E2E Playwright por pantalla (mocks y backend real por gate) | G2 | NR |
-| OAP-UI-005 | Pantallas: identity/usuarios/roles, asset manager (árbol+editor), telemetría, MQTT, dashboards, GIS, reglas, CMMS, Node-RED, AI, admin | G2-G9 | VS (17 páginas OpenRemote + 21 áreas Atlas) |
+| OAP-UI-005 | Pantallas del menú canónico (MASTER_ARCHITECTURE §9.1, ADR-014): Activos (árbol+tipologías+atributos), Conectividad, Telemetría, Dashboards, Mapas, Reglas, CMMS, Integraciones, IA/MCP, Administración | G2-G9 | VS (17 páginas OpenRemote + 21 áreas Atlas + patrones ThingsBoard/Grafana) |
 
 ## OAP-SEC — Seguridad
 

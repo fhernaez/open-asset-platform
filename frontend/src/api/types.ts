@@ -17,6 +17,7 @@ export interface Gateway {
   id: string;
   asset: string;
   asset_name?: string;
+  asset_code?: string;
   protocol: string;
   config: Record<string, unknown>;
   connection_status: string;

@@ -16,6 +16,7 @@ from assets.serializers import (
 )
 from core.errors import ConflictError, ValidationError
 from core.permissions import TenantScopedPermission
+from core.utils import strip_control_chars
 from core.viewsets import TenantScopedViewSet
 from platforms.services import AuditService, require_membership
 
@@ -144,6 +145,7 @@ class AssetViewSet(TenantScopedViewSet):
             if asset_type is not None and asset_type.kind == "gateway":
                 raw_config = self.request.data.get("gateway_config") or {}
                 config = dict(raw_config) if isinstance(raw_config, dict) else {}
+                config = strip_control_chars(config)
                 code = asset_type.code
                 if code == "gateway":
                     protocol = config.get("protocol") or "mqtt"

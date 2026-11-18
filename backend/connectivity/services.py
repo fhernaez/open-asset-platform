@@ -235,6 +235,8 @@ def test_gateway_connection(gateway: Gateway) -> dict:
         return {"status": "error", "detail": "host is required."}
     port = int(config.get("port") or 1883)
     try:
+        import time  # noqa: PLC0415
+
         import paho.mqtt.client as mqtt  # noqa: PLC0415
 
         client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id=f"oap-test-{gateway.id}")
@@ -245,7 +247,14 @@ def test_gateway_connection(gateway: Gateway) -> dict:
             client.tls_set()
         client.connect(host, port, keepalive=5)
         client.loop_start()
-        connected = client.is_connected()
+        # The MQTT CONNACK arrives asynchronously: wait for it briefly.
+        deadline = time.time() + 3.0
+        connected = False
+        while time.time() < deadline:
+            if client.is_connected():
+                connected = True
+                break
+            time.sleep(0.1)
         client.loop_stop()
         client.disconnect()
     except Exception as exc:  # noqa: BLE001

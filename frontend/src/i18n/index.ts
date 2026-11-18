@@ -189,6 +189,8 @@ const resources = {
       "maps.globalMap": "Mapa global (bounds del proyecto)",
       "maps.boundsHint": "Arrastrá con el mouse sobre el mapa para dibujar el rectángulo donde estarán ubicados los activos; luego guardá.",
       "maps.selectProject": "Seleccioná un proyecto para configurar el mapa global.",
+      "maps.latitude": "Latitud",
+      "maps.longitude": "Longitud",
     },
   },
   en: {
@@ -374,6 +376,8 @@ const resources = {
       "maps.globalMap": "Global map (project bounds)",
       "maps.boundsHint": "Drag on the map to draw the rectangle where assets will be located; then save.",
       "maps.selectProject": "Select a project to configure the global map.",
+      "maps.latitude": "Latitude",
+      "maps.longitude": "Longitude",
     },
   },
 };

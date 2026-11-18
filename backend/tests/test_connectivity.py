@@ -309,3 +309,84 @@ def test_binding_address_sanitized(api, tenant, project, platform_admin):
     )
     assert binding.status_code == 201, binding.data
     assert binding.data["address"] == "z2m-tg/SN-PRES-01"
+
+
+def test_gateway_config_strips_control_chars(api, tenant, project, platform_admin):
+    from connectivity.models import Gateway
+
+    api.force_authenticate(user=platform_admin)
+    type_resp = api.get("/api/v1/assets/types/?kind=gateway")
+    mqtt_type = next(r for r in type_resp.data["results"] if r["code"] == "gateway-mqtt")
+    create = api.post(
+        "/api/v1/assets/assets/",
+        {
+            "tenant": str(tenant.id),
+            "project": str(project.id),
+            "name": "GW-Ctrl",
+            "external_ref": "gw-ctrl",
+            "asset_type": mqtt_type["id"],
+            "gateway_config": {"host": "x", "port": 1883, "client_id": "or-domah-bms-01\u0000"},
+        },
+        format="json",
+    )
+    assert create.status_code == 201, create.data
+    gateway = Gateway.objects.get(id=create.data["gateway_id"])
+    assert gateway.config["client_id"] == "or-domah-bms-01"
+
+
+def test_test_connection_waits_for_connack(monkeypatch, tenant, project, platform_admin):
+    import sys
+    import time
+    import types
+
+    from assets.models import Asset
+    from connectivity.models import Gateway
+    from connectivity.services import test_gateway_connection
+
+    gw_asset = Asset.objects.create(tenant=tenant, project=project, name="GW-T", external_ref="gw-t")
+
+    class FakeClient:
+        def __init__(self, *a, **kw):
+            self.calls = 0
+
+        def username_pw_set(self, *a):
+            pass
+
+        def tls_set(self):
+            pass
+
+        def connect(self, *a, **kw):
+            pass
+
+        def loop_start(self):
+            pass
+
+        def loop_stop(self):
+            pass
+
+        def disconnect(self):
+            pass
+
+        def is_connected(self):
+            self.calls += 1
+            return self.calls >= 2
+
+    paho = types.ModuleType("paho")
+    paho_mqtt = types.ModuleType("paho.mqtt")
+    client_mod = types.ModuleType("paho.mqtt.client")
+    client_mod.Client = FakeClient
+    client_mod.CallbackAPIVersion = types.SimpleNamespace(VERSION2=2)
+    paho_mqtt.client = client_mod
+    monkeypatch.setitem(sys.modules, "paho", paho)
+    monkeypatch.setitem(sys.modules, "paho.mqtt", paho_mqtt)
+    monkeypatch.setitem(sys.modules, "paho.mqtt.client", client_mod)
+    monkeypatch.setattr(time, "sleep", lambda *a, **kw: None)
+    monkeypatch.setattr(time, "time", lambda: 0.0)
+
+    gateway = Gateway.objects.create(
+        tenant=tenant, project=project, asset=gw_asset, protocol="mqtt", config={"host": "x", "port": 1883}
+    )
+    result = test_gateway_connection(gateway)
+    assert result["status"] == "connected"
+    gateway.refresh_from_db()
+    assert gateway.connection_status == "connected"

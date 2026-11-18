@@ -18,6 +18,7 @@ import {
   Empty,
   Form,
   Input,
+  InputNumber,
   Modal,
   Popconfirm,
   Select,
@@ -43,6 +44,7 @@ import {
   listAttributes,
   listGateways,
   listUnits,
+  updateAsset,
   updateAssetStatus,
   updateAttribute,
 } from "../api/endpoints";
@@ -105,8 +107,10 @@ function AssetsTab() {
   const { tenantId, projectId } = useAppContext();
   const [createOpen, setCreateOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
+  const [editingAsset, setEditingAsset] = useState<Asset | null>(null);
   const [createForm] = Form.useForm();
   const [attrForm] = Form.useForm();
+  const [editForm] = Form.useForm();
 
   const assetTypes = useQuery({
     queryKey: ["asset-types", tenantId],
@@ -149,6 +153,18 @@ function AssetsTab() {
     mutationFn: (id: string) => deleteAsset(id),
     onSuccess: () => {
       message.success(t("assets.deleteSuccess"));
+      invalidate();
+    },
+    onError: (err) => message.error(err instanceof Error ? err.message : "Error"),
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: ({ id, input }: { id: string; input: Record<string, unknown> }) =>
+      updateAsset(id, input as Parameters<typeof updateAsset>[1]),
+    onSuccess: () => {
+      message.success(t("common.save"));
+      setEditingAsset(null);
+      editForm.resetFields();
       invalidate();
     },
     onError: (err) => message.error(err instanceof Error ? err.message : "Error"),
@@ -229,6 +245,22 @@ function AssetsTab() {
                       {t("assets.retire")}
                     </Button>
                   )}
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      setEditingAsset(record);
+                      editForm.setFieldsValue({
+                        name: record.name,
+                        external_ref: record.external_ref,
+                        status: record.status,
+                        asset_type: record.asset_type,
+                        latitude: record.latitude ?? undefined,
+                        longitude: record.longitude ?? undefined,
+                      });
+                    }}
+                  >
+                    {t("common.edit")}
+                  </Button>
                   <Popconfirm
                     title={t("assets.deleteConfirm")}
                     onConfirm={() => deleteMutation.mutate(record.id)}
@@ -294,6 +326,50 @@ function AssetsTab() {
                 label: `${g.asset_name} (${g.protocol})`,
               }))}
             />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      <Modal
+        title={t("common.edit")}
+        open={Boolean(editingAsset)}
+        onCancel={() => setEditingAsset(null)}
+        onOk={() => editForm.submit()}
+        confirmLoading={updateMutation.isPending}
+      >
+        <Form
+          form={editForm}
+          layout="vertical"
+          onFinish={(values) => {
+            if (editingAsset) updateMutation.mutate({ id: editingAsset.id, input: values });
+          }}
+        >
+          <Form.Item name="name" label={t("assets.name")} rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="external_ref" label={t("common.code")} rules={[{ required: true, pattern: /^[a-z0-9-]+$/ }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="status" label={t("assets.status")}>
+            <Select
+              options={[
+                { value: "draft", label: t("assets.draft") },
+                { value: "active", label: t("assets.active") },
+                { value: "retired", label: t("assets.retired") },
+              ]}
+            />
+          </Form.Item>
+          <Form.Item name="asset_type" label={t("assets.types")}>
+            <Select
+              allowClear
+              options={commonTypes.map((item) => ({ value: item.id, label: item.name }))}
+            />
+          </Form.Item>
+          <Form.Item name="latitude" label={t("maps.latitude")}>
+            <InputNumber step={0.0001} style={{ width: "100%" }} />
+          </Form.Item>
+          <Form.Item name="longitude" label={t("maps.longitude")}>
+            <InputNumber step={0.0001} style={{ width: "100%" }} />
           </Form.Item>
         </Form>
       </Modal>

@@ -34,8 +34,9 @@ import {
   listGateways,
   testGatewayConnection,
   updateAttribute,
+  updateGatewayConfig,
 } from "../api/endpoints";
-import type { Asset, AssetAttribute, Gateway, GatewayBinding } from "../api/types";
+import type { Asset, AssetAttribute, AssetType, Gateway, GatewayBinding } from "../api/types";
 import { useAppContext } from "../contexts/AppContext";
 
 function statusColor(status: string): string {
@@ -48,15 +49,34 @@ export default function ConnectivityPage() {
   const { tenantId } = useAppContext();
   const [createOpen, setCreateOpen] = useState(false);
   const [selectedGateway, setSelectedGateway] = useState<Gateway | null>(null);
+  const [editingGateway, setEditingGateway] = useState<Gateway | null>(null);
   const [form] = Form.useForm();
+  const [editForm] = Form.useForm();
 
   const gateways = useQuery({
     queryKey: ["gateways", tenantId],
     queryFn: () => listGateways({ tenant: tenantId }),
     enabled: Boolean(tenantId),
   });
+  const gatewayTypes = useQuery({
+    queryKey: ["asset-types", tenantId],
+    queryFn: () => listAssetTypes({ tenant: tenantId, kind: "gateway" }),
+    enabled: Boolean(tenantId),
+  });
 
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ["gateways", tenantId] });
+
+  const editMutation = useMutation({
+    mutationFn: ({ id, config }: { id: string; config: Record<string, unknown> }) =>
+      updateGatewayConfig(id, config),
+    onSuccess: () => {
+      message.success(t("common.save"));
+      setEditingGateway(null);
+      editForm.resetFields();
+      invalidate();
+    },
+    onError: (err) => message.error(err instanceof Error ? err.message : "Error"),
+  });
 
   const deleteMutation = useMutation({
     mutationFn: (id: string) => deleteGateway(id),
@@ -112,6 +132,15 @@ export default function ConnectivityPage() {
                   <Button size="small" icon={<ApiOutlined />} onClick={() => testMutation.mutate(record.id)}>
                     {t("conn.test")}
                   </Button>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      setEditingGateway(record);
+                      editForm.setFieldsValue({ config: record.config });
+                    }}
+                  >
+                    {t("common.edit")}
+                  </Button>
                   <Button size="small" icon={<LinkOutlined />} onClick={() => setSelectedGateway(record)}>
                     {t("conn.bindings")}
                   </Button>
@@ -134,6 +163,17 @@ export default function ConnectivityPage() {
           form.resetFields();
           invalidate();
         }}
+      />
+
+      <GatewayEditModal
+        gateway={editingGateway}
+        gatewayTypes={gatewayTypes.data?.results ?? []}
+        form={editForm}
+        onClose={() => setEditingGateway(null)}
+        onSave={(config) => {
+          if (editingGateway) editMutation.mutate({ id: editingGateway.id, config });
+        }}
+        saving={editMutation.isPending}
       />
 
       <BindingsDrawer gateway={selectedGateway} onClose={() => setSelectedGateway(null)} />
@@ -248,6 +288,73 @@ function CreateGatewayModal({
               rules={rules}
               initialValue={f.default as string | number | undefined}
             >
+              {isSecret ? <Input.Password /> : isInt ? <InputNumber style={{ width: "100%" }} /> : <Input />}
+            </Form.Item>
+          );
+        })}
+      </Form>
+    </Modal>
+  );
+}
+
+function GatewayEditModal({
+  gateway,
+  gatewayTypes,
+  form,
+  onClose,
+  onSave,
+  saving,
+}: {
+  gateway: Gateway | null;
+  gatewayTypes: AssetType[];
+  form: FormInstance;
+  onClose: () => void;
+  onSave: (config: Record<string, unknown>) => void;
+  saving: boolean;
+}) {
+  const { t } = useTranslation();
+  const type = gatewayTypes.find((item) => item.code === gateway?.asset_code);
+  const schema = ((type?.schema as Record<string, unknown>)?.connection_schema as Record<string, unknown>[]) ?? [];
+
+  return (
+    <Modal
+      title={t("common.edit")}
+      open={Boolean(gateway)}
+      onCancel={onClose}
+      onOk={() => form.submit()}
+      confirmLoading={saving}
+      width={640}
+    >
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={(values: { config?: Record<string, unknown> }) => onSave(values.config ?? {})}
+      >
+        {schema.map((field) => {
+          const f = field as Record<string, unknown>;
+          const fname = f.field as string;
+          const ftype = f.type as string;
+          const label = ((f.label_i18n as Record<string, string>) ?? {})["es"] ?? fname;
+          const rules = f.required ? [{ required: true }] : [];
+          if (ftype === "bool") {
+            return (
+              <Form.Item key={fname} name={["config", fname]} label={label} valuePropName="checked" rules={rules}>
+                <Checkbox />
+              </Form.Item>
+            );
+          }
+          if (ftype === "select") {
+            const options = (f.options as { value: string }[] | undefined) ?? [];
+            return (
+              <Form.Item key={fname} name={["config", fname]} label={label} rules={rules}>
+                <Select options={options.map((o) => ({ value: o.value, label: o.value }))} />
+              </Form.Item>
+            );
+          }
+          const isSecret = ftype === "secret";
+          const isInt = ftype === "int";
+          return (
+            <Form.Item key={fname} name={["config", fname]} label={label} rules={rules}>
               {isSecret ? <Input.Password /> : isInt ? <InputNumber style={{ width: "100%" }} /> : <Input />}
             </Form.Item>
           );

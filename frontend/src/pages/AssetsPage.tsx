@@ -126,7 +126,7 @@ function AssetsTab() {
   const commonTypes = (assetTypes.data?.results ?? []).filter((item) => item.kind !== "gateway");
   const assets = useQuery({
     queryKey: ["assets", tenantId, projectId],
-    queryFn: () => listAssets({ tenant: tenantId, project: projectId ?? undefined }),
+    queryFn: () => listAssets({ tenant: tenantId, project: projectId ?? undefined, kind: "non_gateway" }),
     enabled: Boolean(tenantId),
   });
 

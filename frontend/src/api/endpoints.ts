@@ -81,10 +81,11 @@ export function createAssetType(input: CreateAssetTypeInput): Promise<AssetType>
   });
 }
 
-export function listAssets(params: { tenant?: string; project?: string } = {}): Promise<Paginated<Asset>> {
+export function listAssets(params: { tenant?: string; project?: string; kind?: string } = {}): Promise<Paginated<Asset>> {
   const query = new URLSearchParams();
   if (params.tenant) query.set("tenant", params.tenant);
   if (params.project) query.set("project", params.project);
+  if (params.kind) query.set("kind", params.kind);
   const qs = query.toString();
   return apiFetch<Paginated<Asset>>(`/assets/assets/${qs ? `?${qs}` : ""}`);
 }
@@ -285,13 +286,17 @@ export function updateTenant(id: string, input: Partial<Pick<Tenant, "name" | "s
   return apiFetch(`/platform/tenants/${id}/`, { method: "PATCH", body: JSON.stringify(input) });
 }
 
+export function deleteTenant(id: string): Promise<void> {
+  return apiFetch<void>(`/platform/tenants/${id}/`, { method: "DELETE" });
+}
+
 // --- Dashboards -----------------------------------------------------------
 
 export interface DashboardWidget {
   id?: string;
   dashboard?: string;
   title: string;
-  widget_type: "line" | "gauge" | "card" | "table" | "map";
+  widget_type: "line" | "gauge" | "card" | "table" | "map" | "stat" | "gateway";
   x: number;
   y: number;
   w: number;

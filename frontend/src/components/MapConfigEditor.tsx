@@ -33,33 +33,41 @@ export default function MapConfigEditor({
   const [rect, setRect] = useState<{ left: string; top: string; width: string; height: string } | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [mapError, setMapError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
-    const hasInitial = initialBounds?.north != null && initialBounds?.west != null;
-    const center: [number, number] = hasInitial
-      ? [
-          (initialBounds!.west! + (initialBounds!.east ?? initialBounds!.west!)) / 2,
-          (initialBounds!.north! + (initialBounds!.south ?? initialBounds!.north!)) / 2,
-        ]
-      : [-58.3816, -34.6037];
-    const map = new MapLibreMap({
-      container: containerRef.current,
-      style: {
-        version: 8,
-        sources: {
-          osm: {
-            type: "raster",
-            tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-            tileSize: 256,
-            attribution: "© OpenStreetMap contributors",
+    let map: MapLibreMap | null = null;
+    try {
+      const hasInitial = initialBounds?.north != null && initialBounds?.west != null;
+      const center: [number, number] = hasInitial
+        ? [
+            (initialBounds!.west! + (initialBounds!.east ?? initialBounds!.west!)) / 2,
+            (initialBounds!.north! + (initialBounds!.south ?? initialBounds!.north!)) / 2,
+          ]
+        : [-58.3816, -34.6037];
+      map = new MapLibreMap({
+        container: containerRef.current,
+        style: {
+          version: 8,
+          sources: {
+            osm: {
+              type: "raster",
+              tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+              tileSize: 256,
+              attribution: "© OpenStreetMap contributors",
+            },
           },
+          layers: [{ id: "osm", type: "raster", source: "osm", minzoom: 0, maxzoom: 19 }],
         },
-        layers: [{ id: "osm", type: "raster", source: "osm", minzoom: 0, maxzoom: 19 }],
-      },
-      center,
-      zoom: hasInitial ? 12 : 4,
-    });
+        center,
+        zoom: hasInitial ? 12 : 4,
+      });
+    } catch (err) {
+      setMapError(err instanceof Error ? err.message : String(err));
+      return;
+    }
+    const initializedMap = map;
 
     function rectFrom(start: Point, end: Point) {
       const north = Math.max(start.lat, end.lat);
@@ -78,16 +86,16 @@ export default function MapConfigEditor({
       };
     }
 
-    map.on("mousedown", (event: MapMouseEvent) => {
+    initializedMap.on("mousedown", (event: MapMouseEvent) => {
       anchorRef.current = { lng: event.lngLat.lng, lat: event.lngLat.lat };
     });
-    map.on("mousemove", (event: MapMouseEvent) => {
+    initializedMap.on("mousemove", (event: MapMouseEvent) => {
       if (anchorRef.current) {
         const r = rectFrom(anchorRef.current, { lng: event.lngLat.lng, lat: event.lngLat.lat });
         setRect({ left: r.left, top: r.top, width: r.width, height: r.height });
       }
     });
-    map.on("mouseup", (event: MapMouseEvent) => {
+    initializedMap.on("mouseup", (event: MapMouseEvent) => {
       if (anchorRef.current) {
         const r = rectFrom(anchorRef.current, { lng: event.lngLat.lng, lat: event.lngLat.lat });
         anchorRef.current = null;
@@ -96,9 +104,9 @@ export default function MapConfigEditor({
       }
     });
 
-    mapRef.current = map;
+    mapRef.current = initializedMap;
     return () => {
-      map.remove();
+      initializedMap.remove();
       mapRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -121,6 +129,7 @@ export default function MapConfigEditor({
   return (
     <Space direction="vertical" style={{ width: "100%" }}>
       <Typography.Text type="secondary">{t("maps.boundsHint")}</Typography.Text>
+      {mapError && <Alert type="warning" showIcon message={t("maps.mapUnavailable")} description={mapError} />}
       <div style={{ position: "relative", width: "100%", height: 420 }}>
         <div ref={containerRef} style={{ position: "absolute", inset: 0 }} />
         {rect && (

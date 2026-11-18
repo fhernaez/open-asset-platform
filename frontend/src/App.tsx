@@ -1,6 +1,7 @@
 import { Spin } from "antd";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./auth/AuthProvider";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { SCREENS, isScreenImplemented } from "./features/flags";
 import MainLayout from "./layouts/MainLayout";
 import AdminPage from "./pages/AdminPage";
@@ -51,17 +52,19 @@ function screenElement(key: string) {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route element={<ProtectedLayout />}>
-          <Route path="/" element={<Navigate to="/assets" replace />} />
-          {SCREENS.map((screen) => (
-            <Route key={screen.key} path={`/${screen.key}`} element={screenElement(screen.key)} />
-          ))}
-          <Route path="*" element={<ComingSoonPage gate="G2" labelKey="common.unknownScreen" />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route element={<ProtectedLayout />}>
+            <Route path="/" element={<Navigate to="/assets" replace />} />
+            {SCREENS.map((screen) => (
+              <Route key={screen.key} path={`/${screen.key}`} element={screenElement(screen.key)} />
+            ))}
+            <Route path="*" element={<ComingSoonPage gate="G2" labelKey="common.unknownScreen" />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }

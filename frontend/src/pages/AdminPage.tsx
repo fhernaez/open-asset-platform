@@ -21,7 +21,9 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   createProject,
+  createTenant,
   deleteProject,
+  deleteTenant,
   listProjects,
   listTenants,
   listUsers,
@@ -48,10 +50,148 @@ export default function AdminPage() {
       defaultActiveKey="settings"
       items={[
         { key: "settings", label: t("admin.settingsTab"), children: <SettingsTab /> },
+        { key: "tenants", label: t("common.organization"), children: <TenantsTab /> },
         { key: "users", label: t("admin.users"), children: <UsersTab /> },
         { key: "projects", label: t("common.project"), children: <ProjectsTab /> },
       ]}
     />
+  );
+}
+
+function TenantsTab() {
+  const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const [createOpen, setCreateOpen] = useState(false);
+  const [editing, setEditing] = useState<Tenant | null>(null);
+  const [form] = Form.useForm();
+  const [editForm] = Form.useForm();
+
+  const tenants = useQuery({ queryKey: ["tenants"], queryFn: () => listTenants() });
+  const invalidate = () => queryClient.invalidateQueries({ queryKey: ["tenants"] });
+
+  const createMutation = useMutation({
+    mutationFn: createTenant,
+    onSuccess: () => {
+      message.success(t("admin.tenantCreated"));
+      setCreateOpen(false);
+      form.resetFields();
+      invalidate();
+    },
+    onError: (err) => message.error(err instanceof Error ? err.message : "Error"),
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: ({ id, input }: { id: string; input: Partial<Tenant> }) => updateTenant(id, input),
+    onSuccess: () => {
+      message.success(t("common.save"));
+      setEditing(null);
+      editForm.resetFields();
+      invalidate();
+    },
+    onError: (err) => message.error(err instanceof Error ? err.message : "Error"),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: deleteTenant,
+    onSuccess: invalidate,
+    onError: (err) => message.error(err instanceof Error ? err.message : "Error"),
+  });
+
+  return (
+    <Space direction="vertical" size="large" style={{ width: "100%" }}>
+      <Button type="primary" icon={<PlusOutlined />} onClick={() => setCreateOpen(true)}>
+        {t("admin.newTenant")}
+      </Button>
+      <Table<Tenant>
+        rowKey="id"
+        dataSource={tenants.data?.results ?? []}
+        loading={tenants.isLoading}
+        pagination={false}
+        columns={[
+          { title: t("org.name"), dataIndex: "name" },
+          { title: t("common.code"), dataIndex: "slug" },
+          { title: t("admin.locale"), dataIndex: "locale", render: (v?: string) => v ?? "—" },
+          {
+            title: t("common.actions"),
+            render: (_, record) => (
+              <Space>
+                <Button
+                  size="small"
+                  onClick={() => {
+                    setEditing(record);
+                    editForm.setFieldsValue({ name: record.name, slug: record.slug, locale: record.locale ?? "es" });
+                  }}
+                >
+                  {t("common.edit")}
+                </Button>
+                <Popconfirm title={t("admin.tenantDeleteConfirm")} onConfirm={() => deleteMutation.mutate(record.id)}>
+                  <Button size="small" danger>
+                    {t("common.delete")}
+                  </Button>
+                </Popconfirm>
+              </Space>
+            ),
+          },
+        ]}
+      />
+
+      <Modal
+        title={t("admin.newTenant")}
+        open={createOpen}
+        onCancel={() => setCreateOpen(false)}
+        onOk={() => form.submit()}
+        confirmLoading={createMutation.isPending}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          onValuesChange={(changed, values) => {
+            if ("name" in changed && typeof values.name === "string") {
+              form.setFieldValue("slug", slugify(values.name));
+            }
+          }}
+          onFinish={(values: { name: string; slug: string }) => createMutation.mutate(values)}
+        >
+          <Form.Item name="name" label={t("org.name")} rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="slug" label={t("common.code")} rules={[{ required: true, pattern: /^[a-z0-9-]+$/ }]}>
+            <Input />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      <Modal
+        title={t("common.edit")}
+        open={Boolean(editing)}
+        onCancel={() => setEditing(null)}
+        onOk={() => editForm.submit()}
+        confirmLoading={updateMutation.isPending}
+      >
+        <Form
+          form={editForm}
+          layout="vertical"
+          onFinish={(values) => {
+            if (editing) updateMutation.mutate({ id: editing.id, input: values });
+          }}
+        >
+          <Form.Item name="name" label={t("org.name")} rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="slug" label={t("common.code")} rules={[{ required: true, pattern: /^[a-z0-9-]+$/ }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="locale" label={t("admin.locale")}>
+            <Select
+              options={[
+                { value: "es", label: "Español" },
+                { value: "en", label: "English" },
+              ]}
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
+    </Space>
   );
 }
 

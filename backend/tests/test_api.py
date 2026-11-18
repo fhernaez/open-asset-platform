@@ -309,3 +309,45 @@ def test_asset_gateway_binding_on_create(api, tenant, project, platform_admin):
     assert device.status_code == 201, device.data
     binding = GatewayBinding.objects.get(gateway_id=gw.data["gateway_id"], asset_id=device.data["id"])
     assert binding.binding_type == "device"
+
+
+def test_assets_kind_filter_hides_gateways(api, tenant, project, platform_admin):
+    api.force_authenticate(user=platform_admin)
+    type_resp = api.get("/api/v1/assets/types/?kind=gateway")
+    mqtt_type = next(r for r in type_resp.data["results"] if r["code"] == "gateway-mqtt")
+    api.post(
+        "/api/v1/assets/assets/",
+        {
+            "tenant": str(tenant.id),
+            "project": str(project.id),
+            "name": "GW-Kind",
+            "external_ref": "gw-kind",
+            "asset_type": mqtt_type["id"],
+            "gateway_config": {"host": "x", "port": 1883},
+        },
+        format="json",
+    )
+    api.post(
+        "/api/v1/assets/assets/",
+        {"tenant": str(tenant.id), "project": str(project.id), "name": "Sensor-Kind", "external_ref": "sensor-kind"},
+        format="json",
+    )
+    listing = api.get(f"/api/v1/assets/assets/?tenant={tenant.id}&kind=non_gateway")
+    assert listing.status_code == 200
+    names = {r["name"] for r in listing.data["results"]}
+    assert "Sensor-Kind" in names
+    assert "GW-Kind" not in names
+
+
+def test_delete_tenant_purges_data(api, tenant, project, platform_admin):
+    from platforms.models import Tenant
+
+    api.force_authenticate(user=platform_admin)
+    api.post(
+        "/api/v1/assets/assets/",
+        {"tenant": str(tenant.id), "project": str(project.id), "name": "A", "external_ref": "a"},
+        format="json",
+    )
+    delete = api.delete(f"/api/v1/platform/tenants/{tenant.id}/")
+    assert delete.status_code == 204
+    assert not Tenant.objects.filter(id=tenant.id).exists()

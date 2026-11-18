@@ -1,7 +1,24 @@
 import { PlusOutlined, ReloadOutlined } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Alert, Button, Card, Col, Empty, Form, Input, Modal, Row, Select, Space, Tag, Typography, message } from "antd";
-import { useState } from "react";
+import {
+  Alert,
+  Button,
+  Card,
+  Col,
+  Empty,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  Row,
+  Select,
+  Space,
+  Table,
+  Tag,
+  Typography,
+  message,
+} from "antd";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   createDashboard,
@@ -10,14 +27,15 @@ import {
   listAssets,
   listAttributes,
   listDashboards,
+  listGateways,
   listScenes,
   telemetryCurrent,
   telemetryHistory,
+  updateWidget,
 } from "../api/endpoints";
 import type { Dashboard, DashboardWidget, Scene } from "../api/endpoints";
 import { useAppContext } from "../contexts/AppContext";
 import * as echarts from "echarts";
-import { useEffect, useRef } from "react";
 
 export default function DashboardsPage() {
   const { t } = useTranslation();
@@ -26,6 +44,7 @@ export default function DashboardsPage() {
   const [createOpen, setCreateOpen] = useState(false);
   const [selected, setSelected] = useState<Dashboard | null>(null);
   const [widgetOpen, setWidgetOpen] = useState(false);
+  const [editingWidget, setEditingWidget] = useState<DashboardWidget | null>(null);
   const [form] = Form.useForm();
   const [widgetForm] = Form.useForm();
 
@@ -54,6 +73,18 @@ export default function DashboardsPage() {
     onSuccess: () => {
       message.success(t("dash.widgetCreated"));
       setWidgetOpen(false);
+      widgetForm.resetFields();
+      invalidate();
+    },
+    onError: (err) => message.error(err instanceof Error ? err.message : "Error"),
+  });
+
+  const updateWidgetMutation = useMutation({
+    mutationFn: ({ id, input }: { id: string; input: Partial<DashboardWidget> }) => updateWidget(id, input),
+    onSuccess: () => {
+      message.success(t("common.save"));
+      setWidgetOpen(false);
+      setEditingWidget(null);
       widgetForm.resetFields();
       invalidate();
     },
@@ -122,39 +153,72 @@ export default function DashboardsPage() {
       {selected && (
         <DashboardEditor
           dashboard={selected}
-          onWidget={() => setWidgetOpen(true)}
+          onWidget={() => {
+            setEditingWidget(null);
+            widgetForm.resetFields();
+            setWidgetOpen(true);
+          }}
+          onEditWidget={(widget) => {
+            setEditingWidget(widget);
+            widgetForm.setFieldsValue({
+              title: widget.title,
+              widget_type: widget.widget_type,
+              attribute_id: widget.config?.attribute_id ?? undefined,
+              scene_id: widget.config?.scene_id ?? undefined,
+              gateway_id: widget.config?.gateway_id ?? undefined,
+            });
+            setWidgetOpen(true);
+          }}
           onDeleteWidget={(id) => deleteMutation.mutate(id)}
           onClose={() => setSelected(null)}
         />
       )}
 
       <Modal
-        title={t("dash.newWidget")}
+        title={editingWidget ? t("common.edit") : t("dash.newWidget")}
         open={widgetOpen}
-        onCancel={() => setWidgetOpen(false)}
+        onCancel={() => {
+          setWidgetOpen(false);
+          setEditingWidget(null);
+        }}
         onOk={() => widgetForm.submit()}
-        confirmLoading={widgetMutation.isPending}
+        confirmLoading={widgetMutation.isPending || updateWidgetMutation.isPending}
         width={640}
       >
         <Form
           form={widgetForm}
           layout="vertical"
           initialValues={{ widget_type: "line", w: 6, h: 3 }}
-          onFinish={(values: { title: string; widget_type: string; attribute_id: string; scene_id?: string }) => {
-            if (!selected) return;
-            widgetMutation.mutate({
-              dashboard: selected.id,
-              title: values.title,
-              widget_type: values.widget_type as DashboardWidget["widget_type"],
-              x: 0,
-              y: 0,
-              w: 6,
-              h: 3,
-              config: {
-                attribute_id: values.attribute_id ?? null,
-                scene_id: values.scene_id ?? null,
-              },
-            });
+          onFinish={(values: {
+            title: string;
+            widget_type: string;
+            attribute_id?: string;
+            scene_id?: string;
+            gateway_id?: string;
+          }) => {
+            if (!selected && !editingWidget) return;
+            const config = {
+              attribute_id: values.attribute_id ?? null,
+              scene_id: values.scene_id ?? null,
+              gateway_id: values.gateway_id ?? null,
+            };
+            if (editingWidget) {
+              updateWidgetMutation.mutate({
+                id: editingWidget.id as string,
+                input: { title: values.title, widget_type: values.widget_type as DashboardWidget["widget_type"], config },
+              });
+            } else {
+              widgetMutation.mutate({
+                dashboard: selected!.id,
+                title: values.title,
+                widget_type: values.widget_type as DashboardWidget["widget_type"],
+                x: 0,
+                y: 0,
+                w: 6,
+                h: 3,
+                config,
+              });
+            }
           }}
         >
           <Form.Item name="title" label={t("dash.widgetTitle")} rules={[{ required: true }]}>
@@ -168,11 +232,13 @@ export default function DashboardsPage() {
                 { value: "card", label: "Card" },
                 { value: "table", label: "Tabla" },
                 { value: "map", label: "Mapa" },
+                { value: "gateway", label: "Gateway (estado)" },
               ]}
             />
           </Form.Item>
           <AttributePicker />
           <ScenePicker />
+          <GatewayPicker />
         </Form>
       </Modal>
     </Space>
@@ -229,14 +295,37 @@ function ScenePicker() {
   );
 }
 
+function GatewayPicker() {
+  const { t } = useTranslation();
+  const { tenantId } = useAppContext();
+  const gateways = useQuery({
+    queryKey: ["gateways", tenantId],
+    queryFn: () => listGateways({ tenant: tenantId }),
+    enabled: Boolean(tenantId),
+  });
+  return (
+    <Form.Item name="gateway_id" label={t("conn.selectGateway")}>
+      <Select
+        allowClear
+        options={(gateways.data?.results ?? []).map((g) => ({
+          value: g.id,
+          label: `${g.asset_name ?? g.protocol} (${g.protocol})`,
+        }))}
+      />
+    </Form.Item>
+  );
+}
+
 function DashboardEditor({
   dashboard,
   onWidget,
+  onEditWidget,
   onDeleteWidget,
   onClose,
 }: {
   dashboard: Dashboard;
   onWidget: () => void;
+  onEditWidget: (widget: DashboardWidget) => void;
   onDeleteWidget: (id: string) => void;
   onClose: () => void;
 }) {
@@ -259,7 +348,21 @@ function DashboardEditor({
             <Card
               size="small"
               title={widget.title || widget.widget_type}
-              extra={<Button size="small" danger onClick={() => widget.id && onDeleteWidget(widget.id)}>✕</Button>}
+              extra={
+                <Space>
+                  <Button size="small" onClick={() => onEditWidget(widget)}>
+                    {t("common.edit")}
+                  </Button>
+                  <Popconfirm
+                    title={t("dash.deleteWidgetConfirm")}
+                    onConfirm={() => widget.id && onDeleteWidget(widget.id)}
+                  >
+                    <Button size="small" danger>
+                      {t("common.delete")}
+                    </Button>
+                  </Popconfirm>
+                </Space>
+              }
             >
               <WidgetRenderer widget={widget} />
             </Card>
@@ -276,14 +379,23 @@ function WidgetRenderer({ widget }: { widget: DashboardWidget }) {
   const current = useQuery({
     queryKey: ["current", attributeId],
     queryFn: () => telemetryCurrent(attributeId ?? ""),
-    enabled: Boolean(attributeId) && widget.widget_type === "card",
+    enabled: Boolean(attributeId) && ["card", "gauge", "stat"].includes(widget.widget_type),
   });
-  if (widget.widget_type === "card") {
+  if (widget.widget_type === "card" || widget.widget_type === "stat") {
     return (
       <Typography.Title level={2}>
         {String((current.data as { value?: unknown })?.value ?? "—")}
       </Typography.Title>
     );
+  }
+  if (widget.widget_type === "gauge") {
+    return <GaugeWidget attributeId={attributeId} />;
+  }
+  if (widget.widget_type === "table") {
+    return <TableWidget attributeId={attributeId} />;
+  }
+  if (widget.widget_type === "gateway") {
+    return <GatewayStatusWidget gatewayId={widget.config?.gateway_id as string | undefined} />;
   }
   if (widget.widget_type === "line") {
     return <LineWidget attributeId={attributeId} />;
@@ -292,6 +404,73 @@ function WidgetRenderer({ widget }: { widget: DashboardWidget }) {
     return <MapWidget sceneId={widget.config?.scene_id as string | undefined} />;
   }
   return <Typography.Text type="secondary">{widget.widget_type}</Typography.Text>;
+}
+
+function GaugeWidget({ attributeId }: { attributeId?: string }) {
+  const { t } = useTranslation();
+  const ref = useRef<HTMLDivElement>(null);
+  const current = useQuery({
+    queryKey: ["current", attributeId],
+    queryFn: () => telemetryCurrent(attributeId ?? ""),
+    enabled: Boolean(attributeId),
+    refetchInterval: 10000,
+  });
+  useEffect(() => {
+    if (!ref.current) return;
+    const value = Number((current.data as { value?: unknown })?.value ?? 0);
+    const chart = echarts.init(ref.current);
+    chart.setOption({
+      series: [{ type: "gauge", progress: { show: true }, detail: { formatter: "{value}" }, data: [{ value }] }],
+    });
+    return () => chart.dispose();
+  }, [current.data]);
+  if (!attributeId) return <Empty description={t("dash.selectAttribute")} />;
+  return <div ref={ref} style={{ height: 160 }} />;
+}
+
+function TableWidget({ attributeId }: { attributeId?: string }) {
+  const { t } = useTranslation();
+  const history = useQuery({
+    queryKey: ["history", attributeId],
+    queryFn: () => telemetryHistory(attributeId ?? ""),
+    enabled: Boolean(attributeId),
+    refetchInterval: 15000,
+  });
+  const points = (history.data?.points ?? []).slice(-10).reverse();
+  if (!attributeId) return <Empty description={t("dash.selectAttribute")} />;
+  return (
+    <Table
+      size="small"
+      pagination={false}
+      rowKey="ts"
+      dataSource={points}
+      columns={[
+        { title: "ts", dataIndex: "ts", render: (v: string) => v.slice(11, 19) },
+        { title: "value", dataIndex: "value" },
+      ]}
+    />
+  );
+}
+
+function GatewayStatusWidget({ gatewayId }: { gatewayId?: string }) {
+  const { t } = useTranslation();
+  const { tenantId } = useAppContext();
+  const gateways = useQuery({
+    queryKey: ["gateways", tenantId],
+    queryFn: () => listGateways({ tenant: tenantId }),
+    enabled: Boolean(tenantId),
+  });
+  const gateway = (gateways.data?.results ?? []).find((g) => g.id === gatewayId);
+  if (!gatewayId) return <Empty description={t("dash.selectGateway")} />;
+  if (!gateway) return <Empty description={t("dash.gatewayNotFound")} />;
+  return (
+    <Space>
+      <Typography.Text>{gateway.asset_name ?? gateway.protocol}</Typography.Text>
+      <Tag color={gateway.connection_status === "connected" ? "green" : "default"}>
+        {gateway.connection_status}
+      </Tag>
+    </Space>
+  );
 }
 
 function LineWidget({ attributeId }: { attributeId?: string }) {

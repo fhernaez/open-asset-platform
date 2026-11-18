@@ -34,6 +34,11 @@ class TenantViewSet(viewsets.ModelViewSet):
         tenant_ids = Membership.objects.filter(user=user, is_active=True).values_list("tenant_id", flat=True)
         return qs.filter(id__in=tenant_ids)
 
+    def perform_destroy(self, instance):
+        from platforms.services import purge_tenant_data
+
+        purge_tenant_data(instance)
+
 
 class ProjectViewSet(TenantScopedViewSet):
     serializer_class = ProjectSerializer

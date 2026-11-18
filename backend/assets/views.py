@@ -108,10 +108,15 @@ class AssetViewSet(TenantScopedViewSet):
         qs = super().get_queryset()
         tenant_id = self.request.query_params.get("tenant")
         project_id = self.request.query_params.get("project")
+        kind = self.request.query_params.get("kind")
         if tenant_id:
             qs = qs.filter(tenant_id=tenant_id)
         if project_id:
             qs = qs.filter(project_id=project_id)
+        if kind in {"standard", "gateway"}:
+            qs = qs.filter(asset_type__kind=kind)
+        elif kind == "non_gateway":
+            qs = qs.exclude(asset_type__kind="gateway")
         return qs
 
     def create(self, request, *args, **kwargs):

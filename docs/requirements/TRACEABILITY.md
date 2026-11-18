@@ -77,6 +77,9 @@ Regenerada 2026-11-17 tras la reestructuración de `REQUIREMENTS.md`. Estados ho
 | OAP-CON-006 | connectivity | G4 | docs/architecture/ADR-014 | connectivity/views.py | PARTIAL (UI + test-connection) |
 | OAP-CON-007 | connectivity | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/storage.py + policy endpoints | PARTIAL (unit) |
 | OAP-CON-008 | connectivity | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/storage.py | PARTIAL (unit) |
+| OAP-CON-009 | connectivity | G4 | docs/architecture/ADR-014 | connectivity/ | SPECIFIED |
+| OAP-CON-010 | connectivity | G4 | docs/architecture/ADR-014 | connectivity/ | SPECIFIED |
+| OAP-CON-011 | connectivity | G4 | docs/architecture/ADR-014 | connectivity/ | SPECIFIED |
 | OAP-PRO-001 | modbus | G7 | docs/plugins/modbus/SPEC.md | — | SPECIFIED |
 | OAP-PRO-002 | bacnet | G7 | docs/plugins/bacnet/SPEC.md | — | SPECIFIED |
 | OAP-PRO-003 | http | G7 | docs/plugins/http_ws/SPEC.md | — | SPECIFIED |

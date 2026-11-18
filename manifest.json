@@ -254,13 +254,13 @@
     },
     {
       "path": "docs/architecture/ADR-014-connectivity-gateway-navigation.md",
-      "bytes": 2575,
-      "sha256": "540ff9e9af39921036511f78ca78188c54654a95c11676f6014b1dbd93d1d43c"
+      "bytes": 3039,
+      "sha256": "ef8b91d4dda7a0c05e4fd246d578ab4bd0f7bb69c7afb05b88b5f8bda2aa7829"
     },
     {
       "path": "docs/architecture/ADR-015-dashboards-map-widgets.md",
-      "bytes": 1896,
-      "sha256": "a4ddf591577e11397e63725b2a4fe494cdb88f9205e01ca20d5bd7fb5f64add2"
+      "bytes": 1921,
+      "sha256": "22bf5175a5d29f31ca9564f463f55b14504a344d4725c0adbcc77bab8622026b"
     },
     {
       "path": "docs/architecture/ADR-016-asset-visuals-i18n.md",
@@ -299,8 +299,8 @@
     },
     {
       "path": "docs/contracts/ASSET_TYPE_SCHEMA.md",
-      "bytes": 4768,
-      "sha256": "4f03feabefaa91dea4eaa2882dfb878e1c75c3a99073d0867a1577900a813a6a"
+      "bytes": 5966,
+      "sha256": "12ecda94449280cee0789c86b74e84b299e5e25752c3976fd0957ad781b0cf1b"
     },
     {
       "path": "docs/contracts/CONFIGURATION_SCHEMA.md",
@@ -339,8 +339,8 @@
     },
     {
       "path": "docs/contracts/REST_UI_CONTRACT.md",
-      "bytes": 1271,
-      "sha256": "8d464d8c200e3c002243216e5a37b6734e40eacd43fff640219a228c4fe2355e"
+      "bytes": 1967,
+      "sha256": "7dad5da28d7e9010d6d184c621d87e143f840bd18f2eae67692f7fdb1905a96d"
     },
     {
       "path": "docs/contracts/SPATIAL_SCHEMA.md",
@@ -354,8 +354,8 @@
     },
     {
       "path": "docs/contracts/openapi.yaml",
-      "bytes": 112818,
-      "sha256": "83bc11072edd39c83cb2d2dca8c99255d3178350a45110f210a01d6bdcd2ee75"
+      "bytes": 154136,
+      "sha256": "a6c93a77c350a0a9901c9ad40a311387685b4cea26bf44c8e75ba34cf979bc15"
     },
     {
       "path": "docs/core/API_REALTIME.md",
@@ -434,13 +434,13 @@
     },
     {
       "path": "docs/evidence/IMPLEMENTATION_STATUS.md",
-      "bytes": 7334,
-      "sha256": "2bc8d778aa6ddad5ef9bf80b169aa2200bcbf9f7d7f2be0f7ba4e90ac8bbc4b2"
+      "bytes": 7687,
+      "sha256": "f5055d9120396bce42e31464759f1bae28e7e784c7921fd4cd0c450bec6f93b9"
     },
     {
       "path": "docs/evidence/TASK_LOG.md",
-      "bytes": 5968,
-      "sha256": "c27c832ea0a40872b72a93f7bb761c43d7296dbe754db620ed5e6f41c3e15c43"
+      "bytes": 6795,
+      "sha256": "ad0c9745529349734e1b1437ac70dec01055c182162339e0426c6ab959ddc341"
     },
     {
       "path": "docs/evidence/TEST_EVIDENCE_TEMPLATE.md",
@@ -1044,8 +1044,8 @@
     },
     {
       "path": "docs/requirements/REQUIREMENTS.md",
-      "bytes": 15871,
-      "sha256": "8e24985961f000bc00bc433adee022b4a0e0da4cb26c615697b95ebfe4463613"
+      "bytes": 16407,
+      "sha256": "a53139075479a5bbef0462fe5c62b233ba1d140fcefb2864e7ff8e350beb5796"
     },
     {
       "path": "docs/requirements/SOURCE_TO_FEATURE.md",
@@ -1054,8 +1054,8 @@
     },
     {
       "path": "docs/requirements/TRACEABILITY.md",
-      "bytes": 9959,
-      "sha256": "5404fa9a9f34ac5874bd8498f284d773a6a9d968ea917e4bf0255b4df6f3c993"
+      "bytes": 10235,
+      "sha256": "d7a37494decf02cfacc43280d23cb81e0146036095e33381968a6f39fc906cf5"
     },
     {
       "path": "docs/research/CODE_GRAPH_RUNBOOK.md",

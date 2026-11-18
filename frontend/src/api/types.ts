@@ -108,6 +108,8 @@ export interface Asset {
   parent: string | null;
   status: string;
   metadata: Record<string, unknown>;
+  latitude?: number | null;
+  longitude?: number | null;
 }
 
 export interface AssetTypeTemplateAttribute {
@@ -138,6 +140,8 @@ export interface AssetAttribute {
   storage_datapoint: boolean;
   history_enabled: boolean;
   history_policy_override: Record<string, unknown> | null;
+  auto_discovered?: boolean;
+  is_active?: boolean;
 }
 
 export interface Paginated<T> {

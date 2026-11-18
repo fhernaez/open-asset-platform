@@ -3,10 +3,13 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./auth/AuthProvider";
 import { SCREENS, isScreenImplemented } from "./features/flags";
 import MainLayout from "./layouts/MainLayout";
+import AdminPage from "./pages/AdminPage";
 import AssetsPage from "./pages/AssetsPage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 import ConnectivityPage from "./pages/ConnectivityPage";
+import DashboardsPage from "./pages/DashboardsPage";
 import LoginPage from "./pages/LoginPage";
+import MapsPage from "./pages/MapsPage";
 import PluginsPage from "./pages/PluginsPage";
 import TelemetryPage from "./pages/TelemetryPage";
 
@@ -30,6 +33,9 @@ const IMPLEMENTED_PAGES: Record<string, React.ReactNode> = {
   connectivity: <ConnectivityPage />,
   telemetry: <TelemetryPage />,
   plugins: <PluginsPage />,
+  dashboards: <DashboardsPage />,
+  maps: <MapsPage />,
+  admin: <AdminPage />,
 };
 
 function screenElement(key: string) {
@@ -40,7 +46,7 @@ function screenElement(key: string) {
   if (!screen) {
     return <ComingSoonPage gate="G2" label="Pantalla desconocida" />;
   }
-  return <ComingSoonPage gate={screen.gate} label={screen.label} />;
+  return <ComingSoonPage gate={screen.gate} label={screen.labelKey} />;
 }
 
 export default function App() {

@@ -58,9 +58,9 @@ export default function MainLayout() {
     () =>
       SCREENS.map((screen) => ({
         key: screen.key,
-        label: screen.label,
+        label: t(screen.labelKey),
       })),
-    [],
+    [t],
   );
 
   const selectedKey = useMemo(() => {
@@ -146,6 +146,9 @@ export default function MainLayout() {
         </Header>
         <Content style={{ padding: 24 }}>
           <Outlet />
+          <Typography.Text type="secondary" style={{ display: "block", marginTop: 16, fontSize: 12 }}>
+            OAP {__APP_VERSION__}
+          </Typography.Text>
         </Content>
       </Layout>
 

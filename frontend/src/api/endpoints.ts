@@ -127,7 +127,9 @@ export function deleteAssetType(id: string): Promise<void> {
 
 export function updateAttribute(
   id: string,
-  input: Partial<Pick<AssetAttribute, "name" | "code" | "value_type" | "unit" | "storage_datapoint">>,
+  input: Partial<
+    Pick<AssetAttribute, "name" | "code" | "value_type" | "unit" | "storage_datapoint" | "is_active">
+  >,
 ): Promise<AssetAttribute> {
   return apiFetch<AssetAttribute>(`/assets/attributes/${id}/`, {
     method: "PATCH",
@@ -249,4 +251,133 @@ export function setPluginEnabled(
     method: "PATCH",
     body: JSON.stringify({ enabled }),
   });
+}
+
+// --- Assets / connectivity status / admin ---------------------------------
+
+export function updateAsset(
+  id: string,
+  input: Partial<Pick<Asset, "name" | "external_ref" | "status" | "latitude" | "longitude">>,
+): Promise<Asset> {
+  return apiFetch<Asset>(`/assets/assets/${id}/`, { method: "PATCH", body: JSON.stringify(input) });
+}
+
+export function assetConnectivityStatus(id: string): Promise<{ asset_id: string; status: string }> {
+  return apiFetch(`/assets/assets/${id}/connectivity-status/`);
+}
+
+export function testGatewayConnection(id: string): Promise<{ gateway_id: string; status: string; detail?: string }> {
+  return apiFetch(`/connectivity/gateways/${id}/test-connection/`, { method: "POST" });
+}
+
+export function listUsers(): Promise<Paginated<{ id: string; email: string; full_name: string; is_platform_admin: boolean }>> {
+  return apiFetch("/platform/users/");
+}
+
+export function updateTenant(id: string, input: Partial<Pick<Tenant, "name" | "slug" | "locale">>): Promise<Tenant> {
+  return apiFetch(`/platform/tenants/${id}/`, { method: "PATCH", body: JSON.stringify(input) });
+}
+
+// --- Dashboards -----------------------------------------------------------
+
+export interface DashboardWidget {
+  id?: string;
+  dashboard?: string;
+  title: string;
+  widget_type: "line" | "gauge" | "card" | "table" | "map";
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  config: Record<string, unknown>;
+}
+
+export interface Dashboard {
+  id: string;
+  name: string;
+  description: string;
+  grid_cols: number;
+  grid_rows: number;
+  widgets: DashboardWidget[];
+}
+
+export function listDashboards(params: { tenant?: string } = {}): Promise<Paginated<Dashboard>> {
+  const query = new URLSearchParams();
+  if (params.tenant) query.set("tenant", params.tenant);
+  const qs = query.toString();
+  return apiFetch(`/dashboards/${qs ? `?${qs}` : ""}`);
+}
+
+export function createDashboard(input: { tenant: string; name: string; grid_cols?: number; grid_rows?: number }): Promise<Dashboard> {
+  return apiFetch("/dashboards/", { method: "POST", body: JSON.stringify(input) });
+}
+
+export function createWidget(input: DashboardWidget & { dashboard: string }): Promise<DashboardWidget> {
+  return apiFetch("/dashboards/widgets/", { method: "POST", body: JSON.stringify(input) });
+}
+
+export function deleteWidget(id: string): Promise<void> {
+  return apiFetch(`/dashboards/widgets/${id}/`, { method: "DELETE" });
+}
+
+export function updateWidget(id: string, input: Partial<DashboardWidget>): Promise<DashboardWidget> {
+  return apiFetch(`/dashboards/widgets/${id}/`, { method: "PATCH", body: JSON.stringify(input) });
+}
+
+// --- Spatial / scenes -----------------------------------------------------
+
+export interface SceneLayer {
+  id: string;
+  key: string;
+  name: string;
+  image_url: string | null;
+  opacity: number;
+  order: number;
+}
+
+export interface ScenePlacement {
+  id: string;
+  asset: string;
+  asset_name: string;
+  layer: string | null;
+  x: number | null;
+  y: number | null;
+  z: number;
+}
+
+export interface Scene {
+  id: string;
+  name: string;
+  description: string;
+  layers: SceneLayer[];
+  placements: ScenePlacement[];
+}
+
+export function listScenes(params: { tenant?: string } = {}): Promise<Paginated<Scene>> {
+  const query = new URLSearchParams();
+  if (params.tenant) query.set("tenant", params.tenant);
+  const qs = query.toString();
+  return apiFetch(`/spatial/scenes/${qs ? `?${qs}` : ""}`);
+}
+
+export function createScene(input: { tenant: string; name: string; description?: string }): Promise<Scene> {
+  return apiFetch("/spatial/scenes/", { method: "POST", body: JSON.stringify(input) });
+}
+
+export function addSceneLayer(sceneId: string, input: { key: string; name?: string; image: File; opacity?: number; order?: number }): Promise<SceneLayer> {
+  const form = new FormData();
+  form.append("key", input.key);
+  if (input.name) form.append("name", input.name);
+  form.append("image", input.image);
+  if (input.opacity !== undefined) form.append("opacity", String(input.opacity));
+  if (input.order !== undefined) form.append("order", String(input.order));
+  return apiFetch(`/spatial/scenes/${sceneId}/layers/`, { method: "POST", body: form });
+}
+
+export function createPlacement(input: { scene: string; layer: string | null; asset: string; x: number | null; y: number | null; z?: number }): Promise<ScenePlacement> {
+  return apiFetch("/spatial/placements/", { method: "POST", body: JSON.stringify(input) });
+}
+
+export function deletePlacement(id: string): Promise<void> {
+  return apiFetch(`/spatial/placements/${id}/`, { method: "DELETE" });
 }

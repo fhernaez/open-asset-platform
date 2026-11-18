@@ -73,6 +73,8 @@ class AssetAttributeSerializer(serializers.ModelSerializer):
             "history_enabled",
             "history_policy_override",
             "metadata",
+            "auto_discovered",
+            "is_active",
             "created_at",
         ]
         extra_kwargs = {

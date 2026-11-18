@@ -209,6 +209,36 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/v1/assets/assets/{id}/connectivity-status/:
+    get:
+      operationId: assets_assets_connectivity_status_retrieve
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this asset.
+        required: true
+      tags:
+      - assets
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+          description: ''
   /api/v1/assets/attributes/:
     get:
       operationId: assets_attributes_list
@@ -1408,8 +1438,8 @@ paths:
                 $ref: '#/components/schemas/Gateway'
           description: ''
   /api/v1/connectivity/gateways/{id}/test-connection/:
-    get:
-      operationId: connectivity_gateways_test_connection_retrieve
+    post:
+      operationId: connectivity_gateways_test_connection_create
       description: |-
         ModelViewSet that scopes the queryset to the tenant/project of the caller.
 
@@ -1427,6 +1457,18 @@ paths:
         required: true
       tags:
       - connectivity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+        required: true
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1437,6 +1479,404 @@ paths:
               schema:
                 $ref: '#/components/schemas/Gateway'
           description: ''
+  /api/v1/dashboards/:
+    get:
+      operationId: dashboards_list
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDashboardList'
+          description: ''
+    post:
+      operationId: dashboards_create
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+          description: ''
+  /api/v1/dashboards/{id}/:
+    get:
+      operationId: dashboards_retrieve
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F-]{36}$
+        required: true
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+          description: ''
+    put:
+      operationId: dashboards_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F-]{36}$
+        required: true
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+          description: ''
+    patch:
+      operationId: dashboards_partial_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F-]{36}$
+        required: true
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDashboard'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDashboard'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDashboard'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+          description: ''
+    delete:
+      operationId: dashboards_destroy
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F-]{36}$
+        required: true
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/dashboards/widgets/:
+    get:
+      operationId: dashboards_widgets_list
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedWidgetList'
+          description: ''
+    post:
+      operationId: dashboards_widgets_create
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Widget'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Widget'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Widget'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Widget'
+          description: ''
+  /api/v1/dashboards/widgets/{id}/:
+    get:
+      operationId: dashboards_widgets_retrieve
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Widget'
+          description: ''
+    put:
+      operationId: dashboards_widgets_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Widget'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Widget'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Widget'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Widget'
+          description: ''
+    patch:
+      operationId: dashboards_widgets_partial_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedWidget'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedWidget'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedWidget'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Widget'
+          description: ''
+    delete:
+      operationId: dashboards_widgets_destroy
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/v1/health:
     get:
       operationId: health_retrieve
@@ -2274,6 +2714,61 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/v1/platform/users/:
+    get:
+      operationId: platform_users_list
+      description: Read-only user directory for the Administración screen (platform
+        admin).
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - platform
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUserList'
+          description: ''
+  /api/v1/platform/users/{id}/:
+    get:
+      operationId: platform_users_retrieve
+      description: Read-only user directory for the Administración screen (platform
+        admin).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this user.
+        required: true
+      tags:
+      - platform
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
   /api/v1/plugins/:
     get:
       operationId: plugins_list
@@ -2686,6 +3181,449 @@ paths:
                 type: object
                 additionalProperties: {}
           description: ''
+  /api/v1/spatial/placements/:
+    get:
+      operationId: spatial_placements_list
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - spatial
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedScenePlacementList'
+          description: ''
+    post:
+      operationId: spatial_placements_create
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      tags:
+      - spatial
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScenePlacement'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ScenePlacement'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ScenePlacement'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScenePlacement'
+          description: ''
+  /api/v1/spatial/placements/{id}/:
+    get:
+      operationId: spatial_placements_retrieve
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this scene placement.
+        required: true
+      tags:
+      - spatial
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScenePlacement'
+          description: ''
+    put:
+      operationId: spatial_placements_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this scene placement.
+        required: true
+      tags:
+      - spatial
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScenePlacement'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ScenePlacement'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ScenePlacement'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScenePlacement'
+          description: ''
+    patch:
+      operationId: spatial_placements_partial_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this scene placement.
+        required: true
+      tags:
+      - spatial
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedScenePlacement'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedScenePlacement'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedScenePlacement'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScenePlacement'
+          description: ''
+    delete:
+      operationId: spatial_placements_destroy
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this scene placement.
+        required: true
+      tags:
+      - spatial
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/spatial/scenes/:
+    get:
+      operationId: spatial_scenes_list
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - spatial
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSceneList'
+          description: ''
+    post:
+      operationId: spatial_scenes_create
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      tags:
+      - spatial
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Scene'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Scene'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Scene'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scene'
+          description: ''
+  /api/v1/spatial/scenes/{id}/:
+    get:
+      operationId: spatial_scenes_retrieve
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this scene.
+        required: true
+      tags:
+      - spatial
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scene'
+          description: ''
+    put:
+      operationId: spatial_scenes_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this scene.
+        required: true
+      tags:
+      - spatial
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Scene'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Scene'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Scene'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scene'
+          description: ''
+    patch:
+      operationId: spatial_scenes_partial_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this scene.
+        required: true
+      tags:
+      - spatial
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedScene'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedScene'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedScene'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scene'
+          description: ''
+    delete:
+      operationId: spatial_scenes_destroy
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this scene.
+        required: true
+      tags:
+      - spatial
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/spatial/scenes/{id}/layers/:
+    post:
+      operationId: spatial_scenes_layers_create
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this scene.
+        required: true
+      tags:
+      - spatial
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Scene'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Scene'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scene'
+          description: ''
   /api/v1/telemetry/attributes/{id}/current/:
     get:
       operationId: telemetry_attributes_current_retrieve
@@ -2886,6 +3824,10 @@ components:
         history_policy_override:
           nullable: true
         metadata: {}
+        auto_discovered:
+          type: boolean
+        is_active:
+          type: boolean
         created_at:
           type: string
           format: date-time
@@ -2989,6 +3931,14 @@ components:
       - created_at
       - id
       - resource_type
+    BindingTypeEnum:
+      enum:
+      - attribute
+      - device
+      type: string
+      description: |-
+        * `attribute` - Attribute
+        * `device` - Device
     ConnectionStatusEnum:
       enum:
       - disconnected
@@ -2999,6 +3949,44 @@ components:
         * `disconnected` - disconnected
         * `connected` - connected
         * `error` - error
+    Dashboard:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tenant:
+          type: string
+          format: uuid
+        project:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        grid_cols:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        grid_rows:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        widgets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Widget'
+          readOnly: true
+      required:
+      - id
+      - name
+      - widgets
     Gateway:
       type: object
       properties:
@@ -3016,6 +4004,12 @@ components:
         asset:
           type: string
           format: uuid
+        asset_name:
+          type: string
+          readOnly: true
+        asset_code:
+          type: string
+          readOnly: true
         protocol:
           type: string
           maxLength: 32
@@ -3026,6 +4020,8 @@ components:
           readOnly: true
       required:
       - asset
+      - asset_code
+      - asset_name
       - connection_status
       - id
       - protocol
@@ -3046,15 +4042,26 @@ components:
         gateway:
           type: string
           format: uuid
+        binding_type:
+          allOf:
+          - $ref: '#/components/schemas/BindingTypeEnum'
+          default: attribute
         asset:
           type: string
           format: uuid
+        asset_name:
+          type: string
+          readOnly: true
         attribute:
           type: string
           format: uuid
+          nullable: true
+        attribute_code:
+          type: string
+          readOnly: true
+          nullable: true
         address:
           type: string
-          maxLength: 255
         mapping:
           type: string
           maxLength: 255
@@ -3069,7 +4076,8 @@ components:
       required:
       - address
       - asset
-      - attribute
+      - asset_name
+      - attribute_code
       - gateway
       - id
     Health:
@@ -3292,6 +4300,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AuditLog'
+    PaginatedDashboardList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dashboard'
     PaginatedGatewayBindingList:
       type: object
       required:
@@ -3453,6 +4484,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Project'
+    PaginatedSceneList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scene'
+    PaginatedScenePlacementList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScenePlacement'
     PaginatedTenantList:
       type: object
       required:
@@ -3499,6 +4576,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Unit'
+    PaginatedUserList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    PaginatedWidgetList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Widget'
     PatchedAsset:
       type: object
       properties:
@@ -3573,6 +4696,10 @@ components:
         history_policy_override:
           nullable: true
         metadata: {}
+        auto_discovered:
+          type: boolean
+        is_active:
+          type: boolean
         created_at:
           type: string
           format: date-time
@@ -3607,6 +4734,40 @@ components:
           type: string
           format: date-time
           readOnly: true
+    PatchedDashboard:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tenant:
+          type: string
+          format: uuid
+        project:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        grid_cols:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        grid_rows:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        widgets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Widget'
+          readOnly: true
     PatchedGateway:
       type: object
       properties:
@@ -3624,6 +4785,12 @@ components:
         asset:
           type: string
           format: uuid
+        asset_name:
+          type: string
+          readOnly: true
+        asset_code:
+          type: string
+          readOnly: true
         protocol:
           type: string
           maxLength: 32
@@ -3649,15 +4816,26 @@ components:
         gateway:
           type: string
           format: uuid
+        binding_type:
+          allOf:
+          - $ref: '#/components/schemas/BindingTypeEnum'
+          default: attribute
         asset:
           type: string
           format: uuid
+        asset_name:
+          type: string
+          readOnly: true
         attribute:
           type: string
           format: uuid
+          nullable: true
+        attribute_code:
+          type: string
+          readOnly: true
+          nullable: true
         address:
           type: string
-          maxLength: 255
         mapping:
           type: string
           maxLength: 255
@@ -3788,6 +4966,66 @@ components:
           type: string
           format: date-time
           readOnly: true
+    PatchedScene:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tenant:
+          type: string
+          format: uuid
+        project:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        layers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SceneLayer'
+          readOnly: true
+        placements:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScenePlacement'
+          readOnly: true
+    PatchedScenePlacement:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        scene:
+          type: string
+          format: uuid
+        layer:
+          type: integer
+          nullable: true
+        asset:
+          type: string
+          format: uuid
+        asset_name:
+          type: string
+          readOnly: true
+        x:
+          type: number
+          format: double
+          nullable: true
+        y:
+          type: number
+          format: double
+          nullable: true
+        z:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
     PatchedTenant:
       type: object
       properties:
@@ -3827,6 +5065,41 @@ components:
         quantity:
           type: string
           maxLength: 40
+    PatchedWidget:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        dashboard:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 160
+        widget_type:
+          $ref: '#/components/schemas/WidgetTypeEnum'
+        x:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        y:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        w:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        h:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        config: {}
     PlatformSetting:
       type: object
       properties:
@@ -3944,6 +5217,109 @@ components:
       - created_at
       - id
       - name
+    Scene:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tenant:
+          type: string
+          format: uuid
+        project:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        layers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SceneLayer'
+          readOnly: true
+        placements:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScenePlacement'
+          readOnly: true
+      required:
+      - id
+      - layers
+      - name
+      - placements
+    SceneLayer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        scene:
+          type: string
+          format: uuid
+        key:
+          type: string
+          maxLength: 80
+        name:
+          type: string
+          maxLength: 160
+        image:
+          type: string
+          format: uri
+        image_url:
+          type: string
+          readOnly: true
+        opacity:
+          type: number
+          format: double
+        order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+      required:
+      - id
+      - image
+      - image_url
+      - key
+    ScenePlacement:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        scene:
+          type: string
+          format: uuid
+        layer:
+          type: integer
+          nullable: true
+        asset:
+          type: string
+          format: uuid
+        asset_name:
+          type: string
+          readOnly: true
+        x:
+          type: number
+          format: double
+          nullable: true
+        y:
+          type: number
+          format: double
+          nullable: true
+        z:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+      required:
+      - asset
+      - asset_name
+      - id
     SourceEnum:
       enum:
       - env
@@ -4052,6 +5428,57 @@ components:
       required:
       - email
       - id
+    Widget:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        dashboard:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 160
+        widget_type:
+          $ref: '#/components/schemas/WidgetTypeEnum'
+        x:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        y:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        w:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        h:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        config: {}
+      required:
+      - id
+    WidgetTypeEnum:
+      enum:
+      - line
+      - gauge
+      - card
+      - table
+      - map
+      type: string
+      description: |-
+        * `line` - Line
+        * `gauge` - Gauge
+        * `card` - Card
+        * `table` - Table
+        * `map` - Map
   securitySchemes:
     cookieAuth:
       type: apiKey

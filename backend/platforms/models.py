@@ -14,7 +14,7 @@ class Tenant(UUIDPkModel):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=80, unique=True)
     timezone = models.CharField(max_length=64, default="UTC")
-    locale = models.CharField(max_length=16, default="en")
+    locale = models.CharField(max_length=16, default="es")
     is_active = models.BooleanField(default=True)
     settings = models.JSONField(default=dict, blank=True)
 

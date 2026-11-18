@@ -58,15 +58,23 @@ connection_schema:             # SOLO kind=gateway
 
 ## Schemas de conexión predefinidos (patrones de OpenRemote/EdgeX/ThingsBoard)
 
-| Tipo gateway | Campos de conexión |
+| Tipo gateway | Campos de conexión (enriquecidos v3 — OpenRemote agent configs + EdgeX device services + ThingsBoard integrations) |
 |---|---|
-| `gateway-mqtt` | host, port(1883), tls(bool), client_id, username, password(secret), keepalive |
-| `gateway-modbus-rtu` | serial_port, baud(9600), parity(select), stop_bits, byte_size, unit_id, timeout |
-| `gateway-modbus-tcp` | host, port(502), unit_id, timeout |
-| `gateway-opcua` | endpoint_url, security_policy(select), username, password(secret), app_uri |
-| `gateway-bacnet` | device_instance, network, apdu_timeout, segmentation |
+| `gateway-mqtt` | host, port(1883), tls(bool), websocket(bool), client_id, username, password(secret), keepalive, clean_session(bool), connect_timeout, reconnect_delay, max_reconnect |
+| `gateway-modbus-rtu` | serial_port, baud(9600), parity(select), stop_bits, byte_size, unit_id, timeout, poll_interval |
+| `gateway-modbus-tcp` | host, port(502), unit_id, timeout, poll_interval |
+| `gateway-opcua` | endpoint_url, security_policy(select), username, password(secret), app_uri, connect_timeout |
+| `gateway-bacnet` | device_instance, network(ip), port(47808), apdu_timeout, segmentation, discovery(bool) |
 | `gateway-snmp` | host, port(161), version(select v1/v2c/v3), community, username, auth/priv(secret) |
-| `gateway-can` | interface, bitrate |
+| `gateway-can` | interface, bitrate, filters |
+
+Config de gateway adicional (no schema): `auto_discover` (bool) — crea atributos candidatos desde claves desconocidas del payload; `auto_accept` (bool) — los candidatos nacen activos o inactivos; `storage_policy` (defaults de almacenamiento on_change + N/ventana T aplicables a atributos manuales Y descubiertos).
+
+## Bindings y dispositivos (ADR-014)
+
+- `GatewayBinding.binding_type = "attribute"`: `address` → atributo concreto (+ `mapping` JSONPath).
+- `GatewayBinding.binding_type = "device"`: `address` → DISPOSITIVO (asset); cada clave del payload se mapea a un atributo del dispositivo por `code`. Claves desconocidas → candidatos `auto_discovered` (según config del gateway). Los atributos inactivos (`is_active=False`) NO se ingieren ni almacenan.
+- Dispositivo "activado": tiene un binding device y su gateway está conectado (estado derivado; endpoint `GET /assets/assets/{id}/connectivity-status`).
 
 ## Representación visual (ADR-016)
 

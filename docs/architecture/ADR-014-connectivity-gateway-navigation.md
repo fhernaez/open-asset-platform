@@ -22,6 +22,7 @@ La navegación actual del frontend mezcla conceptos (una entrada "MQTT" como sec
 - La app `mqtt` existente migra: `BrokerConnection`+`MqttAgent` → `Gateway` (protocol `mqtt`), `MqttBinding` → `GatewayBinding`. Se conserva compatibilidad de URLs `/api/v1/mqtt/*` durante una release (alias) y luego se depreca.
 - El menú deja de tener "MQTT"; Conectividad administra gateways de cualquier protocolo.
 - Los adapters OPC-UA/BACnet/SNMP/CAN quedan `SPECIFIED` (gate G9) hasta implementarse; solo MQTT (P0) y Modbus (P1) se construyen primero.
+- **v2 (2026-11-18):** los gateways se crean y gestionan desde Conectividad (alta de activo gateway inline + test de conexión REAL automático). `GatewayBinding.binding_type` = `attribute` | `device`; los dispositivos se vinculan a un gateway para activarse (estado derivado). Autodescubrimiento de atributos desde el payload con enable/disable por dispositivo; el almacenamiento configurable (on_change + N/ventana T) aplica a atributos manuales y descubiertos.
 
 ## Alternativas consideradas
 

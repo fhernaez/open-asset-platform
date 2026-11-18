@@ -196,3 +196,116 @@ def test_gateway_storage_policy_endpoint(api, tenant, project, platform_admin):
     assert put.data["storage_policy"]["mode"] == "on_change"
     gateway = Gateway.objects.get(id=gateway_id)
     assert gateway.config["storage_policy"]["max_samples"]["count"] == 5
+
+
+def test_device_binding_autodiscovery(api, tenant, project, platform_admin):
+    from assets.models import Asset, AssetAttribute
+    from connectivity.models import Gateway, GatewayBinding
+    from telemetry.models import AttributeCurrent
+
+    api.force_authenticate(user=platform_admin)
+    type_resp = api.get("/api/v1/assets/types/?kind=gateway")
+    mqtt_type = next(r for r in type_resp.data["results"] if r["code"] == "gateway-mqtt")
+    gw_asset = Asset.objects.create(
+        tenant=tenant, project=project, name="GW", external_ref="gw", asset_type_id=mqtt_type["id"]
+    )
+    gateway = Gateway.objects.create(
+        tenant=tenant,
+        project=project,
+        asset=gw_asset,
+        protocol="mqtt",
+        config={"host": "x", "port": 1883, "auto_discover": True, "auto_accept": False},
+    )
+    device = Asset.objects.create(tenant=tenant, project=project, name="Sensor", external_ref="sensor")
+    GatewayBinding.objects.create(
+        tenant=tenant,
+        project=project,
+        gateway=gateway,
+        binding_type="device",
+        asset=device,
+        address="z2m/SN-PRES-01",
+    )
+
+    results = process_message(str(gateway.id), "z2m/SN-PRES-01", b'{"temperature": 22.5, "battery": 90}')
+    # auto_accept=False: attributes are discovered but NOT ingested while inactive.
+    assert not results
+
+    temperature = AssetAttribute.objects.get(asset=device, code="temperature")
+    assert temperature.auto_discovered is True
+    assert temperature.is_active is False  # auto_accept=False
+    assert temperature.value_type == "number"
+
+    # Inactive discovered attributes are NOT ingested.
+    assert not AttributeCurrent.objects.filter(attribute_id=temperature.id).exists()
+
+    # Enable and re-send: value is ingested and current updated.
+    temperature.is_active = True
+    temperature.save(update_fields=["is_active"])
+    process_message(str(gateway.id), "z2m/SN-PRES-01", b'{"temperature": 22.5, "battery": 90}')
+    current = AttributeCurrent.objects.get(attribute_id=temperature.id)
+    assert current.typed_value == 22.5
+
+
+def test_asset_connectivity_status(tenant, project, platform_admin):
+    from assets.models import Asset
+    from connectivity.models import Gateway
+    from connectivity.services import asset_connectivity_status
+
+    plain = Asset.objects.create(tenant=tenant, project=project, name="Plain", external_ref="plain")
+    assert asset_connectivity_status(plain)["status"] == "no_gateway"
+
+    gw_asset = Asset.objects.create(tenant=tenant, project=project, name="GW", external_ref="gw2")
+    Gateway.objects.create(tenant=tenant, project=project, asset=gw_asset, protocol="mqtt", config={})
+    from connectivity.models import GatewayBinding
+
+    GatewayBinding.objects.create(
+        tenant=tenant, project=project, gateway=Gateway.objects.get(asset=gw_asset), asset=plain, address="t"
+    )
+    assert asset_connectivity_status(plain)["status"] == "disconnected"
+
+
+def test_test_connection_not_implemented(tenant, project, platform_admin):
+    from assets.models import Asset
+    from connectivity.models import Gateway
+    from connectivity.services import test_gateway_connection
+
+    gw_asset = Asset.objects.create(tenant=tenant, project=project, name="GW-BAC", external_ref="gw-bac")
+    gateway = Gateway.objects.create(tenant=tenant, project=project, asset=gw_asset, protocol="bacnet", config={})
+    result = test_gateway_connection(gateway)
+    assert result["status"] == "not_implemented"
+
+
+def test_binding_address_sanitized(api, tenant, project, platform_admin):
+    api.force_authenticate(user=platform_admin)
+    type_resp = api.get("/api/v1/assets/types/?kind=gateway")
+    mqtt_type = next(r for r in type_resp.data["results"] if r["code"] == "gateway-mqtt")
+    create = api.post(
+        "/api/v1/assets/assets/",
+        {
+            "tenant": str(tenant.id),
+            "project": str(project.id),
+            "name": "GW-Clean",
+            "external_ref": "gw-clean",
+            "asset_type": mqtt_type["id"],
+            "gateway_config": {"host": "x", "port": 1883},
+        },
+        format="json",
+    )
+    gateway_id = create.data["gateway_id"]
+    attr = api.post(
+        "/api/v1/assets/attributes/",
+        {"asset": create.data["id"], "code": "temp", "name": "temp", "value_type": "number"},
+        format="json",
+    )
+    binding = api.post(
+        "/api/v1/connectivity/bindings/",
+        {
+            "gateway": gateway_id,
+            "asset": create.data["id"],
+            "attribute": attr.data["id"],
+            "address": "z2m-tg/SN-PRES-01\u0000",
+        },
+        format="json",
+    )
+    assert binding.status_code == 201, binding.data
+    assert binding.data["address"] == "z2m-tg/SN-PRES-01"

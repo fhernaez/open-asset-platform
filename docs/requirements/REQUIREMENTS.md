@@ -62,6 +62,9 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 | OAP-CON-006 | Discovery y health de gateways/bindings | G4 | VS (OpenRemote gateway capabilities) |
 | OAP-CON-007 | Policy default por gateway + override por atributo (storageDatapoint) | G4 | NR (antes OAP-MQT-002/003) |
 | OAP-CON-008 | Máximo N muestras por ventana T por gateway/atributo, state y alarmas ANTES del filtro | G4 | NR (antes OAP-MQT-004/005) |
+| OAP-CON-009 | Gateways creados/gestionados desde Conectividad (clase separada de activos), con connection_schema completo y test de conexión REAL automático | G4 | VS (OpenRemote agents; ThingsBoard integrations; EdgeX device services) |
+| OAP-CON-010 | Dispositivos vinculados a un gateway (binding device) y activados por conectividad (estado derivado) | G4 | NR (ADR-014 v2) |
+| OAP-CON-011 | Autodescubrimiento de atributos desde el payload con enable/disable por dispositivo; inactivos no se almacenan | G4 | NR (ADR-014 v2) |
 
 ## OAP-TEL — Telemetría y almacenamiento
 

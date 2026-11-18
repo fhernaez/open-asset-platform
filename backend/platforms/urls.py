@@ -6,6 +6,7 @@ from platforms.views import (
     PlatformSettingViewSet,
     ProjectViewSet,
     TenantViewSet,
+    UserViewSet,
 )
 
 router = DefaultRouter()
@@ -14,5 +15,6 @@ router.register("projects", ProjectViewSet, basename="project")
 router.register("memberships", MembershipViewSet, basename="membership")
 router.register("audit", AuditLogViewSet, basename="audit")
 router.register("settings", PlatformSettingViewSet, basename="platform-setting")
+router.register("users", UserViewSet, basename="user")
 
 urlpatterns = router.urls

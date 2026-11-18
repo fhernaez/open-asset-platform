@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+from django.contrib.auth import get_user_model
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
 from core.permissions import TenantScopedPermission
+from core.serializers import UserSerializer
 from core.viewsets import TenantScopedViewSet
 from platforms.models import AuditLog, Membership, PlatformSetting, Project, Tenant
 from platforms.serializers import (
@@ -106,3 +108,12 @@ class PlatformSettingViewSet(TenantScopedViewSet):
     permission_required = "platform.manage"
     tenant_field = "tenant_id"
     queryset = PlatformSetting.objects.all()
+
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """Read-only user directory for the Administración screen (platform admin)."""
+
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated, TenantScopedPermission]
+    permission_required = "platform.manage"
+    queryset = get_user_model().objects.all().order_by("email")

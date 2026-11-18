@@ -61,6 +61,11 @@ export default function TelemetryPage() {
     [attributes.data, attributeId],
   );
 
+  const selectedGateway = useMemo(
+    () => (gateways.data?.results ?? []).find((g) => g.id === gatewayId),
+    [gateways.data, gatewayId],
+  );
+
   return (
     <Space direction="vertical" size="large" style={{ width: "100%" }}>
       <Typography.Title level={4} style={{ margin: 0 }}>
@@ -108,6 +113,17 @@ export default function TelemetryPage() {
       </Space>
 
       {!attributeId && <Empty description={t("tel.noData")} />}
+      {selectedGateway && (
+        <Card size="small" title={t("conn.title")}>
+          <Space wrap>
+            <Tag color="purple">{selectedGateway.protocol}</Tag>
+            <Tag color={selectedGateway.connection_status === "connected" ? "green" : "default"}>
+              {selectedGateway.connection_status}
+            </Tag>
+            <Typography.Text type="secondary">{selectedGateway.asset_name}</Typography.Text>
+          </Space>
+        </Card>
+      )}
       {attributeId && (
         <>
           <Row gutter={16}>

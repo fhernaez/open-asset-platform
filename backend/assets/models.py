@@ -50,6 +50,8 @@ class Asset(TenantScopedModel):
     parent = models.ForeignKey("self", on_delete=models.SET_NULL, null=True, blank=True, related_name="children")
     status = models.CharField(max_length=16, choices=Status.choices, default=Status.ACTIVE)
     metadata = models.JSONField(default=dict, blank=True)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
 
     class Meta:
         db_table = "assets_asset"
@@ -84,6 +86,9 @@ class AssetAttribute(TenantScopedModel):
     history_enabled = models.BooleanField(default=False)
     history_policy_override = models.JSONField(null=True, blank=True)
     metadata = models.JSONField(default=dict, blank=True)
+    # Auto-discovery (ADR-014 v2): candidates extracted from gateway payloads.
+    auto_discovered = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         db_table = "assets_assetattribute"

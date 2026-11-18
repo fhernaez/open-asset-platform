@@ -12,7 +12,7 @@ Grafana aporta un catálogo de paneles verificado (timeseries, gauge, stat, barc
 2. **Widgets del primer corte:** línea (ECharts), gauge, card (último valor), tabla, **mapa** con dos modos:
    - `plano`: una o varias imágenes locales (escenas), activos posicionados por coordenadas normalizadas, overlays de estado/alarma.
    - `geo`: capa MapLibre con activos por lat/lng, tiles offline opcionales.
-3. **Escenas GIS** (`OAP-GIS`): escena = conjunto de imágenes (capas), CRS simple (normalizado 0..1 en el primer corte), placement de activos por clic sobre el plano o por lat/lng; export/import de la configuración de escena.
+3. **Escenas GIS** (`OAP-GIS`): escena = conjunto de imágenes (capas, almacenadas en `media/`), coordenadas normalizadas 0..1 en el primer corte, placement de activos por clic sobre el plano o por lat/lng; export/import de la configuración de escena.
 4. Los dashboards se conectan a telemetría real (current + history) vía los contratos de `OAP-TEL`; nunca mocks en producción.
 
 ## Consecuencias

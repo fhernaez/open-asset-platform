@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "drf_spectacular",
     # OAP bounded contexts (dependency order: core -> platforms -> events -> assets ->
-    # telemetry -> plugins -> connectivity)
+    # telemetry -> plugins -> connectivity -> dashboards -> spatial)
     "core",
     "platforms",
     "events",
@@ -62,6 +62,8 @@ INSTALLED_APPS = [
     "telemetry",
     "plugins",
     "connectivity",
+    "dashboards",
+    "spatial",
 ]
 
 MIDDLEWARE = [
@@ -178,6 +180,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # --- Security (production hardening; off by default in dev) -----------------
 SECURE_HSTS_SECONDS = int(os.environ.get("SECURE_HSTS_SECONDS", "0"))

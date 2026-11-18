@@ -31,10 +31,19 @@ class Gateway(TenantScopedModel):
 
 
 class GatewayBinding(TenantScopedModel):
+    class BindingType(models.TextChoices):
+        ATTRIBUTE = "attribute"
+        DEVICE = "device"
+
     gateway = models.ForeignKey(Gateway, on_delete=models.CASCADE, related_name="bindings")
+    binding_type = models.CharField(max_length=16, choices=BindingType.choices, default=BindingType.ATTRIBUTE)
     asset = models.ForeignKey("assets.Asset", on_delete=models.CASCADE, related_name="connectivity_bindings")
     attribute = models.ForeignKey(
-        "assets.AssetAttribute", on_delete=models.CASCADE, related_name="connectivity_bindings"
+        "assets.AssetAttribute",
+        on_delete=models.CASCADE,
+        related_name="connectivity_bindings",
+        null=True,
+        blank=True,
     )
     address = models.CharField(max_length=255)
     mapping = models.CharField(max_length=255, blank=True, default="")
@@ -44,6 +53,14 @@ class GatewayBinding(TenantScopedModel):
     class Meta:
         db_table = "connectivity_gatewaybinding"
         unique_together = [("gateway", "attribute")]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["gateway", "asset"],
+                condition=models.Q(binding_type="device"),
+                name="uq_gatewaybinding_device_asset",
+            ),
+        ]
 
     def __str__(self) -> str:
-        return f"{self.gateway} -> {self.attribute.code}@{self.address}"
+        target = self.attribute.code if self.attribute else self.asset.name
+        return f"{self.gateway} -> {target}@{self.address}"

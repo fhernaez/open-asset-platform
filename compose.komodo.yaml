@@ -62,6 +62,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 12
+    volumes:
+      - media_data:/app/media
     networks: [iot-net]
     restart: unless-stopped
 
@@ -126,3 +128,6 @@ services:
 networks:
   iot-net:
     driver: bridge
+
+volumes:
+  media_data:

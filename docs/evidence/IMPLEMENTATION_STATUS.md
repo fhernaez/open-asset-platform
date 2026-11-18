@@ -15,15 +15,16 @@ Actualizado: 2026-11-17 (UTC). Código construido: backend Django/DRF (core, pla
 
 ## C2 — Catálogo, Conectividad y UX de Activos (2026-11-18)
 
-- **Catálogo semilla** (`OAP-ASS-005/006`): `backend/assets/types_catalog/` con ~22 manifiestos (espacios/HVAC/energía/iluminación + 7 gateways con `connection_schema` por protocolo), validador, `seed_asset_types` idempotente por organización y auto-siembra al crear organización.
-- **Conectividad** (`OAP-CON-*`, ADR-014): app `connectivity` (Gateway como activo de tipo gateway + GatewayBinding genérica), worker multi-adapter con adapter MQTT real, API `/api/v1/connectivity/*`; la app `mqtt` fue eliminada (sin datos en producción); plugin `oap.connectivity`; compose usa `connectivity_worker`.
-- **Representación visual + i18n** (ADR-016): icono por tipología (set base por categoría), estado con colores; react-i18next es/en con locale por organización.
-- **UX Activos**: contexto global org/proyecto en el header (persistido), estados de tablas (error/vacío), Retirar/Activar/Eliminar (con purga de telemetría en transacción y 409 para tipologías en uso), drawer de atributos con auto-código, unidad, editar/eliminar.
-- Verificación: **43 pytest PASS**, ruff limpio, `npm lint/typecheck/test/build` PASS, OpenAPI regenerado, spec kit PASS.
+- **Catálogo semilla** (`OAP-ASS-005/006`): `backend/assets/types_catalog/` con ~33 manifiestos completos (espacios/HVAC/energía/iluminación + tipos OpenRemote + 7 gateways con `connection_schema` por protocolo), validador, `seed_asset_types` idempotente por organización con `--refresh` (versionado + custom) y auto-siembra al crear organización.
+- **Conectividad** (`OAP-CON-*`, ADR-014 v2): app `connectivity` (Gateway como activo de tipo gateway + GatewayBinding con `binding_type` attribute/device), worker multi-adapter con adapter MQTT real, **autodescubrimiento** de atributos con enable/disable (`auto_discovered`/`is_active`), test de conexión REAL (MQTT) y estado de conectividad derivado; alta de gateways desde Conectividad con formulario completo.
+- **Dashboards + GIS** (ADR-015): `dashboards` (Dashboard/Widget con tipos line/gauge/card/table/map) y `spatial` (Scene/Layer con imágenes en `media/`, ScenePlacement con x/y normalizados); pantallas Dashboards (builder + widget de mapa plano) y Mapas (escenas, capas, placement por clic).
+- **Admin + i18n**: AdminPage (settings de organización incl. locale + usuarios read-only); `Tenant.locale` default `es`; menú i18n es/en; versión visible en el footer.
+- **Fixes**: `apiFetch` maneja 204 sin body (fin del error "Unexpected end of JSON input"); sanitización de `address` (caracteres de control); dropdown de proyectos con invalidación + error visible.
+- Verificación: **55 pytest PASS**, ruff limpio, `npm lint/typecheck/test/build` PASS, OpenAPI regenerado, spec kit PASS.
 
 ## Pendiente (plan aprobado)
 
-Adapters Modbus (P1) y OPC-UA/BACnet/SNMP/CAN (P2, SPECIFIED) → Plugins UI → Dashboards (ADR-015) → Mapas/GIS → CMMS → Reglas → Integraciones/IA → G9. Validación real en el server del usuario.
+Adapters Modbus (P1) y OPC-UA/BACnet/SNMP/CAN (P2, SPECIFIED) → Reglas (G7) → CMMS (G5) → Integraciones/IA (G8) → G9. Validación real en el server del usuario.
 
 ## Resumen por gate
 

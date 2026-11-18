@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from django.db import transaction
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from assets.models import Asset, AssetAttribute, AssetType, Unit
 from assets.serializers import (
@@ -193,6 +195,13 @@ class AssetViewSet(TenantScopedViewSet):
             resource_id=str(instance.id),
             tenant=tenant,
         )
+
+    @action(detail=True, methods=["get"], url_path="connectivity-status")
+    def connectivity_status(self, request, pk=None):
+        from connectivity.services import asset_connectivity_status
+
+        asset = self.get_object()
+        return Response(asset_connectivity_status(asset))
 
     def _resolve_tenant(self, data):
         from platforms.models import Membership

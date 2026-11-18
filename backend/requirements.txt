@@ -6,3 +6,4 @@ psycopg[binary]==3.3.9
 django-cors-headers==4.7.0
 gunicorn==23.0.0
 paho-mqtt==2.1.0
+Pillow==11.3.0

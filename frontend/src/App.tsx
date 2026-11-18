@@ -5,7 +5,10 @@ import { SCREENS, isScreenImplemented } from "./features/flags";
 import MainLayout from "./layouts/MainLayout";
 import AssetsPage from "./pages/AssetsPage";
 import ComingSoonPage from "./pages/ComingSoonPage";
+import ConnectivityPage from "./pages/ConnectivityPage";
 import LoginPage from "./pages/LoginPage";
+import PluginsPage from "./pages/PluginsPage";
+import TelemetryPage from "./pages/TelemetryPage";
 
 function ProtectedLayout() {
   const { user, loading } = useAuth();
@@ -22,9 +25,16 @@ function ProtectedLayout() {
   return <MainLayout />;
 }
 
+const IMPLEMENTED_PAGES: Record<string, React.ReactNode> = {
+  assets: <AssetsPage />,
+  connectivity: <ConnectivityPage />,
+  telemetry: <TelemetryPage />,
+  plugins: <PluginsPage />,
+};
+
 function screenElement(key: string) {
-  if (key === "assets" && isScreenImplemented("assets")) {
-    return <AssetsPage />;
+  if (isScreenImplemented(key) && IMPLEMENTED_PAGES[key]) {
+    return IMPLEMENTED_PAGES[key];
   }
   const screen = SCREENS.find((s) => s.key === key);
   if (!screen) {

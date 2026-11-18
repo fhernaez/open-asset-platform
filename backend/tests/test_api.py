@@ -2,14 +2,6 @@
 
 from __future__ import annotations
 
-import pytest
-from rest_framework.test import APIClient
-
-
-@pytest.fixture
-def api():
-    return APIClient()
-
 
 def test_login_and_me(api, platform_admin):
     response = api.post(

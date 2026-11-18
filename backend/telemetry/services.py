@@ -62,9 +62,11 @@ class StoragePolicyService:
             "attribute_id": str(attribute.id),
             "history_enabled": bool(attribute.history_enabled),
             "storage_datapoint": bool(attribute.storage_datapoint),
-            "source": "agent+attribute"
-            if (agent_default and attribute.history_policy_override)
-            else ("agent" if agent_default else ("attribute" if attribute.history_policy_override else "default")),
+            "source": (
+                "agent+attribute"
+                if (agent_default and attribute.history_policy_override)
+                else ("agent" if agent_default else ("attribute" if attribute.history_policy_override else "default"))
+            ),
             "mode": policy.get("mode"),
             "max_samples": {"count": max_samples.get("count"), "window": max_samples.get("window")},
             "window_strategy": max_samples.get("strategy"),

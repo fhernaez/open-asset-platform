@@ -113,6 +113,8 @@ function AssetsTab() {
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [createForm] = Form.useForm();
   const [attrForm] = Form.useForm();
+  const [gatewaySchema, setGatewaySchema] = useState<Record<string, unknown>[]>([]);
+  const [gatewayTypeId, setGatewayTypeId] = useState<string | undefined>();
 
   const assetTypes = useQuery({
     queryKey: ["asset-types", tenantId],
@@ -133,6 +135,8 @@ function AssetsTab() {
       message.success(t("assets.createSuccess"));
       setCreateOpen(false);
       createForm.resetFields();
+      setGatewaySchema([]);
+      setGatewayTypeId(undefined);
       invalidate();
     },
     onError: (err) => message.error(err instanceof Error ? err.message : t("assets.createError")),
@@ -153,7 +157,20 @@ function AssetsTab() {
     onError: (err) => message.error(err instanceof Error ? err.message : "Error"),
   });
 
-  function onCreate(values: { name: string; external_ref: string; asset_type?: string }) {
+  function onTypeChange(typeId: string | undefined) {
+    setGatewayTypeId(typeId);
+    const type = (assetTypes.data?.results ?? []).find((item) => item.id === typeId);
+    const schema = type?.kind === "gateway" ? ((type.schema as Record<string, unknown>).connection_schema as Record<string, unknown>[]) ?? [] : [];
+    setGatewaySchema(schema);
+    createForm.setFieldValue("gateway_config", undefined);
+  }
+
+  function onCreate(values: {
+    name: string;
+    external_ref: string;
+    asset_type?: string;
+    gateway_config?: Record<string, unknown>;
+  }) {
     if (!tenantId) return;
     createMutation.mutate({
       tenant: tenantId,
@@ -161,7 +178,8 @@ function AssetsTab() {
       name: values.name,
       external_ref: values.external_ref,
       asset_type: values.asset_type ?? null,
-    });
+      gateway_config: values.gateway_config,
+    } as Parameters<typeof createAsset>[0]);
   }
 
   return (
@@ -253,12 +271,52 @@ function AssetsTab() {
             <Select
               allowClear
               placeholder={t("assets.types")}
+              onChange={onTypeChange}
               options={(assetTypes.data?.results ?? []).map((item) => ({
                 value: item.id,
                 label: item.kind === "gateway" ? `${item.name} (${t("types.kind.gateway")})` : item.name,
               }))}
             />
           </Form.Item>
+          {gatewayTypeId && gatewaySchema.length > 0 && (
+            <>
+              <Typography.Text strong>Configuración de conexión</Typography.Text>
+              {gatewaySchema.map((field) => {
+                const f = field as Record<string, unknown>;
+                const fname = f.field as string;
+                const ftype = f.type as string;
+                const label = ((f.label_i18n as Record<string, string>) ?? {})["es"] ?? fname;
+                const required = Boolean(f.required);
+                const rules = required ? [{ required: true }] : [];
+                if (ftype === "bool") {
+                  return (
+                    <Form.Item key={fname} name={["gateway_config", fname]} label={label} valuePropName="checked" rules={rules}>
+                      <Checkbox />
+                    </Form.Item>
+                  );
+                }
+                if (ftype === "select") {
+                  const options = (f.options as { value: string }[] | undefined) ?? [];
+                  return (
+                    <Form.Item key={fname} name={["gateway_config", fname]} label={label} rules={rules} initialValue={f.default as string | undefined}>
+                      <Select options={options.map((o) => ({ value: o.value, label: o.value }))} />
+                    </Form.Item>
+                  );
+                }
+                const isSecret = ftype === "secret";
+                const isInt = ftype === "int";
+                return (
+                  <Form.Item key={fname} name={["gateway_config", fname]} label={label} rules={rules} initialValue={f.default as string | number | undefined}>
+                    {isSecret ? (
+                      <Input.Password />
+                    ) : (
+                      <Input type={isInt ? "number" : "text"} />
+                    )}
+                  </Form.Item>
+                );
+              })}
+            </>
+          )}
         </Form>
       </Modal>
 

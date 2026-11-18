@@ -7,6 +7,7 @@ Formato declarativo único para tipologías de activos, definibles **por código
 ```yaml
 code: ahu                      # slug único por tenant (patrón ^[a-z0-9-]+$)
 kind: standard                 # standard | gateway
+catalog_version: 2             # versión del manifiesto para seed --refresh
 icon: ahu                      # clave de la librería SVG integrada (o data:image/svg+xml;base64,...)
 label_i18n:                    # nombre mostrado según locale activo (mínimo es/en)
   es: "Unidad de tratamiento de aire"
@@ -14,43 +15,46 @@ label_i18n:                    # nombre mostrado según locale activo (mínimo e
 description_i18n:
   es: "Equipo central de climatización"
   en: "Central air conditioning equipment"
-attributes:                    # plantilla de atributos (se crean al crear un activo con esta tipología)
-  - code: temp
-    label_i18n: { es: "Temperatura", en: "Temperature" }
-    value_type: number         # string | boolean | number | json
-    unit: "°C"                 # símbolo de unidad (catálogo assets_unit)
-    storage_datapoint: true    # default del atributo al crearse
-    description_i18n: { es: "Temperatura de impulsión", en: "Supply air temperature" }
-    metadata:                  # tags libres (Brick/Haystack/81346)
-      brick: ["AHU", "Supply_Air_Temperature_Sensor"]
-connection_schema:             # SOLO kind=gateway: campos de conexión del formulario/adapter
+attributes:                    # plantilla COMPLETA por defecto (customizable luego por el usuario)
+  - code: temp_supply
+    label_i18n: { es: "Temperatura de impulsión", en: "Supply temperature" }
+    value_type: number
+    unit: "°C"
+    storage_datapoint: true
+    metadata: { brick: ["Supply_Air_Temperature_Sensor", "AHU"] }
+  - code: temp_return
+    label_i18n: { es: "Temperatura de retorno", en: "Return temperature" }
+    value_type: number
+    unit: "°C"
+    storage_datapoint: true
+    metadata: { brick: ["Return_Air_Temperature_Sensor", "AHU"] }
+  - code: fan_speed
+    label_i18n: { es: "Velocidad de ventilador", en: "Fan speed" }
+    value_type: number
+    unit: "%"
+    storage_datapoint: true
+    metadata: { brick: ["Supply_Fan_Command"] }
+  - code: running
+    label_i18n: { es: "En marcha", en: "Running" }
+    value_type: boolean
+    storage_datapoint: true
+    metadata: { brick: ["Run_Status", "AHU"] }
+connection_schema:             # SOLO kind=gateway
   - field: host
     label_i18n: { es: "Host", en: "Host" }
     type: string
     required: true
-  - field: port
-    label_i18n: { es: "Puerto", en: "Port" }
-    type: int
-    required: true
-    default: 1883
-  - field: password
-    label_i18n: { es: "Contraseña", en: "Password" }
-    type: secret               # se guarda como referencia a secreto, nunca en claro
-    required: false
-  - field: mode
-    label_i18n: { es: "Modo", en: "Mode" }
-    type: select
-    options: [{ value: "a", label_i18n: { es: "A", en: "A" } }, { value: "b", label_i18n: { es: "B", en: "B" } }]
-    default: "a"
 ```
 
 ## Reglas
 
 - `code` único por tenant; `label_i18n` obligatorio con al menos el locale primario (`es`); `name` legacy = alias de `label_i18n[primario]`.
+- `catalog_version` (int): versión del manifiesto. El seed guarda `schema.catalog_version`; `seed_asset_types --refresh` re-sincroniza tipos cuyo `catalog_version` es menor y que NO fueron customizados. Si el usuario edita el schema por API/UI, el serializer marca `schema.custom=true` y el refresh lo salta (las ediciones del usuario prevalecen).
 - `attributes[].code` único dentro del tipo; `unit` debe existir en `assets_unit` (se crea si falta vía seed).
 - Para `kind=gateway`, `connection_schema` es obligatorio (el formulario de alta del gateway y el adapter lo consumen). Tipos de campo: `string`, `int`, `bool`, `secret`, `select`.
+- **Alta de activo gateway inline:** al crear un activo con tipología `kind=gateway`, la API acepta `gateway_config`; el backend crea el Asset + el `Gateway` (config validada contra `connection_schema`) en UNA transacción. Los activos estándar solo heredan sus atributos por defecto.
 - `icon`: clave de `assets/icons` (librería integrada) o SVG embebido; la UI cae a un icono genérico por categoría si falta.
-- El seed es **seed-once por organización**: `get_or_create(tenant, code)`; no pisa ediciones del usuario; upgrades de catálogo solo agregan tipos nuevos.
+- El seed es **seed-once por organización**: `get_or_create(tenant, code)`; no pisa ediciones del usuario; upgrades de catálogo solo agregan tipos nuevos (o actualizan vía `--refresh` los no customizados).
 
 ## Schemas de conexión predefinidos (patrones de OpenRemote/EdgeX/ThingsBoard)
 

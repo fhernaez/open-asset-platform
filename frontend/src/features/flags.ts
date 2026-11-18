@@ -29,7 +29,7 @@ export const SCREENS: ScreenFlag[] = [
  * never render broken controls: it shows a "disponible en etapa X" notice.
  * Add a screen to IMPLEMENTED_SCREENS only when its backend wiring is real.
  */
-export const IMPLEMENTED_SCREENS: Set<string> = new Set(["assets"]);
+export const IMPLEMENTED_SCREENS: Set<string> = new Set(["assets", "connectivity", "telemetry", "plugins"]);
 
 export function isScreenImplemented(key: string): boolean {
   return IMPLEMENTED_SCREENS.has(key);

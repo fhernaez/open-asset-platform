@@ -74,3 +74,29 @@ def test_invalid_manifest_rejected():
         "label_i18n": {"es": "GW"},
     }
     assert validate_manifest(gateway_missing_conn) != []
+
+
+def test_refresh_updates_non_custom(tenant):
+    # Tenant auto-seeded with the enriched catalog (version 2).
+    ahu = AssetType.objects.get(tenant=tenant, code="ahu")
+    # Simulate an old seed: downgrade the stored version marker and strip attributes.
+    ahu.schema = {"attributes": [], "catalog_version": 1, "icon": "ahu"}
+    ahu.save(update_fields=["schema"])
+
+    result = seed_catalog_for_tenant(tenant, refresh=True)
+    assert result["types_updated"] >= 1
+    ahu.refresh_from_db()
+    assert ahu.schema.get("catalog_version") == 2
+    assert len(ahu.schema.get("attributes", [])) >= 4
+
+
+def test_refresh_skips_custom(tenant):
+    ahu = AssetType.objects.get(tenant=tenant, code="ahu")
+    ahu.schema = {"attributes": [{"code": "custom", "value_type": "string"}], "custom": True, "catalog_version": 1}
+    ahu.save(update_fields=["schema"])
+
+    result = seed_catalog_for_tenant(tenant, refresh=True)
+    ahu.refresh_from_db()
+    assert ahu.schema.get("custom") is True
+    assert [a.get("code") for a in ahu.schema.get("attributes", [])] == ["custom"]
+    assert result["types_updated"] == 0 or ahu.schema.get("attributes")[0]["code"] == "custom"

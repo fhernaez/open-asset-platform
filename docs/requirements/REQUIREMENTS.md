@@ -46,7 +46,7 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 | OAP-ASS-002 | Attribute/Point esquema tipado (string/boolean/number/json) con unidad y calidad | G2 | VS (OpenRemote Attribute/MetaItem; Atlas CustomField) |
 | OAP-ASS-003 | Vínculos agente↔atributo (links de protocolo) | G4 | VS (OpenRemote AttributeLink) |
 | OAP-ASS-004 | Plantillas de activos y bulk import | G6 | VS (OpenRemote asset templates; Atlas ImportController) |
-| OAP-ASS-005 | Catálogo semilla de tipologías (~22 tipos incl. 7 gateways) sembrado por organización, editable, upgrades solo agregan | G2 | VS (OpenRemote/ThingsBoard tipos base; ADR-016) |
+| OAP-ASS-005 | Catálogo semilla (~33 tipos) con defaults COMPLETOS por tipo (atributos con unidad/store/metadata Brick-Haystack), sembrado por organización, editable, versionado (`catalog_version` + `--refresh` no-custom) | G2 | VS (OpenRemote asset/impl + Brick/Haystack; ADR-016) |
 | OAP-ASS-006 | Tipologías por código: manifiestos `ASSET_TYPE_SCHEMA` versionados + `seed_asset_types` idempotente | G2 | VS (Node-RED nodos por código; ThingsBoard templates; ADR-016) |
 | OAP-ASS-007 | Representación visual: icono por tipología + imagen por activo + estado derivado (overlays/dashboards) | G2/G6 | VS (OpenRemote or-icon; ThingsBoard entity image; ADR-016) |
 
@@ -54,7 +54,7 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 
 | ID | Descripción verificable | Gate | Fuente |
 |---|---|---|---|
-| OAP-CON-001 | `Gateway` como tipo de activo especial con atributos de conexión tipados (protocolo, host, puerto, TLS, secreto, polling) | G4 | VS (OpenRemote AgentLink; ThingsBoard profiles/integrations; EdgeX device services) |
+| OAP-CON-001 | `Gateway` como tipo de activo especial con atributos de conexión tipados; **alta inline**: al crear un activo gateway, los campos de `connection_schema` se presentan y el Asset+Gateway se crean en UNA transacción | G4 | VS (OpenRemote AgentLink/GatewayAsset; ThingsBoard profiles/integrations; EdgeX device services) |
 | OAP-CON-002 | `GatewayBinding` genérica: gateway→asset→atributo con dirección (topic/registro) y mapeo JSONPath | G4 | NR (generalización de MqttBinding) |
 | OAP-CON-003 | Worker multi-adapter con registro por protocolo; adapter MQTT directo sin Node-RED | G4 | VS (OpenRemote mqtt protocol) |
 | OAP-CON-004 | Adapter Modbus RTU/TCP (lectura/escritura segura, polling) | G7 | VS (OpenRemote modbus; EdgeX device-modbus-go) |

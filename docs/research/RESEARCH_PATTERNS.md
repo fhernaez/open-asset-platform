@@ -25,6 +25,17 @@ Fuentes: ThingsBoard, EdgeX (compose + device services), Node-RED, Grafana, más
 
 - **Representación visual de activos (3 capas):** OpenRemote `ui/component/or-icon` (icono por tipo de activo en el árbol), ThingsBoard (icono de tipo + imagen de entidad usada en el widget de mapa por imagen), Node-RED (icono SVG por tipo de nodo). Color/badge por estado es ubicuo (alarmas/estado). → OAP: icono por tipología + imagen por activo + estado derivado (ADR-016).
 - **Tipologías por código:** Node-RED (nodos custom como paquetes de código) y ThingsBoard (solution templates/devices profiles) convergen en "definición declarativa versionada + catálogo semilla". → OAP: manifiestos `ASSET_TYPE_SCHEMA` + `seed_asset_types` (ADR-016).
+
+### Tabla tipo→fuente del catálogo semilla
+
+| Tipos | Fuente de referencia |
+|---|---|
+| building, room, thermostat, ventilation, light, plug, door, presence-sensor, environment-sensor, weather, people-counter, parking, gateway | OpenRemote `model/src/main/java/org/openremote/model/asset/impl/` (descriptores verificados: BuildingAsset, RoomAsset, ThermostatAsset, VentilationAsset, LightAsset, PlugAsset, DoorAsset, PresenceSensorAsset, EnvironmentSensorAsset, WeatherAsset, PeopleCounterAsset, ParkingAsset, GatewayAsset) |
+| ahu, vav, fcu, boiler, chiller, pump, fan | Brick/Haystack (puntos por equipo) + dominio HVAC (NR; OpenRemote no incluye estos equipos como descriptores) |
+| electricity-meter, water-meter, heat-meter, lighting-zone | Brick/Haystack + dominio (NR) |
+| connection_schema de gateway-mqtt/modbus/opcua/bacnet/snmp/can | OpenRemote `agent/protocol/*` + EdgeX device services (patrones de configuración) |
+
+Los atributos por defecto (con unidad, store y tags Brick) son el punto de partida "completo" y customizable; el seed guarda `catalog_version` y `--refresh` actualiza solo tipos no customizados (`schema.custom=true` los excluye).
 - **ThingsBoard Alarm/RuleChain:** alarmas con severidad + acknowledge y reglas en cadena (equivalente OAP-RUL).
 - **ThingsBoard Entity relations / EdgeX profiles:** metadatos y relaciones entre entidades (equivalente OAP-ASS relaciones y designaciones).
 - **Node-RED:** catálogo core verificado (mqtt, httpin/request, websocket, tcpin, udp, tls, parsers); Modbus/OPC-UA/BACnet son nodos comunitarios, no core → OAP-NRD import/export debe prever nodos comunitarios vía mapping documentado.

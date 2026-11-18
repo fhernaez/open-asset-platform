@@ -12,6 +12,84 @@ export interface Unit {
   quantity: string;
 }
 
+export interface Gateway {
+  id: string;
+  asset: string;
+  asset_name?: string;
+  protocol: string;
+  config: Record<string, unknown>;
+  connection_status: string;
+}
+
+export interface GatewayBinding {
+  id: string;
+  gateway: string;
+  asset: string;
+  attribute: string;
+  address: string;
+  mapping: string;
+  qos: number;
+  polling: string;
+}
+
+export interface PluginSummary {
+  slug: string;
+  name: string;
+  version: string;
+  installed: boolean;
+  enabled: boolean;
+  effective: boolean;
+  locked: boolean;
+  is_core: boolean;
+  health: string;
+  dependencies: string[];
+  permissions: string[];
+}
+
+export interface TelemetryCurrent {
+  attribute_id: string;
+  observed_at?: string;
+  value_type?: string;
+  value?: unknown;
+  quality?: string;
+  version?: number;
+}
+
+export interface TelemetryPoint {
+  ts: string;
+  value: unknown;
+  value_type: string;
+  quality: string;
+  policy_version: number;
+  source_event_id: string;
+}
+
+export interface TelemetryStats {
+  attribute_id: string;
+  totals: {
+    received: number;
+    accepted: number;
+    filtered_equal: number;
+    filtered_quota: number;
+    invalid: number;
+    duplicate: number;
+    late: number;
+  };
+  samples: number;
+}
+
+export interface EffectivePolicy {
+  attribute_id: string;
+  history_enabled: boolean;
+  storage_datapoint: boolean;
+  source: string;
+  mode: string;
+  max_samples: { count: number | null; window: string | null };
+  window_strategy: string | null;
+  compare: Record<string, unknown>;
+  policy_version: number | null;
+}
+
 export interface Project {
   id: string;
   tenant: string;

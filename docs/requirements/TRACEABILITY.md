@@ -28,7 +28,7 @@ Regenerada 2026-11-17 tras la reestructuración de `REQUIREMENTS.md`. Estados ho
 | OAP-ASS-002 | assets | G2 | docs/core/ASSET_REGISTRY.md | assets/models.py | PARTIAL (unit) |
 | OAP-ASS-003 | mqtt | G4 | docs/plugins/mqtt/SPEC.md | mqtt/models.py | PARTIAL |
 | OAP-ASS-004 | assets | G6 | docs/core/ASSET_REGISTRY.md | — | SPECIFIED |
-| OAP-ASS-005 | assets | G2 | docs/contracts/ASSET_TYPE_SCHEMA.md | assets/types_catalog/ | PARTIAL (seed+signal+38 tests) |
+| OAP-ASS-005 | assets | G2 | docs/contracts/ASSET_TYPE_SCHEMA.md | assets/types_catalog/ | PARTIAL (~33 tipos, versionado+refresh) |
 | OAP-ASS-006 | assets | G2 | docs/contracts/ASSET_TYPE_SCHEMA.md | assets/types_catalog/ | PARTIAL (seed+validator) |
 | OAP-ASS-007 | assets | G2/G6 | docs/architecture/ADR-016 | frontend (iconos por categoría) | PARTIAL (iconos base) |
 | OAP-TEL-001 | telemetry | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/storage.py | PARTIAL (unit) |
@@ -69,13 +69,13 @@ Regenerada 2026-11-17 tras la reestructuración de `REQUIREMENTS.md`. Estados ho
 | OAP-DSH-001 | dashboards | G6 | docs/plugins/dashboards/SPEC.md | — | SPECIFIED |
 | OAP-DSH-002 | dashboards | G6 | docs/plugins/dashboards/SPEC.md | — | SPECIFIED |
 | OAP-DSH-003 | dashboards | G6 | docs/plugins/dashboards/SPEC.md | — | SPECIFIED |
-| OAP-CON-001 | connectivity | G4 | docs/architecture/ADR-014 | connectivity/ | PARTIAL (unit) |
+| OAP-CON-001 | connectivity | G4 | docs/architecture/ADR-014 | connectivity/ + assets (alta inline) | PARTIAL (unit, alta inline) |
 | OAP-CON-002 | connectivity | G4 | docs/architecture/ADR-014 | connectivity/services.py | PARTIAL (unit) |
 | OAP-CON-003 | connectivity | G4 | docs/plugins/mqtt/SPEC.md | connectivity/adapters/mqtt.py | PARTIAL (unit) |
 | OAP-CON-004 | connectivity | G7 | docs/plugins/modbus/SPEC.md | — | SPECIFIED |
 | OAP-CON-005 | connectivity | G9 | docs/plugins/protocol_extensions/SPEC.md | — | SPECIFIED |
-| OAP-CON-006 | connectivity | G4 | docs/architecture/ADR-014 | connectivity/views.py | PARTIAL |
-| OAP-CON-007 | connectivity | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/storage.py | PARTIAL (unit) |
+| OAP-CON-006 | connectivity | G4 | docs/architecture/ADR-014 | connectivity/views.py | PARTIAL (UI + test-connection) |
+| OAP-CON-007 | connectivity | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/storage.py + policy endpoints | PARTIAL (unit) |
 | OAP-CON-008 | connectivity | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/storage.py | PARTIAL (unit) |
 | OAP-PRO-001 | modbus | G7 | docs/plugins/modbus/SPEC.md | — | SPECIFIED |
 | OAP-PRO-002 | bacnet | G7 | docs/plugins/bacnet/SPEC.md | — | SPECIFIED |
@@ -94,7 +94,7 @@ Regenerada 2026-11-17 tras la reestructuración de `REQUIREMENTS.md`. Estados ho
 | OAP-UI-002 | frontend | G2 | docs/contracts/REST_UI_CONTRACT.md | — | SPECIFIED |
 | OAP-UI-003 | frontend | G2 | docs/contracts/REST_UI_CONTRACT.md | — | SPECIFIED |
 | OAP-UI-004 | frontend | G2 | docs/quality/FRONTEND_E2E.md | — | SPECIFIED |
-| OAP-UI-005 | frontend | G2-G9 | docs/plugins/*/OPERATIONS_AND_API.md | — | SPECIFIED |
+| OAP-UI-005 | frontend | G2-G9 | docs/plugins/*/OPERATIONS_AND_API.md | pages/{Assets,Connectivity,Telemetry,Plugins} | PARTIAL (4 pantallas reales) |
 | OAP-UI-006 | frontend | G9 | docs/contracts/ASSET_TYPE_SCHEMA.md | — | SPECIFIED |
 | OAP-SEC-001 | security | G9 | docs/quality/SECURITY_TESTS.md | core/permissions.py | PARTIAL |
 | OAP-SEC-002 | security | G9 | docs/quality/SECURITY_TESTS.md | — | PARTIAL |

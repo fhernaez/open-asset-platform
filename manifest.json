@@ -299,8 +299,8 @@
     },
     {
       "path": "docs/contracts/ASSET_TYPE_SCHEMA.md",
-      "bytes": 4210,
-      "sha256": "3b10bd260e16f5e65dd1c74c01ad4c8b581bc7489e03d426a5cb9c9975bcbb43"
+      "bytes": 4768,
+      "sha256": "4f03feabefaa91dea4eaa2882dfb878e1c75c3a99073d0867a1577900a813a6a"
     },
     {
       "path": "docs/contracts/CONFIGURATION_SCHEMA.md",
@@ -354,8 +354,8 @@
     },
     {
       "path": "docs/contracts/openapi.yaml",
-      "bytes": 110498,
-      "sha256": "1094df78340f3e999a51b03ff422164aaf0db5fed569ec771e8e3e53c611e41f"
+      "bytes": 112818,
+      "sha256": "83bc11072edd39c83cb2d2dca8c99255d3178350a45110f210a01d6bdcd2ee75"
     },
     {
       "path": "docs/core/API_REALTIME.md",
@@ -1044,8 +1044,8 @@
     },
     {
       "path": "docs/requirements/REQUIREMENTS.md",
-      "bytes": 15674,
-      "sha256": "541b66e5c29d738b21131786711d9c3ae66edad9f64eaf1f822f2c84d0c1b919"
+      "bytes": 15871,
+      "sha256": "8e24985961f000bc00bc433adee022b4a0e0da4cb26c615697b95ebfe4463613"
     },
     {
       "path": "docs/requirements/SOURCE_TO_FEATURE.md",
@@ -1054,8 +1054,8 @@
     },
     {
       "path": "docs/requirements/TRACEABILITY.md",
-      "bytes": 9811,
-      "sha256": "ca0b7ec6c2880d412ec20df120ece6331b05cbb51d93fafc02d470bceef2c58a"
+      "bytes": 9959,
+      "sha256": "5404fa9a9f34ac5874bd8498f284d773a6a9d968ea917e4bf0255b4df6f3c993"
     },
     {
       "path": "docs/research/CODE_GRAPH_RUNBOOK.md",
@@ -1074,8 +1074,8 @@
     },
     {
       "path": "docs/research/RESEARCH_PATTERNS.md",
-      "bytes": 4273,
-      "sha256": "6c4cc866f6efe635c1bac7c2de6d274bb914000eb76ef5c7ee7f555b21cc66ea"
+      "bytes": 5439,
+      "sha256": "129f3fa3996fb095dd9f71b6ee779a43974836eeb723dd76fa13c7c74d9fa229"
     },
     {
       "path": "docs/research/VERIFIED_PUBLIC_REFERENCES.md",

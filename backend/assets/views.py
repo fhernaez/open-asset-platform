@@ -10,7 +10,7 @@ from assets.serializers import (
     AssetTypeSerializer,
     UnitSerializer,
 )
-from core.errors import ConflictError
+from core.errors import ConflictError, ValidationError
 from core.permissions import TenantScopedPermission
 from core.viewsets import TenantScopedViewSet
 from platforms.services import AuditService, require_membership
@@ -53,6 +53,10 @@ class AssetTypeViewSet(TenantScopedViewSet):
     def perform_update(self, serializer):
         serializer.validated_data.pop("tenant", None)
         serializer.validated_data.pop("project", None)
+        if "schema" in serializer.validated_data:
+            schema = dict(serializer.validated_data.get("schema") or {})
+            schema["custom"] = True
+            serializer.validated_data["schema"] = schema
         obj = serializer.save()
         AuditService.record(
             actor=self.request.user,
@@ -103,25 +107,61 @@ class AssetViewSet(TenantScopedViewSet):
             qs = qs.filter(project_id=project_id)
         return qs
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        gateway = self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        data = dict(serializer.data)
+        if gateway is not None:
+            data["gateway_id"] = str(gateway.id)
+        from rest_framework.response import Response
+
+        return Response(data, status=201, headers=headers)
+
     def perform_create(self, serializer):
+        from assets.services import apply_type_template
+        from connectivity.models import Gateway
+        from connectivity.services import validate_gateway_config
+
         tenant = self._resolve_tenant(serializer.validated_data)
         require_membership(self.request.user, tenant, "assets.manage")
         project = serializer.validated_data.get("project")
         if project is not None and project.tenant_id != tenant.id:
-            from core.errors import ValidationError
-
             raise ValidationError("project must belong to the asset tenant.")
-        asset = serializer.save(tenant=tenant)
-        from assets.services import apply_type_template
 
-        apply_type_template(asset)
-        AuditService.record(
-            actor=self.request.user,
-            action="asset.create",
-            resource_type="asset",
-            resource_id=str(asset.id),
-            tenant=tenant,
-        )
+        with transaction.atomic():
+            asset = serializer.save(tenant=tenant)
+            apply_type_template(asset)
+            gateway = None
+            asset_type = asset.asset_type
+            if asset_type is not None and asset_type.kind == "gateway":
+                raw_config = self.request.data.get("gateway_config") or {}
+                config = dict(raw_config) if isinstance(raw_config, dict) else {}
+                code = asset_type.code
+                if code == "gateway":
+                    protocol = config.get("protocol") or "mqtt"
+                else:
+                    config.pop("protocol", None)
+                    protocol = code.removeprefix("gateway-") if code.startswith("gateway-") else "mqtt"
+                gateway = Gateway.objects.create(
+                    tenant=tenant,
+                    project=project,
+                    asset=asset,
+                    protocol=protocol,
+                    config=config,
+                )
+                errors = validate_gateway_config(gateway)
+                if errors:
+                    raise ValidationError("; ".join(errors))
+            AuditService.record(
+                actor=self.request.user,
+                action="asset.create",
+                resource_type="asset",
+                resource_id=str(asset.id),
+                tenant=tenant,
+            )
+            return gateway
 
     def perform_update(self, serializer):
         serializer.validated_data.pop("tenant", None)

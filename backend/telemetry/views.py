@@ -81,7 +81,15 @@ class AttributeTelemetryViewSet(viewsets.ViewSet):
     def policy_effective(self, request, pk=None):
         attribute = _get_attribute(pk)
         self.check_object_permissions(request, attribute)
-        return Response(StoragePolicyService.effective(attribute))
+        agent_default = None
+        gateway_id = request.query_params.get("gateway")
+        if gateway_id:
+            from connectivity.models import Gateway
+
+            gateway = Gateway.objects.filter(id=gateway_id, tenant_id=attribute.tenant_id).first()
+            if gateway is not None:
+                agent_default = (gateway.config or {}).get("storage_policy")
+        return Response(StoragePolicyService.effective(attribute, agent_default))
 
 
 class IngestView(APIView):

@@ -48,6 +48,7 @@ export default function MainLayout() {
       message.success(t("types.createSuccess"));
       setProjectModalOpen(false);
       projectForm.resetFields();
+      queryClient.invalidateQueries({ queryKey: ["projects", tenantId] });
       setProjectId(project.id);
     },
     onError: (err) => message.error(err instanceof Error ? err.message : "Error"),

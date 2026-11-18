@@ -17,6 +17,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument("--tenant", dest="tenant_slug", default=None)
+        parser.add_argument("--refresh", action="store_true", dest="refresh")
 
     def handle(self, *args, **options):
         from platforms.models import Tenant
@@ -26,9 +27,10 @@ class Command(BaseCommand):
             tenants = tenants.filter(slug=options["tenant_slug"])
         total_types = 0
         for tenant in tenants:
-            result = seed_catalog_for_tenant(tenant)
+            result = seed_catalog_for_tenant(tenant, refresh=options.get("refresh", False))
             total_types += result["types_created"]
             self.stdout.write(
-                f"tenant={tenant.slug} types_created={result['types_created']} units_created={result['units_created']}"
+                f"tenant={tenant.slug} types_created={result['types_created']} "
+                f"types_updated={result['types_updated']} units_created={result['units_created']}"
             )
         self.stdout.write(self.style.SUCCESS(f"seed_asset_types: total_types_created={total_types}"))

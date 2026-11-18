@@ -40,6 +40,26 @@ class GatewayViewSet(TenantScopedViewSet):
         gateway = self.get_object()
         return Response({"gateway_id": str(gateway.id), "status": gateway.connection_status})
 
+    @action(detail=True, methods=["get", "put"], url_path="storage-policy")
+    def storage_policy(self, request, pk=None):
+        gateway = self.get_object()
+        if request.method == "PUT":
+            policy = request.data.get("storage_policy")
+            if policy is not None and not isinstance(policy, dict):
+                from core.errors import ValidationError
+
+                raise ValidationError("storage_policy must be an object.")
+            config = dict(gateway.config or {})
+            config["storage_policy"] = policy
+            gateway.config = config
+            gateway.save(update_fields=["config"])
+        return Response(
+            {
+                "gateway_id": str(gateway.id),
+                "storage_policy": (gateway.config or {}).get("storage_policy"),
+            }
+        )
+
     @action(detail=True, methods=["post"], url_path="ingest")
     def ingest(self, request, pk=None):
         gateway = self.get_object()

@@ -1336,6 +1336,77 @@ paths:
               schema:
                 $ref: '#/components/schemas/Gateway'
           description: ''
+  /api/v1/connectivity/gateways/{id}/storage-policy/:
+    get:
+      operationId: connectivity_gateways_storage_policy_retrieve
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this gateway.
+        required: true
+      tags:
+      - connectivity
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+          description: ''
+    put:
+      operationId: connectivity_gateways_storage_policy_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this gateway.
+        required: true
+      tags:
+      - connectivity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+          description: ''
   /api/v1/connectivity/gateways/{id}/test-connection/:
     get:
       operationId: connectivity_gateways_test_connection_retrieve

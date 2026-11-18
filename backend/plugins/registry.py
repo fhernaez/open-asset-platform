@@ -8,16 +8,16 @@ from __future__ import annotations
 
 PLUGIN_MANIFESTS: list[dict] = [
     {
-        "slug": "oap.mqtt",
-        "name": "MQTT agent",
+        "slug": "oap.connectivity",
+        "name": "Conectividad (gateways)",
         "version": "1.0.0",
         "core_contract": ">=1.0.0,<2.0.0",
         "kind": "django_app",
         "requires": ["oap.asset_registry", "oap.telemetry", "oap.identity"],
-        "provides": ["iot.mqtt.ingest", "iot.mqtt.storage_policy"],
+        "provides": ["iot.connectivity.gateway", "iot.connectivity.storage_policy"],
         "permissions": ["mqtt.view", "mqtt.manage"],
         "is_core": False,
-        "env_flag": "PLUGIN_MQTT_DEFAULT_ENABLED",
+        "env_flag": "PLUGIN_CONNECTIVITY_DEFAULT_ENABLED",
     },
 ]
 

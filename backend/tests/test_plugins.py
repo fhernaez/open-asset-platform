@@ -19,18 +19,18 @@ def test_sync_definitions_idempotent(db):
     second = PluginManager.sync_definitions()
     assert first["definitions_created"] > 0
     assert second["definitions_created"] == 0
-    assert PluginDefinition.objects.filter(slug="oap.mqtt").exists()
+    assert PluginDefinition.objects.filter(slug="oap.connectivity").exists()
 
 
 def test_seed_once_does_not_overwrite(db, monkeypatch):
-    monkeypatch.setenv("PLUGIN_MQTT_DEFAULT_ENABLED", "true")
+    monkeypatch.setenv("PLUGIN_CONNECTIVITY_DEFAULT_ENABLED", "true")
     PluginManager.sync_definitions()
-    manifest = {"slug": "oap.mqtt", "env_flag": "PLUGIN_MQTT_DEFAULT_ENABLED"}
+    manifest = {"slug": "oap.connectivity", "env_flag": "PLUGIN_CONNECTIVITY_DEFAULT_ENABLED"}
     assert PluginManager.seed_activation(manifest) is True
 
     # Simulate admin disabling, then re-seed: activation must stay disabled.
-    PluginManager.set_enabled("oap.mqtt", False)
-    activation = PluginActivation.objects.get(definition__slug="oap.mqtt")
+    PluginManager.set_enabled("oap.connectivity", False)
+    activation = PluginActivation.objects.get(definition__slug="oap.connectivity")
     assert activation.enabled is False
 
     PluginManager.seed_activation(manifest)
@@ -51,8 +51,8 @@ def test_plugin_activation_api(api, platform_admin):
     api.force_authenticate(user=platform_admin)
     response = api.get("/api/v1/plugins/")
     assert response.status_code == 200
-    assert any(p["slug"] == "oap.mqtt" for p in response.data)
+    assert any(p["slug"] == "oap.connectivity" for p in response.data)
 
-    patch = api.patch("/api/v1/plugins/oap.mqtt/activation/", {"enabled": False}, format="json")
+    patch = api.patch("/api/v1/plugins/oap.connectivity/activation/", {"enabled": False}, format="json")
     assert patch.status_code == 200, patch.data
     assert patch.data["enabled"] is False

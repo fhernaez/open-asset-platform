@@ -3,6 +3,13 @@ export interface Tenant {
   name: string;
   slug: string;
   is_active: boolean;
+  locale?: string;
+}
+
+export interface Unit {
+  symbol: string;
+  name: string;
+  quantity: string;
 }
 
 export interface Project {

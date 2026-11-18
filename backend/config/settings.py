@@ -53,14 +53,15 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_spectacular",
-    # OAP bounded contexts (dependency order: core -> platform -> events -> assets -> telemetry -> plugins -> mqtt)
+    # OAP bounded contexts (dependency order: core -> platforms -> events -> assets ->
+    # telemetry -> plugins -> connectivity)
     "core",
     "platforms",
     "events",
     "assets",
     "telemetry",
     "plugins",
-    "mqtt",
+    "connectivity",
 ]
 
 MIDDLEWARE = [

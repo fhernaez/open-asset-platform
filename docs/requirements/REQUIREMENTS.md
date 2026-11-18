@@ -36,6 +36,7 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 | OAP-PLT-008 | Realms/organizaciones con invitación y dominios | G7 | VS (OpenRemote page-realms) |
 | OAP-PLT-009 | Export de datos (datapoints, activos) | G6 | VS (OpenRemote DatapointExportFormat + page-export; Atlas ExportController) |
 | OAP-PLT-010 | OIDC/SSO opcional (implementación original; SSO/LDAP de Atlas es comercial) | G9 | CU (Atlas) / NR (diseño propio) |
+| OAP-PLT-011 | i18n estructural: UI es/en, locale por organización con override por usuario, manifiestos multilingües | G2 | NR (ADR-016) |
 
 ## OAP-ASS — Asset Registry
 
@@ -45,6 +46,9 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 | OAP-ASS-002 | Attribute/Point esquema tipado (string/boolean/number/json) con unidad y calidad | G2 | VS (OpenRemote Attribute/MetaItem; Atlas CustomField) |
 | OAP-ASS-003 | Vínculos agente↔atributo (links de protocolo) | G4 | VS (OpenRemote AttributeLink) |
 | OAP-ASS-004 | Plantillas de activos y bulk import | G6 | VS (OpenRemote asset templates; Atlas ImportController) |
+| OAP-ASS-005 | Catálogo semilla de tipologías (~22 tipos incl. 7 gateways) sembrado por organización, editable, upgrades solo agregan | G2 | VS (OpenRemote/ThingsBoard tipos base; ADR-016) |
+| OAP-ASS-006 | Tipologías por código: manifiestos `ASSET_TYPE_SCHEMA` versionados + `seed_asset_types` idempotente | G2 | VS (Node-RED nodos por código; ThingsBoard templates; ADR-016) |
+| OAP-ASS-007 | Representación visual: icono por tipología + imagen por activo + estado derivado (overlays/dashboards) | G2/G6 | VS (OpenRemote or-icon; ThingsBoard entity image; ADR-016) |
 
 ## OAP-CON — Conectividad (ADR-014; reemplaza OAP-MQT)
 
@@ -174,6 +178,7 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 | OAP-UI-003 | Feature flags por gate: pantalla sin backend real queda oculta o "disponible en etapa X"; nunca rota | G2 | NR |
 | OAP-UI-004 | E2E Playwright por pantalla (mocks y backend real por gate) | G2 | NR |
 | OAP-UI-005 | Pantallas del menú canónico (MASTER_ARCHITECTURE §9.1, ADR-014): Activos (árbol+tipologías+atributos), Conectividad, Telemetría, Dashboards, Mapas, Reglas, CMMS, Integraciones, IA/MCP, Administración | G2-G9 | VS (17 páginas OpenRemote + 21 áreas Atlas + patrones ThingsBoard/Grafana) |
+| OAP-UI-006 | Editor visual de tipologías: crear tipos desde cero o desde uno existente, generando el MISMO `ASSET_TYPE_SCHEMA` | G9 | VS (ThingsBoard solution templates; ADR-016) |
 
 ## OAP-SEC — Seguridad
 

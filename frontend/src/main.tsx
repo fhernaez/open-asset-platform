@@ -4,6 +4,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { AuthProvider } from "./auth/AuthProvider";
+import { AppProvider } from "./contexts/AppContext";
+import "./i18n";
 
 async function enableMocks(): Promise<void> {
   if (import.meta.env.VITE_ENABLE_MOCKS !== "true") {
@@ -21,7 +23,9 @@ enableMocks().then(() => {
       <QueryClientProvider client={queryClient}>
         <ConfigProvider theme={{ token: { colorPrimary: "#1677ff" } }}>
           <AuthProvider>
-            <App />
+            <AppProvider>
+              <App />
+            </AppProvider>
           </AuthProvider>
         </ConfigProvider>
       </QueryClientProvider>

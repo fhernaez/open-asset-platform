@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class MqttConfig(AppConfig):
+class ConnectivityConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "mqtt"
-    label = "mqtt"
+    name = "connectivity"
+    label = "connectivity"

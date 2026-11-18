@@ -31,9 +31,7 @@ class AssetTypeSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError("schema.attributes must be a list.")
             for item in attributes:
                 if not isinstance(item, dict) or not item.get("code") or not item.get("value_type"):
-                    raise serializers.ValidationError(
-                        "each schema.attributes item needs code and value_type."
-                    )
+                    raise serializers.ValidationError("each schema.attributes item needs code and value_type.")
         return value
 
 

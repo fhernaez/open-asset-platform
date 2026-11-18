@@ -11,5 +11,5 @@ urlpatterns = [
     path("api/v1/assets/", include("assets.urls")),
     path("api/v1/telemetry/", include("telemetry.urls")),
     path("api/v1/plugins/", include("plugins.urls")),
-    path("api/v1/mqtt/", include("mqtt.urls")),
+    path("api/v1/connectivity/", include("connectivity.urls")),
 ]

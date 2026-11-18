@@ -12,11 +12,18 @@ Actualizado: 2026-11-17 (UTC). Código construido: backend Django/DRF (core, pla
 ## C1 — Tipologías y plantillas (2026-11-17)
 
 - Backend: `AssetType.kind` (standard/gateway) + filtros por tenant/kind; plantillas de atributos (`schema.attributes`) aplicadas al crear activo con tipología; migración `assets/0004`.
-- Frontend: Activos ahora con pestañas **Activos | Tipologías**; editor de tipologías con atributos de plantilla dinámicos; select de tipología en crear activo; 30 pytest PASS.
+
+## C2 — Catálogo, Conectividad y UX de Activos (2026-11-18)
+
+- **Catálogo semilla** (`OAP-ASS-005/006`): `backend/assets/types_catalog/` con ~22 manifiestos (espacios/HVAC/energía/iluminación + 7 gateways con `connection_schema` por protocolo), validador, `seed_asset_types` idempotente por organización y auto-siembra al crear organización.
+- **Conectividad** (`OAP-CON-*`, ADR-014): app `connectivity` (Gateway como activo de tipo gateway + GatewayBinding genérica), worker multi-adapter con adapter MQTT real, API `/api/v1/connectivity/*`; la app `mqtt` fue eliminada (sin datos en producción); plugin `oap.connectivity`; compose usa `connectivity_worker`.
+- **Representación visual + i18n** (ADR-016): icono por tipología (set base por categoría), estado con colores; react-i18next es/en con locale por organización.
+- **UX Activos**: contexto global org/proyecto en el header (persistido), estados de tablas (error/vacío), Retirar/Activar/Eliminar (con purga de telemetría en transacción y 409 para tipologías en uso), drawer de atributos con auto-código, unidad, editar/eliminar.
+- Verificación: **43 pytest PASS**, ruff limpio, `npm lint/typecheck/test/build` PASS, OpenAPI regenerado, spec kit PASS.
 
 ## Pendiente (plan aprobado)
 
-C2 Conectividad (app `connectivity` reemplaza `mqtt`, gateway/bindings UI, adapters MQTT→Modbus) → Plugins UI → Dashboards (ADR-015) → Mapas/GIS → CMMS → Reglas → Integraciones/IA → G9. Validación real en el server del usuario.
+Adapters Modbus (P1) y OPC-UA/BACnet/SNMP/CAN (P2, SPECIFIED) → Plugins UI → Dashboards (ADR-015) → Mapas/GIS → CMMS → Reglas → Integraciones/IA → G9. Validación real en el server del usuario.
 
 ## Resumen por gate
 

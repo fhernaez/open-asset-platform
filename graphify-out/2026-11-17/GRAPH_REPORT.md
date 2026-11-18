@@ -1,24 +1,24 @@
 # Graph Report - Open-Asset-Platform  (2026-11-17)
 
 ## Corpus Check
-- 349 files · ~103,182 words
+- 352 files · ~105,538 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 10 file(s) not represented in the graph (top: (none) 5, .example 2, .conf 2)
 
 ## Summary
-- 2261 nodes · 2931 edges · 280 communities (206 shown, 74 thin omitted)
-- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 199 edges (avg confidence: 0.94)
+- 2291 nodes · 2975 edges · 293 communities (212 shown, 81 thin omitted)
+- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 201 edges (avg confidence: 0.94)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f93b20c0`
+- Built from commit: `5ee6ded6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - storage.py
-- mqtt/views.py
-- UUIDPkModel
+- process_message
+- PluginManager
 - package.json
 - platforms/views.py
 - assets/views.py
@@ -27,7 +27,7 @@
 - conftest.py
 - AuthzService
 - core/views.py
-- AttributeTelemetryViewSet
+- mqtt/views.py
 - django_apps
 - compilerOptions
 - devDependencies
@@ -44,12 +44,12 @@
 - oap-backend
 - endpoints.ts
 - AssetViewSet
-- OutboxEvent
+- events/services.py
 - TelemetryPoint
 - Requisitos normativos del producto (v2 — reestructurado por bounded context)
-- App.tsx
+- mqtt/services.py
 - test_telemetry_policy.py
-- AuthProvider.tsx
+- MqttAgentViewSet
 - Arquitectura maestra — OAP autonomous FOSS
 - Plan de construcción secuencial para Kilo Code — NO crear todos los plugins de una vez
 - Backlog estructurado de funcionalidades — v3 (2026-11-17)
@@ -77,7 +77,7 @@
 - Plugin `mqtt` — especificación funcional y técnica
 - Plugin `nodered` — especificación funcional y técnica
 - Plugin `protocol_extensions` — especificación funcional y técnica
-- PluginManager
+- mqtt/admin.py
 - CONTRATO NORMATIVO — Telemetría MQTT: persistir por cambio y máximo N valores/período
 - `analytics` — Operaciones paso a paso, API, UX y fallas
 - `bacnet` — Operaciones paso a paso, API, UX y fallas
@@ -88,7 +88,7 @@
 - `modbus` — Operaciones paso a paso, API, UX y fallas
 - Escenarios específicos obligatorios
 - `protocol_extensions` — Operaciones paso a paso, API, UX y fallas
-- Contrato de extensibilidad OAP Plugin API v1
+- API MCP — permisos y aprobación
 - test_api.py
 - CORE / Api Realtime
 - CORE / Asset Registry
@@ -107,9 +107,9 @@
 - Estado de implementación — ACTUALIZAR DESPUÉS DE CADA GATE
 - Escenarios específicos obligatorios
 - mockServiceWorker.js
-- browser.ts
+- vitest
 - OAP — Instrucciones vinculantes para cualquier agente de Kilo Code
-- core/models.py
+- msw
 - Escenarios específicos obligatorios
 - Escenarios específicos obligatorios
 - Escenarios específicos obligatorios
@@ -125,7 +125,7 @@
 - Escenarios específicos obligatorios
 - Escenarios específicos obligatorios
 - Recorridos Playwright E2E de aplicación
-- bootstrap_config.py
+- plugins/views.py
 - Contrato de sandbox local, Docker y herramientas
 - ADR: Framework Django como core, no FastAPI
 - ADR: Producto independiente
@@ -146,10 +146,10 @@
 - dependencies
 - scripts
 - OAP — Open Asset Platform | Especificación integral para Kilo Code
-- errors.py
 - TenantScopedPermission
-- platforms/admin.py
-- policy.py
+- telemetry/views.py
+- UUIDPkModel
+- OutboxEvent
 - Manual de orquestación Kilo Code: agentes, tareas y checkpoints
 - ADR: Almacenamiento de telemetría en tablas PostgreSQL regulares (sin TimescaleDB)
 - Diagramas de flujo C4 lógico + escenarios operativos
@@ -209,7 +209,7 @@
 - Índice de fuentes auditadas (2026-11-17)
 - Baselines de repositorios y estándares — fijar antes de implementar paridad
 - SYSTEM — Principal para agentes de construcción OAP
-- ConfigService
+- errors.py
 - Cómo interpretar “reconstruir todas las funcionalidades”
 - Registro de contratos OpenAPI (Fase 1)
 - Aceptación del plugin `ai_assistant` — G8
@@ -270,20 +270,35 @@
 - Patrones extraídos de repos de referencia (2026-11-17)
 - ADR: Dashboards con widget de mapa (plano + geo) y escenas GIS por imágenes
 - ADR: Navegación por bounded context y Conectividad como tipo de activo "Gateway"
+- User
+- django_contrib
+- Contrato de extensibilidad OAP Plugin API v1
+- settings.py
+- assets/admin.py
+- platforms/admin.py
+- Contrato — Esquema de tipologías de activos (ASSET_TYPE_SCHEMA v1)
+- AssetAttribute
+- core/models.py
+- plugins/admin.py
+- ADR: Representación visual de activos e i18n estructural
+- 0004_assettype_kind.py
+- PluginViewSet
 
 ## God Nodes (most connected - your core abstractions)
 1. `TenantScopedPermission` - 26 edges
-2. `Membership` - 22 edges
-3. `Requisitos normativos del producto (v2 — reestructurado por bounded context)` - 22 edges
-4. `PluginManager` - 20 edges
-5. `ingest_event()` - 20 edges
-6. `AssetAttribute` - 19 edges
+2. `AssetAttribute` - 22 edges
+3. `Membership` - 22 edges
+4. `Requisitos normativos del producto (v2 — reestructurado por bounded context)` - 22 edges
+5. `PluginManager` - 20 edges
+6. `ingest_event()` - 20 edges
 7. `UUIDPkModel` - 19 edges
 8. `TenantScopedViewSet` - 19 edges
-9. `MqttAgent` - 17 edges
-10. `TelemetryPoint` - 17 edges
+9. `apiFetch()` - 18 edges
+10. `MqttAgent` - 17 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `Scopes` --references--> `AuthzService`  [INFERRED]
+  docs/contracts/MCP_SECURITY.md → backend/core/authz.py
 - `1. Dos niveles de configuración` --references--> `MqttAgent`  [INFERRED]
   docs/core/TELEMETRY_POLICY.md → backend/mqtt/models.py
 - `Checklist común final` --references--> `MqttAgent`  [INFERRED]
@@ -292,61 +307,59 @@
   docs/architecture/DB_LOGICAL_MODEL.md → backend/telemetry/models.py
 - `Estados y métricas` --references--> `AttributeCurrent`  [INFERRED]
   docs/contracts/TELEMETRY_SCHEMA.md → backend/telemetry/models.py
-- `Decisión` --references--> `TelemetryPoint`  [INFERRED]
-  docs/architecture/ADR-013-plain-postgres-no-timescaledb.md → backend/telemetry/models.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (280 total, 74 thin omitted)
+## Communities (293 total, 81 thin omitted)
 
 ### Community 0 - "storage.py"
-Cohesion: 0.16
-Nodes (11): parse_window(), _apply_policy(), _dedupe_key(), _default_policy(), effective_policy(), ingest_event(), IngestResult, _lock_state() (+3 more)
+Cohesion: 0.12
+Nodes (15): canonical_json(), is_change(), merge_policy(), normalize_value(), parse_window(), utcnow(), window_bucket(), _apply_policy() (+7 more)
 
-### Community 1 - "mqtt/views.py"
-Cohesion: 0.06
-Nodes (39): BrokerConnectionAdmin, MqttAgentAdmin, MqttBindingAdmin, MqttDiscoveryTemplateAdmin, MqttSubscriptionHealthAdmin, extract(), Command, on_message() (+31 more)
+### Community 1 - "process_message"
+Cohesion: 0.20
+Nodes (3): Command, on_message(), process_message()
 
-### Community 2 - "UUIDPkModel"
+### Community 2 - "PluginManager"
 Cohesion: 0.16
-Nodes (17): UUIDPkModel, PluginActivationAdmin, PluginDefinitionAdmin, PluginInstallationAdmin, PluginSettingsAdmin, Kind, Meta, PluginActivation (+9 more)
+Nodes (9): ConflictError, _env_flag(), locked_slugs(), PluginManager, api(), test_core_cannot_be_disabled(), test_plugin_activation_api(), test_seed_once_does_not_overwrite() (+1 more)
 
 ### Community 3 - "package.json"
-Cohesion: 0.09
-Nodes (23): msw, workerDirectory, name, private, type, version, echarts, eslint (+15 more)
+Cohesion: 0.10
+Nodes (20): name, private, type, version, echarts, eslint, @eslint/js, eslint-plugin-react-hooks (+12 more)
 
 ### Community 4 - "platforms/views.py"
-Cohesion: 0.15
-Nodes (17): TenantScopedViewSet, AuditLog, Membership, Meta, PlatformSetting, Project, Tenant, AuditLogSerializer (+9 more)
+Cohesion: 0.13
+Nodes (16): IsTenantMember, Membership, PlatformSetting, Project, AuditLogSerializer, MembershipSerializer, Meta, PlatformSettingSerializer (+8 more)
 
 ### Community 5 - "assets/views.py"
-Cohesion: 0.12
-Nodes (21): AssetAdmin, AssetAttributeAdmin, AssetRelationshipAdmin, AssetTypeAdmin, UnitAdmin, Asset, AssetAttribute, AssetRelationship (+13 more)
+Cohesion: 0.18
+Nodes (13): Asset, AssetRelationship, AssetType, Kind, Meta, Status, Unit, AssetAttributeSerializer (+5 more)
 
 ### Community 6 - "django_db"
-Cohesion: 0.13
-Nodes (10): Migration, Migration, Migration, Migration, Migration, Migration, Migration, Migration (+2 more)
+Cohesion: 0.16
+Nodes (8): Migration, Migration, Migration, Migration, Migration, Migration, Migration, Migration
 
 ### Community 7 - "ensure_db.py"
-Cohesion: 0.06
-Nodes (13): _read_secret(), _create_database(), _create_role(), _env(), _install_extensions(), main(), _read_secret(), _validate_identifier() (+5 more)
+Cohesion: 0.09
+Nodes (12): _create_database(), _create_role(), _env(), _install_extensions(), main(), _read_secret(), _validate_identifier(), _wait_for_db() (+4 more)
 
 ### Community 8 - "conftest.py"
-Cohesion: 0.24
-Nodes (11): Role, request_context(), asset(), attribute_factory(), _make(), _enable_db_for_all(), member_user(), platform_admin() (+3 more)
+Cohesion: 0.27
+Nodes (10): request_context(), asset(), attribute_factory(), _make(), _enable_db_for_all(), member_user(), platform_admin(), project() (+2 more)
 
 ### Community 9 - "AuthzService"
-Cohesion: 0.16
-Nodes (11): AssetService, AttributeService, AuthzService, NotFoundError, PermissionDeniedError, require_perm(), API MCP — permisos y aprobación, Capas (+3 more)
+Cohesion: 0.17
+Nodes (8): AssetService, AttributeService, AuthzService, NotFoundError, PermissionDeniedError, require_perm(), ConfigService, require_membership()
 
 ### Community 10 - "core/views.py"
-Cohesion: 0.15
-Nodes (7): Meta, TokenObtainPairSerializer, UserSerializer, HealthView, LoginView, MeView, RefreshView
+Cohesion: 0.11
+Nodes (8): StandardPagination, Meta, TokenObtainPairSerializer, UserSerializer, HealthView, LoginView, MeView, RefreshView
 
-### Community 11 - "AttributeTelemetryViewSet"
-Cohesion: 0.28
-Nodes (3): StoragePolicyService, AttributeTelemetryViewSet, _get_attribute()
+### Community 11 - "mqtt/views.py"
+Cohesion: 0.22
+Nodes (16): BrokerConnection, Meta, MqttAgent, MqttBinding, MqttDiscoveryTemplate, MqttSubscriptionHealth, BrokerConnectionSerializer, Meta (+8 more)
 
 ### Community 12 - "django_apps"
 Cohesion: 0.09
@@ -369,36 +382,32 @@ Cohesion: 0.50
 Nodes (3): files, kit_version, purpose
 
 ### Community 52 - "endpoints.ts"
-Cohesion: 0.16
-Nodes (21): apiFetch(), createAsset(), CreateAssetInput, createAttribute(), CreateAttributeInput, createProject(), createTenant(), health() (+13 more)
+Cohesion: 0.06
+Nodes (64): ADR-0014, ApiError, ApiErrorBody, apiFetch(), authToken, get(), setAuthToken(), setUnauthorizedHandler() (+56 more)
 
 ### Community 53 - "AssetViewSet"
-Cohesion: 0.18
-Nodes (6): AssetAttributeViewSet, AssetViewSet, ValidationError, AuditService, require_membership(), ProjectViewSet
-
-### Community 54 - "OutboxEvent"
-Cohesion: 0.12
-Nodes (7): OutboxEventAdmin, Command, Meta, OutboxEvent, Status, dispatch_pending(), EventPublisher
+Cohesion: 0.22
+Nodes (3): AssetAttributeViewSet, AssetViewSet, ValidationError
 
 ### Community 55 - "TelemetryPoint"
-Cohesion: 0.16
-Nodes (15): AttributeCurrentAdmin, IngestMetricsAdmin, StoragePolicyAdmin, StoragePolicyStateAdmin, TelemetryPointAdmin, AttributeCurrent, IngestMetrics, Meta (+7 more)
+Cohesion: 0.14
+Nodes (17): AttributeCurrentAdmin, IngestMetricsAdmin, StoragePolicyAdmin, StoragePolicyStateAdmin, TelemetryPointAdmin, AttributeCurrent, IngestMetrics, Meta (+9 more)
 
 ### Community 56 - "Requisitos normativos del producto (v2 — reestructurado por bounded context)"
 Cohesion: 0.09
 Nodes (22): Módulos, OAP-AIM — IA local y MCP, OAP-ASS — Asset Registry, OAP-BMS / OAP-EMS, OAP-CMM — Mantenimiento (paridad Atlas + mejoras OAP), OAP-CON — Conectividad (ADR-014; reemplaza OAP-MQT), OAP-DSH — Dashboards e Insights, OAP-ERP — Integración ERP (+14 more)
 
-### Community 57 - "App.tsx"
-Cohesion: 0.20
-Nodes (17): ADR-0014, App(), ProtectedLayout(), screenElement(), useAuth(), Gate, IMPLEMENTED_SCREENS, isScreenImplemented() (+9 more)
+### Community 57 - "mqtt/services.py"
+Cohesion: 0.10
+Nodes (9): extract(), _decode_payload(), effective_attribute_policy(), topic_matches(), _default_policy(), effective_policy(), test_topic_wildcards(), collect() (+1 more)
 
 ### Community 58 - "test_telemetry_policy.py"
 Cohesion: 0.25
 Nodes (14): subscribe_observer(), _history(), _ingest(), test_tel001_on_change_same_value_stores_once(), test_tel002_on_change_sequence(), test_tel003_boolean_transitions(), test_tel004_epsilon_absolute(), test_tel005_attribute_override_beats_agent_default() (+6 more)
 
-### Community 59 - "AuthProvider.tsx"
-Cohesion: 0.14
-Nodes (16): ApiError, ApiErrorBody, authToken, get(), setAuthToken(), setUnauthorizedHandler(), Me, renderApp() (+8 more)
+### Community 59 - "MqttAgentViewSet"
+Cohesion: 0.43
+Nodes (3): IngestMessageSerializer, StoragePolicySerializer, MqttAgentViewSet
 
 ### Community 60 - "Arquitectura maestra — OAP autonomous FOSS"
 Cohesion: 0.12
@@ -508,9 +517,9 @@ Nodes (11): Configuración ambiental (solo defaults y parámetros de despliegue)
 Cohesion: 0.17
 Nodes (11): Configuración ambiental (solo defaults y parámetros de despliegue), Dependencias (contratos públicos; no imports privados), Documentos vinculados, Eventos, permisos y estado, Historias de usuario y workflows de extremo a extremo, Interfaz HTTP — endpoints a especificar en OpenAPI v1, Interfaz React / criterios UX, Modelo propio de dominio / tablas (borrador a formalizar migrando) (+3 more)
 
-### Community 87 - "PluginManager"
-Cohesion: 0.18
-Nodes (9): ConflictError, _env_flag(), locked_slugs(), PluginManager, api(), test_core_cannot_be_disabled(), test_plugin_activation_api(), test_seed_once_does_not_overwrite() (+1 more)
+### Community 87 - "mqtt/admin.py"
+Cohesion: 0.48
+Nodes (5): BrokerConnectionAdmin, MqttAgentAdmin, MqttBindingAdmin, MqttDiscoveryTemplateAdmin, MqttSubscriptionHealthAdmin
 
 ### Community 88 - "CONTRATO NORMATIVO — Telemetría MQTT: persistir por cambio y máximo N valores/período"
 Cohesion: 0.18
@@ -552,13 +561,13 @@ Nodes (10): Escenarios específicos obligatorios, Evidencia gate, `mqtt` — Esc
 Cohesion: 0.18
 Nodes (10): Autorización y configuración, Compatibilidad, error handling y health, Contrato HTTP a implementar y documentar, Definition of Done, Flow 1: Elegir driver de catálogo validado y configurar red/dispositivo, no ejecutar auto-discovery indiscriminado., Flow 2: Mapear datos a AssetAttribute con unidades/calidad, respetar StoragePolicy genérica y commands seguros., Flow 3: Proveer implementación nativa cuando sea viable o gateway de protocolo documentado sin hacer dependiente la app de Node-RED., `protocol_extensions` — Operaciones paso a paso, API, UX y fallas (+2 more)
 
-### Community 98 - "Contrato de extensibilidad OAP Plugin API v1"
-Cohesion: 0.20
-Nodes (9): RequestContext, 1. Objetivo y restricción Django, 2. Manifiesto (semántica a implementarse), 3. APIs core para plugins, 5. API REST propuesta, 6. UI ExtensionManifest, 7. Actualización y compatibilidad, 8. Tests obligatorios (+1 more)
+### Community 98 - "API MCP — permisos y aprobación"
+Cohesion: 0.33
+Nodes (5): API MCP — permisos y aprobación, Capas, Herramientas v1, Scopes, Tests
 
 ### Community 99 - "test_api.py"
-Cohesion: 0.18
-Nodes (3): api(), test_asset_crud_audit(), test_tenant_isolation()
+Cohesion: 0.13
+Nodes (7): AuditLog, Meta, Tenant, api(), test_asset_crud_audit(), test_asset_type_template_creates_attributes(), test_tenant_isolation()
 
 ### Community 100 - "CORE / Api Realtime"
 Cohesion: 0.20
@@ -618,7 +627,7 @@ Nodes (9): Casos negativos comunes, CORE / Spatial Scenes, Dependencias y compat
 
 ### Community 114 - "Estado de implementación — ACTUALIZAR DESPUÉS DE CADA GATE"
 Cohesion: 0.20
-Nodes (9): Bloqueo del sandbox (no es déficit de código), Bloques de código entregados, Comandos exactos para reproducir, Estado de implementación — ACTUALIZAR DESPUÉS DE CADA GATE, Fase 0 y Fase 1 — completadas (2026-11-17), Fase 2 (frontend) y Fase 3 (backend) — fundación (2026-11-17), Pendiente (plan aprobado), Requisitos cubiertos (traceability resumida) (+1 more)
+Nodes (9): Bloqueo del sandbox (no es déficit de código), Bloques de código entregados, C1 — Tipologías y plantillas (2026-11-17), Comandos exactos para reproducir, Estado de implementación — ACTUALIZAR DESPUÉS DE CADA GATE, Fase 0 y Fase 1 — completadas (2026-11-17), Pendiente (plan aprobado), Requisitos cubiertos (traceability resumida) (+1 more)
 
 ### Community 115 - "Escenarios específicos obligatorios"
 Cohesion: 0.20
@@ -628,17 +637,9 @@ Nodes (9): Escenarios específicos obligatorios, Evidencia gate, `nodered` — E
 Cohesion: 0.36
 Nodes (8): activeClientIds, getResponse(), handleRequest(), IS_MOCKED_RESPONSE, resolveMainClient(), respondWithMock(), sendToClient(), serializeRequest()
 
-### Community 117 - "browser.ts"
-Cohesion: 0.47
-Nodes (4): enableMocks(), worker, handlers, msw
-
 ### Community 118 - "OAP — Instrucciones vinculantes para cualquier agente de Kilo Code"
 Cohesion: 0.22
 Nodes (8): Calidad y no regresión, Lectura y ejecución inicial obligatoria, Límites estructurales, OAP — Instrucciones vinculantes para cualquier agente de Kilo Code, Requisitos, auditoría y UI, Rol y disciplina, Salida de cada tarea, Si faltan herramientas o dependencias
-
-### Community 119 - "core/models.py"
-Cohesion: 0.16
-Nodes (4): Meta, TimeStampedModel, User, UserManager
 
 ### Community 120 - "Escenarios específicos obligatorios"
 Cohesion: 0.22
@@ -699,6 +700,10 @@ Nodes (8): Escenarios específicos obligatorios, Evidencia gate, `protocol_exten
 ### Community 134 - "Recorridos Playwright E2E de aplicación"
 Cohesion: 0.22
 Nodes (8): E2E-A: Primer login y proyecto, E2E-B: Plugin lifecycle, E2E-C: MQTT sampling, E2E-D: Mantenimiento, E2E-E: Escenas, E2E-F: Integraciones, Recorridos Playwright E2E de aplicación, UX checklist
+
+### Community 135 - "plugins/views.py"
+Cohesion: 0.25
+Nodes (13): Kind, Meta, PluginActivation, PluginDefinition, PluginInstallation, PluginSettings, Meta, PluginActivationSerializer (+5 more)
 
 ### Community 136 - "Contrato de sandbox local, Docker y herramientas"
 Cohesion: 0.25
@@ -780,21 +785,21 @@ Nodes (8): scripts, build, dev, lint, preview, test, test:e2e, typecheck
 Cohesion: 0.25
 Nodes (7): Licencias y atribución, Limitaciones de este kit, Navegación obligatoria, OAP — Open Asset Platform | Especificación integral para Kilo Code, Primer uso: NO comenzar creando 100 módulos vacíos, Requisitos críticos explícitos, Resultado buscado
 
-### Community 156 - "errors.py"
-Cohesion: 0.12
-Nodes (5): api_exception_handler(), DependencyUnavailableError, OAPError, _problem(), StandardPagination
+### Community 156 - "TenantScopedPermission"
+Cohesion: 0.18
+Nodes (6): AssetTypeViewSet, TenantScopedPermission, TenantScopedViewSet, BrokerConnectionViewSet, MqttBindingViewSet, MqttDiscoveryTemplateViewSet
 
-### Community 157 - "TenantScopedPermission"
-Cohesion: 0.14
-Nodes (6): IsTenantMember, TenantScopedPermission, PluginSettingsViewSet, PluginViewSet, IngestEventSerializer, IngestView
-
-### Community 158 - "platforms/admin.py"
+### Community 157 - "telemetry/views.py"
 Cohesion: 0.17
-Nodes (7): RoleAdmin, UserAdmin, AuditLogAdmin, MembershipAdmin, PlatformSettingAdmin, ProjectAdmin, TenantAdmin
+Nodes (5): IngestEventSerializer, StoragePolicyService, AttributeTelemetryViewSet, _get_attribute(), IngestView
 
-### Community 159 - "policy.py"
-Cohesion: 0.22
-Nodes (6): canonical_json(), is_change(), merge_policy(), normalize_value(), utcnow(), window_bucket()
+### Community 158 - "UUIDPkModel"
+Cohesion: 0.19
+Nodes (5): Command, Meta, Role, TimeStampedModel, UUIDPkModel
+
+### Community 159 - "OutboxEvent"
+Cohesion: 0.21
+Nodes (5): OutboxEventAdmin, Meta, OutboxEvent, Status, EventPublisher
 
 ### Community 160 - "Manual de orquestación Kilo Code: agentes, tareas y checkpoints"
 Cohesion: 0.29
@@ -1032,6 +1037,10 @@ Nodes (4): Advertencia funcional, Baselines de repositorios y estándares — fi
 Cohesion: 0.40
 Nodes (4): Coordinación Kilo, Entrega por historia, SYSTEM — Principal para agentes de construcción OAP, Órdenes permanentes
 
+### Community 219 - "errors.py"
+Cohesion: 0.22
+Nodes (4): api_exception_handler(), DependencyUnavailableError, OAPError, _problem()
+
 ### Community 220 - "Cómo interpretar “reconstruir todas las funcionalidades”"
 Cohesion: 0.50
 Nodes (3): Auditoría y cobertura, Cómo interpretar “reconstruir todas las funcionalidades”, No sustituir completitud por atajos
@@ -1124,25 +1133,53 @@ Nodes (5): ADR: Dashboards con widget de mapa (plano + geo) y escenas GIS por im
 Cohesion: 0.40
 Nodes (4): ADR: Navegación por bounded context y Conectividad como tipo de activo "Gateway", Alternativas consideradas, Contexto, Decisión
 
+### Community 282 - "Contrato de extensibilidad OAP Plugin API v1"
+Cohesion: 0.20
+Nodes (9): RequestContext, 1. Objetivo y restricción Django, 2. Manifiesto (semántica a implementarse), 3. APIs core para plugins, 5. API REST propuesta, 6. UI ExtensionManifest, 7. Actualización y compatibilidad, 8. Tests obligatorios (+1 more)
+
+### Community 284 - "assets/admin.py"
+Cohesion: 0.48
+Nodes (5): AssetAdmin, AssetAttributeAdmin, AssetRelationshipAdmin, AssetTypeAdmin, UnitAdmin
+
+### Community 285 - "platforms/admin.py"
+Cohesion: 0.48
+Nodes (5): AuditLogAdmin, MembershipAdmin, PlatformSettingAdmin, ProjectAdmin, TenantAdmin
+
+### Community 286 - "Contrato — Esquema de tipologías de activos (ASSET_TYPE_SCHEMA v1)"
+Cohesion: 0.29
+Nodes (6): Contrato — Esquema de tipologías de activos (ASSET_TYPE_SCHEMA v1), i18n, Manifiesto (YAML/JSON), Reglas, Representación visual (ADR-016), Schemas de conexión predefinidos (patrones de OpenRemote/EdgeX/ThingsBoard)
+
+### Community 287 - "AssetAttribute"
+Cohesion: 0.33
+Nodes (4): AssetAttribute, Quality, ValueType, apply_type_template()
+
+### Community 289 - "plugins/admin.py"
+Cohesion: 0.53
+Nodes (4): PluginActivationAdmin, PluginDefinitionAdmin, PluginInstallationAdmin, PluginSettingsAdmin
+
+### Community 290 - "ADR: Representación visual de activos e i18n estructural"
+Cohesion: 0.33
+Nodes (5): ADR: Representación visual de activos e i18n estructural, Alternativas consideradas, Consecuencias, Contexto, Decisión
+
 ## Knowledge Gaps
-- **1131 isolated node(s):** `Migration`, `Migration`, `Migration`, `Status`, `ValueType` (+1126 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1521 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **74 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **1144 isolated node(s):** `Migration`, `Migration`, `Migration`, `Migration`, `Kind` (+1139 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1541 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **81 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `UUIDPkModel` connect `UUIDPkModel` to `mqtt/views.py`, `platforms/views.py`, `conftest.py`, `TelemetryPoint`, `OutboxEvent`, `core/models.py`?**
-  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+- **Why does `UUIDPkModel` connect `UUIDPkModel` to `core/models.py`, `test_api.py`, `platforms/views.py`, `plugins/views.py`, `mqtt/views.py`, `TelemetryPoint`, `OutboxEvent`?**
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
 - **Are the 17 inferred relationships involving `TenantScopedPermission` (e.g. with `AssetAttributeViewSet` and `AssetTypeViewSet`) actually correct?**
   _`TenantScopedPermission` has 17 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `Migration`, `Migration`, `Migration` to the rest of the system?**
-  _1131 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `mqtt/views.py` be split into smaller, more focused modules?**
-  _Cohesion score 0.05709876543209876 - nodes in this community are weakly interconnected._
-- **Why does `TelemetryPoint` connect `TelemetryPoint` to `storage.py`, `mqtt/views.py`, `ADR: Almacenamiento de telemetría en tablas PostgreSQL regulares (sin TimescaleDB)`, `Estado de implementación — ACTUALIZAR DESPUÉS DE CADA GATE`, `test_telemetry_policy.py`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **Are the 10 inferred relationships involving `Membership` (e.g. with `AssetTypeViewSet` and `AssetViewSet`) actually correct?**
-  _`Membership` has 10 INFERRED edges - model-reasoned connections that need verification._
+  _1144 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `storage.py` be split into smaller, more focused modules?**
+  _Cohesion score 0.11553030303030302 - nodes in this community are weakly interconnected._
+- **Why does `StoragePolicyState` connect `TelemetryPoint` to `storage.py`, `telemetry/views.py`, `UUIDPkModel`, `Modelo lógico SQL y owners`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Are the 8 inferred relationships involving `AssetAttribute` (e.g. with `AssetAttributeSerializer` and `apply_type_template()`) actually correct?**
+  _`AssetAttribute` has 8 INFERRED edges - model-reasoned connections that need verification._
 - **Should `package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.08831908831908832 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10276679841897234 - nodes in this community are weakly interconnected._

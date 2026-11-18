@@ -62,7 +62,8 @@ services:
       context: ./backend
     command: >
       sh -c "python manage.py migrate --noinput
-      && python manage.py bootstrap_config --seed-missing-only"
+      && python manage.py bootstrap_config --seed-missing-only
+      && python manage.py seed_asset_types"
     environment:
       <<: *backend-env
     depends_on:
@@ -123,7 +124,7 @@ services:
     image: oap-backend:local
     build:
       context: ./backend
-    command: ["python", "manage.py", "mqtt_worker"]
+    command: ["python", "manage.py", "connectivity_worker"]
     environment:
       <<: *backend-env
     profiles: ["iot"]

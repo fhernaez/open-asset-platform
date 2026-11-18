@@ -1,5 +1,14 @@
 import { apiFetch } from "../api/client";
-import type { Asset, AssetAttribute, AssetType, Health, Paginated, Project, Tenant } from "../api/types";
+import type {
+  Asset,
+  AssetAttribute,
+  AssetType,
+  Health,
+  Paginated,
+  Project,
+  Tenant,
+  Unit,
+} from "../api/types";
 
 export function health(): Promise<Health> {
   return apiFetch<Health>("/health");
@@ -91,4 +100,37 @@ export function createAttribute(input: CreateAttributeInput): Promise<AssetAttri
     method: "POST",
     body: JSON.stringify({ ...input, history_enabled: input.storage_datapoint }),
   });
+}
+
+export function updateAssetStatus(id: string, status: string): Promise<Asset> {
+  return apiFetch<Asset>(`/assets/assets/${id}/`, {
+    method: "PATCH",
+    body: JSON.stringify({ status }),
+  });
+}
+
+export function deleteAsset(id: string): Promise<void> {
+  return apiFetch<void>(`/assets/assets/${id}/`, { method: "DELETE" });
+}
+
+export function deleteAssetType(id: string): Promise<void> {
+  return apiFetch<void>(`/assets/types/${id}/`, { method: "DELETE" });
+}
+
+export function updateAttribute(
+  id: string,
+  input: Partial<Pick<AssetAttribute, "name" | "code" | "value_type" | "unit" | "storage_datapoint">>,
+): Promise<AssetAttribute> {
+  return apiFetch<AssetAttribute>(`/assets/attributes/${id}/`, {
+    method: "PATCH",
+    body: JSON.stringify(input),
+  });
+}
+
+export function deleteAttribute(id: string): Promise<void> {
+  return apiFetch<void>(`/assets/attributes/${id}/`, { method: "DELETE" });
+}
+
+export function listUnits(): Promise<Paginated<Unit>> {
+  return apiFetch<Paginated<Unit>>("/assets/units/");
 }

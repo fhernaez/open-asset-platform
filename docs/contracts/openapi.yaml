@@ -886,6 +886,486 @@ paths:
               schema:
                 $ref: '#/components/schemas/TokenRefresh'
           description: ''
+  /api/v1/connectivity/bindings/:
+    get:
+      operationId: connectivity_bindings_list
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - connectivity
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGatewayBindingList'
+          description: ''
+    post:
+      operationId: connectivity_bindings_create
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      tags:
+      - connectivity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewayBinding'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GatewayBinding'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GatewayBinding'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayBinding'
+          description: ''
+  /api/v1/connectivity/bindings/{id}/:
+    get:
+      operationId: connectivity_bindings_retrieve
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this gateway binding.
+        required: true
+      tags:
+      - connectivity
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayBinding'
+          description: ''
+    put:
+      operationId: connectivity_bindings_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this gateway binding.
+        required: true
+      tags:
+      - connectivity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewayBinding'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GatewayBinding'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GatewayBinding'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayBinding'
+          description: ''
+    patch:
+      operationId: connectivity_bindings_partial_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this gateway binding.
+        required: true
+      tags:
+      - connectivity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedGatewayBinding'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedGatewayBinding'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedGatewayBinding'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayBinding'
+          description: ''
+    delete:
+      operationId: connectivity_bindings_destroy
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this gateway binding.
+        required: true
+      tags:
+      - connectivity
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/connectivity/gateways/:
+    get:
+      operationId: connectivity_gateways_list
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - connectivity
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGatewayList'
+          description: ''
+    post:
+      operationId: connectivity_gateways_create
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      tags:
+      - connectivity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+          description: ''
+  /api/v1/connectivity/gateways/{id}/:
+    get:
+      operationId: connectivity_gateways_retrieve
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this gateway.
+        required: true
+      tags:
+      - connectivity
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+          description: ''
+    put:
+      operationId: connectivity_gateways_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this gateway.
+        required: true
+      tags:
+      - connectivity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+          description: ''
+    patch:
+      operationId: connectivity_gateways_partial_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this gateway.
+        required: true
+      tags:
+      - connectivity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedGateway'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedGateway'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedGateway'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+          description: ''
+    delete:
+      operationId: connectivity_gateways_destroy
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this gateway.
+        required: true
+      tags:
+      - connectivity
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/connectivity/gateways/{id}/ingest/:
+    post:
+      operationId: connectivity_gateways_ingest_create
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this gateway.
+        required: true
+      tags:
+      - connectivity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Gateway'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+          description: ''
+  /api/v1/connectivity/gateways/{id}/test-connection/:
+    get:
+      operationId: connectivity_gateways_test_connection_retrieve
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this gateway.
+        required: true
+      tags:
+      - connectivity
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+          description: ''
   /api/v1/health:
     get:
       operationId: health_retrieve
@@ -897,1015 +1377,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Health'
-          description: ''
-  /api/v1/mqtt/agents/:
-    get:
-      operationId: mqtt_agents_list
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedMqttAgentList'
-          description: ''
-    post:
-      operationId: mqtt_agents_create
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MqttAgent'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/MqttAgent'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/MqttAgent'
-        required: true
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttAgent'
-          description: ''
-  /api/v1/mqtt/agents/{id}/:
-    get:
-      operationId: mqtt_agents_retrieve
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt agent.
-        required: true
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttAgent'
-          description: ''
-    put:
-      operationId: mqtt_agents_update
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt agent.
-        required: true
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MqttAgent'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/MqttAgent'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/MqttAgent'
-        required: true
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttAgent'
-          description: ''
-    patch:
-      operationId: mqtt_agents_partial_update
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt agent.
-        required: true
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedMqttAgent'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedMqttAgent'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedMqttAgent'
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttAgent'
-          description: ''
-    delete:
-      operationId: mqtt_agents_destroy
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt agent.
-        required: true
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/v1/mqtt/agents/{id}/ingest/:
-    post:
-      operationId: mqtt_agents_ingest_create
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt agent.
-        required: true
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MqttAgent'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/MqttAgent'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/MqttAgent'
-        required: true
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttAgent'
-          description: ''
-  /api/v1/mqtt/agents/{id}/storage-policy/:
-    get:
-      operationId: mqtt_agents_storage_policy_retrieve
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt agent.
-        required: true
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttAgent'
-          description: ''
-    put:
-      operationId: mqtt_agents_storage_policy_update
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt agent.
-        required: true
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MqttAgent'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/MqttAgent'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/MqttAgent'
-        required: true
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttAgent'
-          description: ''
-  /api/v1/mqtt/agents/{id}/test-connection/:
-    get:
-      operationId: mqtt_agents_test_connection_retrieve
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt agent.
-        required: true
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttAgent'
-          description: ''
-  /api/v1/mqtt/bindings/:
-    get:
-      operationId: mqtt_bindings_list
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedMqttBindingList'
-          description: ''
-    post:
-      operationId: mqtt_bindings_create
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MqttBinding'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/MqttBinding'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/MqttBinding'
-        required: true
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttBinding'
-          description: ''
-  /api/v1/mqtt/bindings/{id}/:
-    get:
-      operationId: mqtt_bindings_retrieve
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt binding.
-        required: true
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttBinding'
-          description: ''
-    put:
-      operationId: mqtt_bindings_update
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt binding.
-        required: true
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MqttBinding'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/MqttBinding'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/MqttBinding'
-        required: true
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttBinding'
-          description: ''
-    patch:
-      operationId: mqtt_bindings_partial_update
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt binding.
-        required: true
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedMqttBinding'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedMqttBinding'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedMqttBinding'
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttBinding'
-          description: ''
-    delete:
-      operationId: mqtt_bindings_destroy
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt binding.
-        required: true
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/v1/mqtt/brokers/:
-    get:
-      operationId: mqtt_brokers_list
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedBrokerConnectionList'
-          description: ''
-    post:
-      operationId: mqtt_brokers_create
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BrokerConnection'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/BrokerConnection'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/BrokerConnection'
-        required: true
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BrokerConnection'
-          description: ''
-  /api/v1/mqtt/brokers/{id}/:
-    get:
-      operationId: mqtt_brokers_retrieve
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this broker connection.
-        required: true
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BrokerConnection'
-          description: ''
-    put:
-      operationId: mqtt_brokers_update
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this broker connection.
-        required: true
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BrokerConnection'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/BrokerConnection'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/BrokerConnection'
-        required: true
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BrokerConnection'
-          description: ''
-    patch:
-      operationId: mqtt_brokers_partial_update
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this broker connection.
-        required: true
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedBrokerConnection'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedBrokerConnection'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedBrokerConnection'
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BrokerConnection'
-          description: ''
-    delete:
-      operationId: mqtt_brokers_destroy
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this broker connection.
-        required: true
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/v1/mqtt/discovery/:
-    get:
-      operationId: mqtt_discovery_list
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedMqttDiscoveryTemplateList'
-          description: ''
-    post:
-      operationId: mqtt_discovery_create
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MqttDiscoveryTemplate'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/MqttDiscoveryTemplate'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/MqttDiscoveryTemplate'
-        required: true
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttDiscoveryTemplate'
-          description: ''
-  /api/v1/mqtt/discovery/{id}/:
-    get:
-      operationId: mqtt_discovery_retrieve
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt discovery template.
-        required: true
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttDiscoveryTemplate'
-          description: ''
-    put:
-      operationId: mqtt_discovery_update
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt discovery template.
-        required: true
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MqttDiscoveryTemplate'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/MqttDiscoveryTemplate'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/MqttDiscoveryTemplate'
-        required: true
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttDiscoveryTemplate'
-          description: ''
-    patch:
-      operationId: mqtt_discovery_partial_update
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt discovery template.
-        required: true
-      tags:
-      - mqtt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedMqttDiscoveryTemplate'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedMqttDiscoveryTemplate'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedMqttDiscoveryTemplate'
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttDiscoveryTemplate'
-          description: ''
-    delete:
-      operationId: mqtt_discovery_destroy
-      description: |-
-        ModelViewSet that scopes the queryset to the tenant/project of the caller.
-
-        ``tenant_lookup`` names the attribute used to derive the tenant from the
-        request (e.g. a header or a project header). By default the tenant is read
-        from ``request.tenant`` which is populated by middleware or by the model
-        instance itself for object-level checks.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this mqtt discovery template.
-        required: true
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/v1/mqtt/health/:
-    get:
-      operationId: mqtt_health_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedMqttSubscriptionHealthList'
-          description: ''
-  /api/v1/mqtt/health/{id}/:
-    get:
-      operationId: mqtt_health_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this mqtt subscription health.
-        required: true
-      tags:
-      - mqtt
-      security:
-      - jwtAuth: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MqttSubscriptionHealth'
           description: ''
   /api/v1/platform/audit/:
     get:
@@ -3447,48 +2918,6 @@ components:
       - created_at
       - id
       - resource_type
-    BrokerConnection:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        tenant:
-          type: string
-          format: uuid
-          readOnly: true
-        project:
-          type: string
-          format: uuid
-          readOnly: true
-          nullable: true
-        name:
-          type: string
-          maxLength: 160
-        host:
-          type: string
-          maxLength: 255
-        port:
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-          format: int64
-        tls:
-          type: boolean
-        credentials_secret_ref:
-          type: string
-          maxLength: 255
-        client_id:
-          type: string
-          maxLength: 120
-        acl_scope: {}
-      required:
-      - host
-      - id
-      - name
-      - project
-      - tenant
     ConnectionStatusEnum:
       enum:
       - disconnected
@@ -3499,6 +2928,79 @@ components:
         * `disconnected` - disconnected
         * `connected` - connected
         * `error` - error
+    Gateway:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tenant:
+          type: string
+          format: uuid
+        project:
+          type: string
+          format: uuid
+          nullable: true
+        asset:
+          type: string
+          format: uuid
+        protocol:
+          type: string
+          maxLength: 32
+        config: {}
+        connection_status:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionStatusEnum'
+          readOnly: true
+      required:
+      - asset
+      - connection_status
+      - id
+      - protocol
+    GatewayBinding:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tenant:
+          type: string
+          format: uuid
+        project:
+          type: string
+          format: uuid
+          nullable: true
+        gateway:
+          type: string
+          format: uuid
+        asset:
+          type: string
+          format: uuid
+        attribute:
+          type: string
+          format: uuid
+        address:
+          type: string
+          maxLength: 255
+        mapping:
+          type: string
+          maxLength: 255
+        qos:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        polling:
+          type: string
+          maxLength: 32
+      required:
+      - address
+      - asset
+      - attribute
+      - gateway
+      - id
     Health:
       type: object
       properties:
@@ -3627,157 +3129,6 @@ components:
       - tenant
       - user
       - user_email
-    MqttAgent:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        tenant:
-          type: string
-          format: uuid
-          readOnly: true
-        project:
-          type: string
-          format: uuid
-          readOnly: true
-          nullable: true
-        name:
-          type: string
-          maxLength: 160
-        broker:
-          type: string
-          format: uuid
-        client_id:
-          type: string
-          maxLength: 120
-        subscription_defs: {}
-        storage_policy_defaults: {}
-        connection_status:
-          allOf:
-          - $ref: '#/components/schemas/ConnectionStatusEnum'
-          readOnly: true
-      required:
-      - broker
-      - connection_status
-      - id
-      - name
-      - project
-      - tenant
-    MqttBinding:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        tenant:
-          type: string
-          format: uuid
-          readOnly: true
-        project:
-          type: string
-          format: uuid
-          readOnly: true
-          nullable: true
-        agent:
-          type: string
-          format: uuid
-        asset:
-          type: string
-          format: uuid
-        attribute:
-          type: string
-          format: uuid
-        subscribe_topic:
-          type: string
-          maxLength: 255
-        publish_topic:
-          type: string
-          maxLength: 255
-        json_path:
-          type: string
-          maxLength: 255
-        qos:
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-          format: int64
-        retain_policy:
-          type: string
-          maxLength: 16
-      required:
-      - agent
-      - asset
-      - attribute
-      - id
-      - project
-      - subscribe_topic
-      - tenant
-    MqttDiscoveryTemplate:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        tenant:
-          type: string
-          format: uuid
-          readOnly: true
-        project:
-          type: string
-          format: uuid
-          readOnly: true
-          nullable: true
-        name:
-          type: string
-          maxLength: 160
-        topic_pattern:
-          type: string
-          maxLength: 255
-        device_id_mapping: {}
-        attribute_schema: {}
-        approval_required:
-          type: boolean
-      required:
-      - id
-      - name
-      - project
-      - tenant
-      - topic_pattern
-    MqttSubscriptionHealth:
-      type: object
-      properties:
-        agent:
-          type: string
-          format: uuid
-        connectivity:
-          type: string
-          maxLength: 16
-        received:
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-          format: int64
-        published:
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-          format: int64
-        backpressure:
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-          format: int64
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-      required:
-      - agent
-      - updated_at
     PaginatedAssetAttributeList:
       type: object
       required:
@@ -3870,7 +3221,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AuditLog'
-    PaginatedBrokerConnectionList:
+    PaginatedGatewayBindingList:
       type: object
       required:
       - count
@@ -3892,7 +3243,30 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/BrokerConnection'
+            $ref: '#/components/schemas/GatewayBinding'
+    PaginatedGatewayList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Gateway'
     PaginatedMembershipList:
       type: object
       required:
@@ -3916,98 +3290,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Membership'
-    PaginatedMqttAgentList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/MqttAgent'
-    PaginatedMqttBindingList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/MqttBinding'
-    PaginatedMqttDiscoveryTemplateList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/MqttDiscoveryTemplate'
-    PaginatedMqttSubscriptionHealthList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/MqttSubscriptionHealth'
     PaginatedPlatformSettingList:
       type: object
       required:
@@ -4254,7 +3536,7 @@ components:
           type: string
           format: date-time
           readOnly: true
-    PatchedBrokerConnection:
+    PatchedGateway:
       type: object
       properties:
         id:
@@ -4264,32 +3546,58 @@ components:
         tenant:
           type: string
           format: uuid
-          readOnly: true
         project:
           type: string
           format: uuid
-          readOnly: true
           nullable: true
-        name:
+        asset:
           type: string
-          maxLength: 160
-        host:
+          format: uuid
+        protocol:
+          type: string
+          maxLength: 32
+        config: {}
+        connection_status:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionStatusEnum'
+          readOnly: true
+    PatchedGatewayBinding:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tenant:
+          type: string
+          format: uuid
+        project:
+          type: string
+          format: uuid
+          nullable: true
+        gateway:
+          type: string
+          format: uuid
+        asset:
+          type: string
+          format: uuid
+        attribute:
+          type: string
+          format: uuid
+        address:
           type: string
           maxLength: 255
-        port:
+        mapping:
+          type: string
+          maxLength: 255
+        qos:
           type: integer
           maximum: 9223372036854775807
           minimum: -9223372036854775808
           format: int64
-        tls:
-          type: boolean
-        credentials_secret_ref:
+        polling:
           type: string
-          maxLength: 255
-        client_id:
-          type: string
-          maxLength: 120
-        acl_scope: {}
+          maxLength: 32
     PatchedMembership:
       type: object
       properties:
@@ -4317,105 +3625,6 @@ components:
           type: string
           format: date-time
           readOnly: true
-    PatchedMqttAgent:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        tenant:
-          type: string
-          format: uuid
-          readOnly: true
-        project:
-          type: string
-          format: uuid
-          readOnly: true
-          nullable: true
-        name:
-          type: string
-          maxLength: 160
-        broker:
-          type: string
-          format: uuid
-        client_id:
-          type: string
-          maxLength: 120
-        subscription_defs: {}
-        storage_policy_defaults: {}
-        connection_status:
-          allOf:
-          - $ref: '#/components/schemas/ConnectionStatusEnum'
-          readOnly: true
-    PatchedMqttBinding:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        tenant:
-          type: string
-          format: uuid
-          readOnly: true
-        project:
-          type: string
-          format: uuid
-          readOnly: true
-          nullable: true
-        agent:
-          type: string
-          format: uuid
-        asset:
-          type: string
-          format: uuid
-        attribute:
-          type: string
-          format: uuid
-        subscribe_topic:
-          type: string
-          maxLength: 255
-        publish_topic:
-          type: string
-          maxLength: 255
-        json_path:
-          type: string
-          maxLength: 255
-        qos:
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-          format: int64
-        retain_policy:
-          type: string
-          maxLength: 16
-    PatchedMqttDiscoveryTemplate:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        tenant:
-          type: string
-          format: uuid
-          readOnly: true
-        project:
-          type: string
-          format: uuid
-          readOnly: true
-          nullable: true
-        name:
-          type: string
-          maxLength: 160
-        topic_pattern:
-          type: string
-          maxLength: 255
-        device_id_mapping: {}
-        attribute_schema: {}
-        approval_required:
-          type: boolean
     PatchedPlatformSetting:
       type: object
       properties:

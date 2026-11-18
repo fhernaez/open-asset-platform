@@ -20,7 +20,8 @@ services:
     image: ghcr.io/fhernaez/open-asset-platform/backend:latest
     command: >
       sh -c "python manage.py migrate --noinput
-      && python manage.py bootstrap_config --seed-missing-only"
+      && python manage.py bootstrap_config --seed-missing-only
+      && python manage.py seed_asset_types"
     environment:
       DJANGO_SETTINGS_MODULE: config.settings
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
@@ -85,7 +86,7 @@ services:
 
   telemetry-worker:
     image: ghcr.io/fhernaez/open-asset-platform/backend:latest
-    command: ["python", "manage.py", "mqtt_worker"]
+    command: ["python", "manage.py", "connectivity_worker"]
     environment:
       DJANGO_SETTINGS_MODULE: config.settings
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}

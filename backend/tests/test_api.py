@@ -93,9 +93,7 @@ def test_admin_without_membership_creates_asset(api, tenant, project, platform_a
 
 def test_admin_creates_tenant_and_project(api, platform_admin):
     api.force_authenticate(user=platform_admin)
-    tenant_resp = api.post(
-        "/api/v1/platform/tenants/", {"name": "Hotel Demo", "slug": "hotel-demo"}, format="json"
-    )
+    tenant_resp = api.post("/api/v1/platform/tenants/", {"name": "Hotel Demo", "slug": "hotel-demo"}, format="json")
     assert tenant_resp.status_code == 201, tenant_resp.data
     tenant_id = tenant_resp.data["id"]
     project_resp = api.post(
@@ -115,8 +113,8 @@ def test_asset_type_template_creates_attributes(api, tenant, project, platform_a
         "/api/v1/assets/types/",
         {
             "tenant": str(tenant.id),
-            "name": "Unidad de tratamiento de aire",
-            "code": "ahu",
+            "name": "Unidad de tratamiento de aire custom",
+            "code": "ahu-custom",
             "kind": "standard",
             "schema": {
                 "attributes": [
@@ -144,9 +142,7 @@ def test_asset_type_template_creates_attributes(api, tenant, project, platform_a
     assert asset_resp.status_code == 201, asset_resp.data
     asset_id = asset_resp.data["id"]
 
-    codes = sorted(
-        AssetAttribute.objects.filter(asset_id=asset_id).values_list("code", flat=True)
-    )
+    codes = sorted(AssetAttribute.objects.filter(asset_id=asset_id).values_list("code", flat=True))
     assert codes == ["mode", "temp"]
     temp = AssetAttribute.objects.get(asset_id=asset_id, code="temp")
     assert temp.storage_datapoint is True
@@ -156,7 +152,13 @@ def test_gateway_type_kind(api, tenant, platform_admin):
     api.force_authenticate(user=platform_admin)
     create = api.post(
         "/api/v1/assets/types/",
-        {"tenant": str(tenant.id), "name": "Gateway MQTT", "code": "gateway-mqtt", "kind": "gateway", "schema": {}},
+        {
+            "tenant": str(tenant.id),
+            "name": "Gateway MQTT custom",
+            "code": "gateway-mqtt-custom",
+            "kind": "gateway",
+            "schema": {},
+        },
         format="json",
     )
     assert create.status_code == 201, create.data
@@ -165,3 +167,88 @@ def test_gateway_type_kind(api, tenant, platform_admin):
     assert listing.status_code == 200
     kinds = {r["kind"] for r in listing.data["results"]}
     assert kinds == {"gateway"}
+    assert any(r["code"] == "gateway-mqtt-custom" for r in listing.data["results"])
+
+
+def test_delete_asset_purges_telemetry(api, tenant, project, platform_admin):
+    from django.utils import timezone
+
+    from assets.models import AssetAttribute
+    from telemetry.models import AttributeCurrent, TelemetryPoint
+    from telemetry.storage import ingest_event
+
+    api.force_authenticate(user=platform_admin)
+    asset_resp = api.post(
+        "/api/v1/assets/assets/",
+        {"tenant": str(tenant.id), "project": str(project.id), "name": "Bomba-1", "external_ref": "bomba-1"},
+        format="json",
+    )
+    assert asset_resp.status_code == 201, asset_resp.data
+    asset_id = asset_resp.data["id"]
+    attr = AssetAttribute.objects.create(
+        tenant=tenant,
+        project=project,
+        asset_id=asset_id,
+        name="presion",
+        code="presion",
+        value_type="number",
+        storage_datapoint=True,
+        history_enabled=True,
+    )
+    ingest_event(
+        tenant_id=str(tenant.id),
+        project_id=str(project.id),
+        asset_id=asset_id,
+        attribute_id=str(attr.id),
+        value=42,
+        value_type="number",
+        observed_at=timezone.now(),
+        history_enabled=True,
+    )
+    assert TelemetryPoint.objects.filter(attribute_id=attr.id).count() == 1
+    assert AttributeCurrent.objects.filter(attribute_id=attr.id).exists()
+
+    delete = api.delete(f"/api/v1/assets/assets/{asset_id}/")
+    assert delete.status_code == 204
+    assert TelemetryPoint.objects.filter(attribute_id=attr.id).count() == 0
+    assert not AttributeCurrent.objects.filter(attribute_id=attr.id).exists()
+    assert not AssetAttribute.objects.filter(id=attr.id).exists()
+
+
+def test_delete_type_in_use_conflicts(api, tenant, project, platform_admin):
+    api.force_authenticate(user=platform_admin)
+    type_resp = api.post(
+        "/api/v1/assets/types/",
+        {"tenant": str(tenant.id), "name": "Tipo en uso", "code": "tipo-en-uso", "kind": "standard", "schema": {}},
+        format="json",
+    )
+    assert type_resp.status_code == 201
+    asset_resp = api.post(
+        "/api/v1/assets/assets/",
+        {
+            "tenant": str(tenant.id),
+            "project": str(project.id),
+            "name": "Equipo",
+            "external_ref": "equipo",
+            "asset_type": type_resp.data["id"],
+        },
+        format="json",
+    )
+    assert asset_resp.status_code == 201
+    delete = api.delete(f"/api/v1/assets/types/{type_resp.data['id']}/")
+    assert delete.status_code == 409
+    assert "en uso" in str(delete.data.get("detail", ""))
+
+
+def test_retire_asset_via_patch(api, tenant, project, platform_admin):
+    api.force_authenticate(user=platform_admin)
+    create = api.post(
+        "/api/v1/assets/assets/",
+        {"tenant": str(tenant.id), "project": str(project.id), "name": "Fan-1", "external_ref": "fan-1"},
+        format="json",
+    )
+    assert create.status_code == 201, create.data
+    asset_id = create.data["id"]
+    patch = api.patch(f"/api/v1/assets/assets/{asset_id}/", {"status": "retired"}, format="json")
+    assert patch.status_code == 200, patch.data
+    assert patch.data["status"] == "retired"

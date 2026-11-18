@@ -149,8 +149,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 5422,
-      "sha256": "69134e3142b05e1d66277c798b0907c7247670fb014de22b1c45f53472145eb0"
+      "bytes": 5618,
+      "sha256": "18a5048d7bfa7c58a47af8510f762a5e85c911431a34169be3cb3f5312032e02"
     },
     {
       "path": "CONTEXT.md",
@@ -263,6 +263,11 @@
       "sha256": "a4ddf591577e11397e63725b2a4fe494cdb88f9205e01ca20d5bd7fb5f64add2"
     },
     {
+      "path": "docs/architecture/ADR-016-asset-visuals-i18n.md",
+      "bytes": 2324,
+      "sha256": "fae3f6ec396a5ff0e3dfa77c35ef36de83143fded64705293bacc0ce131726a4"
+    },
+    {
       "path": "docs/architecture/C4_DATAFLOWS.md",
       "bytes": 2058,
       "sha256": "18f8ab4a7ce5fe58fe3f42d8dd88984fb433a2eb4ef396b0966e7c4e243b7fa5"
@@ -291,6 +296,11 @@
       "path": "docs/contracts/ASSET_SEMANTIC_SCHEMA.md",
       "bytes": 1627,
       "sha256": "50a2f4fd94867c523c9dbf8d1fd9192f756ff4e9bbc7eadc2b1acdd1f2daf4dc"
+    },
+    {
+      "path": "docs/contracts/ASSET_TYPE_SCHEMA.md",
+      "bytes": 4210,
+      "sha256": "3b10bd260e16f5e65dd1c74c01ad4c8b581bc7489e03d426a5cb9c9975bcbb43"
     },
     {
       "path": "docs/contracts/CONFIGURATION_SCHEMA.md",
@@ -344,8 +354,8 @@
     },
     {
       "path": "docs/contracts/openapi.yaml",
-      "bytes": 133472,
-      "sha256": "fa623cf97e795ed1aadfffa65f629641a458ab5cafddddb4278cde1a3169a663"
+      "bytes": 110498,
+      "sha256": "1094df78340f3e999a51b03ff422164aaf0db5fed569ec771e8e3e53c611e41f"
     },
     {
       "path": "docs/core/API_REALTIME.md",
@@ -424,13 +434,13 @@
     },
     {
       "path": "docs/evidence/IMPLEMENTATION_STATUS.md",
-      "bytes": 6343,
-      "sha256": "2d60e34b59196f8ff2d6768a8ccb944f12f380b64c1760eee74367879152453d"
+      "bytes": 7334,
+      "sha256": "2bc8d778aa6ddad5ef9bf80b169aa2200bcbf9f7d7f2be0f7ba4e90ac8bbc4b2"
     },
     {
       "path": "docs/evidence/TASK_LOG.md",
-      "bytes": 4337,
-      "sha256": "a62c7e9340c8e2cae9f8d92392e52c1744ff882b2cfcd82485da95f9533a15b7"
+      "bytes": 5968,
+      "sha256": "c27c832ea0a40872b72a93f7bb761c43d7296dbe754db620ed5e6f41c3e15c43"
     },
     {
       "path": "docs/evidence/TEST_EVIDENCE_TEMPLATE.md",
@@ -1034,8 +1044,8 @@
     },
     {
       "path": "docs/requirements/REQUIREMENTS.md",
-      "bytes": 14769,
-      "sha256": "60c420938e63e15458400209c2709670019678951d5e8923f7a1113250f33123"
+      "bytes": 15674,
+      "sha256": "541b66e5c29d738b21131786711d9c3ae66edad9f64eaf1f822f2c84d0c1b919"
     },
     {
       "path": "docs/requirements/SOURCE_TO_FEATURE.md",
@@ -1044,8 +1054,8 @@
     },
     {
       "path": "docs/requirements/TRACEABILITY.md",
-      "bytes": 9230,
-      "sha256": "eb06c8fa0cb7b7a43fcdaf0188167ffcb77485487c15b27a928df2f6ac2c0e11"
+      "bytes": 9811,
+      "sha256": "ca0b7ec6c2880d412ec20df120ece6331b05cbb51d93fafc02d470bceef2c58a"
     },
     {
       "path": "docs/research/CODE_GRAPH_RUNBOOK.md",
@@ -1064,8 +1074,8 @@
     },
     {
       "path": "docs/research/RESEARCH_PATTERNS.md",
-      "bytes": 3615,
-      "sha256": "7d394a2fe50bc467368da3b1903dc7eca6d79951064e228849970d27e8fd70ca"
+      "bytes": 4273,
+      "sha256": "6c4cc866f6efe635c1bac7c2de6d274bb914000eb76ef5c7ee7f555b21cc66ea"
     },
     {
       "path": "docs/research/VERIFIED_PUBLIC_REFERENCES.md",
@@ -1079,8 +1089,8 @@
     },
     {
       "path": "prompts/CONTEXT.md",
-      "bytes": 1861,
-      "sha256": "9337a05aca3afc957095f495492d0a7406e8a13b17c8b6559b5ed07bc85197fb"
+      "bytes": 2285,
+      "sha256": "1b7f4060b572b7017eb31a7bd351a52cabc7e0fd9e3aff2feca526eeba8efe9e"
     },
     {
       "path": "prompts/INITIAL_USER_PROMPT.md",
@@ -1089,8 +1099,8 @@
     },
     {
       "path": "prompts/SYSTEM.md",
-      "bytes": 2849,
-      "sha256": "8fefce0a039ada5cb2e65c3bb3fd7c347067b7ab8bf36cf9812c58a154ae7e1d"
+      "bytes": 3063,
+      "sha256": "316c0e6b53639108c00996814a88e7a6f1fa15eb250611d80939b0159a61c2c0"
     },
     {
       "path": "scripts/check_spec_kit.py",

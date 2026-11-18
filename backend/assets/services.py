@@ -76,3 +76,43 @@ def apply_type_template(asset) -> list:
             )
         )
     return created
+
+
+def seed_catalog_for_tenant(tenant) -> dict:
+    """Seed built-in asset types for a tenant (seed-once; never overwrite edits)."""
+    from assets.models import AssetType, Unit
+    from assets.types_catalog.manifests import MANIFESTS
+    from assets.types_catalog.validate import validate_manifest
+
+    created_types = 0
+    created_units = 0
+    for manifest in MANIFESTS:
+        errors = validate_manifest(manifest)
+        if errors:
+            raise ValueError(f"invalid manifest {manifest.get('code')}: {errors}")
+        for attribute in manifest.get("attributes", []):
+            symbol = attribute.get("unit")
+            if symbol and not Unit.objects.filter(symbol=symbol).exists():
+                Unit.objects.create(symbol=symbol, name=symbol, quantity="")
+                created_units += 1
+        schema = {
+            "attributes": manifest.get("attributes", []),
+        }
+        if manifest.get("connection_schema"):
+            schema["connection_schema"] = manifest["connection_schema"]
+        labels = manifest.get("label_i18n") or {}
+        descriptions = manifest.get("description_i18n") or {}
+        icon = manifest.get("icon", "")
+        _, created = AssetType.objects.get_or_create(
+            tenant=tenant,
+            code=manifest["code"],
+            defaults={
+                "name": str(labels.get("es") or manifest["code"])[:200],
+                "kind": manifest.get("kind", "standard"),
+                "description": str(descriptions.get("es", ""))[:500],
+                "schema": {**schema, "icon": icon},
+            },
+        )
+        if created:
+            created_types += 1
+    return {"types_created": created_types, "units_created": created_units}

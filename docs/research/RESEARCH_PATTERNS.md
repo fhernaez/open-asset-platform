@@ -23,6 +23,8 @@ Fuentes: ThingsBoard, EdgeX (compose + device services), Node-RED, Grafana, más
 
 ## 4. Otros patrones relevantes
 
+- **Representación visual de activos (3 capas):** OpenRemote `ui/component/or-icon` (icono por tipo de activo en el árbol), ThingsBoard (icono de tipo + imagen de entidad usada en el widget de mapa por imagen), Node-RED (icono SVG por tipo de nodo). Color/badge por estado es ubicuo (alarmas/estado). → OAP: icono por tipología + imagen por activo + estado derivado (ADR-016).
+- **Tipologías por código:** Node-RED (nodos custom como paquetes de código) y ThingsBoard (solution templates/devices profiles) convergen en "definición declarativa versionada + catálogo semilla". → OAP: manifiestos `ASSET_TYPE_SCHEMA` + `seed_asset_types` (ADR-016).
 - **ThingsBoard Alarm/RuleChain:** alarmas con severidad + acknowledge y reglas en cadena (equivalente OAP-RUL).
 - **ThingsBoard Entity relations / EdgeX profiles:** metadatos y relaciones entre entidades (equivalente OAP-ASS relaciones y designaciones).
 - **Node-RED:** catálogo core verificado (mqtt, httpin/request, websocket, tcpin, udp, tls, parsers); Modbus/OPC-UA/BACnet son nodos comunitarios, no core → OAP-NRD import/export debe prever nodos comunitarios vía mapping documentado.

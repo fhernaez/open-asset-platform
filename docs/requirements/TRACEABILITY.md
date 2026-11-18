@@ -23,7 +23,10 @@ Regenerada 2026-11-17 tras la reestructuración de `REQUIREMENTS.md`. Estados ho
 | OAP-PLT-008 | identity | G7 | docs/core/IDENTITY_AUTHZ.md | — | SPECIFIED |
 | OAP-PLT-009 | telemetry | G6 | docs/core/TELEMETRY_POLICY.md | — | SPECIFIED |
 | OAP-PLT-010 | identity | G9 | docs/core/IDENTITY_AUTHZ.md | — | SPECIFIED |
-| OAP-PLT-011 | frontend | G2 | docs/architecture/ADR-016 | frontend/src/i18n/ | PARTIAL (es/en + locale por org) |
+| OAP-PLT-011 | frontend | G2 | docs/architecture/ADR-016 | frontend/src/i18n/ + config.js | PARTIAL (resolución user→org→env) |
+| OAP-PLT-012 | identity | G2 | docs/core/IDENTITY_AUTHZ.md | platforms/views.py | SPECIFIED |
+| OAP-ASS-008 | assets | G2 | docs/architecture/ADR-014 | assets/views.py | SPECIFIED |
+| OAP-OPS-010 | infra | G2 | docs/architecture/ADR-014 | platforms/management/ | SPECIFIED |
 | OAP-ASS-001 | assets | G2 | docs/core/ASSET_REGISTRY.md | assets/models.py | PARTIAL (unit) |
 | OAP-ASS-002 | assets | G2 | docs/core/ASSET_REGISTRY.md | assets/models.py | PARTIAL (unit) |
 | OAP-ASS-003 | mqtt | G4 | docs/plugins/mqtt/SPEC.md | mqtt/models.py | PARTIAL |

@@ -14,7 +14,8 @@ La representación gráfica de los activos es estructural: será central en dash
    - Rendering de **estado** derivado (color/badge por status/alarma) para overlays.
 2. **i18n estructural:**
    - UI con react-i18next + locales de Ant Design; idiomas base **es/en**.
-   - Locale por organización (config persistente) con override por usuario (P2).
+   - **Resolución de locale**: `User.locale` (si está definido) → `Tenant.locale` → **`OAP_DEFAULT_LOCALE`** (variable de entorno del SERVICIO frontend; default `es`). El contenedor nginx genera `/config.js` con `window.__OAP_CONFIG__` vía envsubst en el arranque y el bundle lo lee antes de inicializar i18n.
+   - **Resolución de timezone** (formateo de timestamps en UI; el backend sigue en UTC): `User.timezone` → `Tenant.timezone` → `OAP_DEFAULT_TIMEZONE` (default `America/Argentina/Buenos_Aires`).
    - Manifiestos de tipología (y catálogo semilla) declaran `label_i18n`/`description_i18n` (mínimo es/en); los schemas de conexión también (`label_i18n` por campo).
    - Los datos de usuario (nombres de activos, proyectos, org) NO se traducen.
 3. **Convergencia con el editor visual:** el futuro editor gráfico de tipologías (G9) genera el MISMO `ASSET_TYPE_SCHEMA`; no existe segundo formato. La comunidad puede aportar tipos por manifiestos de código o, a futuro, por export/import de bundles.

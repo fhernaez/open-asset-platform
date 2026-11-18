@@ -1,0 +1,4 @@
+window.__OAP_CONFIG__ = {
+  defaultLocale: "${OAP_DEFAULT_LOCALE}",
+  defaultTimezone: "${OAP_DEFAULT_TIMEZONE}",
+};

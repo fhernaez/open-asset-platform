@@ -4,6 +4,7 @@ export interface Tenant {
   slug: string;
   is_active: boolean;
   locale?: string;
+  timezone?: string;
 }
 
 export interface Unit {
@@ -156,6 +157,8 @@ export interface Me {
   email: string;
   full_name: string;
   is_platform_admin: boolean;
+  locale?: string;
+  timezone?: string;
 }
 
 export interface Health {

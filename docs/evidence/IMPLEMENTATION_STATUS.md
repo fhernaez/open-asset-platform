@@ -26,6 +26,16 @@ Actualizado: 2026-11-17 (UTC). Código construido: backend Django/DRF (core, pla
 
 Adapters Modbus (P1) y OPC-UA/BACnet/SNMP/CAN (P2, SPECIFIED) → Reglas (G7) → CMMS (G5) → Integraciones/IA (G8) → G9. Validación real en el server del usuario.
 
+## C3 — Idioma/timezone, usuarios, proyectos, MapConfig (2026-11-18)
+
+- **Idioma/timezone**: resolución `User.locale/timezone` → `Tenant.locale/timezone` → `OAP_DEFAULT_LOCALE`/`OAP_DEFAULT_TIMEZONE` (env del servicio frontend servidas por `/config.js` con envsubst); formateo de timestamps con dayjs timezone.
+- **Usuarios**: CRUD completo en Administración (crear con contraseña inicial + org/rol, editar idioma/timezone, activar/desactivar — nunca hard-delete).
+- **Proyectos**: CRUD en Administración + comando `manage.py purge_project --code <código> [--yes]` (dry-run con conteos, borrado en orden de dependencias).
+- **Mapas**: `ProjectMapConfig` con bounds dibujando un rectángulo sobre MapLibre+OSM; ubicación geográfica (lat/lng) o relativa (escena+capa+x/y); widget de mapa en dashboards.
+- **Identificadores**: campo unificado "Código" con auto-sugerencia desde el nombre en todos los formularios; fix del selector de proyectos (opciones {value,label}).
+- **Activos**: tipologías gateway ocultas del alta común (hint) + asociación opcional a un gateway (binding device automático).
+- Verificación: **59 pytest PASS**, ruff limpio, `npm lint/typecheck/test/build` PASS, OpenAPI 0 errores, spec kit PASS, compose OK.
+
 ## Resumen por gate
 
 | Gate | Estado | Evidencia |

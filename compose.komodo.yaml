@@ -108,6 +108,9 @@ services:
 
   frontend:
     image: ghcr.io/fhernaez/open-asset-platform/frontend:latest
+    environment:
+      OAP_DEFAULT_LOCALE: ${OAP_DEFAULT_LOCALE:-es}
+      OAP_DEFAULT_TIMEZONE: ${OAP_DEFAULT_TIMEZONE:-America/Argentina/Buenos_Aires}
     ports:
       - "${HTTP_PORT:-8080}:80"
     depends_on:

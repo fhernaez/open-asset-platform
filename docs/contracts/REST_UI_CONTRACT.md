@@ -7,8 +7,10 @@ Reglas vinculantes adicionales (2026-11-18):
 - **DELETE responde 204 sin body**: el cliente debe manejar respuestas sin cuerpo (no parsear JSON en 204/empty).
 - Sanitización de entradas técnicas (direcciones/topics): el backend elimina caracteres de control (`\x00`–`\x1f`) y recorta espacios.
 - Media: imágenes de escenas GIS vía multipart; se sirven por `/media/` (nginx → api).
-- i18n: locale desde `Tenant.locale` (default `es`); menú y pantallas usan las mismas claves i18n es/en.
+- i18n: resolución de locale usuario → organización → `OAP_DEFAULT_LOCALE` (env del servicio frontend); timezone idem (`OAP_DEFAULT_TIMEZONE`). El contenedor frontend sirve `/config.js` (window.__OAP_CONFIG__) generado por envsubst.
+- Identificadores únicos: todos los campos de tipo slug/code/external_ref se presentan como **"Código"** con el mismo helper y se auto-sugieren desde el nombre (slug minúsculas/guiones); si el usuario lo edita manualmente, no se pisa.
 - Alta de gateways: `POST /assets/assets/` con `gateway_config` crea Asset+Gateway atómicamente y devuelve `gateway_id`; `test-connection` intenta conexión REAL (MQTT) o responde `not_implemented`.
+- Asociación activo→gateway: `POST /assets/assets/` acepta `gateway_id` opcional → crea binding `device` en la misma transacción.
 
 ## Seguridad
 Auth principal local/Keycloak OIDC; CSRF para cookies, CORS allowlist, JWT audience+issuer para bearer; roles/tenant/project/object permission en cada endpoint. No exponer full table scans ni campos sensibles en list view. WebSocket/SSE los mismos filtros autorizados; cache invalidación según revocación.

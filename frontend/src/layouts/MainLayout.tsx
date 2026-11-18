@@ -8,6 +8,7 @@ import { createProject, createTenant, listProjects } from "../api/endpoints";
 import { useAuth } from "../auth/AuthProvider";
 import { useAppContext } from "../contexts/AppContext";
 import { SCREENS } from "../features/flags";
+import { slugify } from "../utils/slugify";
 
 const { Header, Sider, Content } = Layout;
 
@@ -106,15 +107,15 @@ export default function MainLayout() {
             <Button icon={<PlusOutlined />} onClick={() => setTenantModalOpen(true)}>
               {t("org.create")}
             </Button>
-            <Select
-              style={{ minWidth: 200 }}
-              placeholder={t("common.project")}
-              disabled={!tenantId}
-              value={projectId}
-              allowClear
-              onChange={(value) => setProjectId(value)}
-              options={projects}
-            />
+        <Select
+          style={{ minWidth: 200 }}
+          placeholder={t("common.project")}
+          disabled={!tenantId}
+          value={projectId}
+          allowClear
+          onChange={(value) => setProjectId(value)}
+          options={projects.map((p) => ({ value: p.id, label: p.name }))}
+        />
             <Button icon={<PlusOutlined />} disabled={!tenantId} onClick={() => setProjectModalOpen(true)}>
               {t("project.create")}
             </Button>
@@ -162,12 +163,22 @@ export default function MainLayout() {
         <Form
           form={tenantForm}
           layout="vertical"
+          onValuesChange={(changed, values) => {
+            if ("name" in changed && typeof values.name === "string") {
+              tenantForm.setFieldValue("slug", slugify(values.name));
+            }
+          }}
           onFinish={(values: { name: string; slug: string }) => tenantMutation.mutate(values)}
         >
           <Form.Item name="name" label={t("org.name")} rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name="slug" label={t("org.slug")} rules={[{ required: true, pattern: /^[a-z0-9-]+$/ }]}>
+          <Form.Item
+            name="slug"
+            label={t("common.code")}
+            rules={[{ required: true, pattern: /^[a-z0-9-]+$/ }]}
+            extra={t("common.codeHelp")}
+          >
             <Input />
           </Form.Item>
         </Form>
@@ -183,6 +194,11 @@ export default function MainLayout() {
         <Form
           form={projectForm}
           layout="vertical"
+          onValuesChange={(changed, values) => {
+            if ("name" in changed && typeof values.name === "string") {
+              projectForm.setFieldValue("code", slugify(values.name));
+            }
+          }}
           onFinish={(values: { name: string; code: string }) => {
             if (!tenantId) return;
             projectMutation.mutate({ tenant: tenantId, ...values });
@@ -191,7 +207,12 @@ export default function MainLayout() {
           <Form.Item name="name" label={t("assets.name")} rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name="code" label={t("project.code")} rules={[{ required: true, pattern: /^[a-z0-9-]+$/ }]}>
+          <Form.Item
+            name="code"
+            label={t("common.code")}
+            rules={[{ required: true, pattern: /^[a-z0-9-]+$/ }]}
+            extra={t("common.codeHelp")}
+          >
             <Input />
           </Form.Item>
         </Form>

@@ -36,6 +36,10 @@ export function listProjects(tenantId: string): Promise<Paginated<Project>> {
   return apiFetch<Paginated<Project>>(`/platform/projects/?tenant=${tenantId}`);
 }
 
+export function deleteProject(id: string): Promise<void> {
+  return apiFetch<void>(`/platform/projects/${id}/`, { method: "DELETE" });
+}
+
 export function createProject(input: { tenant: string; name: string; code: string }): Promise<Project> {
   return apiFetch<Project>("/platform/projects/", {
     method: "POST",
@@ -50,6 +54,7 @@ export interface CreateAssetInput {
   external_ref: string;
   asset_type?: string | null;
   gateway_config?: Record<string, unknown>;
+  gateway_id?: string;
 }
 
 export interface CreateAssetTypeInput {
@@ -270,7 +275,9 @@ export function testGatewayConnection(id: string): Promise<{ gateway_id: string;
   return apiFetch(`/connectivity/gateways/${id}/test-connection/`, { method: "POST" });
 }
 
-export function listUsers(): Promise<Paginated<{ id: string; email: string; full_name: string; is_platform_admin: boolean }>> {
+export function listUsers(): Promise<
+  Paginated<{ id: string; email: string; full_name: string; is_platform_admin: boolean; is_active: boolean; locale?: string; timezone?: string }>
+> {
   return apiFetch("/platform/users/");
 }
 
@@ -380,4 +387,28 @@ export function createPlacement(input: { scene: string; layer: string | null; as
 
 export function deletePlacement(id: string): Promise<void> {
   return apiFetch(`/spatial/placements/${id}/`, { method: "DELETE" });
+}
+
+export interface MapBounds {
+  north: number | null;
+  south: number | null;
+  east: number | null;
+  west: number | null;
+}
+
+export interface ProjectMapConfig {
+  project_id: string;
+  provider: string;
+  bounds: MapBounds;
+}
+
+export function getMapConfig(projectId: string): Promise<ProjectMapConfig> {
+  return apiFetch(`/spatial/projects/${projectId}/map-config/`);
+}
+
+export function putMapConfig(projectId: string, bounds: MapBounds): Promise<ProjectMapConfig> {
+  return apiFetch(`/spatial/projects/${projectId}/map-config/`, {
+    method: "PUT",
+    body: JSON.stringify({ bounds }),
+  });
 }

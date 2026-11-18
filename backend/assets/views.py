@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import logging
+
 from django.db import transaction
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
@@ -16,6 +18,8 @@ from core.errors import ConflictError, ValidationError
 from core.permissions import TenantScopedPermission
 from core.viewsets import TenantScopedViewSet
 from platforms.services import AuditService, require_membership
+
+logger = logging.getLogger(__name__)
 
 
 class UnitViewSet(TenantScopedViewSet):
@@ -123,7 +127,7 @@ class AssetViewSet(TenantScopedViewSet):
 
     def perform_create(self, serializer):
         from assets.services import apply_type_template
-        from connectivity.models import Gateway
+        from connectivity.models import Gateway, GatewayBinding
         from connectivity.services import validate_gateway_config
 
         tenant = self._resolve_tenant(serializer.validated_data)
@@ -146,16 +150,37 @@ class AssetViewSet(TenantScopedViewSet):
                 else:
                     config.pop("protocol", None)
                     protocol = code.removeprefix("gateway-") if code.startswith("gateway-") else "mqtt"
-                gateway = Gateway.objects.create(
+                try:
+                    gateway = Gateway.objects.create(
+                        tenant=tenant,
+                        project=project,
+                        asset=asset,
+                        protocol=protocol,
+                        config=config,
+                    )
+                    errors = validate_gateway_config(gateway)
+                    if errors:
+                        raise ValidationError("; ".join(errors))
+                except ValidationError:
+                    raise
+                except Exception:
+                    # Fail closed with a visible log; the transaction rolls back.
+                    logger.exception("failed to create gateway for asset %s", asset.id)
+                    raise
+            gateway_id = self.request.data.get("gateway_id")
+            if gateway_id and gateway is None:
+                try:
+                    target = Gateway.objects.get(id=gateway_id, tenant_id=tenant.id)
+                except Gateway.DoesNotExist:
+                    raise ValidationError("gateway_id does not exist in this tenant.") from None
+                GatewayBinding.objects.create(
                     tenant=tenant,
                     project=project,
+                    gateway=target,
+                    binding_type="device",
                     asset=asset,
-                    protocol=protocol,
-                    config=config,
+                    address=str(asset.external_ref or asset.id),
                 )
-                errors = validate_gateway_config(gateway)
-                if errors:
-                    raise ValidationError("; ".join(errors))
             AuditService.record(
                 actor=self.request.user,
                 action="asset.create",

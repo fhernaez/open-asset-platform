@@ -1,15 +1,81 @@
 from __future__ import annotations
 
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema
 from rest_framework import parsers, status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from core.permissions import TenantScopedPermission
 from core.viewsets import TenantScopedViewSet
 from platforms.services import require_membership
-from spatial.models import Scene, SceneLayer, ScenePlacement
+from spatial.models import ProjectMapConfig, Scene, SceneLayer, ScenePlacement
 from spatial.serializers import SceneLayerSerializer, ScenePlacementSerializer, SceneSerializer
+
+
+class ProjectMapConfigView(APIView):
+    """GET/PUT the geo map config (bounds) for a project."""
+
+    permission_classes = [IsAuthenticated, TenantScopedPermission]
+    permission_required = "assets.view"
+
+    @extend_schema(responses={"200": OpenApiTypes.OBJECT})
+    def get(self, request, project_id):
+        from platforms.models import Project
+
+        project = Project.objects.filter(id=project_id).first()
+        if project is None:
+            return Response({"detail": "project not found."}, status=404)
+        config, _ = ProjectMapConfig.objects.get_or_create(
+            tenant=project.tenant,
+            project=project,
+            defaults={"provider": "maplibre"},
+        )
+        return Response(
+            {
+                "project_id": str(project.id),
+                "provider": config.provider,
+                "bounds": {
+                    "north": config.north,
+                    "south": config.south,
+                    "east": config.east,
+                    "west": config.west,
+                },
+            }
+        )
+
+    @extend_schema(request=OpenApiTypes.OBJECT, responses={"200": OpenApiTypes.OBJECT})
+    def put(self, request, project_id):
+        from platforms.models import Project
+
+        project = Project.objects.filter(id=project_id).first()
+        if project is None:
+            return Response({"detail": "project not found."}, status=404)
+        bounds = request.data.get("bounds") or {}
+        config, _ = ProjectMapConfig.objects.get_or_create(
+            tenant=project.tenant,
+            project=project,
+            defaults={"provider": request.data.get("provider", "maplibre")},
+        )
+        config.north = bounds.get("north")
+        config.south = bounds.get("south")
+        config.east = bounds.get("east")
+        config.west = bounds.get("west")
+        config.save(update_fields=["north", "south", "east", "west"])
+        return Response(
+            {
+                "project_id": str(project.id),
+                "provider": config.provider,
+                "bounds": {
+                    "north": config.north,
+                    "south": config.south,
+                    "east": config.east,
+                    "west": config.west,
+                },
+            }
+        )
 
 
 class SceneViewSet(TenantScopedViewSet):

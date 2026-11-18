@@ -12,6 +12,27 @@ def scene_image_path(instance, filename: str) -> str:
     return f"scenes/{scene.tenant_id}/{scene.id}/{filename}"
 
 
+class ProjectMapConfig(TenantScopedModel):
+    """Geo map configuration for a project (ADR-015 v2).
+
+    Bounds define the rectangle where assets are located; the user draws it by
+    navigating the global map (MapLibre + OpenStreetMap, free).
+    """
+
+    provider = models.CharField(max_length=32, default="maplibre")
+    north = models.FloatField(null=True, blank=True)
+    south = models.FloatField(null=True, blank=True)
+    east = models.FloatField(null=True, blank=True)
+    west = models.FloatField(null=True, blank=True)
+
+    class Meta:
+        db_table = "spatial_projectmapconfig"
+        unique_together = [("tenant", "project")]
+
+    def __str__(self) -> str:
+        return f"map-config:{self.project_id}"
+
+
 class Scene(TenantScopedModel):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, default="")

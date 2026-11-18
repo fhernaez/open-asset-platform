@@ -5,7 +5,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
 from core.permissions import TenantScopedPermission
-from core.serializers import UserSerializer
+from core.serializers import UserCreateSerializer, UserSerializer
 from core.viewsets import TenantScopedViewSet
 from platforms.models import AuditLog, Membership, PlatformSetting, Project, Tenant
 from platforms.serializers import (
@@ -110,10 +110,43 @@ class PlatformSettingViewSet(TenantScopedViewSet):
     queryset = PlatformSetting.objects.all()
 
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    """Read-only user directory for the Administración screen (platform admin)."""
+class UserViewSet(viewsets.ModelViewSet):
+    """User directory for the Administración screen (platform admin only)."""
 
-    serializer_class = UserSerializer
     permission_classes = [IsAuthenticated, TenantScopedPermission]
     permission_required = "platform.manage"
     queryset = get_user_model().objects.all().order_by("email")
+
+    def get_serializer_class(self):
+        if self.action == "create":
+            return UserCreateSerializer
+        return UserSerializer
+
+    def perform_create(self, serializer):
+        user = serializer.save()
+        AuditService.record(
+            actor=self.request.user,
+            action="user.create",
+            resource_type="user",
+            resource_id=str(user.id),
+        )
+
+    def perform_update(self, serializer):
+        serializer.save()
+        AuditService.record(
+            actor=self.request.user,
+            action="user.update",
+            resource_type="user",
+            resource_id=str(serializer.instance.id),
+        )
+
+    def perform_destroy(self, instance):
+        # Users are deactivated, never hard-deleted (audit/history integrity).
+        instance.is_active = False
+        instance.save(update_fields=["is_active"])
+        AuditService.record(
+            actor=self.request.user,
+            action="user.deactivate",
+            resource_type="user",
+            resource_id=str(instance.id),
+        )

@@ -92,3 +92,35 @@ def test_users_readonly(api, platform_admin):
     assert listing.status_code == 200
     emails = {u["email"] for u in listing.data["results"]}
     assert "admin@example.com" in emails
+
+
+def test_map_config_bounds(api, tenant, project, platform_admin):
+    api.force_authenticate(user=platform_admin)
+    put = api.put(
+        f"/api/v1/spatial/projects/{project.id}/map-config/",
+        {"bounds": {"north": -34.5, "south": -34.7, "east": -58.3, "west": -58.5}},
+        format="json",
+    )
+    assert put.status_code == 200, put.data
+    assert put.data["bounds"]["north"] == -34.5
+
+    get = api.get(f"/api/v1/spatial/projects/{project.id}/map-config/")
+    assert get.status_code == 200
+    assert get.data["bounds"]["west"] == -58.5
+
+
+def test_purge_project_dry_run(tenant, project, platform_admin):
+    from io import StringIO
+
+    from django.core.management import call_command
+
+    from assets.models import Asset
+
+    Asset.objects.create(tenant=tenant, project=project, name="X", external_ref="x")
+    out = StringIO()
+    call_command("purge_project", code=project.code, stdout=out)
+    assert "DRY RUN" in out.getvalue()
+    assert Asset.objects.filter(project=project).count() == 1
+
+    call_command("purge_project", code=project.code, yes=True, stdout=out)
+    assert Asset.objects.filter(project=project).count() == 0

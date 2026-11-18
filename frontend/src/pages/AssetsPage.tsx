@@ -41,12 +41,14 @@ import {
   listAssets,
   listAssetTypes,
   listAttributes,
+  listGateways,
   listUnits,
   updateAssetStatus,
   updateAttribute,
 } from "../api/endpoints";
 import type { Asset, AssetType } from "../api/types";
 import { useAppContext } from "../contexts/AppContext";
+import { slugify } from "../utils/slugify";
 
 const VALUE_TYPES = [
   { value: "number", label: "number" },
@@ -55,14 +57,6 @@ const VALUE_TYPES = [
   { value: "json", label: "json" },
 ];
 
-function slugify(value: string): string {
-  return value
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
 
 const TYPE_ICONS: Record<string, React.ReactNode> = {
   building: <HomeOutlined />,
@@ -113,14 +107,19 @@ function AssetsTab() {
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [createForm] = Form.useForm();
   const [attrForm] = Form.useForm();
-  const [gatewaySchema, setGatewaySchema] = useState<Record<string, unknown>[]>([]);
-  const [gatewayTypeId, setGatewayTypeId] = useState<string | undefined>();
 
   const assetTypes = useQuery({
     queryKey: ["asset-types", tenantId],
     queryFn: () => listAssetTypes({ tenant: tenantId }),
     enabled: Boolean(tenantId),
   });
+  const gateways = useQuery({
+    queryKey: ["gateways", tenantId],
+    queryFn: () => listGateways({ tenant: tenantId }),
+    enabled: Boolean(tenantId),
+  });
+  // Gateways are created from Conectividad (ADR-014 v2): hidden from the common asset creation flow.
+  const commonTypes = (assetTypes.data?.results ?? []).filter((item) => item.kind !== "gateway");
   const assets = useQuery({
     queryKey: ["assets", tenantId, projectId],
     queryFn: () => listAssets({ tenant: tenantId, project: projectId ?? undefined }),
@@ -135,8 +134,6 @@ function AssetsTab() {
       message.success(t("assets.createSuccess"));
       setCreateOpen(false);
       createForm.resetFields();
-      setGatewaySchema([]);
-      setGatewayTypeId(undefined);
       invalidate();
     },
     onError: (err) => message.error(err instanceof Error ? err.message : t("assets.createError")),
@@ -157,19 +154,11 @@ function AssetsTab() {
     onError: (err) => message.error(err instanceof Error ? err.message : "Error"),
   });
 
-  function onTypeChange(typeId: string | undefined) {
-    setGatewayTypeId(typeId);
-    const type = (assetTypes.data?.results ?? []).find((item) => item.id === typeId);
-    const schema = type?.kind === "gateway" ? ((type.schema as Record<string, unknown>).connection_schema as Record<string, unknown>[]) ?? [] : [];
-    setGatewaySchema(schema);
-    createForm.setFieldValue("gateway_config", undefined);
-  }
-
   function onCreate(values: {
     name: string;
     external_ref: string;
     asset_type?: string;
-    gateway_config?: Record<string, unknown>;
+    gateway_id?: string;
   }) {
     if (!tenantId) return;
     createMutation.mutate({
@@ -178,7 +167,7 @@ function AssetsTab() {
       name: values.name,
       external_ref: values.external_ref,
       asset_type: values.asset_type ?? null,
-      gateway_config: values.gateway_config,
+      gateway_id: values.gateway_id,
     } as Parameters<typeof createAsset>[0]);
   }
 
@@ -260,63 +249,52 @@ function AssetsTab() {
         onOk={() => createForm.submit()}
         confirmLoading={createMutation.isPending}
       >
-        <Form form={createForm} layout="vertical" onFinish={onCreate}>
+        <Form
+          form={createForm}
+          layout="vertical"
+          onValuesChange={(changed, values) => {
+            if ("name" in changed && typeof values.name === "string") {
+              createForm.setFieldValue("external_ref", slugify(values.name));
+            }
+          }}
+          onFinish={onCreate}
+        >
           <Form.Item name="name" label={t("assets.name")} rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name="external_ref" label={t("assets.reference")} rules={[{ required: true }]}>
+          <Form.Item
+            name="external_ref"
+            label={t("common.code")}
+            rules={[{ required: true, pattern: /^[a-z0-9-]+$/ }]}
+            extra={t("common.codeHelp")}
+          >
             <Input />
           </Form.Item>
           <Form.Item name="asset_type" label={t("assets.types")}>
             <Select
               allowClear
               placeholder={t("assets.types")}
-              onChange={onTypeChange}
-              options={(assetTypes.data?.results ?? []).map((item) => ({
+              options={commonTypes.map((item) => ({
                 value: item.id,
-                label: item.kind === "gateway" ? `${item.name} (${t("types.kind.gateway")})` : item.name,
+                label: item.name,
+              }))}
+              notFoundContent={t("assets.noStandardTypes")}
+            />
+          </Form.Item>
+          <Form.Item
+            name="gateway_id"
+            label={t("conn.gatewayOptional")}
+            extra={t("conn.gatewayOptionalHelp")}
+          >
+            <Select
+              allowClear
+              placeholder={t("conn.selectGateway")}
+              options={(gateways.data?.results ?? []).map((g) => ({
+                value: g.id,
+                label: `${g.asset_name} (${g.protocol})`,
               }))}
             />
           </Form.Item>
-          {gatewayTypeId && gatewaySchema.length > 0 && (
-            <>
-              <Typography.Text strong>Configuración de conexión</Typography.Text>
-              {gatewaySchema.map((field) => {
-                const f = field as Record<string, unknown>;
-                const fname = f.field as string;
-                const ftype = f.type as string;
-                const label = ((f.label_i18n as Record<string, string>) ?? {})["es"] ?? fname;
-                const required = Boolean(f.required);
-                const rules = required ? [{ required: true }] : [];
-                if (ftype === "bool") {
-                  return (
-                    <Form.Item key={fname} name={["gateway_config", fname]} label={label} valuePropName="checked" rules={rules}>
-                      <Checkbox />
-                    </Form.Item>
-                  );
-                }
-                if (ftype === "select") {
-                  const options = (f.options as { value: string }[] | undefined) ?? [];
-                  return (
-                    <Form.Item key={fname} name={["gateway_config", fname]} label={label} rules={rules} initialValue={f.default as string | undefined}>
-                      <Select options={options.map((o) => ({ value: o.value, label: o.value }))} />
-                    </Form.Item>
-                  );
-                }
-                const isSecret = ftype === "secret";
-                const isInt = ftype === "int";
-                return (
-                  <Form.Item key={fname} name={["gateway_config", fname]} label={label} rules={rules} initialValue={f.default as string | number | undefined}>
-                    {isSecret ? (
-                      <Input.Password />
-                    ) : (
-                      <Input type={isInt ? "number" : "text"} />
-                    )}
-                  </Form.Item>
-                );
-              })}
-            </>
-          )}
         </Form>
       </Modal>
 

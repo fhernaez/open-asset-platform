@@ -61,6 +61,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_platform_admin = models.BooleanField(default=False)
+    # Locale/timezone overrides (blank = inherit organization -> service env default).
+    locale = models.CharField(max_length=16, blank=True, default="")
+    timezone = models.CharField(max_length=64, blank=True, default="")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

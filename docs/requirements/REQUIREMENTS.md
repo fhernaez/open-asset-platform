@@ -21,6 +21,7 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 | OAP-OPS-007 | Backup/restore y upgrade comprobados con smoke real | G9 | NR |
 | OAP-OPS-008 | Visor de logs del sistema con redacción de secretos | G7 | VS (OpenRemote `syslog` + page-logs) |
 | OAP-OPS-009 | Base PostgreSQL plano + PostGIS (sin hypertables); TimescaleDB diferido (ADR-013) | G1 | NR |
+| OAP-OPS-010 | Comando `purge_project --code <código> [--yes]` con `--dry-run`: borrado de todo lo vinculado a un proyecto en orden de dependencias sin errores en cascada | G2 | NR |
 
 ## OAP-PLT — Platform e Identity
 
@@ -36,7 +37,8 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 | OAP-PLT-008 | Realms/organizaciones con invitación y dominios | G7 | VS (OpenRemote page-realms) |
 | OAP-PLT-009 | Export de datos (datapoints, activos) | G6 | VS (OpenRemote DatapointExportFormat + page-export; Atlas ExportController) |
 | OAP-PLT-010 | OIDC/SSO opcional (implementación original; SSO/LDAP de Atlas es comercial) | G9 | CU (Atlas) / NR (diseño propio) |
-| OAP-PLT-011 | i18n estructural: UI es/en, locale por organización con override por usuario, manifiestos multilingües | G2 | NR (ADR-016) |
+| OAP-PLT-011 | i18n y timezone estructurales: resolución User.locale/timezone → Tenant.locale/timezone → env del servicio frontend (`OAP_DEFAULT_LOCALE`/`OAP_DEFAULT_TIMEZONE`); formateo de timestamps en UI con la timezone resuelta | G2 | NR (ADR-016) |
+| OAP-PLT-012 | CRUD de usuarios en Administración: crear (email/nombre/idioma/timezone/contraseña inicial), editar, activar/desactivar, asignación de organización+rol | G2 | VS (Atlas UserController; OpenRemote users page) |
 
 ## OAP-ASS — Asset Registry
 
@@ -46,6 +48,7 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 | OAP-ASS-002 | Attribute/Point esquema tipado (string/boolean/number/json) con unidad y calidad | G2 | VS (OpenRemote Attribute/MetaItem; Atlas CustomField) |
 | OAP-ASS-003 | Vínculos agente↔atributo (links de protocolo) | G4 | VS (OpenRemote AttributeLink) |
 | OAP-ASS-004 | Plantillas de activos y bulk import | G6 | VS (OpenRemote asset templates; Atlas ImportController) |
+| OAP-ASS-008 | Alta de activo común: se ocultan tipologías `kind=gateway` (hint) y se permite asociar opcionalmente un Gateway (crea binding `device` en la misma transacción); atributos se auto-construyen luego por autodescubrimiento | G2 | NR (ADR-014 v2) |
 | OAP-ASS-005 | Catálogo semilla (~33 tipos) con defaults COMPLETOS por tipo (atributos con unidad/store/metadata Brick-Haystack), sembrado por organización, editable, versionado (`catalog_version` + `--refresh` no-custom) | G2 | VS (OpenRemote asset/impl + Brick/Haystack; ADR-016) |
 | OAP-ASS-006 | Tipologías por código: manifiestos `ASSET_TYPE_SCHEMA` versionados + `seed_asset_types` idempotente | G2 | VS (Node-RED nodos por código; ThingsBoard templates; ADR-016) |
 | OAP-ASS-007 | Representación visual: icono por tipología + imagen por activo + estado derivado (overlays/dashboards) | G2/G6 | VS (OpenRemote or-icon; ThingsBoard entity image; ADR-016) |
@@ -90,8 +93,8 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 
 | ID | Descripción verificable | Gate | Fuente |
 |---|---|---|---|
-| OAP-GIS-001 | Escenas por imágenes locales (planos) con capas, placement por clic sobre el plano o lat/lng, overlays de estado (ADR-015) | G6 | VS (OpenRemote or-map + page-map; Atlas FloorPlan; ThingsBoard Image Map) |
-| OAP-GIS-002 | Geo capa MapLibre + PostGIS con overlays de estado; offline | G6 | NR (diseño propio OAP) |
+| OAP-GIS-001 | `ProjectMapConfig` por proyecto: proveedor libre (MapLibre+OSM), bounds (N/S/E/O) definidas dibujando un rectángulo navegando el mapa global; ubicación geográfica de activos (lat/lng validada dentro de bounds) | G6 | VS (ThingsBoard/OpenRemote mapas; ADR-015 v2) |
+| OAP-GIS-002 | Ubicación relativa por escenas (imágenes/capas) con placement por POP-UP (clic sobre mapa geo o sobre plano), sincronizado con campos numéricos | G6 | NR (ADR-015 v2) |
 
 ## OAP-RUL — Reglas, alarmas y comandos
 

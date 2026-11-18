@@ -1,8 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import { RUNTIME } from "../config";
+import { useAuth } from "../auth/AuthProvider";
 import { listTenants } from "../api/endpoints";
 import type { Tenant } from "../api/types";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 interface AppContextValue {
   tenantId: string | undefined;
@@ -10,6 +18,8 @@ interface AppContextValue {
   tenant: Tenant | undefined;
   tenants: Tenant[];
   loading: boolean;
+  locale: string;
+  timezone: string;
   setTenantId: (id: string | undefined) => void;
   setProjectId: (id: string | undefined) => void;
 }
@@ -30,6 +40,7 @@ function writeStored(key: string, value: string | undefined): void {
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const { i18n } = useTranslation();
+  const { user } = useAuth();
   const [tenantId, setTenantIdState] = useState<string | undefined>(() => readStored("oap.tenant") ?? undefined);
   const [projectId, setProjectIdState] = useState<string | undefined>(
     () => readStored("oap.project") ?? undefined,
@@ -50,12 +61,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     [tenants, tenantId],
   );
 
-  // Locale follows the selected organization (Tenant.locale).
+  // Locale/timezone resolution: user > organization > service env default.
+  const locale = user?.locale || tenant?.locale || RUNTIME.defaultLocale;
+  const timezone = user?.timezone || tenant?.timezone || RUNTIME.defaultTimezone;
+
   useEffect(() => {
-    if (tenant?.locale && i18n.language !== tenant.locale) {
-      void i18n.changeLanguage(tenant.locale);
+    if (i18n.language !== locale) {
+      void i18n.changeLanguage(locale);
     }
-  }, [tenant, i18n]);
+  }, [locale, i18n]);
+
+  useEffect(() => {
+    dayjs.tz.setDefault(timezone);
+  }, [timezone]);
 
   function setTenantId(id: string | undefined) {
     setTenantIdState(id);
@@ -77,11 +95,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       tenant,
       tenants,
       loading: tenantsQuery.isLoading,
+      locale,
+      timezone,
       setTenantId,
       setProjectId,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [tenantId, projectId, tenant, tenants, tenantsQuery.isLoading],
+    [tenantId, projectId, tenant, tenants, tenantsQuery.isLoading, locale, timezone],
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

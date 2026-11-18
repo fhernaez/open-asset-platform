@@ -244,3 +244,68 @@ def test_retire_asset_via_patch(api, tenant, project, platform_admin):
     patch = api.patch(f"/api/v1/assets/assets/{asset_id}/", {"status": "retired"}, format="json")
     assert patch.status_code == 200, patch.data
     assert patch.data["status"] == "retired"
+
+
+def test_user_crud_and_locale(api, tenant, platform_admin, tenant_admin_role):
+    api.force_authenticate(user=platform_admin)
+    create = api.post(
+        "/api/v1/platform/users/",
+        {
+            "email": "Nuevo@Example.com",
+            "full_name": "Nuevo Usuario",
+            "password": "inicial-12345",
+            "locale": "es",
+            "timezone": "America/Argentina/Buenos_Aires",
+            "tenant": str(tenant.id),
+            "role": "tenant_admin",
+        },
+        format="json",
+    )
+    assert create.status_code == 201, create.data
+    assert create.data["email"] == "nuevo@example.com"
+    user_id = create.data["id"]
+
+    from platforms.models import Membership
+
+    assert Membership.objects.filter(user_id=user_id, tenant=tenant).exists()
+
+    patch = api.patch(f"/api/v1/platform/users/{user_id}/", {"locale": "en", "is_active": False}, format="json")
+    assert patch.status_code == 200, patch.data
+    assert patch.data["locale"] == "en"
+    assert patch.data["is_active"] is False
+
+
+def test_asset_gateway_binding_on_create(api, tenant, project, platform_admin):
+    from connectivity.models import GatewayBinding
+
+    api.force_authenticate(user=platform_admin)
+    type_resp = api.get("/api/v1/assets/types/?kind=gateway")
+    mqtt_type = next(r for r in type_resp.data["results"] if r["code"] == "gateway-mqtt")
+    gw = api.post(
+        "/api/v1/assets/assets/",
+        {
+            "tenant": str(tenant.id),
+            "project": str(project.id),
+            "name": "GW-Assoc",
+            "external_ref": "gw-assoc",
+            "asset_type": mqtt_type["id"],
+            "gateway_config": {"host": "x", "port": 1883},
+        },
+        format="json",
+    )
+    assert gw.status_code == 201, gw.data
+
+    device = api.post(
+        "/api/v1/assets/assets/",
+        {
+            "tenant": str(tenant.id),
+            "project": str(project.id),
+            "name": "Sensor-A",
+            "external_ref": "sensor-a",
+            "gateway_id": gw.data["gateway_id"],
+        },
+        format="json",
+    )
+    assert device.status_code == 201, device.data
+    binding = GatewayBinding.objects.get(gateway_id=gw.data["gateway_id"], asset_id=device.data["id"])
+    assert binding.binding_type == "device"

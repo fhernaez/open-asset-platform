@@ -12,8 +12,11 @@ Grafana aporta un catálogo de paneles verificado (timeseries, gauge, stat, barc
 2. **Widgets del primer corte:** línea (ECharts), gauge, card (último valor), tabla, **mapa** con dos modos:
    - `plano`: una o varias imágenes locales (escenas), activos posicionados por coordenadas normalizadas, overlays de estado/alarma.
    - `geo`: capa MapLibre con activos por lat/lng, tiles offline opcionales.
-3. **Escenas GIS** (`OAP-GIS`): escena = conjunto de imágenes (capas, almacenadas en `media/`), coordenadas normalizadas 0..1 en el primer corte, placement de activos por clic sobre el plano o por lat/lng; export/import de la configuración de escena.
-4. Los dashboards se conectan a telemetría real (current + history) vía los contratos de `OAP-TEL`; nunca mocks en producción.
+3. **Escenas GIS y mapa global** (`OAP-GIS` v2):
+   - `ProjectMapConfig` por proyecto: proveedor libre **MapLibre + OpenStreetMap** y `bounds` (norte/sur/este/oeste) definidas **navegando el mapa global y dibujando un rectángulo con el mouse**.
+   - Ubicación de activos: **geográfica** (`latitude`/`longitude`, validada dentro de bounds cuando existe config) o **relativa** (escena + capa + x/y normalizados 0..1).
+   - Placement por **pop-up**: el botón "Ubicar" junto al activo abre el mapa (proyectos geo) o la imagen del plano (proyectos relativos) y ubica con clic; los campos numéricos se sincronizan.
+4. Los dashboards se conectan a telemetría real (current + history) vía los contratos de `OAP-TEL`; nunca mocks en producción. El **widget de mapa** elige modo: plano (escena+capa con placements) o geo (bounds del proyecto con assets por lat/lng), con selección de los activos a mostrar.
 
 ## Consecuencias
 

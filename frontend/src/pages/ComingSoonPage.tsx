@@ -1,14 +1,16 @@
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { Empty, Typography } from "antd";
+import { useTranslation } from "react-i18next";
 import type { Gate } from "../features/flags";
 
-export default function ComingSoonPage({ gate, label }: { gate: Gate; label: string }) {
+export default function ComingSoonPage({ gate, labelKey }: { gate: Gate; labelKey: string }) {
+  const { t } = useTranslation();
   return (
     <Empty
       image={<ClockCircleOutlined style={{ fontSize: 64, color: "#bfbfbf" }} />}
       description={
         <Typography.Text type="secondary">
-          {label} — disponible en etapa {gate}
+          {t(labelKey)} — {t("comingSoon.availableIn", { gate })}
         </Typography.Text>
       }
     />

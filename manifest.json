@@ -259,13 +259,13 @@
     },
     {
       "path": "docs/architecture/ADR-015-dashboards-map-widgets.md",
-      "bytes": 1921,
-      "sha256": "22bf5175a5d29f31ca9564f463f55b14504a344d4725c0adbcc77bab8622026b"
+      "bytes": 2444,
+      "sha256": "cf1da12640812521b62884b5c90429e8fbf5969f497cdc80543bf9410e2568cc"
     },
     {
       "path": "docs/architecture/ADR-016-asset-visuals-i18n.md",
-      "bytes": 2324,
-      "sha256": "fae3f6ec396a5ff0e3dfa77c35ef36de83143fded64705293bacc0ce131726a4"
+      "bytes": 2758,
+      "sha256": "c3675e8a6adf32c0c095263067ed9cb5e3b789f4a44b5c45c7c04ba1cf02c83b"
     },
     {
       "path": "docs/architecture/C4_DATAFLOWS.md",
@@ -339,8 +339,8 @@
     },
     {
       "path": "docs/contracts/REST_UI_CONTRACT.md",
-      "bytes": 1967,
-      "sha256": "7dad5da28d7e9010d6d184c621d87e143f840bd18f2eae67692f7fdb1905a96d"
+      "bytes": 2474,
+      "sha256": "c768575d7a8da13f2c077b8969946950e500105ff87c5725b653fe5af554ed7f"
     },
     {
       "path": "docs/contracts/SPATIAL_SCHEMA.md",
@@ -354,8 +354,8 @@
     },
     {
       "path": "docs/contracts/openapi.yaml",
-      "bytes": 154136,
-      "sha256": "a6c93a77c350a0a9901c9ad40a311387685b4cea26bf44c8e75ba34cf979bc15"
+      "bytes": 160603,
+      "sha256": "642c17200d07fb04033151762d461e0266b63b24e61c508899bdc907a8a9d0a9"
     },
     {
       "path": "docs/core/API_REALTIME.md",
@@ -1044,8 +1044,8 @@
     },
     {
       "path": "docs/requirements/REQUIREMENTS.md",
-      "bytes": 16407,
-      "sha256": "a53139075479a5bbef0462fe5c62b233ba1d140fcefb2864e7ff8e350beb5796"
+      "bytes": 17342,
+      "sha256": "848214070069c5a9be40e7a19fff2c31894567cc2884f36a9e7890028381d198"
     },
     {
       "path": "docs/requirements/SOURCE_TO_FEATURE.md",
@@ -1054,8 +1054,8 @@
     },
     {
       "path": "docs/requirements/TRACEABILITY.md",
-      "bytes": 10235,
-      "sha256": "d7a37494decf02cfacc43280d23cb81e0146036095e33381968a6f39fc906cf5"
+      "bytes": 10529,
+      "sha256": "9d8558fadb841cf1cc3e940859b95da3c174f7c8a1f3e319ce3f66f52c5547cf"
     },
     {
       "path": "docs/research/CODE_GRAPH_RUNBOOK.md",
@@ -1089,8 +1089,8 @@
     },
     {
       "path": "prompts/CONTEXT.md",
-      "bytes": 2285,
-      "sha256": "1b7f4060b572b7017eb31a7bd351a52cabc7e0fd9e3aff2feca526eeba8efe9e"
+      "bytes": 2576,
+      "sha256": "80d85ee0f33fb9cda040b02794c0330cdee7a08875c8da74a15a19627fc0a174"
     },
     {
       "path": "prompts/INITIAL_USER_PROMPT.md",

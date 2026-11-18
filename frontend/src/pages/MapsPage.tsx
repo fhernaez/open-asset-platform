@@ -17,11 +17,13 @@ import {
 } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import MapConfigEditor from "../components/MapConfigEditor";
 import {
   addSceneLayer,
   createPlacement,
   createScene,
   deletePlacement,
+  getMapConfig,
   listAssets,
   listScenes,
 } from "../api/endpoints";
@@ -31,7 +33,7 @@ import { useAppContext } from "../contexts/AppContext";
 export default function MapsPage() {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
-  const { tenantId } = useAppContext();
+  const { tenantId, projectId } = useAppContext();
   const [createOpen, setCreateOpen] = useState(false);
   const [selected, setSelected] = useState<Scene | null>(null);
   const [layerOpen, setLayerOpen] = useState(false);
@@ -43,6 +45,11 @@ export default function MapsPage() {
     queryKey: ["scenes", tenantId],
     queryFn: () => listScenes({ tenant: tenantId }),
     enabled: Boolean(tenantId),
+  });
+  const mapConfig = useQuery({
+    queryKey: ["map-config", projectId],
+    queryFn: () => getMapConfig(projectId ?? ""),
+    enabled: Boolean(projectId),
   });
 
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ["scenes", tenantId] });
@@ -81,6 +88,18 @@ export default function MapsPage() {
           {t("maps.createScene")}
         </Button>
       </Space>
+
+      <Card title={t("maps.globalMap")}>
+        {projectId ? (
+          <MapConfigEditor
+            projectId={projectId}
+            initialBounds={mapConfig.data?.bounds ?? null}
+            onSaved={() => queryClient.invalidateQueries({ queryKey: ["map-config", projectId] })}
+          />
+        ) : (
+          <Empty description={t("maps.selectProject")} />
+        )}
+      </Card>
 
       {scenes.isError && <Alert type="error" showIcon message={t("maps.loadError")} />}
       {!scenes.isError && scenes.data?.results.length === 0 && <Empty description={t("maps.noData")} />}

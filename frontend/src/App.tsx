@@ -44,9 +44,9 @@ function screenElement(key: string) {
   }
   const screen = SCREENS.find((s) => s.key === key);
   if (!screen) {
-    return <ComingSoonPage gate="G2" label="Pantalla desconocida" />;
+    return <ComingSoonPage gate="G2" labelKey="common.unknownScreen" />;
   }
-  return <ComingSoonPage gate={screen.gate} label={screen.labelKey} />;
+  return <ComingSoonPage gate={screen.gate} labelKey={screen.labelKey} />;
 }
 
 export default function App() {
@@ -59,7 +59,7 @@ export default function App() {
           {SCREENS.map((screen) => (
             <Route key={screen.key} path={`/${screen.key}`} element={screenElement(screen.key)} />
           ))}
-          <Route path="*" element={<ComingSoonPage gate="G2" label="Página" />} />
+          <Route path="*" element={<ComingSoonPage gate="G2" labelKey="common.unknownScreen" />} />
         </Route>
       </Routes>
     </BrowserRouter>

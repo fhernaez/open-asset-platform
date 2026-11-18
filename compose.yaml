@@ -106,6 +106,9 @@ services:
     image: oap-frontend:local
     build:
       context: ./frontend
+    environment:
+      OAP_DEFAULT_LOCALE: ${OAP_DEFAULT_LOCALE:-es}
+      OAP_DEFAULT_TIMEZONE: ${OAP_DEFAULT_TIMEZONE:-America/Argentina/Buenos_Aires}
     ports:
       - "8080:80"
     depends_on:

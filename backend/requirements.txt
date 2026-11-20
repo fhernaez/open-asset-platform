@@ -11,6 +11,6 @@ rdflib==7.6.0
 pyshacl==0.26.0
 pymodbus==3.8.6
 asyncua==1.1.6
-BAC0==25.0.0
+BAC0==2026.7.25
 pysnmp==7.1.18
 python-can==4.5.0

@@ -22,5 +22,3 @@ secrets/
 *.tsbuildinfo
 .DS_Store
 graphify-out/cache/
-backend/media/
-backend/media/

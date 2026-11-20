@@ -263,9 +263,16 @@ export function setPluginEnabled(
 
 export function updateAsset(
   id: string,
-  input: Partial<Pick<Asset, "name" | "external_ref" | "status" | "latitude" | "longitude">>,
+  input: Partial<Pick<Asset, "name" | "external_ref" | "status" | "latitude" | "longitude" | "parent">>,
 ): Promise<Asset> {
   return apiFetch<Asset>(`/assets/assets/${id}/`, { method: "PATCH", body: JSON.stringify(input) });
+}
+
+export function setAssetDesignation(
+  id: string,
+  input: { aspect: string; code: string },
+): Promise<Record<string, unknown>> {
+  return apiFetch(`/assets/assets/${id}/designation/`, { method: "POST", body: JSON.stringify(input) });
 }
 
 export function assetConnectivityStatus(id: string): Promise<{ asset_id: string; status: string }> {
@@ -296,7 +303,7 @@ export interface DashboardWidget {
   id?: string;
   dashboard?: string;
   title: string;
-  widget_type: "line" | "gauge" | "card" | "table" | "map" | "stat" | "gateway";
+  widget_type: "line" | "trend" | "gauge" | "card" | "table" | "map" | "stat" | "gateway";
   x: number;
   y: number;
   w: number;
@@ -336,6 +343,85 @@ export function updateWidget(id: string, input: Partial<DashboardWidget>): Promi
   return apiFetch(`/dashboards/widgets/${id}/`, { method: "PATCH", body: JSON.stringify(input) });
 }
 
+export interface TrendPoint {
+  ts: string;
+  value: number | string;
+  quality: string;
+  gap: boolean;
+}
+
+export interface TrendSeries {
+  attribute_id: string;
+  code: string;
+  name: string;
+  unit: string | null;
+  points: TrendPoint[];
+}
+
+export function telemetryTrend(input: {
+  attributes: string[];
+  tenant?: string;
+  from?: string;
+  to?: string;
+  interval?: string;
+  downsample?: string;
+  max_points?: number;
+}): Promise<{ interval: string | null; downsample: string; series: TrendSeries[] }> {
+  return apiFetch("/telemetry/trend", { method: "POST", body: JSON.stringify(input) });
+}
+
+export interface DashboardBundle {
+  id: string;
+  name: string;
+  description: string;
+  data: unknown;
+}
+
+export interface DashboardTemplate {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  definition: unknown;
+}
+
+export interface ScadaSymbol {
+  key: string;
+  label_i18n: Record<string, string>;
+  categories: string[];
+}
+
+export function listBundles(params: { tenant?: string } = {}): Promise<Paginated<DashboardBundle>> {
+  const query = new URLSearchParams();
+  if (params.tenant) query.set("tenant", params.tenant);
+  const qs = query.toString();
+  return apiFetch(`/dashboards/bundles/${qs ? `?${qs}` : ""}`);
+}
+
+export function exportBundle(dashboardId: string, input: { name?: string; description?: string }): Promise<DashboardBundle> {
+  return apiFetch(`/dashboards/${dashboardId}/export-bundle/`, { method: "POST", body: JSON.stringify(input) });
+}
+
+export function importBundle(bundleId: string): Promise<Dashboard> {
+  return apiFetch(`/dashboards/bundles/${bundleId}/import/`, { method: "POST", body: JSON.stringify({}) });
+}
+
+export function listTemplates(params: { tenant?: string; category?: string } = {}): Promise<Paginated<DashboardTemplate>> {
+  const query = new URLSearchParams();
+  if (params.tenant) query.set("tenant", params.tenant);
+  if (params.category) query.set("category", params.category);
+  const qs = query.toString();
+  return apiFetch(`/dashboards/templates/${qs ? `?${qs}` : ""}`);
+}
+
+export function applyTemplate(templateId: string, input: { name?: string }): Promise<Dashboard> {
+  return apiFetch(`/dashboards/templates/${templateId}/apply/`, { method: "POST", body: JSON.stringify(input) });
+}
+
+export function listSymbols(): Promise<{ symbols: ScadaSymbol[] }> {
+  return apiFetch("/dashboards/symbols/");
+}
+
 // --- Spatial / scenes -----------------------------------------------------
 
 export interface SceneLayer {
@@ -355,6 +441,7 @@ export interface ScenePlacement {
   x: number | null;
   y: number | null;
   z: number;
+  symbol: string;
 }
 
 export interface Scene {

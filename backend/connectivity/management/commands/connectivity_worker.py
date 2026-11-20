@@ -1,8 +1,9 @@
 """Multi-protocol connectivity worker.
 
-Runs one adapter per gateway protocol (registry below). Only the MQTT adapter
-is implemented today (P0); Modbus/OPC-UA/BACnet/SNMP/CAN are SPECIFIED until
-their adapters land (never presented as functional).
+Runs one adapter worker per adapter class (MQTT, Modbus RTU/TCP, OPC-UA,
+BACnet, SNMP, CAN). Workers re-sync gateways/bindings each loop so runtime
+edits are picked up without restart, and ``connection_status`` stays
+authoritative (real worker state).
 """
 
 from __future__ import annotations
@@ -22,7 +23,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         threads: list[threading.Thread] = []
+        seen: set[type] = set()
         for protocol, adapter_cls in ADAPTERS.items():
+            if adapter_cls in seen:
+                continue
+            seen.add(adapter_cls)
             thread = threading.Thread(
                 target=adapter_cls.run_forever,
                 name=f"connectivity-{protocol}",

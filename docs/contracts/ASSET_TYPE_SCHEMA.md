@@ -49,6 +49,10 @@ connection_schema:             # SOLO kind=gateway
 ## Reglas
 
 - `code` único por tenant; `label_i18n` obligatorio con al menos el locale primario (`es`); `name` legacy = alias de `label_i18n[primario]`.
+- `is_location` (bool): activos de sitio (city/building/floor/room/apartment/area/field/zone/parking). Un asset location lleva `geofence` (polígono GeoJSON dibujado sobre el mapa) **o** `image` propia (upload a media/); sus hijos heredan el modo (imagen → `rel_x`/`rel_y`; polígono → lat/lng validada dentro del geofence) — ADR-017.
+- `rules` (opcional): validación SHACL-like en línea de escritura — `required_attributes: [códigos]` y `required_relations: [{relation, target_codes: [...]}]` (ej. VAV exige `airflow_sensor` y `isFedBy` a `ahu`); se evalúan al crear/importar y devuelven 422 con detalle — ADR-018.
+- `metadata` por atributo: `brick: [clases]` y `haystack: [tags]` para etiquetado semántico.
+- Designaciones 81346: los manifiestos declaran `designation_prefix` (ej. `-` para producto) opcional; la ocurrencia se auto-sugiere (única por tenant/ámbito) — ADR-018.
 - `catalog_version` (int): versión del manifiesto. El seed guarda `schema.catalog_version`; `seed_asset_types --refresh` re-sincroniza tipos cuyo `catalog_version` es menor y que NO fueron customizados. Si el usuario edita el schema por API/UI, el serializer marca `schema.custom=true` y el refresh lo salta (las ediciones del usuario prevalecen).
 - `attributes[].code` único dentro del tipo; `unit` debe existir en `assets_unit` (se crea si falta vía seed).
 - Para `kind=gateway`, `connection_schema` es obligatorio (el formulario de alta del gateway y el adapter lo consumen). Tipos de campo: `string`, `int`, `bool`, `secret`, `select`.

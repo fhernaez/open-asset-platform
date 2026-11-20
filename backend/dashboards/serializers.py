@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from rest_framework import serializers
 
-from dashboards.models import Dashboard, Widget
+from dashboards.models import Dashboard, DashboardBundle, DashboardTemplate, Widget
 
 
 class WidgetSerializer(serializers.ModelSerializer):
@@ -22,3 +22,15 @@ class DashboardSerializer(serializers.ModelSerializer):
             "tenant": {"required": False},
             "project": {"required": False, "allow_null": True},
         }
+
+
+class DashboardBundleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DashboardBundle
+        fields = ["id", "tenant", "project", "name", "description", "data"]
+
+
+class DashboardTemplateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DashboardTemplate
+        fields = ["id", "tenant", "project", "name", "description", "category", "definition"]

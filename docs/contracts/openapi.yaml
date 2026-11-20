@@ -239,6 +239,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/Asset'
           description: ''
+  /api/v1/assets/assets/{id}/designation/:
+    post:
+      operationId: assets_assets_designation_create
+      description: Set a versioned 81346 designation for one aspect (=/-/+/%).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this asset.
+        required: true
+      tags:
+      - assets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Asset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Asset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Asset'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+          description: ''
   /api/v1/assets/attributes/:
     get:
       operationId: assets_attributes_list
@@ -1679,6 +1715,538 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/v1/dashboards/{id}/export-bundle/:
+    post:
+      operationId: dashboards_export_bundle_create
+      description: Export the dashboard + widgets as a DashboardBundle (ADR-019).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F-]{36}$
+        required: true
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Dashboard'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+          description: ''
+  /api/v1/dashboards/bundles/:
+    get:
+      operationId: dashboards_bundles_list
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDashboardBundleList'
+          description: ''
+    post:
+      operationId: dashboards_bundles_create
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardBundle'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DashboardBundle'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DashboardBundle'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardBundle'
+          description: ''
+  /api/v1/dashboards/bundles/{id}/:
+    get:
+      operationId: dashboards_bundles_retrieve
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this dashboard bundle.
+        required: true
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardBundle'
+          description: ''
+    put:
+      operationId: dashboards_bundles_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this dashboard bundle.
+        required: true
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardBundle'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DashboardBundle'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DashboardBundle'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardBundle'
+          description: ''
+    patch:
+      operationId: dashboards_bundles_partial_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this dashboard bundle.
+        required: true
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDashboardBundle'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDashboardBundle'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDashboardBundle'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardBundle'
+          description: ''
+    delete:
+      operationId: dashboards_bundles_destroy
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this dashboard bundle.
+        required: true
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/dashboards/bundles/{id}/import/:
+    post:
+      operationId: dashboards_bundles_import_create
+      description: Create a new dashboard from the bundle data (same tenant).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this dashboard bundle.
+        required: true
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardBundle'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DashboardBundle'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DashboardBundle'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardBundle'
+          description: ''
+  /api/v1/dashboards/symbols/:
+    get:
+      operationId: dashboards_symbols_retrieve
+      description: SCADA symbol catalog for map/SCADA widgets (ADR-019, P2 basic catalog).
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/dashboards/templates/:
+    get:
+      operationId: dashboards_templates_list
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDashboardTemplateList'
+          description: ''
+    post:
+      operationId: dashboards_templates_create
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardTemplate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DashboardTemplate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DashboardTemplate'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardTemplate'
+          description: ''
+  /api/v1/dashboards/templates/{id}/:
+    get:
+      operationId: dashboards_templates_retrieve
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this dashboard template.
+        required: true
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardTemplate'
+          description: ''
+    put:
+      operationId: dashboards_templates_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this dashboard template.
+        required: true
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardTemplate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DashboardTemplate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DashboardTemplate'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardTemplate'
+          description: ''
+    patch:
+      operationId: dashboards_templates_partial_update
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this dashboard template.
+        required: true
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDashboardTemplate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDashboardTemplate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDashboardTemplate'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardTemplate'
+          description: ''
+    delete:
+      operationId: dashboards_templates_destroy
+      description: |-
+        ModelViewSet that scopes the queryset to the tenant/project of the caller.
+
+        ``tenant_lookup`` names the attribute used to derive the tenant from the
+        request (e.g. a header or a project header). By default the tenant is read
+        from ``request.tenant`` which is populated by middleware or by the model
+        instance itself for object-level checks.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this dashboard template.
+        required: true
+      tags:
+      - dashboards
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/dashboards/templates/{id}/apply/:
+    post:
+      operationId: dashboards_templates_apply_create
+      description: Instantiate the template as a new dashboard (same tenant).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this dashboard template.
+        required: true
+      tags:
+      - dashboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardTemplate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DashboardTemplate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DashboardTemplate'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardTemplate'
+          description: ''
   /api/v1/dashboards/widgets/:
     get:
       operationId: dashboards_widgets_list
@@ -3918,6 +4486,37 @@ paths:
                 type: object
                 additionalProperties: {}
           description: ''
+  /api/v1/telemetry/trend:
+    post:
+      operationId: telemetry_trend_create
+      description: 'Multi-attribute trend for the trend widget (ADR-019): POST attributes+range.'
+      tags:
+      - telemetry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
 components:
   schemas:
     Asset:
@@ -3952,6 +4551,32 @@ components:
         status:
           $ref: '#/components/schemas/StatusEnum'
         metadata: {}
+        latitude:
+          type: number
+          format: double
+          nullable: true
+        longitude:
+          type: number
+          format: double
+          nullable: true
+        rel_x:
+          type: number
+          format: double
+          nullable: true
+        rel_y:
+          type: number
+          format: double
+          nullable: true
+        geofence:
+          nullable: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        image_url:
+          type: string
+          readOnly: true
+        designations: {}
         created_at:
           type: string
           format: date-time
@@ -3959,6 +4584,7 @@ components:
       required:
       - created_at
       - id
+      - image_url
       - name
     AssetAttribute:
       type: object
@@ -4047,6 +4673,8 @@ components:
           pattern: ^[-a-zA-Z0-9_]+$
         kind:
           $ref: '#/components/schemas/AssetTypeKindEnum'
+        is_location:
+          type: boolean
         description:
           type: string
         schema: {}
@@ -4161,6 +4789,57 @@ components:
       - id
       - name
       - widgets
+    DashboardBundle:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tenant:
+          type: string
+          format: uuid
+        project:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        data: {}
+      required:
+      - id
+      - name
+      - tenant
+    DashboardTemplate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tenant:
+          type: string
+          format: uuid
+        project:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        category:
+          type: string
+          maxLength: 80
+        definition: {}
+      required:
+      - id
+      - name
+      - tenant
     Gateway:
       type: object
       properties:
@@ -4474,6 +5153,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AuditLog'
+    PaginatedDashboardBundleList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DashboardBundle'
     PaginatedDashboardList:
       type: object
       required:
@@ -4497,6 +5199,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Dashboard'
+    PaginatedDashboardTemplateList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DashboardTemplate'
     PaginatedGatewayBindingList:
       type: object
       required:
@@ -4828,6 +5553,32 @@ components:
         status:
           $ref: '#/components/schemas/StatusEnum'
         metadata: {}
+        latitude:
+          type: number
+          format: double
+          nullable: true
+        longitude:
+          type: number
+          format: double
+          nullable: true
+        rel_x:
+          type: number
+          format: double
+          nullable: true
+        rel_y:
+          type: number
+          format: double
+          nullable: true
+        geofence:
+          nullable: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        image_url:
+          type: string
+          readOnly: true
+        designations: {}
         created_at:
           type: string
           format: date-time
@@ -4901,6 +5652,8 @@ components:
           pattern: ^[-a-zA-Z0-9_]+$
         kind:
           $ref: '#/components/schemas/AssetTypeKindEnum'
+        is_location:
+          type: boolean
         description:
           type: string
         schema: {}
@@ -4942,6 +5695,49 @@ components:
           items:
             $ref: '#/components/schemas/Widget'
           readOnly: true
+    PatchedDashboardBundle:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tenant:
+          type: string
+          format: uuid
+        project:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        data: {}
+    PatchedDashboardTemplate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tenant:
+          type: string
+          format: uuid
+        project:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        category:
+          type: string
+          maxLength: 80
+        definition: {}
     PatchedGateway:
       type: object
       properties:
@@ -5200,6 +5996,9 @@ components:
           maximum: 9223372036854775807
           minimum: -9223372036854775808
           format: int64
+        symbol:
+          type: string
+          maxLength: 40
     PatchedTenant:
       type: object
       properties:
@@ -5515,6 +6314,9 @@ components:
           maximum: 9223372036854775807
           minimum: -9223372036854775808
           format: int64
+        symbol:
+          type: string
+          maxLength: 40
       required:
       - asset
       - asset_name
@@ -5717,6 +6519,7 @@ components:
     WidgetTypeEnum:
       enum:
       - line
+      - trend
       - gauge
       - card
       - table
@@ -5724,6 +6527,7 @@ components:
       type: string
       description: |-
         * `line` - Line
+        * `trend` - Trend
         * `gauge` - Gauge
         * `card` - Card
         * `table` - Table

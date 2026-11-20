@@ -11,5 +11,11 @@ class BaseAdapter(ABC):
     @classmethod
     @abstractmethod
     def run_forever(cls) -> None:
-        """Block forever, ingesting via connectivity.services.process_message."""
+        """Block forever, ingesting via connectivity.services helpers."""
+        raise NotImplementedError
+
+    @classmethod
+    @abstractmethod
+    def test(cls, gateway) -> dict:
+        """Attempt a REAL connection; return {"status": "connected"|"error", "detail": ...}."""
         raise NotImplementedError

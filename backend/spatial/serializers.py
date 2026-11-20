@@ -28,7 +28,7 @@ class ScenePlacementSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ScenePlacement
-        fields = ["id", "scene", "layer", "asset", "asset_name", "x", "y", "z"]
+        fields = ["id", "scene", "layer", "asset", "asset_name", "x", "y", "z", "symbol"]
         extra_kwargs = {"scene": {"required": False}}
 
 

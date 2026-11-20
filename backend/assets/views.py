@@ -145,6 +145,11 @@ class AssetViewSet(TenantScopedViewSet):
         with transaction.atomic():
             asset = serializer.save(tenant=tenant)
             apply_type_template(asset)
+            from assets.services import validate_manifest_rules
+
+            rule_errors = validate_manifest_rules(asset)
+            if rule_errors:
+                raise ValidationError("; ".join(rule_errors))
             gateway = None
             asset_type = asset.asset_type
             if asset_type is not None and asset_type.kind == "gateway":
@@ -201,6 +206,11 @@ class AssetViewSet(TenantScopedViewSet):
         serializer.validated_data.pop("tenant", None)
         serializer.validated_data.pop("project", None)
         asset = serializer.save()
+        from assets.services import validate_manifest_rules
+
+        rule_errors = validate_manifest_rules(asset)
+        if rule_errors:
+            raise ValidationError("; ".join(rule_errors))
         AuditService.record(
             actor=self.request.user,
             action="asset.update",
@@ -234,6 +244,19 @@ class AssetViewSet(TenantScopedViewSet):
 
         asset = self.get_object()
         return Response(asset_connectivity_status(asset))
+
+    @action(detail=True, methods=["post"], url_path="designation")
+    def designation(self, request, pk=None):
+        """Set a versioned 81346 designation for one aspect (=/-/+/%)."""
+        from assets.services import set_designation
+
+        asset = self.get_object()
+        aspect = request.data.get("aspect")
+        code = request.data.get("code")
+        if aspect not in {"function", "product", "location", "type"}:
+            raise ValidationError("aspect must be one of: function, product, location, type.")
+        result = set_designation(asset, aspect, code)
+        return Response(result)
 
     def _resolve_tenant(self, data):
         from platforms.models import Membership

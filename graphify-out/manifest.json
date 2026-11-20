@@ -612,9 +612,9 @@
     "semantic_hash": ""
   },
   "manifest.json": {
-    "mtime": 1795040516.2575386,
-    "seen": 1795040518.8361943,
-    "ast_hash": "52ecc6c853c222bd0e51fe260bc4b3a3",
+    "mtime": 1795109036.4203696,
+    "seen": 1795109039.0843074,
+    "ast_hash": "a89d363712f14c89c37d23b7a81db976",
     "semantic_hash": ""
   },
   "scripts/check_spec_kit.py": {
@@ -1242,9 +1242,9 @@
     "semantic_hash": ""
   },
   "docs/evidence/TASK_LOG.md": {
-    "mtime": 1795037633.588053,
-    "seen": 1795040518.8362699,
-    "ast_hash": "6d325388b78fcb2018b97cb221342a2e",
+    "mtime": 1795040523.9482498,
+    "seen": 1795109039.084425,
+    "ast_hash": "31cd4b8e795192a16eb0600085a496bd",
     "semantic_hash": ""
   },
   "docs/evidence/TEST_EVIDENCE_TEMPLATE.md": {
@@ -1968,9 +1968,9 @@
     "semantic_hash": ""
   },
   "docs/requirements/REQUIREMENTS.md": {
-    "mtime": 1795024387.7286649,
-    "seen": 1795024406.5127416,
-    "ast_hash": "5cb6a09c76d831b17f8b79739a7b17fa",
+    "mtime": 1795109025.7588613,
+    "seen": 1795109039.084646,
+    "ast_hash": "fd2acffadaae1bdc8275ff86bc8868c8",
     "semantic_hash": ""
   },
   "docs/requirements/SOURCE_TO_FEATURE.md": {
@@ -2016,9 +2016,9 @@
     "semantic_hash": ""
   },
   "prompts/CONTEXT.md": {
-    "mtime": 1795024400.4623806,
-    "seen": 1795024406.512748,
-    "ast_hash": "8d6377a9a7e7eb712f0b349d317a3462",
+    "mtime": 1795109032.5137095,
+    "seen": 1795109039.0846562,
+    "ast_hash": "7a593ea10ef52f95ee48e9c176f3a2e8",
     "semantic_hash": ""
   },
   "prompts/INITIAL_USER_PROMPT.md": {
@@ -2064,9 +2064,9 @@
     "semantic_hash": ""
   },
   "docs/contracts/ASSET_TYPE_SCHEMA.md": {
-    "mtime": 1795019643.4430804,
-    "seen": 1795019692.219345,
-    "ast_hash": "3ae5d0ffc504d2c531bb74112532ea0a",
+    "mtime": 1795109016.9440596,
+    "seen": 1795109039.0843968,
+    "ast_hash": "c7d8fa5e1febf0e1e147ec0b8b1f1748",
     "semantic_hash": ""
   },
   "backend/assets/management/__init__.py": {
@@ -2475,6 +2475,30 @@
     "mtime": 1795040318.034063,
     "seen": 1795040518.8361557,
     "ast_hash": "e295e1235e993eec452e90d1a3368c28",
+    "semantic_hash": ""
+  },
+  "docs/architecture/ADR-017-asset-hierarchy-location-assets.md": {
+    "mtime": 1795108997.9584868,
+    "seen": 1795109039.0843868,
+    "ast_hash": "6f2e16ae817d5204b9c63ec536cc6ac4",
+    "semantic_hash": ""
+  },
+  "docs/architecture/ADR-018-semantic-stack.md": {
+    "mtime": 1795109001.9803963,
+    "seen": 1795109039.0843883,
+    "ast_hash": "43368eb786b530c5d73ccd511bbad311",
+    "semantic_hash": ""
+  },
+  "docs/architecture/ADR-019-dashboards-trend.md": {
+    "mtime": 1795109005.81931,
+    "seen": 1795109039.0843892,
+    "ast_hash": "c126343baa26b6a898bc020e3ec0d6b7",
+    "semantic_hash": ""
+  },
+  "docs/research/STANDARDS_GAP_ANALYSIS.md": {
+    "mtime": 1795108988.0407102,
+    "seen": 1795109039.0846534,
+    "ast_hash": "bca9ed90a342142ecd34246243845b5d",
     "semantic_hash": ""
   }
 }

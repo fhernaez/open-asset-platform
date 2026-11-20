@@ -112,6 +112,12 @@ export interface Asset {
   metadata: Record<string, unknown>;
   latitude?: number | null;
   longitude?: number | null;
+  rel_x?: number | null;
+  rel_y?: number | null;
+  geofence?: Record<string, unknown> | null;
+  image?: string | null;
+  image_url?: string | null;
+  designations?: Record<string, unknown>;
 }
 
 export interface AssetTypeTemplateAttribute {

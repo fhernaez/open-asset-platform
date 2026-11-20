@@ -264,15 +264,68 @@ def test_asset_connectivity_status(tenant, project, platform_admin):
     assert asset_connectivity_status(plain)["status"] == "disconnected"
 
 
-def test_test_connection_not_implemented(tenant, project, platform_admin):
+def test_adapter_registry_covers_all_protocols():
+    from connectivity.adapters.registry import ADAPTERS
+
+    assert set(ADAPTERS) == {"mqtt", "modbus-rtu", "modbus-tcp", "opcua", "bacnet", "snmp", "can"}
+    for adapter in set(ADAPTERS.values()):
+        assert hasattr(adapter, "run_forever")
+        assert hasattr(adapter, "test")
+
+
+def test_test_connection_delegates_to_adapter(tenant, project, platform_admin):
     from assets.models import Asset
+    from connectivity.adapters.bacnet import BacnetAdapter
     from connectivity.models import Gateway
     from connectivity.services import test_gateway_connection
 
     gw_asset = Asset.objects.create(tenant=tenant, project=project, name="GW-BAC", external_ref="gw-bac")
     gateway = Gateway.objects.create(tenant=tenant, project=project, asset=gw_asset, protocol="bacnet", config={})
-    result = test_gateway_connection(gateway)
-    assert result["status"] == "not_implemented"
+
+    original = BacnetAdapter.test
+    BacnetAdapter.test = classmethod(lambda cls, gw: {"status": "connected"})  # type: ignore[method-assign]
+    try:
+        result = test_gateway_connection(gateway)
+    finally:
+        BacnetAdapter.test = original
+    assert result["status"] == "connected"
+    gateway.refresh_from_db()
+    assert gateway.connection_status == "connected"
+
+
+def test_test_connection_adapter_error_marks_status(tenant, project, platform_admin):
+    from assets.models import Asset
+    from connectivity.adapters.bacnet import BacnetAdapter
+    from connectivity.models import Gateway
+    from connectivity.services import test_gateway_connection
+
+    gw_asset = Asset.objects.create(tenant=tenant, project=project, name="GW-BAC2", external_ref="gw-bac2")
+    gateway = Gateway.objects.create(tenant=tenant, project=project, asset=gw_asset, protocol="bacnet", config={})
+
+    original = BacnetAdapter.test
+    BacnetAdapter.test = classmethod(lambda cls, gw: {"status": "error", "detail": "boom"})  # type: ignore[method-assign]
+    try:
+        result = test_gateway_connection(gateway)
+    finally:
+        BacnetAdapter.test = original
+    assert result["status"] == "error"
+    gateway.refresh_from_db()
+    assert gateway.connection_status == "error"
+
+
+def test_modbus_register_parsing():
+    from connectivity.adapters.modbus import ModbusAdapter
+
+    assert ModbusAdapter._parse_register("40001") == 40001
+    assert ModbusAdapter._parse_register("holding:7") == 7
+
+
+def test_can_signal_decode():
+    from connectivity.adapters.can import CanAdapter
+
+    data = (12345).to_bytes(2, "little")
+    assert CanAdapter._decode(data, {"start": 0, "length": 16, "scale": 0.1}) == 1234.5
+    assert CanAdapter._decode(data, {"start": 0, "length": 16, "scale": 1, "offset": 5}) == 12350.0
 
 
 def test_binding_address_sanitized(api, tenant, project, platform_admin):

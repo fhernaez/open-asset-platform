@@ -14,7 +14,18 @@ class UnitSerializer(serializers.ModelSerializer):
 class AssetTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = AssetType
-        fields = ["id", "tenant", "project", "name", "code", "kind", "description", "schema", "created_at"]
+        fields = [
+            "id",
+            "tenant",
+            "project",
+            "name",
+            "code",
+            "kind",
+            "is_location",
+            "description",
+            "schema",
+            "created_at",
+        ]
         extra_kwargs = {
             "tenant": {"required": False},
             "project": {"required": False, "allow_null": True},
@@ -36,6 +47,8 @@ class AssetTypeSerializer(serializers.ModelSerializer):
 
 
 class AssetSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Asset
         fields = [
@@ -48,12 +61,29 @@ class AssetSerializer(serializers.ModelSerializer):
             "parent",
             "status",
             "metadata",
+            "latitude",
+            "longitude",
+            "rel_x",
+            "rel_y",
+            "geofence",
+            "image",
+            "image_url",
+            "designations",
             "created_at",
         ]
         extra_kwargs = {
             "tenant": {"required": False},
             "project": {"required": False, "allow_null": True},
         }
+
+    def get_image_url(self, obj):
+        request = self.context.get("request")
+        if not obj.image:
+            return None
+        url = obj.image.url
+        if request:
+            return request.build_absolute_uri(url)
+        return url
 
 
 class AssetAttributeSerializer(serializers.ModelSerializer):

@@ -7,3 +7,10 @@ django-cors-headers==4.7.0
 gunicorn==23.0.0
 paho-mqtt==2.1.0
 Pillow==11.3.0
+rdflib==7.6.0
+pyshacl==0.26.0
+pymodbus==3.8.6
+asyncua==1.1.6
+BAC0==25.0.0
+pysnmp==7.1.18
+python-can==4.5.0

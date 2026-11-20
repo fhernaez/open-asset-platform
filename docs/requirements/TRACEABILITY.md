@@ -34,6 +34,8 @@ Regenerada 2026-11-17 tras la reestructuración de `REQUIREMENTS.md`. Estados ho
 | OAP-ASS-005 | assets | G2 | docs/contracts/ASSET_TYPE_SCHEMA.md | assets/types_catalog/ | PARTIAL (~33 tipos, versionado+refresh) |
 | OAP-ASS-006 | assets | G2 | docs/contracts/ASSET_TYPE_SCHEMA.md | assets/types_catalog/ | PARTIAL (seed+validator) |
 | OAP-ASS-007 | assets | G2/G6 | docs/architecture/ADR-016 | frontend (iconos por categoría) | PARTIAL (iconos base) |
+| OAP-ASS-009 | assets | G2/G6 | docs/architecture/ADR-017 | assets/models.py + frontend (árbol drag&drop, geofence, rel_x/y) | PARTIAL (unit) |
+| OAP-ASS-010 | assets | G6 | docs/architecture/ADR-018 | assets/services.py + assets/views.py (designation) | PARTIAL (unit) |
 | OAP-TEL-001 | telemetry | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/storage.py | PARTIAL (unit) |
 | OAP-TEL-002 | telemetry | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/services.py | PARTIAL (unit) |
 | OAP-TEL-003 | telemetry | G6 | docs/core/TELEMETRY_POLICY.md | — | SPECIFIED |
@@ -43,7 +45,8 @@ Regenerada 2026-11-17 tras la reestructuración de `REQUIREMENTS.md`. Estados ho
 | OAP-TEL-007 | telemetry | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/models.py | PARTIAL |
 | OAP-TEL-008 | telemetry | G9 | docs/core/TELEMETRY_POLICY.md | — | SPECIFIED |
 | OAP-SEM-001 | semantics | G6 | docs/contracts/ASSET_SEMANTIC_SCHEMA.md | — | SPECIFIED |
-| OAP-SEM-002 | semantics | G6 | docs/core/SEMANTICS_81346_BRICK_HAYSTACK.md | — | SPECIFIED |
+| OAP-SEM-002 | semantics | G6 | docs/core/SEMANTICS_81346_BRICK_HAYSTACK.md | assets/semantics.py (build_graph) | PARTIAL (unit) |
+| OAP-SEM-003 | semantics | G2 | docs/architecture/ADR-018 | assets/services.py (validate_manifest_rules) | PARTIAL (unit) |
 | OAP-GIS-001 | spatial | G6 | docs/contracts/SPATIAL_SCHEMA.md | — | SPECIFIED |
 | OAP-GIS-002 | spatial | G6 | docs/contracts/SPATIAL_SCHEMA.md | — | SPECIFIED |
 | OAP-RUL-001 | rules | G7 | docs/core/RULES_ALARMS.md | — | SPECIFIED |
@@ -71,12 +74,12 @@ Regenerada 2026-11-17 tras la reestructuración de `REQUIREMENTS.md`. Estados ho
 | OAP-EMS-002 | ems | G9 | docs/plugins/ems/SPEC.md | — | SPECIFIED |
 | OAP-DSH-001 | dashboards | G6 | docs/plugins/dashboards/SPEC.md | — | SPECIFIED |
 | OAP-DSH-002 | dashboards | G6 | docs/plugins/dashboards/SPEC.md | — | SPECIFIED |
-| OAP-DSH-003 | dashboards | G6 | docs/plugins/dashboards/SPEC.md | — | SPECIFIED |
+| OAP-DSH-003 | dashboards | G6 | docs/plugins/dashboards/SPEC.md | dashboards/ + telemetry/views.py (trend) + frontend DashboardsPage | PARTIAL (unit) |
 | OAP-CON-001 | connectivity | G4 | docs/architecture/ADR-014 | connectivity/ + assets (alta inline) | PARTIAL (unit, alta inline) |
 | OAP-CON-002 | connectivity | G4 | docs/architecture/ADR-014 | connectivity/services.py | PARTIAL (unit) |
 | OAP-CON-003 | connectivity | G4 | docs/plugins/mqtt/SPEC.md | connectivity/adapters/mqtt.py | PARTIAL (unit) |
 | OAP-CON-004 | connectivity | G7 | docs/plugins/modbus/SPEC.md | — | SPECIFIED |
-| OAP-CON-005 | connectivity | G9 | docs/plugins/protocol_extensions/SPEC.md | — | SPECIFIED |
+| OAP-CON-005 | connectivity | G9 | docs/plugins/protocol_extensions/SPEC.md | connectivity/adapters/{modbus,opcua,bacnet,snmp,can}.py | PARTIAL (unit, sin hardware real) |
 | OAP-CON-006 | connectivity | G4 | docs/architecture/ADR-014 | connectivity/views.py | PARTIAL (UI + test-connection) |
 | OAP-CON-007 | connectivity | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/storage.py + policy endpoints | PARTIAL (unit) |
 | OAP-CON-008 | connectivity | G4 | docs/core/TELEMETRY_POLICY.md | telemetry/storage.py | PARTIAL (unit) |

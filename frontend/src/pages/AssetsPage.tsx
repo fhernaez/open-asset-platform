@@ -13,7 +13,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   Alert,
   Button,
+  Card,
   Checkbox,
+  Col,
+  Descriptions,
   Drawer,
   Empty,
   Form,
@@ -21,16 +24,19 @@ import {
   InputNumber,
   Modal,
   Popconfirm,
+  Row,
   Select,
   Space,
   Table,
   Tabs,
   Tag,
+  Tree,
   Typography,
   message,
 } from "antd";
 import type { FormInstance } from "antd";
-import { useState } from "react";
+import type { TreeProps } from "antd";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   createAsset,
@@ -44,6 +50,7 @@ import {
   listAttributes,
   listGateways,
   listUnits,
+  setAssetDesignation,
   updateAsset,
   updateAssetStatus,
   updateAttribute,
@@ -90,12 +97,14 @@ function typeIcon(code: string): React.ReactNode {
 }
 
 export default function AssetsPage() {
+  const { t } = useTranslation();
   return (
     <Tabs
       defaultActiveKey="assets"
       items={[
-        { key: "assets", label: "Activos", children: <AssetsTab /> },
-        { key: "types", label: "Tipologías", children: <AssetTypesTab /> },
+        { key: "assets", label: t("assets.title"), children: <AssetsTab /> },
+        { key: "tree", label: t("assets.hierarchy"), children: <AssetsTreeTab /> },
+        { key: "types", label: t("assets.types"), children: <AssetTypesTab /> },
       ]}
     />
   );
@@ -719,5 +728,183 @@ function AttributesDrawer({
         </Form>
       </Modal>
     </Drawer>
+  );
+}
+
+interface TreeAssetNode {
+  key: string;
+  title: React.ReactNode;
+  parent: string | null;
+  name: string;
+  asset: Asset;
+  children: TreeAssetNode[];
+}
+
+function buildAssetTree(assets: Asset[]): TreeAssetNode[] {
+  const byId = new Map<string, TreeAssetNode>();
+  for (const asset of assets) {
+    byId.set(asset.id, {
+      key: asset.id,
+      title: null,
+      parent: asset.parent,
+      name: asset.name,
+      asset,
+      children: [],
+    });
+  }
+  const roots: TreeAssetNode[] = [];
+  for (const node of byId.values()) {
+    const parent = node.parent ? byId.get(node.parent) : undefined;
+    if (parent) {
+      parent.children.push(node);
+    } else {
+      roots.push(node);
+    }
+  }
+  const decorate = (nodes: TreeAssetNode[]) => {
+    for (const node of nodes) {
+      node.title = (
+        <Space size={4}>
+          <AppstoreOutlined />
+          <span>{node.name}</span>
+          {node.asset.status === "retired" && <Tag color="orange" style={{ marginInlineEnd: 0 }}>R</Tag>}
+        </Space>
+      );
+      decorate(node.children);
+    }
+  };
+  decorate(roots);
+  return roots;
+}
+
+function AssetsTreeTab() {
+  const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const { tenantId, projectId } = useAppContext();
+  const [selected, setSelected] = useState<Asset | null>(null);
+  const [designationForm] = Form.useForm();
+
+  const assets = useQuery({
+    queryKey: ["assets", tenantId, projectId],
+    queryFn: () => listAssets({ tenant: tenantId, project: projectId ?? undefined, kind: "non_gateway" }),
+    enabled: Boolean(tenantId),
+  });
+
+  const invalidate = () => queryClient.invalidateQueries({ queryKey: ["assets", tenantId, projectId] });
+
+  const moveMutation = useMutation({
+    mutationFn: ({ id, parent }: { id: string; parent: string | null }) => updateAsset(id, { parent }),
+    onSuccess: invalidate,
+    onError: (err) => message.error(err instanceof Error ? err.message : "Error"),
+  });
+
+  const designationMutation = useMutation({
+    mutationFn: ({ aspect, code }: { aspect: string; code: string }) =>
+      setAssetDesignation(selected!.id, { aspect, code }),
+    onSuccess: () => {
+      message.success(t("assets.designationAssigned"));
+      designationForm.resetFields();
+      invalidate();
+    },
+    onError: (err) => message.error(err instanceof Error ? err.message : "Error"),
+  });
+
+  const treeData = useMemo(() => buildAssetTree(assets.data?.results ?? []), [assets.data]);
+
+  const onDrop: TreeProps["onDrop"] = (info) => {
+    const dragId = String(info.dragNode.key);
+    const dropId = String(info.node.key);
+    if (dragId === dropId) return;
+    const dropNode = info.node as { parent?: { key: React.Key } };
+    const targetParent = info.dropToGap ? ((dropNode.parent?.key as string | null) ?? null) : dropId;
+    moveMutation.mutate({ id: dragId, parent: targetParent });
+  };
+
+  const designations = selected?.designations as Record<string, unknown> | undefined;
+
+  return (
+    <Row gutter={16}>
+      <Col flex="360px">
+        <Card size="small" title={t("assets.hierarchy")}>
+          <Typography.Paragraph type="secondary" style={{ fontSize: 12 }}>
+            {t("assets.dragHint")}
+          </Typography.Paragraph>
+          {!tenantId && <Empty description={t("assets.noOrg")} />}
+          {tenantId && !assets.isLoading && treeData.length === 0 && <Empty description={t("assets.noData")} />}
+          <Tree
+            showLine
+            blockNode
+            draggable={{ icon: false }}
+            treeData={treeData}
+            selectedKeys={selected ? [selected.id] : []}
+            onSelect={(keys) => {
+              const id = keys[0] as string | undefined;
+              setSelected(id ? (assets.data?.results ?? []).find((a) => a.id === id) ?? null : null);
+            }}
+            onDrop={onDrop}
+          />
+        </Card>
+      </Col>
+      <Col flex="auto">
+        {!selected && <Empty description={t("assets.detail")} />}
+        {selected && (
+          <Card title={`${t("assets.detail")} — ${selected.name}`} extra={<Typography.Text type="secondary">{selected.external_ref}</Typography.Text>}>
+            <Descriptions size="small" column={2} bordered>
+              <Descriptions.Item label={t("assets.status")}>
+                <Tag color={selected.status === "active" ? "green" : selected.status === "retired" ? "orange" : "default"}>
+                  {selected.status}
+                </Tag>
+              </Descriptions.Item>
+              <Descriptions.Item label={t("assets.parent")}>{selected.parent ?? t("assets.noParent")}</Descriptions.Item>
+              <Descriptions.Item label="lat">{selected.latitude ?? "—"}</Descriptions.Item>
+              <Descriptions.Item label="lon">{selected.longitude ?? "—"}</Descriptions.Item>
+              <Descriptions.Item label="rel_x">{selected.rel_x ?? "—"}</Descriptions.Item>
+              <Descriptions.Item label="rel_y">{selected.rel_y ?? "—"}</Descriptions.Item>
+            </Descriptions>
+
+            <Typography.Title level={5} style={{ marginTop: 16 }}>
+              {t("assets.designations")}
+            </Typography.Title>
+            <Space direction="vertical" size={4}>
+              {Object.entries(designations ?? {})
+                .filter(([key]) => key !== "version" && key !== "history")
+                .map(([aspect, value]) => {
+                  const v = value as { code?: string; occurrence?: number };
+                  return (
+                    <Tag key={aspect}>
+                      {aspect}: {v.code}-{v.occurrence}
+                    </Tag>
+                  );
+                })}
+              {Object.keys(designations ?? {}).length === 0 && <Typography.Text type="secondary">—</Typography.Text>}
+            </Space>
+            <Form
+              form={designationForm}
+              layout="inline"
+              style={{ marginTop: 8 }}
+              onFinish={(values: { aspect: string; code: string }) => designationMutation.mutate(values)}
+            >
+              <Form.Item name="aspect" label={t("assets.designationAspect")} initialValue="function" rules={[{ required: true }]}>
+                <Select
+                  style={{ width: 130 }}
+                  options={[
+                    { value: "function", label: "=" },
+                    { value: "product", label: "-" },
+                    { value: "location", label: "+" },
+                    { value: "type", label: "%" },
+                  ]}
+                />
+              </Form.Item>
+              <Form.Item name="code" label={t("assets.designationCode")} rules={[{ required: true }]}>
+                <Input style={{ width: 120 }} />
+              </Form.Item>
+              <Button type="primary" htmlType="submit" loading={designationMutation.isPending}>
+                {t("assets.setDesignation")}
+              </Button>
+            </Form>
+          </Card>
+        )}
+      </Col>
+    </Row>
   );
 }

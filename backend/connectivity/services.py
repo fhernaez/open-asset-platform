@@ -161,6 +161,39 @@ def _ingest(
     )
 
 
+def ingest_device_payload(
+    gateway: Gateway,
+    binding: GatewayBinding,
+    payload: dict,
+    *,
+    transport: str = "mqtt",
+    source_event_id: str = "",
+) -> list[dict]:
+    """Map a decoded payload dict to a device's attributes (shared by all adapters).
+
+    Unknown keys become auto_discovered candidates per gateway config; only
+    active attributes are ingested.
+    """
+    config = gateway.config or {}
+    auto_discover = bool(config.get("auto_discover", False))
+    auto_accept = bool(config.get("auto_accept", False))
+    results: list[dict] = []
+    device = binding.asset
+    for key, value in payload.items():
+        attribute = _resolve_device_attribute(device, key, gateway, auto_discover, auto_accept, value)
+        if attribute is None or not attribute.is_active:
+            continue
+        result = _ingest(binding, attribute, value, gateway, binding.address, source_event_id, transport=transport)
+        results.append(
+            {
+                "attribute_id": str(attribute.id),
+                "auto_discovered": attribute.auto_discovered,
+                "counters": result.as_dict(),
+            }
+        )
+    return results
+
+
 def process_message(gateway_id: str, topic: str, payload: bytes | str, *, source_event_id: str = "") -> list[dict]:
     """Deliver a message to every binding of a gateway whose address matches."""
     try:
@@ -174,9 +207,6 @@ def process_message(gateway_id: str, topic: str, payload: bytes | str, *, source
     if not matched:
         return []
 
-    config = gateway.config or {}
-    auto_discover = bool(config.get("auto_discover", False))
-    auto_accept = bool(config.get("auto_accept", False))
     results: list[dict] = []
 
     for binding in matched:
@@ -188,23 +218,13 @@ def process_message(gateway_id: str, topic: str, payload: bytes | str, *, source
             results.append({"attribute_id": str(binding.attribute.id), "counters": result.as_dict()})
             continue
 
-        # Device binding: map payload keys to device attributes.
+        # Device binding: map payload keys to device attributes (shared pipeline).
         scope = extract(decoded, binding.mapping) if binding.mapping else decoded
         if not isinstance(scope, dict):
             continue
-        device = binding.asset
-        for key, value in scope.items():
-            attribute = _resolve_device_attribute(device, key, gateway, auto_discover, auto_accept, value)
-            if attribute is None or not attribute.is_active:
-                continue
-            result = _ingest(binding, attribute, value, gateway, topic, source_event_id)
-            results.append(
-                {
-                    "attribute_id": str(attribute.id),
-                    "auto_discovered": attribute.auto_discovered,
-                    "counters": result.as_dict(),
-                }
-            )
+        results.extend(
+            ingest_device_payload(gateway, binding, scope, transport="mqtt", source_event_id=source_event_id)
+        )
     return results
 
 
@@ -225,9 +245,21 @@ def ensure_gateway_asset_kind(gateway: Gateway) -> None:
 
 
 def test_gateway_connection(gateway: Gateway) -> dict:
-    """Attempt a REAL connection for the gateway protocol."""
-    if gateway.protocol != "mqtt":
-        return {"status": "not_implemented", "detail": f"adapter '{gateway.protocol}' aún no implementado."}
+    """Attempt a REAL connection for the gateway protocol (via its adapter)."""
+    from connectivity.adapters.registry import ADAPTERS
+
+    adapter = ADAPTERS.get(gateway.protocol)
+    if adapter is None:
+        return {"status": "not_implemented", "detail": f"adapter '{gateway.protocol}' no registrado."}
+    if gateway.protocol == "mqtt":
+        return _test_mqtt(gateway)
+    result = adapter.test(gateway)
+    status = result.get("status", "error")
+    Gateway.objects.filter(id=gateway.id).update(connection_status=status)
+    return result
+
+
+def _test_mqtt(gateway: Gateway) -> dict:
     config = gateway.config or {}
     host = config.get("host")
     if not host:

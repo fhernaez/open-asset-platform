@@ -52,6 +52,8 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 | OAP-ASS-005 | Catálogo semilla (~33 tipos) con defaults COMPLETOS por tipo (atributos con unidad/store/metadata Brick-Haystack), sembrado por organización, editable, versionado (`catalog_version` + `--refresh` no-custom) | G2 | VS (OpenRemote asset/impl + Brick/Haystack; ADR-016) |
 | OAP-ASS-006 | Tipologías por código: manifiestos `ASSET_TYPE_SCHEMA` versionados + `seed_asset_types` idempotente | G2 | VS (Node-RED nodos por código; ThingsBoard templates; ADR-016) |
 | OAP-ASS-007 | Representación visual: icono por tipología + imagen por activo + estado derivado (overlays/dashboards) | G2/G6 | VS (OpenRemote or-icon; ThingsBoard entity image; ADR-016) |
+| OAP-ASS-009 | Jerarquía de activos navegable (árbol drag&drop con re-parenting validado), activos de ubicación (`is_location` con geofence o imagen propia) y ubicación heredada relativa/geo de los hijos | G2/G6 | VS (OpenRemote asset tree; ADR-017) |
+| OAP-ASS-010 | Designaciones IEC/ISO 81346 versionadas por aspecto (=/-/+/%) con auto-ocurrencia; conformidad plena documentada como límite | G6 | NR (ADR-018) |
 
 ## OAP-CON — Conectividad (ADR-014; reemplaza OAP-MQT)
 
@@ -61,7 +63,7 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 | OAP-CON-002 | `GatewayBinding` genérica: gateway→asset→atributo con dirección (topic/registro) y mapeo JSONPath | G4 | NR (generalización de MqttBinding) |
 | OAP-CON-003 | Worker multi-adapter con registro por protocolo; adapter MQTT directo sin Node-RED | G4 | VS (OpenRemote mqtt protocol) |
 | OAP-CON-004 | Adapter Modbus RTU/TCP (lectura/escritura segura, polling) | G7 | VS (OpenRemote modbus; EdgeX device-modbus-go) |
-| OAP-CON-005 | Adapters OPC-UA, BACnet, SNMP, CAN (P2, declarados SPECIFIED hasta implementarse) | G9 | VS (OpenRemote snmp; EdgeX device-snmp-go; BACnet no existe en EdgeX) |
+| OAP-CON-005 | Adapters OPC-UA, BACnet, SNMP, CAN (P0 en esta iteración, con test-connection real y descubrimiento por protocolo) | G4 | VS (OpenRemote snmp; EdgeX device-snmp-go; BACnet no existe en EdgeX) |
 | OAP-CON-006 | Discovery y health de gateways/bindings | G4 | VS (OpenRemote gateway capabilities) |
 | OAP-CON-007 | Policy default por gateway + override por atributo (storageDatapoint) | G4 | NR (antes OAP-MQT-002/003) |
 | OAP-CON-008 | Máximo N muestras por ventana T por gateway/atributo, state y alarmas ANTES del filtro | G4 | NR (antes OAP-MQT-004/005) |
@@ -88,6 +90,7 @@ Nota de renumeración (ADR-014): `OAP-MQT-*` → `OAP-CON-*` (MQTT pasa a ser un
 |---|---|---|---|
 | OAP-SEM-001 | IEC/ISO 81346 función/producto/ubicación con historial de designaciones | G6 | NR |
 | OAP-SEM-002 | Brick/Haystack metadata, RDF proyectado y validado con SHACL | G6 | NR |
+| OAP-SEM-003 | Reglas declarativas en manifiestos (`rules`): atributos y relaciones requeridos evaluadas en línea de escritura | G2 | NR (ADR-018) |
 
 ## OAP-GIS — Espacial y mapas
 

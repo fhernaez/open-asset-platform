@@ -24,7 +24,15 @@ Actualizado: 2026-11-17 (UTC). Código construido: backend Django/DRF (core, pla
 
 ## Pendiente (plan aprobado)
 
-Adapters Modbus (P1) y OPC-UA/BACnet/SNMP/CAN (P2, SPECIFIED) → Reglas (G7) → CMMS (G5) → Integraciones/IA (G8) → G9. Validación real en el server del usuario.
+F5: validación real en el server del usuario (PostgreSQL/Mosquitto reales, E2E, `scripts/checklist`) → push + deploy. Reglas (G7) → CMMS (G5) → Integraciones/IA (G8) → G9.
+
+## C4 — Semántica + jerarquía + 5 adapters + dashboards tipo ThingsBoard (2026-11-19)
+
+- Backend: migración `assets/0006` (`is_location`, `rel_x/rel_y`, `geofence`, `image`, `designations`); designaciones 81346 versionadas con ocurrencia automática (`POST /assets/assets/{id}/designation/`); reglas de manifiesto validadas en create/update (422); proyección RDF (Brick/Haystack/OAP) + validación SHACL con `export_rdf`/`validate_semantics`; catálogo v3 con 11 tipos de ubicación (`is_location` + `designation_prefix` + `brick`).
+- Backend: 5 adapters de protocolo (Modbus RTU/TCP, OPC-UA, BACnet, SNMP, CAN) con `run_forever`/`test` reales, registro único y worker multi-protocolo; pipeline compartido `ingest_device_payload` (autodescubrimiento agnóstico) para todos los transportes; `test_gateway_connection` delega al adapter.
+- Backend: `POST /telemetry/trend` multi-atributo con downsampling (avg/LTTB) y flags de gap; `DashboardBundle` export/import, `DashboardTemplate` apply, catálogo de símbolos SCADA (`/dashboards/symbols/`), `ScenePlacement.symbol`; migración `dashboards/0002` + `spatial/0003`.
+- Frontend: Sider colapsable manual; pestaña Jerarquía (árbol drag&drop con `PATCH parent` + maestro-detalle con designaciones); DashboardsPage con react-grid-layout (drag/resize persistido), widget `trend` multi-serie/multi-eje con período y gaps, bundles/templates UI, símbolos SCADA en widget mapa; i18n es/en.
+- Evidencia: 82 pytest; ruff limpio; `makemigrations --check` sin cambios; OpenAPI regenerado (0 errores); npm lint/typecheck/test/build PASS; spec kit PASS.
 
 ## C3 — Idioma/timezone, usuarios, proyectos, MapConfig (2026-11-18)
 

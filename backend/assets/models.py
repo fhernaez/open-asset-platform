@@ -27,6 +27,7 @@ class AssetType(TenantScopedModel):
     name = models.CharField(max_length=200)
     code = models.SlugField(max_length=80)
     kind = models.CharField(max_length=16, choices=Kind.choices, default=Kind.STANDARD)
+    is_location = models.BooleanField(default=False)
     description = models.TextField(blank=True, default="")
     schema = models.JSONField(default=dict, blank=True)
 
@@ -52,6 +53,16 @@ class Asset(TenantScopedModel):
     metadata = models.JSONField(default=dict, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
+    # Location inheritance (ADR-017): relative to the nearest location-ancestor image.
+    rel_x = models.FloatField(null=True, blank=True)
+    rel_y = models.FloatField(null=True, blank=True)
+    # GeoJSON polygon (location assets) drawn on the global map.
+    geofence = models.JSONField(null=True, blank=True)
+    # Own image (location assets), uploaded to media/.
+    image = models.ImageField(upload_to="locations", null=True, blank=True, max_length=255)
+    # IEC/ISO 81346 designations, versioned per aspect (ADR-018):
+    # {aspect: {code, occurrence}, "version": n, "history": [...]}
+    designations = models.JSONField(default=dict, blank=True)
 
     class Meta:
         db_table = "assets_asset"

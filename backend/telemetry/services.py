@@ -50,6 +50,109 @@ class HistoryService:
             "samples": TelemetryPoint.objects.filter(attribute_id=attribute_id).count(),
         }
 
+    # Trend (widget trend multi-serie, ADR-019) -------------------------------
+    @staticmethod
+    def trend(
+        attribute_ids: list[str],
+        *,
+        from_ts=None,
+        to_ts=None,
+        interval_seconds: int | None = None,
+        downsample: str = "none",
+        max_points: int = 2000,
+    ) -> list[dict]:
+        """Multi-attribute series with optional bucket downsampling and gap flags."""
+        series: list[dict] = []
+        for attribute_id in attribute_ids:
+            rows = HistoryService.history(attribute_id, from_ts=from_ts, to_ts=to_ts, limit=20000)
+            points = [
+                {"ts": r.ts, "value": r.typed_value, "quality": r.quality}
+                for r in rows
+                if r.typed_value is not None
+            ]
+            if downsample == "avg" and interval_seconds:
+                points = _bucket_average(points, interval_seconds)
+            elif downsample == "lttb" and len(points) > max_points:
+                points = _lttb(points, max_points)
+            series.append(_with_gaps(points, interval_seconds))
+        return series
+
+
+_QUALITY_RANK = {"invalid": 0, "stale": 1, "good": 2}
+
+
+def _bucket_average(points: list[dict], interval_seconds: int) -> list[dict]:
+    if not points:
+        return []
+    buckets: dict[int, dict] = {}
+    for point in points:
+        key = int(point["ts"].timestamp() // interval_seconds)
+        bucket = buckets.get(key)
+        if bucket is None:
+            bucket = {"ts": point["ts"], "sum": 0.0, "count": 0, "quality": point["quality"]}
+            buckets[key] = bucket
+        try:
+            bucket["sum"] += float(point["value"])
+            bucket["count"] += 1
+        except (TypeError, ValueError):
+            continue
+        if _QUALITY_RANK.get(point["quality"], 2) < _QUALITY_RANK.get(bucket["quality"], 2):
+            bucket["quality"] = point["quality"]
+    result = []
+    for key in sorted(buckets):
+        bucket = buckets[key]
+        result.append({"ts": bucket["ts"], "value": bucket["sum"] / bucket["count"], "quality": bucket["quality"]})
+    return result
+
+
+def _lttb(points: list[dict], max_points: int) -> list[dict]:
+    """Largest-Triangle-Three-Buckets downsampling preserving visual shape."""
+    if len(points) <= max_points or max_points < 3:
+        return points
+    bucket_size = (len(points) - 2) / (max_points - 2)
+    sampled: list[dict] = [points[0]]
+    for i in range(max_points - 2):
+        start = int((i + 1) * bucket_size) + 1
+        end = int((i + 2) * bucket_size) + 1
+        end = min(end, len(points) - 1)
+        avg = {"ts": points[0]["ts"], "sum": 0.0, "count": 0}
+        for j in range(start, end):
+            avg["sum"] += float(points[j]["value"])
+            avg["count"] += 1
+        if avg["count"] == 0:
+            if start >= len(points):
+                break
+            sampled.append(points[start])
+            continue
+        previous = sampled[-1]
+        next_point = points[end]
+        max_area = -1.0
+        chosen = points[start]
+        for j in range(start, end):
+            area = abs(
+                (float(previous["ts"].timestamp()) - float(next_point["ts"].timestamp()))
+                * (float(points[j]["value"]) - float(previous["value"]))
+                - (float(previous["ts"].timestamp()) - float(points[j]["ts"].timestamp()))
+                * (float(next_point["value"]) - float(previous["value"]))
+            )
+            if area > max_area:
+                max_area = area
+                chosen = points[j]
+        sampled.append(chosen)
+    sampled.append(points[-1])
+    return sampled
+
+
+def _with_gaps(points: list[dict], interval_seconds: int | None) -> list[dict]:
+    threshold = (interval_seconds or 60) * 2.5
+    result = []
+    previous_ts = None
+    for point in points:
+        gap = previous_ts is not None and (point["ts"] - previous_ts).total_seconds() > threshold
+        result.append({"ts": point["ts"], "value": point["value"], "quality": point["quality"], "gap": gap})
+        previous_ts = point["ts"]
+    return result
+
 
 class StoragePolicyService:
     @staticmethod

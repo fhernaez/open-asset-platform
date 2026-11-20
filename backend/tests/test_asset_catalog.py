@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from assets.models import AssetType
 from assets.services import seed_catalog_for_tenant
-from assets.types_catalog.manifests import MANIFESTS
+from assets.types_catalog.manifests import CATALOG_VERSION, MANIFESTS
 from assets.types_catalog.validate import validate_manifest
 
 
@@ -86,7 +86,7 @@ def test_refresh_updates_non_custom(tenant):
     result = seed_catalog_for_tenant(tenant, refresh=True)
     assert result["types_updated"] >= 1
     ahu.refresh_from_db()
-    assert ahu.schema.get("catalog_version") == 2
+    assert ahu.schema.get("catalog_version") == CATALOG_VERSION
     assert len(ahu.schema.get("attributes", [])) >= 4
 
 
@@ -100,3 +100,14 @@ def test_refresh_skips_custom(tenant):
     assert ahu.schema.get("custom") is True
     assert [a.get("code") for a in ahu.schema.get("attributes", [])] == ["custom"]
     assert result["types_updated"] == 0 or ahu.schema.get("attributes")[0]["code"] == "custom"
+
+
+def test_location_types_seeded_with_semantics(tenant):
+    from assets.models import AssetType
+
+    location = AssetType.objects.get(tenant=tenant, code="building")
+    assert location.is_location is True
+    assert location.schema.get("designation_prefix") == "++"
+    assert location.schema.get("brick") == ["Building"]
+    for code in ("site", "floor", "room", "zone", "group", "city", "thing", "apartment", "area", "field"):
+        assert AssetType.objects.get(tenant=tenant, code=code).is_location is True

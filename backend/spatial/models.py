@@ -68,6 +68,8 @@ class ScenePlacement(models.Model):
     x = models.FloatField(null=True, blank=True)
     y = models.FloatField(null=True, blank=True)
     z = models.IntegerField(default=0)
+    # SCADA symbol key from the dashboards catalog (ADR-019, P2).
+    symbol = models.CharField(max_length=40, blank=True, default="")
 
     class Meta:
         db_table = "spatial_sceneplacement"

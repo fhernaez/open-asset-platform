@@ -116,3 +116,88 @@ class IngestView(APIView):
             topic=data.get("topic", ""),
         )
         return Response(result.as_dict(), status=status.HTTP_200_OK)
+
+
+def _parse_interval(value: str | None) -> int | None:
+    if not value:
+        return None
+    try:
+        return int(float(value))
+    except ValueError:
+        pass
+    multiplier = {"s": 1, "m": 60, "h": 3600, "d": 86400}
+    unit = value[-1]
+    try:
+        return int(float(value[:-1]) * multiplier[unit])
+    except (KeyError, ValueError):
+        return None
+
+
+class TrendView(APIView):
+    """Multi-attribute trend for the trend widget (ADR-019): POST attributes+range."""
+
+    permission_classes = [IsAuthenticated, TenantScopedPermission]
+    permission_required = "telemetry.view"
+
+    @extend_schema(request=OpenApiTypes.OBJECT, responses={"200": OpenApiTypes.OBJECT})
+    def post(self, request):
+        from assets.models import AssetAttribute
+        from core.errors import NotFoundError
+
+        attribute_ids = request.data.get("attributes") or []
+        if not isinstance(attribute_ids, list) or not attribute_ids:
+            return Response({"detail": "attributes (list) is required."}, status=400)
+        interval_seconds = _parse_interval(request.data.get("interval"))
+        downsample = request.data.get("downsample") or "none"
+        max_points = int(request.data.get("max_points") or 2000)
+        from_ts = request.data.get("from")
+        to_ts = request.data.get("to")
+
+        tenant_id = request.data.get("tenant")
+        if tenant_id:
+            from core.errors import PermissionDeniedError
+            from platforms.models import Membership
+            from platforms.services import require_membership
+
+            is_admin = request.user.is_superuser or getattr(request.user, "is_platform_admin", False)
+            membership = Membership.objects.filter(user=request.user, tenant_id=tenant_id, is_active=True).first()
+            if not is_admin and membership is None:
+                raise PermissionDeniedError("No active membership for the requested tenant.")
+            require_membership(request.user, membership.tenant if membership else None, "telemetry.view")
+        else:
+            from platforms.models import Membership
+
+            membership = Membership.objects.filter(user=request.user, is_active=True).first()
+            tenant_id = membership.tenant_id if membership else None
+        attributes = AssetAttribute.objects.select_related("unit").filter(
+            id__in=attribute_ids, tenant_id=tenant_id
+        )
+        by_id = {str(a.id): a for a in attributes}
+        if len(by_id) != len(set(str(i) for i in attribute_ids)):
+            missing = [str(i) for i in attribute_ids if str(i) not in by_id]
+            raise NotFoundError(f"Attributes not found for tenant: {', '.join(missing[:5])}.")
+
+        series = HistoryService.trend(
+            [str(a.id) for a in attributes],
+            from_ts=datetime.fromisoformat(from_ts.replace("Z", "+00:00")) if from_ts else None,
+            to_ts=datetime.fromisoformat(to_ts.replace("Z", "+00:00")) if to_ts else None,
+            interval_seconds=interval_seconds,
+            downsample=downsample,
+            max_points=max_points,
+        )
+        payload = []
+        for attribute, points in zip(attributes, series, strict=True):
+            unit = attribute.unit.symbol if attribute.unit is not None else None
+            payload.append(
+                {
+                    "attribute_id": str(attribute.id),
+                    "code": attribute.code,
+                    "name": attribute.name,
+                    "unit": unit,
+                    "points": [
+                        {"ts": p["ts"].isoformat(), "value": p["value"], "quality": p["quality"], "gap": p["gap"]}
+                        for p in points
+                    ],
+                }
+            )
+        return Response({"interval": request.data.get("interval"), "downsample": downsample, "series": payload})

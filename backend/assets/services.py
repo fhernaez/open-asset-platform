@@ -106,12 +106,16 @@ def seed_catalog_for_tenant(tenant, *, refresh: bool = False) -> dict:
         }
         if manifest.get("connection_schema"):
             schema["connection_schema"] = manifest["connection_schema"]
+        for key in ("rules", "haystack", "brick", "designation_prefix"):
+            if manifest.get(key):
+                schema[key] = manifest[key]
         labels = manifest.get("label_i18n") or {}
         descriptions = manifest.get("description_i18n") or {}
         icon = manifest.get("icon", "")
         defaults = {
             "name": str(labels.get("es") or manifest["code"])[:200],
             "kind": manifest.get("kind", "standard"),
+            "is_location": bool(manifest.get("is_location", False)),
             "description": str(descriptions.get("es", ""))[:500],
             "schema": {**schema, "icon": icon},
         }
@@ -129,8 +133,78 @@ def seed_catalog_for_tenant(tenant, *, refresh: bool = False) -> dict:
         if stored_version < manifest_version:
             obj.name = defaults["name"]
             obj.kind = defaults["kind"]
+            obj.is_location = defaults["is_location"]
             obj.description = defaults["description"]
             obj.schema = defaults["schema"]
-            obj.save(update_fields=["name", "kind", "description", "schema"])
+            obj.save(update_fields=["name", "kind", "is_location", "description", "schema"])
             updated_types += 1
     return {"types_created": created_types, "types_updated": updated_types, "units_created": created_units}
+
+
+def suggest_designation_occurrence(asset, aspect: str, code: str) -> int:
+    """Next occurrence number for an 81346 aspect+code within the same parent scope."""
+    from assets.models import Asset
+
+    siblings = Asset.objects.filter(tenant=asset.tenant, parent=asset.parent)
+    occurrences = []
+    for sibling in siblings:
+        value = (sibling.designations or {}).get(aspect)
+        if isinstance(value, dict) and value.get("code") == code:
+            try:
+                occurrences.append(int(value.get("occurrence", 0)))
+            except (TypeError, ValueError):
+                continue
+    return (max(occurrences) + 1) if occurrences else 1
+
+
+def set_designation(asset, aspect: str, code: str) -> dict:
+    """Set a versioned designation for an aspect (81346). Returns the updated map."""
+    from core.errors import ValidationError
+
+    code = code.strip()
+    if not code:
+        raise ValidationError(f"designation code for '{aspect}' is required.")
+    occurrence = suggest_designation_occurrence(asset, aspect, code)
+    current = dict(asset.designations or {})
+    previous = current.get(aspect)
+    history = list(current.get("history") or [])
+    if previous:
+        history.append({"aspect": aspect, **previous, "until": None})
+    current[aspect] = {"code": code, "occurrence": occurrence}
+    current["version"] = int(current.get("version", 0)) + 1
+    if previous:
+        history[-1]["until"] = current["version"]
+    current["history"] = history
+    asset.designations = current
+    asset.save(update_fields=["designations"])
+    return current
+
+
+def validate_manifest_rules(asset) -> list[str]:
+    """Evaluate declarative rules from the asset type manifest (ADR-018)."""
+    from assets.models import AssetRelationship
+
+    asset_type = asset.asset_type
+    if asset_type is None:
+        return []
+    rules = (asset_type.schema or {}).get("rules") or {}
+    errors: list[str] = []
+    required_attributes = rules.get("required_attributes") or []
+    existing_codes = set(asset.attributes.values_list("code", flat=True))
+    for code in required_attributes:
+        if code not in existing_codes:
+            errors.append(f"missing required attribute '{code}'.")
+    for relation_rule in rules.get("required_relations") or []:
+        relation = relation_rule.get("relation")
+        target_codes = relation_rule.get("target_codes") or []
+        found = AssetRelationship.objects.filter(
+            tenant=asset.tenant,
+            source=asset,
+            relation_type=relation,
+            target__asset_type__code__in=target_codes,
+        ).exists()
+        if not found:
+            errors.append(
+                f"missing required relation '{relation}' to types {target_codes}."
+            )
+    return errors

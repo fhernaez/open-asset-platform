@@ -9,7 +9,7 @@ solo tipos no customizados (`schema.custom=true` los excluye).
 
 from __future__ import annotations
 
-CATALOG_VERSION = 2
+CATALOG_VERSION = 3
 
 
 def _attr(
@@ -68,13 +68,28 @@ def _manifest(code: str, kind: str, icon: str, es: str, en: str, *, version: int
 
 
 MANIFESTS: list[dict] = [
-    # --- Espacios ---------------------------------------------------------
+    # --- Espacios (location assets, ADR-017) ------------------------------
+    _manifest(
+        "site",
+        "standard",
+        "site",
+        "Sitio",
+        "Site",
+        is_location=True,
+        designation_prefix="++",
+        brick=["Site"],
+        description_i18n={"es": "Emplazamiento o planta completa", "en": "Site or whole facility"},
+        attributes=[_attr("name", "Nombre", "Name", "string", brick=["Site"])],
+    ),
     _manifest(
         "building",
         "standard",
         "building",
         "Edificio",
         "Building",
+        is_location=True,
+        designation_prefix="++",
+        brick=["Building"],
         description_i18n={"es": "Inmueble o edificio gestionado", "en": "Managed building or facility"},
         attributes=[_attr("name", "Nombre", "Name", "string", brick=["Building"])],
     ),
@@ -84,6 +99,9 @@ MANIFESTS: list[dict] = [
         "floor",
         "Planta",
         "Floor",
+        is_location=True,
+        designation_prefix="+",
+        brick=["Floor"],
         description_i18n={"es": "Nivel o planta de un edificio", "en": "Floor or level of a building"},
         attributes=[_attr("name", "Nombre", "Name", "string", brick=["Floor"])],
     ),
@@ -93,6 +111,9 @@ MANIFESTS: list[dict] = [
         "room",
         "Sala",
         "Room",
+        is_location=True,
+        designation_prefix="+",
+        brick=["Room"],
         description_i18n={"es": "Espacio interior (habitación, sala)", "en": "Indoor space (room)"},
         attributes=[
             _attr("temp", "Temperatura", "Temperature", unit="°C", store=True, brick=["Zone_Air_Temperature_Sensor"]),
@@ -107,8 +128,80 @@ MANIFESTS: list[dict] = [
         "zone",
         "Zona",
         "Zone",
+        is_location=True,
+        designation_prefix="+",
+        brick=["Zone"],
         description_i18n={"es": "Agrupación funcional de espacios", "en": "Functional grouping of spaces"},
         attributes=[_attr("name", "Nombre", "Name", "string", brick=["HVAC_Zone"])],
+    ),
+    _manifest(
+        "group",
+        "standard",
+        "group",
+        "Grupo",
+        "Group",
+        is_location=True,
+        designation_prefix="=",
+        brick=["Collection"],
+        description_i18n={
+            "es": "Grupo jerárquico arbitrario de activos",
+            "en": "Arbitrary hierarchical group of assets",
+        },
+    ),
+    _manifest(
+        "city",
+        "standard",
+        "city",
+        "Ciudad",
+        "City",
+        is_location=True,
+        designation_prefix="++",
+        brick=["Site"],
+        description_i18n={"es": "Ciudad o municipio", "en": "City or municipality"},
+    ),
+    _manifest(
+        "thing",
+        "standard",
+        "thing",
+        "Cosa",
+        "Thing",
+        is_location=True,
+        designation_prefix="+",
+        brick=["Zone"],
+        description_i18n={"es": "Contenedor genérico (cosa)", "en": "Generic container (thing)"},
+    ),
+    _manifest(
+        "apartment",
+        "standard",
+        "apartment",
+        "Apartamento",
+        "Apartment",
+        is_location=True,
+        designation_prefix="+",
+        brick=["Room"],
+        description_i18n={"es": "Apartamento o unidad habitacional", "en": "Apartment or dwelling unit"},
+    ),
+    _manifest(
+        "area",
+        "standard",
+        "area",
+        "Área",
+        "Area",
+        is_location=True,
+        designation_prefix="+",
+        brick=["Zone"],
+        description_i18n={"es": "Área operativa", "en": "Operational area"},
+    ),
+    _manifest(
+        "field",
+        "standard",
+        "field",
+        "Recinto",
+        "Field",
+        is_location=True,
+        designation_prefix="+",
+        brick=["Site"],
+        description_i18n={"es": "Recinto exterior o campo", "en": "Outdoor enclosure or field"},
     ),
     # --- OpenRemote asset/impl -------------------------------------------
     _manifest(

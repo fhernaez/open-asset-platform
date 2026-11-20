@@ -1,4 +1,4 @@
-import { LogoutOutlined, PlusOutlined } from "@ant-design/icons";
+import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PlusOutlined } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Avatar, Button, Dropdown, Form, Input, Layout, Menu, Modal, Select, Space, Typography, message } from "antd";
 import { useMemo, useState } from "react";
@@ -21,6 +21,7 @@ export default function MainLayout() {
   const queryClient = useQueryClient();
   const [tenantModalOpen, setTenantModalOpen] = useState(false);
   const [projectModalOpen, setProjectModalOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const [tenantForm] = Form.useForm();
   const [projectForm] = Form.useForm();
 
@@ -71,8 +72,10 @@ export default function MainLayout() {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider breakpoint="lg" collapsedWidth={0}>
-        <div style={{ color: "#fff", padding: 16, fontWeight: 600 }}>{t("app.title")}</div>
+      <Sider collapsible collapsed={collapsed} trigger={null} width={230} breakpoint="lg" collapsedWidth={64} onBreakpoint={(broken) => setCollapsed(broken)}>
+        <div style={{ color: "#fff", padding: 16, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden" }}>
+          {collapsed ? "OAP" : t("app.title")}
+        </div>
         <Menu
           theme="dark"
           mode="inline"
@@ -93,6 +96,12 @@ export default function MainLayout() {
           }}
         >
           <Space wrap>
+            <Button
+              type="text"
+              aria-label="toggle-sider"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed((value) => !value)}
+            />
             <Select
               style={{ minWidth: 200 }}
               placeholder={t("common.organization")}

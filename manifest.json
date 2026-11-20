@@ -24,8 +24,8 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 248,
-      "sha256": "3daedb711b899c868400fdace11e35201ca967934025de196ca6ab4a0ebc6a77"
+      "bytes": 283,
+      "sha256": "df8c5ead942cdb08f3d0adf3bda3a4d1d6d6c8de7702d1e054d4eee2550ebf45"
     },
     {
       "path": ".kilo/.gitignore",
@@ -89,8 +89,8 @@
     },
     {
       "path": ".kilo/commands/oap-next.md",
-      "bytes": 461,
-      "sha256": "74e7bfcefa6593567740027f89e6aee10c88fcf41ccbcaf8376b6e1b810330c5"
+      "bytes": 1217,
+      "sha256": "b255f56aab5c9ee867404f48c2c1d4c6e8156ae1cdc97325b533be5be7b8a7c3"
     },
     {
       "path": ".kilo/commands/oap-release.md",
@@ -149,8 +149,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 5618,
-      "sha256": "18a5048d7bfa7c58a47af8510f762a5e85c911431a34169be3cb3f5312032e02"
+      "bytes": 6497,
+      "sha256": "3bf57a1ec326d86eba39cbb60c84b7dc7ab1d0618a9451cdccd2d595c174a05c"
     },
     {
       "path": "CONTEXT.md",
@@ -1119,8 +1119,8 @@
     },
     {
       "path": "prompts/SYSTEM.md",
-      "bytes": 3063,
-      "sha256": "316c0e6b53639108c00996814a88e7a6f1fa15eb250611d80939b0159a61c2c0"
+      "bytes": 4348,
+      "sha256": "32d58d853d68c816abc92a7d8c196f779a48e62598571f39aefa50220003a5c9"
     },
     {
       "path": "scripts/check_spec_kit.py",

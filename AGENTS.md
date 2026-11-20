@@ -8,11 +8,14 @@ Sos un ingeniero responsable de construir una plataforma FOSS reproducible. El u
 2. Si `.venv` no existe: ejecutar `python3 -m venv .venv` ANTES de instalar/ejecutar Python local. Comprobar `.venv/bin/python -c 'import sys; print(sys.prefix)'` y `sys.prefix != sys.base_prefix`. Todos los Python locales usan la ruta venv.
 3. Comprobar Docker y Compose; no ejecutar código externo ni escrituras sobre máquinas/sistemas reales sin permiso.
 4. Leer especificación y acceptance del módulo que estás implementando, contratos/eventos y limitaciones.
-5. Antes de modificar código: escribir objetivo, archivos afectados, tests a introducir, riesgos y criterios de aceptación en `docs/evidence/TASK_LOG.md`.
-6. Implementar migración + dominio + API + autorización + UI cuando aplique + tests + documentación. Correr gates. Registrar comandos y resultados reales.
+5. **Grafo primero**: antes de cualquier cambio de código, consultar el grafo de conocimiento vigente (`graphify-out/graph.json`) para los módulos afectados. Evita errores y ahorra tokens.
+6. Antes de modificar código: escribir objetivo, archivos afectados, tests a introducir, riesgos y criterios de aceptación en `docs/evidence/TASK_LOG.md`.
+7. Implementar migración + dominio + API + autorización + UI cuando aplique + tests + documentación. Correr gates. Registrar comandos y resultados reales.
+8. **Grafo después**: al terminar el cambio, regenerar `graphify extract /workspace/Open-Asset-Platform --code-only` y commitear los artefactos de `graphify-out/` en el MISMO commit del cambio.
 
 ## Límites estructurales
 - Stack: Django/DRF, React/TypeScript (rebuild UI: Ant Design + ECharts + React Router + TanStack Query + mocks MSW + Playwright); PostgreSQL plano + PostGIS (sin hypertables, ADR-013); MQTT; Docker Compose. OpenRemote y Atlas **SOLO referencias de auditoría** (commits fijados en `docs/research/REFERENCE_LOCK.md`), no dependencias de producción.
+- **Deploy por Komodo, únicamente.** El usuario despliega con Komodo (sincronizar repo → Build → Deploy). Prohibido darle instrucciones manuales de ssh/docker compose para el server. Todo ajuste de YAML se aplica a `compose.yaml` y `compose.komodo.yaml` en el repo; las dependencias (requirements.txt, package.json) se resuelven dentro de los builds de esos servicios. Nunca pedir al usuario compilar, buildear, editar archivos ni ejecutar comandos: el agente edita, verifica y commitea.
 - CORE independiente de addons; addons importan únicamente contratos públicos. NO consultar tablas privadas de otro bounded context ni hacer imports circulares.
 - Los plugins Django empaquetados en imagen no se descargan dinámicamente desde GUI. La GUI activa/desactiva funcionalidad instalada; código nuevo requiere build, migración y despliegue aprobados. Plugins externos funcionan como servicios aislados.
 - Identidad de activo UUID estable. IEC/ISO 81346 designaciones como valores versionados; Brick + Haystack metadata, RDF proyectado y validado con SHACL; GIS con planos locales y geoposiciones. Tipologías: formato único `ASSET_TYPE_SCHEMA` (manifiestos + `seed_asset_types`); visual = icono por tipo + imagen por activo + estado derivado (ADR-016); UI es/en con locale por organización.

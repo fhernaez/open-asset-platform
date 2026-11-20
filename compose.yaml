@@ -130,6 +130,13 @@ services:
     build:
       context: ./backend
     command: ["python", "manage.py", "connectivity_worker"]
+    # BACnet: broadcast UDP 47808 para whois/I-Am de gateways BACnet.
+    ports:
+      - "47808:47808/udp"
+    # Modbus RTU por puerto serie (descomentar si hay hardware serie):
+    # devices:
+    #   - "/dev/ttyUSB0:/dev/ttyUSB0"
+    #   - "/dev/ttyS0:/dev/ttyS0"
     environment:
       <<: *backend-env
     profiles: ["iot"]

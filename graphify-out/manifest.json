@@ -612,10 +612,10 @@
     "semantic_hash": "87a30e25c899b9ba7a5ee56512b20eec"
   },
   "manifest.json": {
-    "mtime": 1795110597.4851158,
-    "seen": 1795215914.124314,
-    "ast_hash": "bd76206dcf25560fe40821e6caf1dd3b",
-    "semantic_hash": "bd76206dcf25560fe40821e6caf1dd3b"
+    "mtime": 1795217414.2339206,
+    "seen": 1795217434.9926856,
+    "ast_hash": "45ac673127c2d6d7c02f8e41621a4083",
+    "semantic_hash": "45ac673127c2d6d7c02f8e41621a4083"
   },
   "scripts/check_spec_kit.py": {
     "mtime": 1794873954.2370377,

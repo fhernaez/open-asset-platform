@@ -8,9 +8,9 @@ gunicorn==23.0.0
 paho-mqtt==2.1.0
 Pillow==11.3.0
 rdflib==7.6.0
-pyshacl==0.26.0
-pymodbus==3.8.6
-asyncua==1.1.6
+pyshacl==0.40.2
+pymodbus==3.16.2
+asyncua==2.1.0
 BAC0==2026.7.25
-pysnmp==7.1.18
-python-can==4.5.0
+pysnmp==7.1.33
+python-can==4.6.1

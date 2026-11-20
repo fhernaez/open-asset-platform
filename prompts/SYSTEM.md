@@ -15,6 +15,10 @@ Actuá como arquitecto/ingeniero senior de sistemas distribuidos, BMS/IoT, CMMS 
 - Exigí autenticación y controles por tenant/proyecto/objeto en REST, WebSocket, MQTT, admin y MCP.
 - Antes de promover una etapa: ejecutar y capturar checks. No usar mocks como prueba de integración real. Nunca marcar PASS por ausencia de tests.
 - No deploy en cloud, no secrets, no control físico, no compras, no migraciones destructivas sin autorización del usuario.
+- Grafo de conocimiento: ANTES de cada cambio de código consultá el grafo vigente (`graphify-out/graph.json`, vía MCP graphify o búsqueda dirigida) para los módulos afectados: evita errores y ahorra tokens. DESPUÉS de cada cambio de código regenerá el grafo con `graphify extract /workspace/Open-Asset-Platform --code-only` y commiteá los artefactos regenerados (`graphify-out/`) en el MISMO commit del cambio.
+- Nunca pidas al usuario compilar, buildear, editar archivos ni ejecutar comandos de terminal. Toda instalación de dependencias se resuelve dentro de los builds de servicios definidos en `compose.yaml` y `compose.komodo.yaml` (pip/npm corren dentro del build). El agente edita, verifica y commitea; el usuario solo despliega.
+- El despliegue se hace exclusivamente vía Komodo (sincronizar repo → Build → Deploy). Prohibido dar instrucciones manuales de ssh/docker compose para el server. Todo ajuste de YAML se aplica al repo en `compose.yaml` y `compose.komodo.yaml`, nunca se dicta al usuario.
+- Guardas de irreversibilidad: nunca migraciones destructivas, nunca `docker compose down -v`, semillas y bootstrap idempotentes, versiones de imagen/build pineadas para rollback, revisar `git diff --cached` antes de commitear y nunca commitear secrets ni media.
 
 ## Coordinación Kilo
 Usá el agente líder para una tarea acotada; delegá exploración, dominios, UI y pruebas a subagentes cuando Kilo soporte delegación. Subagentes devuelven contratos y archivos cambiados, nunca invaden los dominios de otros sin acuerdo. El agente líder integra, corre gates, actualiza progreso y no inicia la fase siguiente con bloqueos abiertos.

@@ -772,18 +772,18 @@
       "backend_telemetry_services_rationale_1",
       "docs_core_telemetry_policy_6_datos_que_deben_almacenarse",
       "docs_evidence_task_log",
-      "docs_evidence_task_log_bit\u00e1cora_de_tareas_verificables"
+      "docs_evidence_task_log_bitácora_de_tareas_verificables"
     ],
     "23": [
       "docs_requirements_requirements",
-      "docs_requirements_requirements_m\u00f3dulos",
+      "docs_requirements_requirements_módulos",
       "docs_requirements_requirements_oap_aim_ia_local_y_mcp",
       "docs_requirements_requirements_oap_ass_asset_registry",
       "docs_requirements_requirements_oap_bms_oap_ems",
       "docs_requirements_requirements_oap_cmm_mantenimiento_paridad_atlas_mejoras_oap",
       "docs_requirements_requirements_oap_con_conectividad_adr_014_reemplaza_oap_mqt",
       "docs_requirements_requirements_oap_dsh_dashboards_e_insights",
-      "docs_requirements_requirements_oap_erp_integraci\u00f3n_erp",
+      "docs_requirements_requirements_oap_erp_integración_erp",
       "docs_requirements_requirements_oap_foss_legal",
       "docs_requirements_requirements_oap_gis_espacial_y_mapas",
       "docs_requirements_requirements_oap_nrd_node_red_bidireccional",
@@ -793,10 +793,10 @@
       "docs_requirements_requirements_oap_qly_calidad",
       "docs_requirements_requirements_oap_rul_reglas_alarmas_y_comandos",
       "docs_requirements_requirements_oap_sec_seguridad",
-      "docs_requirements_requirements_oap_sem_sem\u00e1ntica",
-      "docs_requirements_requirements_oap_tel_telemetr\u00eda_y_almacenamiento",
+      "docs_requirements_requirements_oap_sem_semántica",
+      "docs_requirements_requirements_oap_tel_telemetría_y_almacenamiento",
       "docs_requirements_requirements_oap_ui_frontend_rebuild_total",
-      "docs_requirements_requirements_reglas_de_aceptaci\u00f3n_sin_cambio",
+      "docs_requirements_requirements_reglas_de_aceptación_sin_cambio",
       "docs_requirements_requirements_requisitos_normativos_del_producto_v2_reestructurado_por_bounded_context"
     ],
     "24": [
@@ -820,8 +820,8 @@
       "backend_plugins_serializers_pluginactivationserializer",
       "backend_plugins_serializers_pluginserializer",
       "backend_plugins_serializers_pluginsettingsserializer",
-      "docs_architecture_master_architecture_6_composici\u00f3n_y_operaci\u00f3n",
-      "docs_contracts_plugin_contract_4_instalaci\u00f3n_y_habilitaci\u00f3n"
+      "docs_architecture_master_architecture_6_composición_y_operación",
+      "docs_contracts_plugin_contract_4_instalación_y_habilitación"
     ],
     "25": [
       "backend_assets_models_assettype",
@@ -1104,7 +1104,7 @@
       "backend_core_viewsets_require_perm",
       "dataclasses",
       "docs_contracts_mcp_security",
-      "docs_contracts_mcp_security_api_mcp_permisos_y_aprobaci\u00f3n",
+      "docs_contracts_mcp_security_api_mcp_permisos_y_aprobación",
       "docs_contracts_mcp_security_capas",
       "docs_contracts_mcp_security_herramientas_v1",
       "docs_contracts_mcp_security_scopes",
@@ -1168,17 +1168,17 @@
       "docs_architecture_master_architecture",
       "docs_architecture_master_architecture_10_seguridad_operacional",
       "docs_architecture_master_architecture_11_escalabilidad",
-      "docs_architecture_master_architecture_12_deploy_y_actualizaci\u00f3n",
-      "docs_architecture_master_architecture_13_foss_documentaci\u00f3n_p\u00fablica",
-      "docs_architecture_master_architecture_14_criterios_globales_de_aceptaci\u00f3n",
-      "docs_architecture_master_architecture_1_prop\u00f3sito_alcance_y_criterio_de_arquitectura",
+      "docs_architecture_master_architecture_12_deploy_y_actualización",
+      "docs_architecture_master_architecture_13_foss_documentación_pública",
+      "docs_architecture_master_architecture_14_criterios_globales_de_aceptación",
+      "docs_architecture_master_architecture_1_propósito_alcance_y_criterio_de_arquitectura",
       "docs_architecture_master_architecture_2_contexto_c4_actores_y_sistemas",
-      "docs_architecture_master_architecture_3_contenedores_l\u00f3gicos",
+      "docs_architecture_master_architecture_3_contenedores_lógicos",
       "docs_architecture_master_architecture_4_bounded_contexts",
-      "docs_architecture_master_architecture_5_regla_\u00fanica_de_autoridad",
+      "docs_architecture_master_architecture_5_regla_única_de_autoridad",
       "docs_architecture_master_architecture_7_datos_y_db",
       "docs_architecture_master_architecture_8_protocolos",
-      "docs_architecture_master_architecture_9_1_navegaci\u00f3n_men\u00fa_can\u00f3nico_adr_014",
+      "docs_architecture_master_architecture_9_1_navegación_menú_canónico_adr_014",
       "docs_architecture_master_architecture_9_api_ui_y_mcp",
       "docs_architecture_master_architecture_arquitectura_maestra_oap_autonomous_foss"
     ],
@@ -1200,17 +1200,17 @@
     ],
     "44": [
       "docs_plan_build_order",
-      "docs_plan_build_order_checklist_com\u00fan_final",
-      "docs_plan_build_order_plan_de_construcci\u00f3n_secuencial_para_kilo_code_no_crear_todos_los_plugins_de_una_vez",
+      "docs_plan_build_order_checklist_común_final",
+      "docs_plan_build_order_plan_de_construcción_secuencial_para_kilo_code_no_crear_todos_los_plugins_de_una_vez",
       "docs_plan_build_order_principios",
       "docs_plan_build_order_s00_antes_de_codificar",
-      "docs_plan_build_order_s01_bootstrap_y_vertical_m\u00ednimo",
+      "docs_plan_build_order_s01_bootstrap_y_vertical_mínimo",
       "docs_plan_build_order_s02_asset_transaccional",
-      "docs_plan_build_order_s03_plugins_y_configuraci\u00f3n",
-      "docs_plan_build_order_s04_mqtt_y_pol\u00edtica_cr\u00edtica",
+      "docs_plan_build_order_s03_plugins_y_configuración",
+      "docs_plan_build_order_s04_mqtt_y_política_crítica",
       "docs_plan_build_order_s05_cmms",
-      "docs_plan_build_order_s06_sem\u00e1ntica_gis_ui",
-      "docs_plan_build_order_s07_control_y_operaci\u00f3n",
+      "docs_plan_build_order_s06_semántica_gis_ui",
+      "docs_plan_build_order_s07_control_y_operación",
       "docs_plan_build_order_s08_integraciones_ia",
       "docs_plan_build_order_s09_paridad_y_hardening"
     ],
@@ -1246,7 +1246,7 @@
     ],
     "47": [
       "docs_plan_feature_backlog",
-      "docs_plan_feature_backlog_automatizaci\u00f3n_oap_rul",
+      "docs_plan_feature_backlog_automatización_oap_rul",
       "docs_plan_feature_backlog_backlog_estructurado_de_funcionalidades_v3_2026_11_17",
       "docs_plan_feature_backlog_bms_ems_oap_bms_oap_ems",
       "docs_plan_feature_backlog_dashboards_oap_dsh",
@@ -1256,35 +1256,35 @@
       "docs_plan_feature_backlog_mantenimiento_oap_cmm_paridad_atlas_verificada",
       "docs_plan_feature_backlog_plataforma_y_data_oap_plt_oap_ass_oap_ops",
       "docs_plan_feature_backlog_protocolos_oap_pro",
-      "docs_plan_feature_backlog_sem\u00e1ntica_y_gis_oap_sem_oap_gis",
-      "docs_plan_feature_backlog_telemetr\u00eda_y_almacenamiento_oap_tel_oap_mqt_diferenciador_oap"
+      "docs_plan_feature_backlog_semántica_y_gis_oap_sem_oap_gis",
+      "docs_plan_feature_backlog_telemetría_y_almacenamiento_oap_tel_oap_mqt_diferenciador_oap"
     ],
     "48": [
       "docs_plugins_cmms_operations_and_api",
-      "docs_plugins_cmms_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_cmms_operations_and_api_autorización_y_configuración",
       "docs_plugins_cmms_operations_and_api_cmms_operaciones_paso_a_paso_api_ux_y_fallas",
       "docs_plugins_cmms_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_cmms_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_cmms_operations_and_api_definition_of_done",
-      "docs_plugins_cmms_operations_and_api_flow_1_solicitud_pending_approved_rejected_auditable_aprobaci\u00f3n_crea_orden_idempotente",
+      "docs_plugins_cmms_operations_and_api_flow_1_solicitud_pending_approved_rejected_auditable_aprobación_crea_orden_idempotente",
       "docs_plugins_cmms_operations_and_api_flow_2_orden_new_assigned_in_progress_paused_completed_closed_con_reopening_autorizado_y_comentario_obligatorio",
-      "docs_plugins_cmms_operations_and_api_flow_3_plan_de_mantenimiento_calendario_o_medidor_condici\u00f3n_genera_como_m\u00e1ximo_1_orden_por_ciclo_definido",
-      "docs_plugins_cmms_operations_and_api_flow_4_registrar_t\u00e9cnico_tiempos_repuestos_usados_checklist_fotos_adjuntos_y_downtime_sin_p\u00e9rdida_de_historia",
-      "docs_plugins_cmms_operations_and_api_flow_5_alarma_bms_puede_crear_propuesta_de_orden_con_dedupe_por_correlation_id_cmms_no_act\u00faa_sobre_equipo_sin_comando_autorizado",
+      "docs_plugins_cmms_operations_and_api_flow_3_plan_de_mantenimiento_calendario_o_medidor_condición_genera_como_máximo_1_orden_por_ciclo_definido",
+      "docs_plugins_cmms_operations_and_api_flow_4_registrar_técnico_tiempos_repuestos_usados_checklist_fotos_adjuntos_y_downtime_sin_pérdida_de_historia",
+      "docs_plugins_cmms_operations_and_api_flow_5_alarma_bms_puede_crear_propuesta_de_orden_con_dedupe_por_correlation_id_cmms_no_actúa_sobre_equipo_sin_comando_autorizado",
       "docs_plugins_cmms_operations_and_api_ui_y_formularios",
       "docs_plugins_cmms_operations_and_api_workflows_normativos"
     ],
     "49": [
       "docs_plugins_nodered_operations_and_api",
-      "docs_plugins_nodered_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_nodered_operations_and_api_autorización_y_configuración",
       "docs_plugins_nodered_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_nodered_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_nodered_operations_and_api_definition_of_done",
       "docs_plugins_nodered_operations_and_api_flow_1_import_json_admin_api_y_parse_nodes_mqtt_in_out_config_topics_jsonpath_transforms_declarativas_detectar_funciones_js_no_inferibles_y_marcar_human_review",
-      "docs_plugins_nodered_operations_and_api_flow_2_proponer_assets_y_point_bindings_con_diff_identificaci\u00f3n_canonical_duplicados_y_escenario_no_reemplazar_derechos_proyecto_commit_tras_aprobaci\u00f3n",
-      "docs_plugins_nodered_operations_and_api_flow_3_exportar_pesta\u00f1a_flow_tab_nodes_mqtt_y_opcionales_transforms_placeholders_secrets_metadatos_oap_asset_id_y_hash_validar_antes_de_post_flow",
+      "docs_plugins_nodered_operations_and_api_flow_2_proponer_assets_y_point_bindings_con_diff_identificación_canonical_duplicados_y_escenario_no_reemplazar_derechos_proyecto_commit_tras_aprobación",
+      "docs_plugins_nodered_operations_and_api_flow_3_exportar_pestaña_flow_tab_nodes_mqtt_y_opcionales_transforms_placeholders_secrets_metadatos_oap_asset_id_y_hash_validar_antes_de_post_flow",
       "docs_plugins_nodered_operations_and_api_flow_4_actualizar_flow_existente_con_concurrency_check_hash_divergence_manual_ofrece_merge_review_en_lugar_de_overwrite",
-      "docs_plugins_nodered_operations_and_api_flow_5_disparar_proceso_mediante_webhook_autenticado_o_mqtt_evento_admin_api_se_reserva_a_gesti\u00f3n_de_flujos_no_ejecuci\u00f3n_normal",
+      "docs_plugins_nodered_operations_and_api_flow_5_disparar_proceso_mediante_webhook_autenticado_o_mqtt_evento_admin_api_se_reserva_a_gestión_de_flujos_no_ejecución_normal",
       "docs_plugins_nodered_operations_and_api_nodered_operaciones_paso_a_paso_api_ux_y_fallas",
       "docs_plugins_nodered_operations_and_api_ui_y_formularios",
       "docs_plugins_nodered_operations_and_api_workflows_normativos"
@@ -1305,13 +1305,13 @@
     ],
     "51": [
       "docs_evidence_implementation_status",
-      "docs_evidence_implementation_status_bloqueo_del_sandbox_no_es_d\u00e9ficit_de_c\u00f3digo",
-      "docs_evidence_implementation_status_bloques_de_c\u00f3digo_entregados",
-      "docs_evidence_implementation_status_c1_tipolog\u00edas_y_plantillas_2026_11_17",
-      "docs_evidence_implementation_status_c2_cat\u00e1logo_conectividad_y_ux_de_activos_2026_11_18",
+      "docs_evidence_implementation_status_bloqueo_del_sandbox_no_es_déficit_de_código",
+      "docs_evidence_implementation_status_bloques_de_código_entregados",
+      "docs_evidence_implementation_status_c1_tipologías_y_plantillas_2026_11_17",
+      "docs_evidence_implementation_status_c2_catálogo_conectividad_y_ux_de_activos_2026_11_18",
       "docs_evidence_implementation_status_c3_idioma_timezone_usuarios_proyectos_mapconfig_2026_11_18",
       "docs_evidence_implementation_status_comandos_exactos_para_reproducir",
-      "docs_evidence_implementation_status_estado_de_implementaci\u00f3n_actualizar_despu\u00e9s_de_cada_gate",
+      "docs_evidence_implementation_status_estado_de_implementación_actualizar_después_de_cada_gate",
       "docs_evidence_implementation_status_fase_0_y_fase_1_completadas_2026_11_17",
       "docs_evidence_implementation_status_pendiente_plan_aprobado",
       "docs_evidence_implementation_status_requisitos_cubiertos_traceability_resumida",
@@ -1320,178 +1320,178 @@
     "52": [
       "docs_plugins_ai_assistant_operations_and_api",
       "docs_plugins_ai_assistant_operations_and_api_ai_assistant_operaciones_paso_a_paso_api_ux_y_fallas",
-      "docs_plugins_ai_assistant_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_ai_assistant_operations_and_api_autorización_y_configuración",
       "docs_plugins_ai_assistant_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_ai_assistant_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_ai_assistant_operations_and_api_definition_of_done",
       "docs_plugins_ai_assistant_operations_and_api_flow_1_usuario_consulta_activos_y_fallas_rag_restringido_por_tenant_project_sobre_documentos_y_rdf_citar_source_ids_sin_inventar",
       "docs_plugins_ai_assistant_operations_and_api_flow_2_asistente_genera_propuesta_shacl_iec_node_red_maintenance_con_preview_diff_nunca_modifica_directo",
-      "docs_plugins_ai_assistant_operations_and_api_flow_3_si_solicita_acci\u00f3n_write_emite_mcp_tool_proposal_verifica_rbac_y_aprobaci\u00f3n_humana_graba_audit",
-      "docs_plugins_ai_assistant_operations_and_api_flow_4_sin_motor_llm_activo_core_y_plugins_restantes_contin\u00faan_y_gui_muestra_servicio_no_disponible",
+      "docs_plugins_ai_assistant_operations_and_api_flow_3_si_solicita_acción_write_emite_mcp_tool_proposal_verifica_rbac_y_aprobación_humana_graba_audit",
+      "docs_plugins_ai_assistant_operations_and_api_flow_4_sin_motor_llm_activo_core_y_plugins_restantes_continúan_y_gui_muestra_servicio_no_disponible",
       "docs_plugins_ai_assistant_operations_and_api_ui_y_formularios",
       "docs_plugins_ai_assistant_operations_and_api_workflows_normativos"
     ],
     "53": [
       "docs_plugins_ai_assistant_spec",
-      "docs_plugins_ai_assistant_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_ai_assistant_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_ai_assistant_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_ai_assistant_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_ai_assistant_spec_documentos_vinculados",
       "docs_plugins_ai_assistant_spec_eventos_permisos_y_estado",
       "docs_plugins_ai_assistant_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_ai_assistant_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_ai_assistant_spec_interfaz_react_criterios_ux",
       "docs_plugins_ai_assistant_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_ai_assistant_spec_plugin_ai_assistant_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_ai_assistant_spec_plugin_ai_assistant_especificación_funcional_y_técnica",
       "docs_plugins_ai_assistant_spec_problema_y_capacidades",
-      "docs_plugins_ai_assistant_spec_riesgos_espec\u00edficos"
+      "docs_plugins_ai_assistant_spec_riesgos_específicos"
     ],
     "54": [
       "docs_plugins_analytics_spec",
-      "docs_plugins_analytics_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_analytics_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_analytics_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_analytics_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_analytics_spec_documentos_vinculados",
       "docs_plugins_analytics_spec_eventos_permisos_y_estado",
       "docs_plugins_analytics_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_analytics_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_analytics_spec_interfaz_react_criterios_ux",
       "docs_plugins_analytics_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_analytics_spec_plugin_analytics_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_analytics_spec_plugin_analytics_especificación_funcional_y_técnica",
       "docs_plugins_analytics_spec_problema_y_capacidades",
-      "docs_plugins_analytics_spec_riesgos_espec\u00edficos"
+      "docs_plugins_analytics_spec_riesgos_específicos"
     ],
     "55": [
       "docs_plugins_bacnet_spec",
-      "docs_plugins_bacnet_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_bacnet_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_bacnet_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_bacnet_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_bacnet_spec_documentos_vinculados",
       "docs_plugins_bacnet_spec_eventos_permisos_y_estado",
       "docs_plugins_bacnet_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_bacnet_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_bacnet_spec_interfaz_react_criterios_ux",
       "docs_plugins_bacnet_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_bacnet_spec_plugin_bacnet_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_bacnet_spec_plugin_bacnet_especificación_funcional_y_técnica",
       "docs_plugins_bacnet_spec_problema_y_capacidades",
-      "docs_plugins_bacnet_spec_riesgos_espec\u00edficos"
+      "docs_plugins_bacnet_spec_riesgos_específicos"
     ],
     "56": [
       "docs_plugins_bms_operations_and_api",
-      "docs_plugins_bms_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_bms_operations_and_api_autorización_y_configuración",
       "docs_plugins_bms_operations_and_api_bms_operaciones_paso_a_paso_api_ux_y_fallas",
       "docs_plugins_bms_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_bms_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_bms_operations_and_api_definition_of_done",
-      "docs_plugins_bms_operations_and_api_flow_1_crear_building_floor_zones_y_equipos_vincular_puntos_brick_haystack_y_ubicaci\u00f3n_de_planos",
+      "docs_plugins_bms_operations_and_api_flow_1_crear_building_floor_zones_y_equipos_vincular_puntos_brick_haystack_y_ubicación_de_planos",
       "docs_plugins_bms_operations_and_api_flow_2_widget_hvac_muestra_temp_mode_setpoint_alarms_y_permite_propuesta_de_cambio_validada",
-      "docs_plugins_bms_operations_and_api_flow_3_planificador_horario_decide_comandos_con_interlocks_roles_y_registro_de_ejecuci\u00f3n",
-      "docs_plugins_bms_operations_and_api_flow_4_alarmas_y_mantenimiento_generan_orden_sugerida_sin_duplicaci\u00f3n_al_repetirse_un_trigger",
+      "docs_plugins_bms_operations_and_api_flow_3_planificador_horario_decide_comandos_con_interlocks_roles_y_registro_de_ejecución",
+      "docs_plugins_bms_operations_and_api_flow_4_alarmas_y_mantenimiento_generan_orden_sugerida_sin_duplicación_al_repetirse_un_trigger",
       "docs_plugins_bms_operations_and_api_ui_y_formularios",
       "docs_plugins_bms_operations_and_api_workflows_normativos"
     ],
     "57": [
       "docs_plugins_bms_spec",
-      "docs_plugins_bms_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_bms_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_bms_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_bms_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_bms_spec_documentos_vinculados",
       "docs_plugins_bms_spec_eventos_permisos_y_estado",
       "docs_plugins_bms_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_bms_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_bms_spec_interfaz_react_criterios_ux",
       "docs_plugins_bms_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_bms_spec_plugin_bms_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_bms_spec_plugin_bms_especificación_funcional_y_técnica",
       "docs_plugins_bms_spec_problema_y_capacidades",
-      "docs_plugins_bms_spec_riesgos_espec\u00edficos"
+      "docs_plugins_bms_spec_riesgos_específicos"
     ],
     "58": [
       "docs_plugins_cmms_spec",
-      "docs_plugins_cmms_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_cmms_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_cmms_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_cmms_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_cmms_spec_documentos_vinculados",
       "docs_plugins_cmms_spec_eventos_permisos_y_estado",
       "docs_plugins_cmms_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_cmms_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_cmms_spec_interfaz_react_criterios_ux",
       "docs_plugins_cmms_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_cmms_spec_plugin_cmms_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_cmms_spec_plugin_cmms_especificación_funcional_y_técnica",
       "docs_plugins_cmms_spec_problema_y_capacidades",
-      "docs_plugins_cmms_spec_riesgos_espec\u00edficos"
+      "docs_plugins_cmms_spec_riesgos_específicos"
     ],
     "59": [
       "docs_plugins_dashboards_spec",
-      "docs_plugins_dashboards_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_dashboards_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_dashboards_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_dashboards_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_dashboards_spec_documentos_vinculados",
       "docs_plugins_dashboards_spec_eventos_permisos_y_estado",
       "docs_plugins_dashboards_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_dashboards_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_dashboards_spec_interfaz_react_criterios_ux",
       "docs_plugins_dashboards_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_dashboards_spec_plugin_dashboards_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_dashboards_spec_plugin_dashboards_especificación_funcional_y_técnica",
       "docs_plugins_dashboards_spec_problema_y_capacidades",
-      "docs_plugins_dashboards_spec_riesgos_espec\u00edficos"
+      "docs_plugins_dashboards_spec_riesgos_específicos"
     ],
     "60": [
       "docs_plugins_edge_spec",
-      "docs_plugins_edge_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_edge_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_edge_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_edge_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_edge_spec_documentos_vinculados",
       "docs_plugins_edge_spec_eventos_permisos_y_estado",
       "docs_plugins_edge_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_edge_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_edge_spec_interfaz_react_criterios_ux",
       "docs_plugins_edge_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_edge_spec_plugin_edge_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_edge_spec_plugin_edge_especificación_funcional_y_técnica",
       "docs_plugins_edge_spec_problema_y_capacidades",
-      "docs_plugins_edge_spec_riesgos_espec\u00edficos"
+      "docs_plugins_edge_spec_riesgos_específicos"
     ],
     "61": [
       "docs_plugins_ems_operations_and_api",
-      "docs_plugins_ems_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_ems_operations_and_api_autorización_y_configuración",
       "docs_plugins_ems_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_ems_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_ems_operations_and_api_definition_of_done",
       "docs_plugins_ems_operations_and_api_ems_operaciones_paso_a_paso_api_ux_y_fallas",
-      "docs_plugins_ems_operations_and_api_flow_1_vincular_medidor_y_atributos_energ\u00eda_potencia_con_unidades_y_time_zone",
-      "docs_plugins_ems_operations_and_api_flow_2_calcular_demanda_punta_fuera_punta_y_consumo_por_per\u00edodo_con_calidad_no_gaps_silenciosos",
-      "docs_plugins_ems_operations_and_api_flow_3_simular_pv_bess_peak_shaving_separado_de_control_real_con_reserva_soc_y_l\u00edmites",
+      "docs_plugins_ems_operations_and_api_flow_1_vincular_medidor_y_atributos_energía_potencia_con_unidades_y_time_zone",
+      "docs_plugins_ems_operations_and_api_flow_2_calcular_demanda_punta_fuera_punta_y_consumo_por_período_con_calidad_no_gaps_silenciosos",
+      "docs_plugins_ems_operations_and_api_flow_3_simular_pv_bess_peak_shaving_separado_de_control_real_con_reserva_soc_y_límites",
       "docs_plugins_ems_operations_and_api_flow_4_alertar_demanda_consumo_sobre_umbral_y_disparar_mantenimiento_si_data_quality_confirma",
       "docs_plugins_ems_operations_and_api_ui_y_formularios",
       "docs_plugins_ems_operations_and_api_workflows_normativos"
     ],
     "62": [
       "docs_plugins_ems_spec",
-      "docs_plugins_ems_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_ems_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_ems_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_ems_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_ems_spec_documentos_vinculados",
       "docs_plugins_ems_spec_eventos_permisos_y_estado",
       "docs_plugins_ems_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_ems_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_ems_spec_interfaz_react_criterios_ux",
       "docs_plugins_ems_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_ems_spec_plugin_ems_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_ems_spec_plugin_ems_especificación_funcional_y_técnica",
       "docs_plugins_ems_spec_problema_y_capacidades",
-      "docs_plugins_ems_spec_riesgos_espec\u00edficos"
+      "docs_plugins_ems_spec_riesgos_específicos"
     ],
     "63": [
       "docs_plugins_erp_spec",
-      "docs_plugins_erp_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_erp_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_erp_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_erp_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_erp_spec_documentos_vinculados",
       "docs_plugins_erp_spec_eventos_permisos_y_estado",
       "docs_plugins_erp_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_erp_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_erp_spec_interfaz_react_criterios_ux",
       "docs_plugins_erp_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_erp_spec_plugin_erp_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_erp_spec_plugin_erp_especificación_funcional_y_técnica",
       "docs_plugins_erp_spec_problema_y_capacidades",
-      "docs_plugins_erp_spec_riesgos_espec\u00edficos"
+      "docs_plugins_erp_spec_riesgos_específicos"
     ],
     "64": [
       "docs_plugins_http_ws_operations_and_api",
-      "docs_plugins_http_ws_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_http_ws_operations_and_api_autorización_y_configuración",
       "docs_plugins_http_ws_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_http_ws_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_http_ws_operations_and_api_definition_of_done",
-      "docs_plugins_http_ws_operations_and_api_flow_1_configurar_url_y_m\u00e9todo_comprobar_allowlist_dns_ip_https_y_auth_secret_reference",
+      "docs_plugins_http_ws_operations_and_api_flow_1_configurar_url_y_método_comprobar_allowlist_dns_ip_https_y_auth_secret_reference",
       "docs_plugins_http_ws_operations_and_api_flow_2_poll_y_parse_jsonpath_a_atributos_respetar_las_mismas_storagepolicy_que_mqtt",
       "docs_plugins_http_ws_operations_and_api_flow_3_webhook_firmado_valida_origen_timestamp_replay_proyecto_y_schema",
       "docs_plugins_http_ws_operations_and_api_flow_4_websocket_reconnect_con_backoff_y_carga_acotada",
@@ -1501,129 +1501,129 @@
     ],
     "65": [
       "docs_plugins_http_ws_spec",
-      "docs_plugins_http_ws_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_http_ws_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_http_ws_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_http_ws_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_http_ws_spec_documentos_vinculados",
       "docs_plugins_http_ws_spec_eventos_permisos_y_estado",
       "docs_plugins_http_ws_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_http_ws_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_http_ws_spec_interfaz_react_criterios_ux",
       "docs_plugins_http_ws_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_http_ws_spec_plugin_http_ws_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_http_ws_spec_plugin_http_ws_especificación_funcional_y_técnica",
       "docs_plugins_http_ws_spec_problema_y_capacidades",
-      "docs_plugins_http_ws_spec_riesgos_espec\u00edficos"
+      "docs_plugins_http_ws_spec_riesgos_específicos"
     ],
     "66": [
       "docs_plugins_inventory_spec",
-      "docs_plugins_inventory_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_inventory_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_inventory_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_inventory_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_inventory_spec_documentos_vinculados",
       "docs_plugins_inventory_spec_eventos_permisos_y_estado",
       "docs_plugins_inventory_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_inventory_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_inventory_spec_interfaz_react_criterios_ux",
       "docs_plugins_inventory_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_inventory_spec_plugin_inventory_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_inventory_spec_plugin_inventory_especificación_funcional_y_técnica",
       "docs_plugins_inventory_spec_problema_y_capacidades",
-      "docs_plugins_inventory_spec_riesgos_espec\u00edficos"
+      "docs_plugins_inventory_spec_riesgos_específicos"
     ],
     "67": [
       "docs_plugins_mcp_server_operations_and_api",
-      "docs_plugins_mcp_server_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_mcp_server_operations_and_api_autorización_y_configuración",
       "docs_plugins_mcp_server_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_mcp_server_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_mcp_server_operations_and_api_definition_of_done",
       "docs_plugins_mcp_server_operations_and_api_flow_1_publicar_tools_lectura_assets_search_get_graph_scenes_get_telemetry_query_bounded_y_semantic_validate_limits",
-      "docs_plugins_mcp_server_operations_and_api_flow_2_exponer_tools_de_escritura_inicialmente_solo_propose_confirmar_produce_cambio_mediante_servicios_drf_con_auditor\u00eda",
-      "docs_plugins_mcp_server_operations_and_api_flow_3_aceptar_s\u00f3lo_transporte_recomendado_por_sdk_vigente_y_validar_tokens_issuer_audience_scope_tls_no_exponer_creds_llm",
-      "docs_plugins_mcp_server_operations_and_api_flow_4_deshabilitar_plugin_inmediatamente_bloquea_nuevas_invocaciones_y_mantiene_auditor\u00eda",
+      "docs_plugins_mcp_server_operations_and_api_flow_2_exponer_tools_de_escritura_inicialmente_solo_propose_confirmar_produce_cambio_mediante_servicios_drf_con_auditoría",
+      "docs_plugins_mcp_server_operations_and_api_flow_3_aceptar_sólo_transporte_recomendado_por_sdk_vigente_y_validar_tokens_issuer_audience_scope_tls_no_exponer_creds_llm",
+      "docs_plugins_mcp_server_operations_and_api_flow_4_deshabilitar_plugin_inmediatamente_bloquea_nuevas_invocaciones_y_mantiene_auditoría",
       "docs_plugins_mcp_server_operations_and_api_mcp_server_operaciones_paso_a_paso_api_ux_y_fallas",
       "docs_plugins_mcp_server_operations_and_api_ui_y_formularios",
       "docs_plugins_mcp_server_operations_and_api_workflows_normativos"
     ],
     "68": [
       "docs_plugins_mcp_server_spec",
-      "docs_plugins_mcp_server_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_mcp_server_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_mcp_server_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_mcp_server_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_mcp_server_spec_documentos_vinculados",
       "docs_plugins_mcp_server_spec_eventos_permisos_y_estado",
       "docs_plugins_mcp_server_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_mcp_server_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_mcp_server_spec_interfaz_react_criterios_ux",
       "docs_plugins_mcp_server_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_mcp_server_spec_plugin_mcp_server_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_mcp_server_spec_plugin_mcp_server_especificación_funcional_y_técnica",
       "docs_plugins_mcp_server_spec_problema_y_capacidades",
-      "docs_plugins_mcp_server_spec_riesgos_espec\u00edficos"
+      "docs_plugins_mcp_server_spec_riesgos_específicos"
     ],
     "69": [
       "docs_plugins_modbus_spec",
-      "docs_plugins_modbus_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_modbus_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_modbus_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_modbus_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_modbus_spec_documentos_vinculados",
       "docs_plugins_modbus_spec_eventos_permisos_y_estado",
       "docs_plugins_modbus_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_modbus_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_modbus_spec_interfaz_react_criterios_ux",
       "docs_plugins_modbus_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_modbus_spec_plugin_modbus_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_modbus_spec_plugin_modbus_especificación_funcional_y_técnica",
       "docs_plugins_modbus_spec_problema_y_capacidades",
-      "docs_plugins_modbus_spec_riesgos_espec\u00edficos"
+      "docs_plugins_modbus_spec_riesgos_específicos"
     ],
     "70": [
       "docs_plugins_mqtt_operations_and_api",
-      "docs_plugins_mqtt_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_mqtt_operations_and_api_autorización_y_configuración",
       "docs_plugins_mqtt_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_mqtt_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_mqtt_operations_and_api_definition_of_done",
-      "docs_plugins_mqtt_operations_and_api_flow_1_admin_registra_broker_tls_acl_y_agente_con_defaults_on_change_n_1h_configura_topic_jsonpath_y_prueba_preview_sin_escribir_hist\u00f3rico",
+      "docs_plugins_mqtt_operations_and_api_flow_1_admin_registra_broker_tls_acl_y_agente_con_defaults_on_change_n_1h_configura_topic_jsonpath_y_prueba_preview_sin_escribir_histórico",
       "docs_plugins_mqtt_operations_and_api_flow_2_el_broker_entrega_payload_validate_schema_type_unit_current_rules_storagepolicy_postgresql_el_agente_no_delega_sampling_en_node_red",
       "docs_plugins_mqtt_operations_and_api_flow_3_publish_de_command_solamente_mediante_commandservice_topics_allowlisted_ttl_retries_y_ack_si_disponible",
-      "docs_plugins_mqtt_operations_and_api_flow_4_autodiscovery_crea_propuesta_de_assets_attributes_no_provisiona_a_tenant_ni_publica_comandos_sin_confirmaci\u00f3n",
+      "docs_plugins_mqtt_operations_and_api_flow_4_autodiscovery_crea_propuesta_de_assets_attributes_no_provisiona_a_tenant_ni_publica_comandos_sin_confirmación",
       "docs_plugins_mqtt_operations_and_api_mqtt_operaciones_paso_a_paso_api_ux_y_fallas",
       "docs_plugins_mqtt_operations_and_api_ui_y_formularios",
       "docs_plugins_mqtt_operations_and_api_workflows_normativos"
     ],
     "71": [
       "docs_plugins_mqtt_spec",
-      "docs_plugins_mqtt_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_mqtt_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_mqtt_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_mqtt_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_mqtt_spec_documentos_vinculados",
       "docs_plugins_mqtt_spec_eventos_permisos_y_estado",
       "docs_plugins_mqtt_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_mqtt_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_mqtt_spec_interfaz_react_criterios_ux",
       "docs_plugins_mqtt_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_mqtt_spec_plugin_mqtt_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_mqtt_spec_plugin_mqtt_especificación_funcional_y_técnica",
       "docs_plugins_mqtt_spec_problema_y_capacidades",
-      "docs_plugins_mqtt_spec_riesgos_espec\u00edficos"
+      "docs_plugins_mqtt_spec_riesgos_específicos"
     ],
     "72": [
       "docs_plugins_nodered_spec",
-      "docs_plugins_nodered_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_nodered_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_nodered_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_nodered_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_nodered_spec_documentos_vinculados",
       "docs_plugins_nodered_spec_eventos_permisos_y_estado",
       "docs_plugins_nodered_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_nodered_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_nodered_spec_interfaz_react_criterios_ux",
       "docs_plugins_nodered_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_nodered_spec_plugin_nodered_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_nodered_spec_plugin_nodered_especificación_funcional_y_técnica",
       "docs_plugins_nodered_spec_problema_y_capacidades",
-      "docs_plugins_nodered_spec_riesgos_espec\u00edficos"
+      "docs_plugins_nodered_spec_riesgos_específicos"
     ],
     "73": [
       "docs_plugins_protocol_extensions_spec",
-      "docs_plugins_protocol_extensions_spec_configuraci\u00f3n_ambiental_solo_defaults_y_par\u00e1metros_de_despliegue",
-      "docs_plugins_protocol_extensions_spec_dependencias_contratos_p\u00fablicos_no_imports_privados",
+      "docs_plugins_protocol_extensions_spec_configuración_ambiental_solo_defaults_y_parámetros_de_despliegue",
+      "docs_plugins_protocol_extensions_spec_dependencias_contratos_públicos_no_imports_privados",
       "docs_plugins_protocol_extensions_spec_documentos_vinculados",
       "docs_plugins_protocol_extensions_spec_eventos_permisos_y_estado",
       "docs_plugins_protocol_extensions_spec_historias_de_usuario_y_workflows_de_extremo_a_extremo",
       "docs_plugins_protocol_extensions_spec_interfaz_http_endpoints_a_especificar_en_openapi_v1",
       "docs_plugins_protocol_extensions_spec_interfaz_react_criterios_ux",
       "docs_plugins_protocol_extensions_spec_modelo_propio_de_dominio_tablas_borrador_a_formalizar_migrando",
-      "docs_plugins_protocol_extensions_spec_plugin_protocol_extensions_especificaci\u00f3n_funcional_y_t\u00e9cnica",
+      "docs_plugins_protocol_extensions_spec_plugin_protocol_extensions_especificación_funcional_y_técnica",
       "docs_plugins_protocol_extensions_spec_problema_y_capacidades",
-      "docs_plugins_protocol_extensions_spec_riesgos_espec\u00edficos"
+      "docs_plugins_protocol_extensions_spec_riesgos_específicos"
     ],
     "74": [
       "frontend_package_dependencies",
@@ -1642,37 +1642,37 @@
     "75": [
       "docs_core_telemetry_policy",
       "docs_core_telemetry_policy_10_anti_patrones_bloqueantes",
-      "docs_core_telemetry_policy_1_dos_niveles_de_configuraci\u00f3n",
-      "docs_core_telemetry_policy_2_modelo_de_configuraci\u00f3n_propuesta",
-      "docs_core_telemetry_policy_3_sem\u00e1ntica_de_on_change",
-      "docs_core_telemetry_policy_4_l\u00edmite_n_muestras_por_ventana_t",
+      "docs_core_telemetry_policy_1_dos_niveles_de_configuración",
+      "docs_core_telemetry_policy_2_modelo_de_configuración_propuesta",
+      "docs_core_telemetry_policy_3_semántica_de_on_change",
+      "docs_core_telemetry_policy_4_límite_n_muestras_por_ventana_t",
       "docs_core_telemetry_policy_5_pipeline_obligatorio_orden",
-      "docs_core_telemetry_policy_7_replay_ca\u00edda_de_conexi\u00f3n_y_consistencia",
+      "docs_core_telemetry_policy_7_replay_caída_de_conexión_y_consistencia",
       "docs_core_telemetry_policy_8_api_rest_y_ui",
-      "docs_core_telemetry_policy_9_umbrales_y_aceptaci\u00f3n_no_solo_conteo_de_archivos",
-      "docs_core_telemetry_policy_contrato_normativo_telemetr\u00eda_mqtt_persistir_por_cambio_y_m\u00e1ximo_n_valores_per\u00edodo"
+      "docs_core_telemetry_policy_9_umbrales_y_aceptación_no_solo_conteo_de_archivos",
+      "docs_core_telemetry_policy_contrato_normativo_telemetría_mqtt_persistir_por_cambio_y_máximo_n_valores_período"
     ],
     "76": [
       "docs_plugins_analytics_operations_and_api",
       "docs_plugins_analytics_operations_and_api_analytics_operaciones_paso_a_paso_api_ux_y_fallas",
-      "docs_plugins_analytics_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_analytics_operations_and_api_autorización_y_configuración",
       "docs_plugins_analytics_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_analytics_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_analytics_operations_and_api_definition_of_done",
-      "docs_plugins_analytics_operations_and_api_flow_1_usuario_define_per\u00edodo_filtros_y_fuente_autorizada_api_optimiza_agregaciones_y_ofrece_csv_json_pdf_si_plugin_disponible",
-      "docs_plugins_analytics_operations_and_api_flow_2_hist\u00f3ricos_muestreados_reportan_policy_de_sampling_calidad_porcentaje_discarded",
+      "docs_plugins_analytics_operations_and_api_flow_1_usuario_define_período_filtros_y_fuente_autorizada_api_optimiza_agregaciones_y_ofrece_csv_json_pdf_si_plugin_disponible",
+      "docs_plugins_analytics_operations_and_api_flow_2_históricos_muestreados_reportan_policy_de_sampling_calidad_porcentaje_discarded",
       "docs_plugins_analytics_operations_and_api_flow_3_cmms_cost_downtime_mttr_mtbf_calculados_con_fixtures_conocidos",
       "docs_plugins_analytics_operations_and_api_ui_y_formularios",
       "docs_plugins_analytics_operations_and_api_workflows_normativos"
     ],
     "77": [
       "docs_plugins_bacnet_operations_and_api",
-      "docs_plugins_bacnet_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_bacnet_operations_and_api_autorización_y_configuración",
       "docs_plugins_bacnet_operations_and_api_bacnet_operaciones_paso_a_paso_api_ux_y_fallas",
       "docs_plugins_bacnet_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_bacnet_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_bacnet_operations_and_api_definition_of_done",
-      "docs_plugins_bacnet_operations_and_api_flow_1_descubrir_dispositivo_en_red_permitida_no_escanear_segmentos_arbitrarios_y_presentar_assets_properties_para_aprobaci\u00f3n",
+      "docs_plugins_bacnet_operations_and_api_flow_1_descubrir_dispositivo_en_red_permitida_no_escanear_segmentos_arbitrarios_y_presentar_assets_properties_para_aprobación",
       "docs_plugins_bacnet_operations_and_api_flow_2_leer_propiedades_con_calidad_e_timestamps_cov_con_renewal_y_fallback_poll_controlado",
       "docs_plugins_bacnet_operations_and_api_flow_3_writes_pasan_commandservice_y_config_de_prioridad_bacnet_documentada_y_auditada",
       "docs_plugins_bacnet_operations_and_api_ui_y_formularios",
@@ -1680,7 +1680,7 @@
     ],
     "78": [
       "docs_plugins_dashboards_operations_and_api",
-      "docs_plugins_dashboards_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_dashboards_operations_and_api_autorización_y_configuración",
       "docs_plugins_dashboards_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_dashboards_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_dashboards_operations_and_api_dashboards_operaciones_paso_a_paso_api_ux_y_fallas",
@@ -1693,7 +1693,7 @@
     ],
     "79": [
       "docs_plugins_edge_operations_and_api",
-      "docs_plugins_edge_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_edge_operations_and_api_autorización_y_configuración",
       "docs_plugins_edge_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_edge_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_edge_operations_and_api_definition_of_done",
@@ -1706,12 +1706,12 @@
     ],
     "80": [
       "docs_plugins_erp_operations_and_api",
-      "docs_plugins_erp_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_erp_operations_and_api_autorización_y_configuración",
       "docs_plugins_erp_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_erp_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_erp_operations_and_api_definition_of_done",
       "docs_plugins_erp_operations_and_api_erp_operaciones_paso_a_paso_api_ux_y_fallas",
-      "docs_plugins_erp_operations_and_api_flow_1_cmms_inventory_solicita_material_outbox_erp_adapter_crea_requisici\u00f3n_con_external_reference",
+      "docs_plugins_erp_operations_and_api_flow_1_cmms_inventory_solicita_material_outbox_erp_adapter_crea_requisición_con_external_reference",
       "docs_plugins_erp_operations_and_api_flow_2_erp_aprueba_compra_recibe_webhook_autenticado_o_poll_actualiza_estado_replicado_y_enlaza_a_work_order",
       "docs_plugins_erp_operations_and_api_flow_3_conflictos_y_retries_usan_idempotency_correlation_id_nunca_factura_oc_contable_en_oap",
       "docs_plugins_erp_operations_and_api_ui_y_formularios",
@@ -1719,20 +1719,20 @@
     ],
     "81": [
       "docs_plugins_inventory_operations_and_api",
-      "docs_plugins_inventory_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_inventory_operations_and_api_autorización_y_configuración",
       "docs_plugins_inventory_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_inventory_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_inventory_operations_and_api_definition_of_done",
-      "docs_plugins_inventory_operations_and_api_flow_1_stock_inicial_por_dep\u00f3sito_entrada_y_transferencia_con_movimiento_auditable",
-      "docs_plugins_inventory_operations_and_api_flow_2_orden_reserva_repuesto_y_al_cerrar_consume_con_transacci\u00f3n_serializable_o_lock",
-      "docs_plugins_inventory_operations_and_api_flow_3_stock_bajo_m\u00ednimo_produce_solicitud_de_abastecimiento_para_erp_connector_no_orden_de_compra_local",
+      "docs_plugins_inventory_operations_and_api_flow_1_stock_inicial_por_depósito_entrada_y_transferencia_con_movimiento_auditable",
+      "docs_plugins_inventory_operations_and_api_flow_2_orden_reserva_repuesto_y_al_cerrar_consume_con_transacción_serializable_o_lock",
+      "docs_plugins_inventory_operations_and_api_flow_3_stock_bajo_mínimo_produce_solicitud_de_abastecimiento_para_erp_connector_no_orden_de_compra_local",
       "docs_plugins_inventory_operations_and_api_inventory_operaciones_paso_a_paso_api_ux_y_fallas",
       "docs_plugins_inventory_operations_and_api_ui_y_formularios",
       "docs_plugins_inventory_operations_and_api_workflows_normativos"
     ],
     "82": [
       "docs_plugins_modbus_operations_and_api",
-      "docs_plugins_modbus_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_modbus_operations_and_api_autorización_y_configuración",
       "docs_plugins_modbus_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_modbus_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_modbus_operations_and_api_definition_of_done",
@@ -1745,26 +1745,26 @@
     ],
     "83": [
       "docs_plugins_mqtt_test_scenarios",
-      "docs_plugins_mqtt_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_mqtt_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_mqtt_test_scenarios_evidencia_gate",
       "docs_plugins_mqtt_test_scenarios_mqtt_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_mqtt_test_scenarios_suite_com\u00fan_no_negociable",
+      "docs_plugins_mqtt_test_scenarios_suite_común_no_negociable",
       "docs_plugins_mqtt_test_scenarios_test_01_1000_payloads_mismos_valores_1_fila_tsdb_1000_current_rule_observations_y_counters_correctos",
       "docs_plugins_mqtt_test_scenarios_test_02_cambios_1_2_2_3_3_filas_si_no_aplica_cap",
       "docs_plugins_mqtt_test_scenarios_test_03_agent_n_2_attribute_n_5_2_y_5_respectivamente_en_misma_ventana_persistente_al_reinicio",
       "docs_plugins_mqtt_test_scenarios_test_04_dos_workers_compiten_por_cuota_n_3_nunca_4_puntos",
       "docs_plugins_mqtt_test_scenarios_test_05_reconnect_qos1_replay_no_duplicated_history_403_publish_sin_permiso",
-      "docs_plugins_mqtt_test_scenarios_test_06_ning\u00fan_servicio_node_red_levantado_y_mqtt_sigue_funcionando"
+      "docs_plugins_mqtt_test_scenarios_test_06_ningún_servicio_node_red_levantado_y_mqtt_sigue_funcionando"
     ],
     "84": [
       "docs_plugins_protocol_extensions_operations_and_api",
-      "docs_plugins_protocol_extensions_operations_and_api_autorizaci\u00f3n_y_configuraci\u00f3n",
+      "docs_plugins_protocol_extensions_operations_and_api_autorización_y_configuración",
       "docs_plugins_protocol_extensions_operations_and_api_compatibilidad_error_handling_y_health",
       "docs_plugins_protocol_extensions_operations_and_api_contrato_http_a_implementar_y_documentar",
       "docs_plugins_protocol_extensions_operations_and_api_definition_of_done",
-      "docs_plugins_protocol_extensions_operations_and_api_flow_1_elegir_driver_de_cat\u00e1logo_validado_y_configurar_red_dispositivo_no_ejecutar_auto_discovery_indiscriminado",
-      "docs_plugins_protocol_extensions_operations_and_api_flow_2_mapear_datos_a_assetattribute_con_unidades_calidad_respetar_storagepolicy_gen\u00e9rica_y_commands_seguros",
-      "docs_plugins_protocol_extensions_operations_and_api_flow_3_proveer_implementaci\u00f3n_nativa_cuando_sea_viable_o_gateway_de_protocolo_documentado_sin_hacer_dependiente_la_app_de_node_red",
+      "docs_plugins_protocol_extensions_operations_and_api_flow_1_elegir_driver_de_catálogo_validado_y_configurar_red_dispositivo_no_ejecutar_auto_discovery_indiscriminado",
+      "docs_plugins_protocol_extensions_operations_and_api_flow_2_mapear_datos_a_assetattribute_con_unidades_calidad_respetar_storagepolicy_genérica_y_commands_seguros",
+      "docs_plugins_protocol_extensions_operations_and_api_flow_3_proveer_implementación_nativa_cuando_sea_viable_o_gateway_de_protocolo_documentado_sin_hacer_dependiente_la_app_de_node_red",
       "docs_plugins_protocol_extensions_operations_and_api_protocol_extensions_operaciones_paso_a_paso_api_ux_y_fallas",
       "docs_plugins_protocol_extensions_operations_and_api_ui_y_formularios",
       "docs_plugins_protocol_extensions_operations_and_api_workflows_normativos"
@@ -1785,12 +1785,12 @@
     "86": [
       "backend_core_viewsets_requestcontext",
       "docs_contracts_plugin_contract",
-      "docs_contracts_plugin_contract_1_objetivo_y_restricci\u00f3n_django",
-      "docs_contracts_plugin_contract_2_manifiesto_sem\u00e1ntica_a_implementarse",
+      "docs_contracts_plugin_contract_1_objetivo_y_restricción_django",
+      "docs_contracts_plugin_contract_2_manifiesto_semántica_a_implementarse",
       "docs_contracts_plugin_contract_3_apis_core_para_plugins",
       "docs_contracts_plugin_contract_5_api_rest_propuesta",
       "docs_contracts_plugin_contract_6_ui_extensionmanifest",
-      "docs_contracts_plugin_contract_7_actualizaci\u00f3n_y_compatibilidad",
+      "docs_contracts_plugin_contract_7_actualización_y_compatibilidad",
       "docs_contracts_plugin_contract_8_tests_obligatorios",
       "docs_contracts_plugin_contract_contrato_de_extensibilidad_oap_plugin_api_v1"
     ],
@@ -1799,177 +1799,177 @@
       "docs_core_api_realtime_casos_negativos_comunes",
       "docs_core_api_realtime_core_api_realtime",
       "docs_core_api_realtime_dependencias_y_compatibilidad",
-      "docs_core_api_realtime_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_api_realtime_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_api_realtime_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_api_realtime_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_api_realtime_flujo_de_implementación_mínimo",
       "docs_core_api_realtime_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_api_realtime_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_api_realtime_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_api_realtime_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_api_realtime_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "88": [
       "docs_core_asset_registry",
       "docs_core_asset_registry_casos_negativos_comunes",
       "docs_core_asset_registry_core_asset_registry",
       "docs_core_asset_registry_dependencias_y_compatibilidad",
-      "docs_core_asset_registry_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_asset_registry_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_asset_registry_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_asset_registry_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_asset_registry_flujo_de_implementación_mínimo",
       "docs_core_asset_registry_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_asset_registry_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_asset_registry_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_asset_registry_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_asset_registry_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "89": [
       "docs_core_attributes_commands",
       "docs_core_attributes_commands_casos_negativos_comunes",
       "docs_core_attributes_commands_core_attributes_commands",
       "docs_core_attributes_commands_dependencias_y_compatibilidad",
-      "docs_core_attributes_commands_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_attributes_commands_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_attributes_commands_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_attributes_commands_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_attributes_commands_flujo_de_implementación_mínimo",
       "docs_core_attributes_commands_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_attributes_commands_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_attributes_commands_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_attributes_commands_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_attributes_commands_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "90": [
       "docs_core_configuration_secrets",
       "docs_core_configuration_secrets_casos_negativos_comunes",
       "docs_core_configuration_secrets_core_configuration_secrets",
       "docs_core_configuration_secrets_dependencias_y_compatibilidad",
-      "docs_core_configuration_secrets_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_configuration_secrets_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_configuration_secrets_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_configuration_secrets_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_configuration_secrets_flujo_de_implementación_mínimo",
       "docs_core_configuration_secrets_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_configuration_secrets_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_configuration_secrets_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_configuration_secrets_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_configuration_secrets_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "91": [
       "docs_core_dashboards_ui",
       "docs_core_dashboards_ui_casos_negativos_comunes",
       "docs_core_dashboards_ui_core_dashboards_ui",
       "docs_core_dashboards_ui_dependencias_y_compatibilidad",
-      "docs_core_dashboards_ui_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_dashboards_ui_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_dashboards_ui_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_dashboards_ui_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_dashboards_ui_flujo_de_implementación_mínimo",
       "docs_core_dashboards_ui_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_dashboards_ui_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_dashboards_ui_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_dashboards_ui_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_dashboards_ui_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "92": [
       "docs_core_edge_provisioning",
       "docs_core_edge_provisioning_casos_negativos_comunes",
       "docs_core_edge_provisioning_core_edge_provisioning",
       "docs_core_edge_provisioning_dependencias_y_compatibilidad",
-      "docs_core_edge_provisioning_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_edge_provisioning_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_edge_provisioning_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_edge_provisioning_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_edge_provisioning_flujo_de_implementación_mínimo",
       "docs_core_edge_provisioning_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_edge_provisioning_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_edge_provisioning_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_edge_provisioning_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_edge_provisioning_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "93": [
       "docs_core_events_outbox",
       "docs_core_events_outbox_casos_negativos_comunes",
       "docs_core_events_outbox_core_events_outbox",
       "docs_core_events_outbox_dependencias_y_compatibilidad",
-      "docs_core_events_outbox_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_events_outbox_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_events_outbox_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_events_outbox_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_events_outbox_flujo_de_implementación_mínimo",
       "docs_core_events_outbox_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_events_outbox_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_events_outbox_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_events_outbox_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_events_outbox_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "94": [
       "docs_core_identity_authz",
       "docs_core_identity_authz_casos_negativos_comunes",
       "docs_core_identity_authz_core_identity_authz",
       "docs_core_identity_authz_dependencias_y_compatibilidad",
-      "docs_core_identity_authz_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_identity_authz_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_identity_authz_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_identity_authz_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_identity_authz_flujo_de_implementación_mínimo",
       "docs_core_identity_authz_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_identity_authz_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_identity_authz_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_identity_authz_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_identity_authz_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "95": [
       "docs_core_notifications",
       "docs_core_notifications_casos_negativos_comunes",
       "docs_core_notifications_core_notifications",
       "docs_core_notifications_dependencias_y_compatibilidad",
-      "docs_core_notifications_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_notifications_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_notifications_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_notifications_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_notifications_flujo_de_implementación_mínimo",
       "docs_core_notifications_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_notifications_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_notifications_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_notifications_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_notifications_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "96": [
       "docs_core_plugin_manager",
       "docs_core_plugin_manager_casos_negativos_comunes",
       "docs_core_plugin_manager_core_plugin_manager",
       "docs_core_plugin_manager_dependencias_y_compatibilidad",
-      "docs_core_plugin_manager_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_plugin_manager_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_plugin_manager_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_plugin_manager_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_plugin_manager_flujo_de_implementación_mínimo",
       "docs_core_plugin_manager_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_plugin_manager_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_plugin_manager_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_plugin_manager_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_plugin_manager_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "97": [
       "docs_core_projects_tenants",
       "docs_core_projects_tenants_casos_negativos_comunes",
       "docs_core_projects_tenants_core_projects_tenants",
       "docs_core_projects_tenants_dependencias_y_compatibilidad",
-      "docs_core_projects_tenants_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_projects_tenants_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_projects_tenants_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_projects_tenants_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_projects_tenants_flujo_de_implementación_mínimo",
       "docs_core_projects_tenants_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_projects_tenants_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_projects_tenants_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_projects_tenants_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_projects_tenants_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "98": [
       "docs_core_rules_alarms",
       "docs_core_rules_alarms_casos_negativos_comunes",
       "docs_core_rules_alarms_core_rules_alarms",
       "docs_core_rules_alarms_dependencias_y_compatibilidad",
-      "docs_core_rules_alarms_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_rules_alarms_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_rules_alarms_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_rules_alarms_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_rules_alarms_flujo_de_implementación_mínimo",
       "docs_core_rules_alarms_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_rules_alarms_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_rules_alarms_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_rules_alarms_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_rules_alarms_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "99": [
       "docs_core_semantics_81346_brick_haystack",
       "docs_core_semantics_81346_brick_haystack_casos_negativos_comunes",
       "docs_core_semantics_81346_brick_haystack_core_semantics_81346_brick_haystack",
       "docs_core_semantics_81346_brick_haystack_dependencias_y_compatibilidad",
-      "docs_core_semantics_81346_brick_haystack_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_semantics_81346_brick_haystack_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_semantics_81346_brick_haystack_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_semantics_81346_brick_haystack_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_semantics_81346_brick_haystack_flujo_de_implementación_mínimo",
       "docs_core_semantics_81346_brick_haystack_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_semantics_81346_brick_haystack_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_semantics_81346_brick_haystack_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_semantics_81346_brick_haystack_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_semantics_81346_brick_haystack_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "100": [
       "docs_core_spatial_scenes",
       "docs_core_spatial_scenes_casos_negativos_comunes",
       "docs_core_spatial_scenes_core_spatial_scenes",
       "docs_core_spatial_scenes_dependencias_y_compatibilidad",
-      "docs_core_spatial_scenes_endpoints_propuestos_api_v1_documentaci\u00f3n_openapi_rbac_y_errores_uniformes",
+      "docs_core_spatial_scenes_endpoints_propuestos_api_v1_documentación_openapi_rbac_y_errores_uniformes",
       "docs_core_spatial_scenes_entidades_y_campos_propuestos_django_models_ajustar_con_adr_si_cambia",
-      "docs_core_spatial_scenes_flujo_de_implementaci\u00f3n_m\u00ednimo",
+      "docs_core_spatial_scenes_flujo_de_implementación_mínimo",
       "docs_core_spatial_scenes_invariantes_funcionales_reglas_de_negocio",
-      "docs_core_spatial_scenes_objetivo_de_producto_y_l\u00edmites_de_propiedad",
-      "docs_core_spatial_scenes_tests_contractuales_y_de_aceptaci\u00f3n_obligatorios"
+      "docs_core_spatial_scenes_objetivo_de_producto_y_límites_de_propiedad",
+      "docs_core_spatial_scenes_tests_contractuales_y_de_aceptación_obligatorios"
     ],
     "101": [
       "docs_plugins_nodered_test_scenarios",
-      "docs_plugins_nodered_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_nodered_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_nodered_test_scenarios_evidencia_gate",
       "docs_plugins_nodered_test_scenarios_nodered_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_nodered_test_scenarios_suite_com\u00fan_no_negociable",
+      "docs_plugins_nodered_test_scenarios_suite_común_no_negociable",
       "docs_plugins_nodered_test_scenarios_test_01_json_con_1_broker_2_sensors_preview_correcto_y_commit_idempotente",
-      "docs_plugins_nodered_test_scenarios_test_02_export_json_importable_a_pesta\u00f1a_node_red_v\u00e1lida_sin_credenciales",
+      "docs_plugins_nodered_test_scenarios_test_02_export_json_importable_a_pestaña_node_red_válida_sin_credenciales",
       "docs_plugins_nodered_test_scenarios_test_03_cambio_manual_de_flow_produce_conflicto_409_y_no_sobrescribe",
       "docs_plugins_nodered_test_scenarios_test_04_sin_node_red_la_plataforma_mqtt_sigue_funcionando_al_100",
       "docs_plugins_nodered_test_scenarios_test_05_webhook_no_autenticado_no_dispara_acciones"
@@ -2000,11 +2000,11 @@
     ],
     "104": [
       "agents",
-      "agents_calidad_y_no_regresi\u00f3n",
-      "agents_lectura_y_ejecuci\u00f3n_inicial_obligatoria",
-      "agents_l\u00edmites_estructurales",
+      "agents_calidad_y_no_regresión",
+      "agents_lectura_y_ejecución_inicial_obligatoria",
+      "agents_límites_estructurales",
       "agents_oap_instrucciones_vinculantes_para_cualquier_agente_de_kilo_code",
-      "agents_requisitos_auditor\u00eda_y_ui",
+      "agents_requisitos_auditoría_y_ui",
       "agents_rol_y_disciplina",
       "agents_salida_de_cada_tarea",
       "agents_si_faltan_herramientas_o_dependencias"
@@ -2034,31 +2034,31 @@
     "107": [
       "docs_plugins_ai_assistant_test_scenarios",
       "docs_plugins_ai_assistant_test_scenarios_ai_assistant_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_ai_assistant_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_ai_assistant_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_ai_assistant_test_scenarios_evidencia_gate",
-      "docs_plugins_ai_assistant_test_scenarios_suite_com\u00fan_no_negociable",
-      "docs_plugins_ai_assistant_test_scenarios_test_01_prompt_injection_en_documento_no_ampl\u00eda_scopes",
+      "docs_plugins_ai_assistant_test_scenarios_suite_común_no_negociable",
+      "docs_plugins_ai_assistant_test_scenarios_test_01_prompt_injection_en_documento_no_amplía_scopes",
       "docs_plugins_ai_assistant_test_scenarios_test_02_usuario_a_no_recupera_embeddings_documentos_de_b",
       "docs_plugins_ai_assistant_test_scenarios_test_03_llm_ausente_no_rompe_api_principal",
-      "docs_plugins_ai_assistant_test_scenarios_test_04_aprobaci\u00f3n_requerida_para_escribir_acciones_expiradas_no_ejecutan"
+      "docs_plugins_ai_assistant_test_scenarios_test_04_aprobación_requerida_para_escribir_acciones_expiradas_no_ejecutan"
     ],
     "108": [
       "docs_plugins_analytics_test_scenarios",
       "docs_plugins_analytics_test_scenarios_analytics_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_analytics_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_analytics_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_analytics_test_scenarios_evidencia_gate",
-      "docs_plugins_analytics_test_scenarios_suite_com\u00fan_no_negociable",
-      "docs_plugins_analytics_test_scenarios_test_01_c\u00e1lculo_mttr_mtbf_sobre_fixture_manual_coincide",
+      "docs_plugins_analytics_test_scenarios_suite_común_no_negociable",
+      "docs_plugins_analytics_test_scenarios_test_01_cálculo_mttr_mtbf_sobre_fixture_manual_coincide",
       "docs_plugins_analytics_test_scenarios_test_02_export_no_filtra_datos_tenant_externo",
-      "docs_plugins_analytics_test_scenarios_test_03_hist\u00f3ricos_sampling_no_producen_falsas_sumas_de_energ\u00eda",
-      "docs_plugins_analytics_test_scenarios_test_04_cotas_de_tama\u00f1o_timeout_evitan_consultas_costosas"
+      "docs_plugins_analytics_test_scenarios_test_03_históricos_sampling_no_producen_falsas_sumas_de_energía",
+      "docs_plugins_analytics_test_scenarios_test_04_cotas_de_tamaño_timeout_evitan_consultas_costosas"
     ],
     "109": [
       "docs_plugins_bacnet_test_scenarios",
       "docs_plugins_bacnet_test_scenarios_bacnet_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_bacnet_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_bacnet_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_bacnet_test_scenarios_evidencia_gate",
-      "docs_plugins_bacnet_test_scenarios_suite_com\u00fan_no_negociable",
+      "docs_plugins_bacnet_test_scenarios_suite_común_no_negociable",
       "docs_plugins_bacnet_test_scenarios_test_01_simulador_bacnet_discover_read_temperatura_offline_y_retry",
       "docs_plugins_bacnet_test_scenarios_test_02_subs_cov_expiry_re_subscribe_sin_duplicar",
       "docs_plugins_bacnet_test_scenarios_test_03_reject_write_a_property_read_only_y_sin_permissions",
@@ -2067,9 +2067,9 @@
     "110": [
       "docs_plugins_bms_test_scenarios",
       "docs_plugins_bms_test_scenarios_bms_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_bms_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_bms_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_bms_test_scenarios_evidencia_gate",
-      "docs_plugins_bms_test_scenarios_suite_com\u00fan_no_negociable",
+      "docs_plugins_bms_test_scenarios_suite_común_no_negociable",
       "docs_plugins_bms_test_scenarios_test_01_setpoint_fuera_rango_y_comando_no_autorizado_se_bloquea",
       "docs_plugins_bms_test_scenarios_test_02_control_en_zona_a_no_modifica_equipo_de_b",
       "docs_plugins_bms_test_scenarios_test_03_cambios_horarios_dst_no_duplican_comandos",
@@ -2078,10 +2078,10 @@
     "111": [
       "docs_plugins_cmms_test_scenarios",
       "docs_plugins_cmms_test_scenarios_cmms_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_cmms_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_cmms_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_cmms_test_scenarios_evidencia_gate",
-      "docs_plugins_cmms_test_scenarios_suite_com\u00fan_no_negociable",
-      "docs_plugins_cmms_test_scenarios_test_01_estado_inv\u00e1lido_o_usuario_sin_rol_devuelve_409_403_y_no_cambia",
+      "docs_plugins_cmms_test_scenarios_suite_común_no_negociable",
+      "docs_plugins_cmms_test_scenarios_test_01_estado_inválido_o_usuario_sin_rol_devuelve_409_403_y_no_cambia",
       "docs_plugins_cmms_test_scenarios_test_02_plan_recurrente_dst_y_2_workers_no_crea_orden_duplicada",
       "docs_plugins_cmms_test_scenarios_test_03_orden_cerrada_conserva_logs_adjuntos_audit_permisos_por_proyecto",
       "docs_plugins_cmms_test_scenarios_test_04_alarma_repetida_100_veces_genera_1_propuesta_por_incidencia"
@@ -2089,97 +2089,97 @@
     "112": [
       "docs_plugins_dashboards_test_scenarios",
       "docs_plugins_dashboards_test_scenarios_dashboards_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_dashboards_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_dashboards_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_dashboards_test_scenarios_evidencia_gate",
-      "docs_plugins_dashboards_test_scenarios_suite_com\u00fan_no_negociable",
+      "docs_plugins_dashboards_test_scenarios_suite_común_no_negociable",
       "docs_plugins_dashboards_test_scenarios_test_01_crear_editar_compartir_dashboard_e2e_con_reload",
-      "docs_plugins_dashboards_test_scenarios_test_02_widget_plugin_deshabilitado_queda_placeholder_sin_perder_configuraci\u00f3n",
+      "docs_plugins_dashboards_test_scenarios_test_02_widget_plugin_deshabilitado_queda_placeholder_sin_perder_configuración",
       "docs_plugins_dashboards_test_scenarios_test_03_sin_permiso_asset_widget_no_muestra_datos_sensibles",
       "docs_plugins_dashboards_test_scenarios_test_04_un_lote_1000_sensores_no_causa_miles_requests_no_paginadas"
     ],
     "113": [
       "docs_plugins_edge_test_scenarios",
       "docs_plugins_edge_test_scenarios_edge_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_edge_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_edge_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_edge_test_scenarios_evidencia_gate",
-      "docs_plugins_edge_test_scenarios_suite_com\u00fan_no_negociable",
-      "docs_plugins_edge_test_scenarios_test_01_500_eventos_offline_reanudados_sin_duplicar_l\u00edmite_spool_genera_m\u00e9trica",
+      "docs_plugins_edge_test_scenarios_suite_común_no_negociable",
+      "docs_plugins_edge_test_scenarios_test_01_500_eventos_offline_reanudados_sin_duplicar_límite_spool_genera_métrica",
       "docs_plugins_edge_test_scenarios_test_02_token_enroll_usado_dos_veces_rechazado",
       "docs_plugins_edge_test_scenarios_test_03_gateway_a_no_recibe_credenciales_points_de_b",
-      "docs_plugins_edge_test_scenarios_test_04_actualizaci\u00f3n_de_edge_no_destruye_cursor_queue"
+      "docs_plugins_edge_test_scenarios_test_04_actualización_de_edge_no_destruye_cursor_queue"
     ],
     "114": [
       "docs_plugins_ems_test_scenarios",
       "docs_plugins_ems_test_scenarios_ems_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_ems_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_ems_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_ems_test_scenarios_evidencia_gate",
-      "docs_plugins_ems_test_scenarios_suite_com\u00fan_no_negociable",
+      "docs_plugins_ems_test_scenarios_suite_común_no_negociable",
       "docs_plugins_ems_test_scenarios_test_01_kw_vs_kwh_consistencia_fixture_y_timezone_tarifaria",
-      "docs_plugins_ems_test_scenarios_test_02_agregaci\u00f3n_15_min_mensual_sin_doble_contar_puntos_repetidos",
-      "docs_plugins_ems_test_scenarios_test_03_escenario_no_ejecuta_comandos_f\u00edsicos",
+      "docs_plugins_ems_test_scenarios_test_02_agregación_15_min_mensual_sin_doble_contar_puntos_repetidos",
+      "docs_plugins_ems_test_scenarios_test_03_escenario_no_ejecuta_comandos_físicos",
       "docs_plugins_ems_test_scenarios_test_04_faltantes_se_reportan_en_vez_de_inventar_consumo"
     ],
     "115": [
       "docs_plugins_erp_test_scenarios",
       "docs_plugins_erp_test_scenarios_erp_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_erp_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_erp_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_erp_test_scenarios_evidencia_gate",
-      "docs_plugins_erp_test_scenarios_suite_com\u00fan_no_negociable",
-      "docs_plugins_erp_test_scenarios_test_01_dos_reintentos_de_un_pedido_una_requisici\u00f3n_externa",
-      "docs_plugins_erp_test_scenarios_test_02_callback_con_firma_err\u00f3nea_o_status_ilegal_no_modifica_estado",
+      "docs_plugins_erp_test_scenarios_suite_común_no_negociable",
+      "docs_plugins_erp_test_scenarios_test_01_dos_reintentos_de_un_pedido_una_requisición_externa",
+      "docs_plugins_erp_test_scenarios_test_02_callback_con_firma_errónea_o_status_ilegal_no_modifica_estado",
       "docs_plugins_erp_test_scenarios_test_03_erp_no_disponible_deja_outbox_pendiente_e_indicador",
       "docs_plugins_erp_test_scenarios_test_04_cmms_puede_seguir_operando_si_conector_erp_disabled"
     ],
     "116": [
       "docs_plugins_http_ws_test_scenarios",
-      "docs_plugins_http_ws_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_http_ws_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_http_ws_test_scenarios_evidencia_gate",
       "docs_plugins_http_ws_test_scenarios_http_ws_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_http_ws_test_scenarios_suite_com\u00fan_no_negociable",
+      "docs_plugins_http_ws_test_scenarios_suite_común_no_negociable",
       "docs_plugins_http_ws_test_scenarios_test_01_http_5xx_reintento_acotado_con_dlq",
       "docs_plugins_http_ws_test_scenarios_test_02_ssrf_contra_localhost_metadata_reservadas_bloqueado",
-      "docs_plugins_http_ws_test_scenarios_test_03_webhook_con_firma_inv\u00e1lida_o_replay_rechazado",
-      "docs_plugins_http_ws_test_scenarios_test_04_payload_m\u00e1ximo_falla_413_y_no_se_almacena"
+      "docs_plugins_http_ws_test_scenarios_test_03_webhook_con_firma_inválida_o_replay_rechazado",
+      "docs_plugins_http_ws_test_scenarios_test_04_payload_máximo_falla_413_y_no_se_almacena"
     ],
     "117": [
       "docs_plugins_inventory_test_scenarios",
-      "docs_plugins_inventory_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_inventory_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_inventory_test_scenarios_evidencia_gate",
       "docs_plugins_inventory_test_scenarios_inventory_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_inventory_test_scenarios_suite_com\u00fan_no_negociable",
-      "docs_plugins_inventory_test_scenarios_test_01_dos_\u00f3rdenes_compitiendo_stock_no_generan_qty_negativa",
+      "docs_plugins_inventory_test_scenarios_suite_común_no_negociable",
+      "docs_plugins_inventory_test_scenarios_test_01_dos_órdenes_compitiendo_stock_no_generan_qty_negativa",
       "docs_plugins_inventory_test_scenarios_test_02_cancelar_reserva_restaura_disponibilidad_una_sola_vez",
       "docs_plugins_inventory_test_scenarios_test_03_movimientos_con_unidad_equivocada_rechazados",
       "docs_plugins_inventory_test_scenarios_test_04_no_se_emite_una_oc_local_desde_este_plugin"
     ],
     "118": [
       "docs_plugins_mcp_server_test_scenarios",
-      "docs_plugins_mcp_server_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_mcp_server_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_mcp_server_test_scenarios_evidencia_gate",
       "docs_plugins_mcp_server_test_scenarios_mcp_server_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_mcp_server_test_scenarios_suite_com\u00fan_no_negociable",
+      "docs_plugins_mcp_server_test_scenarios_suite_común_no_negociable",
       "docs_plugins_mcp_server_test_scenarios_test_01_mcp_client_con_token_sin_scopes_obtiene_forbidden",
       "docs_plugins_mcp_server_test_scenarios_test_02_read_tool_nunca_entrega_assets_tenant_ajeno",
-      "docs_plugins_mcp_server_test_scenarios_test_03_tool_write_sin_aprobaci\u00f3n_devuelve_proposal_id_no_changes",
+      "docs_plugins_mcp_server_test_scenarios_test_03_tool_write_sin_aprobación_devuelve_proposal_id_no_changes",
       "docs_plugins_mcp_server_test_scenarios_test_04_mcp_disabled_no_expone_herramientas_y_no_rompe_core"
     ],
     "119": [
       "docs_plugins_modbus_test_scenarios",
-      "docs_plugins_modbus_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_modbus_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_modbus_test_scenarios_evidencia_gate",
       "docs_plugins_modbus_test_scenarios_modbus_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_modbus_test_scenarios_suite_com\u00fan_no_negociable",
+      "docs_plugins_modbus_test_scenarios_suite_común_no_negociable",
       "docs_plugins_modbus_test_scenarios_test_01_registro_40001_base1_vs_addr0_verificado_con_simulador",
       "docs_plugins_modbus_test_scenarios_test_02_poll_10_registros_sin_bloquear_django_api",
-      "docs_plugins_modbus_test_scenarios_test_03_timeout_retry_produce_quality_offline_y_no_ocupa_memoria_sin_l\u00edmite",
+      "docs_plugins_modbus_test_scenarios_test_03_timeout_retry_produce_quality_offline_y_no_ocupa_memoria_sin_límite",
       "docs_plugins_modbus_test_scenarios_test_04_write_denegado_no_llega_al_simulador"
     ],
     "120": [
       "docs_plugins_protocol_extensions_test_scenarios",
-      "docs_plugins_protocol_extensions_test_scenarios_escenarios_espec\u00edficos_obligatorios",
+      "docs_plugins_protocol_extensions_test_scenarios_escenarios_específicos_obligatorios",
       "docs_plugins_protocol_extensions_test_scenarios_evidencia_gate",
       "docs_plugins_protocol_extensions_test_scenarios_protocol_extensions_escenarios_given_when_then_y_evidencias",
-      "docs_plugins_protocol_extensions_test_scenarios_suite_com\u00fan_no_negociable",
+      "docs_plugins_protocol_extensions_test_scenarios_suite_común_no_negociable",
       "docs_plugins_protocol_extensions_test_scenarios_test_01_driver_disabled_no_accede_red",
       "docs_plugins_protocol_extensions_test_scenarios_test_02_contrato_de_datos_consistente_entre_mqtt_modbus_bacnet_opc_ua",
       "docs_plugins_protocol_extensions_test_scenarios_test_03_credenciales_de_protocolos_aisladas_y_no_visibles_en_export",
@@ -2193,7 +2193,7 @@
       "docs_quality_frontend_e2e_e2e_d_mantenimiento",
       "docs_quality_frontend_e2e_e2e_e_escenas",
       "docs_quality_frontend_e2e_e2e_f_integraciones",
-      "docs_quality_frontend_e2e_recorridos_playwright_e2e_de_aplicaci\u00f3n",
+      "docs_quality_frontend_e2e_recorridos_playwright_e2e_de_aplicación",
       "docs_quality_frontend_e2e_ux_checklist"
     ],
     "122": [
@@ -2218,10 +2218,10 @@
     ],
     "124": [
       "docs_agents_sandbox",
-      "docs_agents_sandbox_acciones_que_requieren_aprobaci\u00f3n",
+      "docs_agents_sandbox_acciones_que_requieren_aprobación",
       "docs_agents_sandbox_aislamiento_de_pruebas",
       "docs_agents_sandbox_ambiente_local_obligatorio",
-      "docs_agents_sandbox_condici\u00f3n_de_bloqueo",
+      "docs_agents_sandbox_condición_de_bloqueo",
       "docs_agents_sandbox_contrato_de_sandbox_local_docker_y_herramientas",
       "docs_agents_sandbox_docker",
       "docs_agents_sandbox_seguridad_de_agentes"
@@ -2232,8 +2232,8 @@
       "docs_architecture_adr_001_django_not_fastapi_alternativas_consideradas",
       "docs_architecture_adr_001_django_not_fastapi_consecuencias",
       "docs_architecture_adr_001_django_not_fastapi_contexto",
-      "docs_architecture_adr_001_django_not_fastapi_decisi\u00f3n",
-      "docs_architecture_adr_001_django_not_fastapi_pruebas_de_decisi\u00f3n",
+      "docs_architecture_adr_001_django_not_fastapi_decisión",
+      "docs_architecture_adr_001_django_not_fastapi_pruebas_de_decisión",
       "docs_architecture_adr_001_django_not_fastapi_referencias_internas"
     ],
     "126": [
@@ -2242,18 +2242,18 @@
       "docs_architecture_adr_002_self_contained_no_openremote_alternativas_consideradas",
       "docs_architecture_adr_002_self_contained_no_openremote_consecuencias",
       "docs_architecture_adr_002_self_contained_no_openremote_contexto",
-      "docs_architecture_adr_002_self_contained_no_openremote_decisi\u00f3n",
-      "docs_architecture_adr_002_self_contained_no_openremote_pruebas_de_decisi\u00f3n",
+      "docs_architecture_adr_002_self_contained_no_openremote_decisión",
+      "docs_architecture_adr_002_self_contained_no_openremote_pruebas_de_decisión",
       "docs_architecture_adr_002_self_contained_no_openremote_referencias_internas"
     ],
     "127": [
       "docs_architecture_adr_003_plugin_lifecycle",
-      "docs_architecture_adr_003_plugin_lifecycle_adr_m\u00f3dulos_estables_y_addons_administrables",
+      "docs_architecture_adr_003_plugin_lifecycle_adr_módulos_estables_y_addons_administrables",
       "docs_architecture_adr_003_plugin_lifecycle_alternativas_consideradas",
       "docs_architecture_adr_003_plugin_lifecycle_consecuencias",
       "docs_architecture_adr_003_plugin_lifecycle_contexto",
-      "docs_architecture_adr_003_plugin_lifecycle_decisi\u00f3n",
-      "docs_architecture_adr_003_plugin_lifecycle_pruebas_de_decisi\u00f3n",
+      "docs_architecture_adr_003_plugin_lifecycle_decisión",
+      "docs_architecture_adr_003_plugin_lifecycle_pruebas_de_decisión",
       "docs_architecture_adr_003_plugin_lifecycle_referencias_internas"
     ],
     "128": [
@@ -2262,8 +2262,8 @@
       "docs_architecture_adr_004_data_authority_alternativas_consideradas",
       "docs_architecture_adr_004_data_authority_consecuencias",
       "docs_architecture_adr_004_data_authority_contexto",
-      "docs_architecture_adr_004_data_authority_decisi\u00f3n",
-      "docs_architecture_adr_004_data_authority_pruebas_de_decisi\u00f3n",
+      "docs_architecture_adr_004_data_authority_decisión",
+      "docs_architecture_adr_004_data_authority_pruebas_de_decisión",
       "docs_architecture_adr_004_data_authority_referencias_internas"
     ],
     "129": [
@@ -2272,8 +2272,8 @@
       "docs_architecture_adr_005_telemetry_policies_alternativas_consideradas",
       "docs_architecture_adr_005_telemetry_policies_consecuencias",
       "docs_architecture_adr_005_telemetry_policies_contexto",
-      "docs_architecture_adr_005_telemetry_policies_decisi\u00f3n",
-      "docs_architecture_adr_005_telemetry_policies_pruebas_de_decisi\u00f3n",
+      "docs_architecture_adr_005_telemetry_policies_decisión",
+      "docs_architecture_adr_005_telemetry_policies_pruebas_de_decisión",
       "docs_architecture_adr_005_telemetry_policies_referencias_internas"
     ],
     "130": [
@@ -2282,8 +2282,8 @@
       "docs_architecture_adr_006_semantic_rdf_alternativas_consideradas",
       "docs_architecture_adr_006_semantic_rdf_consecuencias",
       "docs_architecture_adr_006_semantic_rdf_contexto",
-      "docs_architecture_adr_006_semantic_rdf_decisi\u00f3n",
-      "docs_architecture_adr_006_semantic_rdf_pruebas_de_decisi\u00f3n",
+      "docs_architecture_adr_006_semantic_rdf_decisión",
+      "docs_architecture_adr_006_semantic_rdf_pruebas_de_decisión",
       "docs_architecture_adr_006_semantic_rdf_referencias_internas"
     ],
     "131": [
@@ -2292,28 +2292,28 @@
       "docs_architecture_adr_007_spatial_alternativas_consideradas",
       "docs_architecture_adr_007_spatial_consecuencias",
       "docs_architecture_adr_007_spatial_contexto",
-      "docs_architecture_adr_007_spatial_decisi\u00f3n",
-      "docs_architecture_adr_007_spatial_pruebas_de_decisi\u00f3n",
+      "docs_architecture_adr_007_spatial_decisión",
+      "docs_architecture_adr_007_spatial_pruebas_de_decisión",
       "docs_architecture_adr_007_spatial_referencias_internas"
     ],
     "132": [
       "docs_architecture_adr_008_command_safety",
-      "docs_architecture_adr_008_command_safety_adr_seguridad_de_control_f\u00edsico",
+      "docs_architecture_adr_008_command_safety_adr_seguridad_de_control_físico",
       "docs_architecture_adr_008_command_safety_alternativas_consideradas",
       "docs_architecture_adr_008_command_safety_consecuencias",
       "docs_architecture_adr_008_command_safety_contexto",
-      "docs_architecture_adr_008_command_safety_decisi\u00f3n",
-      "docs_architecture_adr_008_command_safety_pruebas_de_decisi\u00f3n",
+      "docs_architecture_adr_008_command_safety_decisión",
+      "docs_architecture_adr_008_command_safety_pruebas_de_decisión",
       "docs_architecture_adr_008_command_safety_referencias_internas"
     ],
     "133": [
       "docs_architecture_adr_009_docker_db_bootstrap",
-      "docs_architecture_adr_009_docker_db_bootstrap_adr_bootstrap_autom\u00e1tico_postgresql",
+      "docs_architecture_adr_009_docker_db_bootstrap_adr_bootstrap_automático_postgresql",
       "docs_architecture_adr_009_docker_db_bootstrap_alternativas_consideradas",
       "docs_architecture_adr_009_docker_db_bootstrap_consecuencias",
       "docs_architecture_adr_009_docker_db_bootstrap_contexto",
-      "docs_architecture_adr_009_docker_db_bootstrap_decisi\u00f3n",
-      "docs_architecture_adr_009_docker_db_bootstrap_pruebas_de_decisi\u00f3n",
+      "docs_architecture_adr_009_docker_db_bootstrap_decisión",
+      "docs_architecture_adr_009_docker_db_bootstrap_pruebas_de_decisión",
       "docs_architecture_adr_009_docker_db_bootstrap_referencias_internas"
     ],
     "134": [
@@ -2322,8 +2322,8 @@
       "docs_architecture_adr_010_mcp_agent_alternativas_consideradas",
       "docs_architecture_adr_010_mcp_agent_consecuencias",
       "docs_architecture_adr_010_mcp_agent_contexto",
-      "docs_architecture_adr_010_mcp_agent_decisi\u00f3n",
-      "docs_architecture_adr_010_mcp_agent_pruebas_de_decisi\u00f3n",
+      "docs_architecture_adr_010_mcp_agent_decisión",
+      "docs_architecture_adr_010_mcp_agent_pruebas_de_decisión",
       "docs_architecture_adr_010_mcp_agent_referencias_internas"
     ],
     "135": [
@@ -2332,8 +2332,8 @@
       "docs_architecture_adr_011_integrations_alternativas_consideradas",
       "docs_architecture_adr_011_integrations_consecuencias",
       "docs_architecture_adr_011_integrations_contexto",
-      "docs_architecture_adr_011_integrations_decisi\u00f3n",
-      "docs_architecture_adr_011_integrations_pruebas_de_decisi\u00f3n",
+      "docs_architecture_adr_011_integrations_decisión",
+      "docs_architecture_adr_011_integrations_pruebas_de_decisión",
       "docs_architecture_adr_011_integrations_referencias_internas"
     ],
     "136": [
@@ -2342,39 +2342,39 @@
       "docs_architecture_adr_012_foss_licensing_alternativas_consideradas",
       "docs_architecture_adr_012_foss_licensing_consecuencias",
       "docs_architecture_adr_012_foss_licensing_contexto",
-      "docs_architecture_adr_012_foss_licensing_decisi\u00f3n",
-      "docs_architecture_adr_012_foss_licensing_pruebas_de_decisi\u00f3n",
+      "docs_architecture_adr_012_foss_licensing_decisión",
+      "docs_architecture_adr_012_foss_licensing_pruebas_de_decisión",
       "docs_architecture_adr_012_foss_licensing_referencias_internas"
     ],
     "137": [
       "docs_contracts_asset_type_schema",
       "docs_contracts_asset_type_schema_bindings_y_dispositivos_adr_014",
-      "docs_contracts_asset_type_schema_contrato_esquema_de_tipolog\u00edas_de_activos_asset_type_schema_v1",
+      "docs_contracts_asset_type_schema_contrato_esquema_de_tipologías_de_activos_asset_type_schema_v1",
       "docs_contracts_asset_type_schema_i18n",
       "docs_contracts_asset_type_schema_manifiesto_yaml_json",
       "docs_contracts_asset_type_schema_reglas",
-      "docs_contracts_asset_type_schema_representaci\u00f3n_visual_adr_016",
-      "docs_contracts_asset_type_schema_schemas_de_conexi\u00f3n_predefinidos_patrones_de_openremote_edgex_thingsboard"
+      "docs_contracts_asset_type_schema_representación_visual_adr_016",
+      "docs_contracts_asset_type_schema_schemas_de_conexión_predefinidos_patrones_de_openremote_edgex_thingsboard"
     ],
     "138": [
       "docs_contracts_configuration_schema",
-      "docs_contracts_configuration_schema_contrato_de_configuraci\u00f3n_env_db_gui",
+      "docs_contracts_configuration_schema_contrato_de_configuración_env_db_gui",
       "docs_contracts_configuration_schema_ejemplo",
-      "docs_contracts_configuration_schema_entidades_de_auditor\u00eda",
+      "docs_contracts_configuration_schema_entidades_de_auditoría",
       "docs_contracts_configuration_schema_niveles_y_precedencia",
       "docs_contracts_configuration_schema_precedencia_efectiva_por_clave",
       "docs_contracts_configuration_schema_resiliencia",
-      "docs_contracts_configuration_schema_validaci\u00f3n_y_ui"
+      "docs_contracts_configuration_schema_validación_y_ui"
     ],
     "139": [
       "docs_infrastructure_db_bootstrap",
       "docs_infrastructure_db_bootstrap_1_no_confundir_dos_mecanismos",
       "docs_infrastructure_db_bootstrap_2_pipeline_compose_y_dependencias",
       "docs_infrastructure_db_bootstrap_3_algoritmo_del_job_db_bootstrap",
-      "docs_infrastructure_db_bootstrap_4_persistencia_y_recuperaci\u00f3n",
-      "docs_infrastructure_db_bootstrap_5_casos_de_prueba_de_aceptaci\u00f3n_db_b001",
+      "docs_infrastructure_db_bootstrap_4_persistencia_y_recuperación",
+      "docs_infrastructure_db_bootstrap_5_casos_de_prueba_de_aceptación_db_b001",
       "docs_infrastructure_db_bootstrap_6_referencias",
-      "docs_infrastructure_db_bootstrap_db_b001_aprovisionamiento_autom\u00e1tico_postgresql_postgis"
+      "docs_infrastructure_db_bootstrap_db_b001_aprovisionamiento_automático_postgresql_postgis"
     ],
     "140": [
       "docs_quality_contract_tests",
@@ -2388,9 +2388,9 @@
     ],
     "141": [
       "docs_quality_test_data",
-      "docs_quality_test_data_activos_sem\u00e1ntica",
+      "docs_quality_test_data_activos_semántica",
       "docs_quality_test_data_cmms",
-      "docs_quality_test_data_fixtures_de_qa_sint\u00e9ticas",
+      "docs_quality_test_data_fixtures_de_qa_sintéticas",
       "docs_quality_test_data_mqtt",
       "docs_quality_test_data_node_red",
       "docs_quality_test_data_proyectos",
@@ -2398,13 +2398,13 @@
     ],
     "142": [
       "docs_research_research_patterns",
-      "docs_research_research_patterns_1_navegaci\u00f3n_men\u00fa",
+      "docs_research_research_patterns_1_navegación_menú",
       "docs_research_research_patterns_2_conectividad_gateways",
       "docs_research_research_patterns_3_dashboards_y_widgets_de_mapa",
       "docs_research_research_patterns_4_otros_patrones_relevantes",
-      "docs_research_research_patterns_5_licencias_para_auditor\u00eda_oap_foss",
-      "docs_research_research_patterns_patrones_extra\u00eddos_de_repos_de_referencia_2026_11_17",
-      "docs_research_research_patterns_tabla_tipo_fuente_del_cat\u00e1logo_semilla"
+      "docs_research_research_patterns_5_licencias_para_auditoría_oap_foss",
+      "docs_research_research_patterns_patrones_extraídos_de_repos_de_referencia_2026_11_17",
+      "docs_research_research_patterns_tabla_tipo_fuente_del_catálogo_semilla"
     ],
     "143": [
       "frontend_package_scripts",
@@ -2418,12 +2418,12 @@
     ],
     "144": [
       "readme",
-      "readme_licencias_y_atribuci\u00f3n",
+      "readme_licencias_y_atribución",
       "readme_limitaciones_de_este_kit",
-      "readme_navegaci\u00f3n_obligatoria",
-      "readme_oap_open_asset_platform_especificaci\u00f3n_integral_para_kilo_code",
-      "readme_primer_uso_no_comenzar_creando_100_m\u00f3dulos_vac\u00edos",
-      "readme_requisitos_cr\u00edticos_expl\u00edcitos",
+      "readme_navegación_obligatoria",
+      "readme_oap_open_asset_platform_especificación_integral_para_kilo_code",
+      "readme_primer_uso_no_comenzar_creando_100_módulos_vacíos",
+      "readme_requisitos_críticos_explícitos",
       "readme_resultado_buscado"
     ],
     "145": [
@@ -2447,36 +2447,36 @@
     "147": [
       "docs_agents_orchestration",
       "docs_agents_orchestration_campos_obligatorios_del_task_brief",
-      "docs_agents_orchestration_manual_de_orquestaci\u00f3n_kilo_code_agentes_tareas_y_checkpoints",
+      "docs_agents_orchestration_manual_de_orquestación_kilo_code_agentes_tareas_y_checkpoints",
       "docs_agents_orchestration_modelo_de_responsabilidad",
-      "docs_agents_orchestration_m\u00e9tricas_de_trabajo",
-      "docs_agents_orchestration_pol\u00edtica_de_interrupci\u00f3n_reanudaci\u00f3n",
-      "docs_agents_orchestration_protocolo_de_delegaci\u00f3n"
+      "docs_agents_orchestration_métricas_de_trabajo",
+      "docs_agents_orchestration_política_de_interrupción_reanudación",
+      "docs_agents_orchestration_protocolo_de_delegación"
     ],
     "148": [
       "docs_architecture_adr_013_plain_postgres_no_timescaledb",
-      "docs_architecture_adr_013_plain_postgres_no_timescaledb_adr_almacenamiento_de_telemetr\u00eda_en_tablas_postgresql_regulares_sin_timescaledb",
+      "docs_architecture_adr_013_plain_postgres_no_timescaledb_adr_almacenamiento_de_telemetría_en_tablas_postgresql_regulares_sin_timescaledb",
       "docs_architecture_adr_013_plain_postgres_no_timescaledb_alternativas_consideradas",
       "docs_architecture_adr_013_plain_postgres_no_timescaledb_consecuencias",
       "docs_architecture_adr_013_plain_postgres_no_timescaledb_contexto",
-      "docs_architecture_adr_013_plain_postgres_no_timescaledb_decisi\u00f3n",
+      "docs_architecture_adr_013_plain_postgres_no_timescaledb_decisión",
       "docs_architecture_adr_013_plain_postgres_no_timescaledb_referencias_internas"
     ],
     "149": [
       "docs_architecture_c4_dataflows",
-      "docs_architecture_c4_dataflows_diagramas_de_flujo_c4_l\u00f3gico_escenarios_operativos",
+      "docs_architecture_c4_dataflows_diagramas_de_flujo_c4_lógico_escenarios_operativos",
       "docs_architecture_c4_dataflows_flujo_cambio_de_plugin",
-      "docs_architecture_c4_dataflows_flujo_db_primera_ejecuci\u00f3n",
+      "docs_architecture_c4_dataflows_flujo_db_primera_ejecución",
       "docs_architecture_c4_dataflows_flujo_import_export_node_red",
       "docs_architecture_c4_dataflows_flujo_mcp_escritura",
-      "docs_architecture_c4_dataflows_flujo_telemetr\u00eda_mqtt"
+      "docs_architecture_c4_dataflows_flujo_telemetría_mqtt"
     ],
     "150": [
       "docs_contracts_asset_semantic_schema",
       "docs_contracts_asset_semantic_schema_contrato_de_identidad_activos_iec_81346_y_rdf",
       "docs_contracts_asset_semantic_schema_identidades",
-      "docs_contracts_asset_semantic_schema_migraci\u00f3n_y_consultas",
-      "docs_contracts_asset_semantic_schema_relaci\u00f3n_sem\u00e1ntica",
+      "docs_contracts_asset_semantic_schema_migración_y_consultas",
+      "docs_contracts_asset_semantic_schema_relación_semántica",
       "docs_contracts_asset_semantic_schema_tests",
       "docs_contracts_asset_semantic_schema_versionado"
     ],
@@ -2485,7 +2485,7 @@
       "docs_contracts_nodered_json_disparar_procesos",
       "docs_contracts_nodered_json_export",
       "docs_contracts_nodered_json_import",
-      "docs_contracts_nodered_json_node_red_json_bidireccional_modelo_de_negociaci\u00f3n_y_export_de_pesta\u00f1a",
+      "docs_contracts_nodered_json_node_red_json_bidireccional_modelo_de_negociación_y_export_de_pestaña",
       "docs_contracts_nodered_json_preview_commit",
       "docs_contracts_nodered_json_pruebas"
     ],
@@ -2496,21 +2496,21 @@
       "docs_contracts_spatial_schema_edge_cases",
       "docs_contracts_spatial_schema_endpoints",
       "docs_contracts_spatial_schema_flujo_frontend",
-      "docs_contracts_spatial_schema_validaci\u00f3n"
+      "docs_contracts_spatial_schema_validación"
     ],
     "153": [
       "docs_contracts_telemetry_schema",
       "docs_contracts_telemetry_schema_consultas",
       "docs_contracts_telemetry_schema_esquema_de_evento_normalizado_telemetry_observed_v1",
-      "docs_contracts_telemetry_schema_esquema_de_telemetr\u00eda_y_pol\u00edticas_de_almacenamiento",
+      "docs_contracts_telemetry_schema_esquema_de_telemetría_y_políticas_de_almacenamiento",
       "docs_contracts_telemetry_schema_esquema_storagepolicy_telemetry_storage_policy_v1",
-      "docs_contracts_telemetry_schema_estados_y_m\u00e9tricas",
+      "docs_contracts_telemetry_schema_estados_y_métricas",
       "docs_contracts_telemetry_schema_pruebas_vinculantes"
     ],
     "154": [
       "docs_infrastructure_docker_compose",
       "docs_infrastructure_docker_compose_build",
-      "docs_infrastructure_docker_compose_docker_compose_como_distribuci\u00f3n_principal",
+      "docs_infrastructure_docker_compose_docker_compose_como_distribución_principal",
       "docs_infrastructure_docker_compose_roles_de_datos",
       "docs_infrastructure_docker_compose_servicios_y_perfiles",
       "docs_infrastructure_docker_compose_startup",
@@ -2520,32 +2520,32 @@
       "docs_infrastructure_env_policy",
       "docs_infrastructure_env_policy_archivo_principal",
       "docs_infrastructure_env_policy_ejemplo_importante",
-      "docs_infrastructure_env_policy_grupos_de_configuraci\u00f3n",
-      "docs_infrastructure_env_policy_requisitos_cr\u00edticos_telemetr\u00eda",
-      "docs_infrastructure_env_policy_variables_de_entorno_oap_esquema_defaults_administraci\u00f3n",
+      "docs_infrastructure_env_policy_grupos_de_configuración",
+      "docs_infrastructure_env_policy_requisitos_críticos_telemetría",
+      "docs_infrastructure_env_policy_variables_de_entorno_oap_esquema_defaults_administración",
       "docs_infrastructure_env_policy_variables_y_esquema_validado"
     ],
     "156": [
       "docs_quality_performance_observability",
-      "docs_quality_performance_observability_alerta_de_saturaci\u00f3n",
+      "docs_quality_performance_observability_alerta_de_saturación",
       "docs_quality_performance_observability_bd",
       "docs_quality_performance_observability_carga_reproducible",
       "docs_quality_performance_observability_gis_ui",
-      "docs_quality_performance_observability_instrumentaci\u00f3n",
+      "docs_quality_performance_observability_instrumentación",
       "docs_quality_performance_observability_rendimiento_y_observabilidad"
     ],
     "157": [
       "docs_quality_security_tests",
       "docs_quality_security_tests_authorization_multitenancy",
       "docs_quality_security_tests_commands_ai",
-      "docs_quality_security_tests_criterio_de_aprobaci\u00f3n",
+      "docs_quality_security_tests_criterio_de_aprobación",
       "docs_quality_security_tests_devsecops",
       "docs_quality_security_tests_pruebas_de_seguridad_negativas_por_ruta_protocolo",
       "docs_quality_security_tests_web_app"
     ],
     "158": [
       "docs_research_code_graph_runbook",
-      "docs_research_code_graph_runbook_extracci\u00f3n_de_grafo_de_c\u00f3digo_de_repositorios_de_referencia",
+      "docs_research_code_graph_runbook_extracción_de_grafo_de_código_de_repositorios_de_referencia",
       "docs_research_code_graph_runbook_fuente_atlas_java_spring_react",
       "docs_research_code_graph_runbook_fuente_openremote_java_gradle",
       "docs_research_code_graph_runbook_objetivos",
@@ -2556,10 +2556,10 @@
       "docs_research_standards_gap_analysis",
       "docs_research_standards_gap_analysis_1_iec_iso_81346_rds_por_aspectos",
       "docs_research_standards_gap_analysis_2_project_haystack_tags_y_xeto",
-      "docs_research_standards_gap_analysis_3_brick_schema_ontolog\u00eda",
+      "docs_research_standards_gap_analysis_3_brick_schema_ontología",
       "docs_research_standards_gap_analysis_4_rdf_y_shacl",
-      "docs_research_standards_gap_analysis_an\u00e1lisis_de_acercamiento_a_las_normativas_81346_haystack_brick_rdf_shacl",
-      "docs_research_standards_gap_analysis_conclusi\u00f3n"
+      "docs_research_standards_gap_analysis_análisis_de_acercamiento_a_las_normativas_81346_haystack_brick_rdf_shacl",
+      "docs_research_standards_gap_analysis_conclusión"
     ],
     "160": [
       "backend_assets_management_commands_seed_asset_types",
@@ -2619,43 +2619,43 @@
     ],
     "167": [
       "docs_architecture_adr_014_connectivity_gateway_navigation",
-      "docs_architecture_adr_014_connectivity_gateway_navigation_adr_navegaci\u00f3n_por_bounded_context_y_conectividad_como_tipo_de_activo_gateway",
+      "docs_architecture_adr_014_connectivity_gateway_navigation_adr_navegación_por_bounded_context_y_conectividad_como_tipo_de_activo_gateway",
       "docs_architecture_adr_014_connectivity_gateway_navigation_alternativas_consideradas",
       "docs_architecture_adr_014_connectivity_gateway_navigation_consecuencias",
       "docs_architecture_adr_014_connectivity_gateway_navigation_contexto",
-      "docs_architecture_adr_014_connectivity_gateway_navigation_decisi\u00f3n"
+      "docs_architecture_adr_014_connectivity_gateway_navigation_decisión"
     ],
     "168": [
       "docs_architecture_adr_015_dashboards_map_widgets",
-      "docs_architecture_adr_015_dashboards_map_widgets_adr_dashboards_con_widget_de_mapa_plano_geo_y_escenas_gis_por_im\u00e1genes",
+      "docs_architecture_adr_015_dashboards_map_widgets_adr_dashboards_con_widget_de_mapa_plano_geo_y_escenas_gis_por_imágenes",
       "docs_architecture_adr_015_dashboards_map_widgets_alternativas_consideradas",
       "docs_architecture_adr_015_dashboards_map_widgets_consecuencias",
       "docs_architecture_adr_015_dashboards_map_widgets_contexto",
-      "docs_architecture_adr_015_dashboards_map_widgets_decisi\u00f3n"
+      "docs_architecture_adr_015_dashboards_map_widgets_decisión"
     ],
     "169": [
       "docs_architecture_adr_016_asset_visuals_i18n",
-      "docs_architecture_adr_016_asset_visuals_i18n_adr_representaci\u00f3n_visual_de_activos_e_i18n_estructural",
+      "docs_architecture_adr_016_asset_visuals_i18n_adr_representación_visual_de_activos_e_i18n_estructural",
       "docs_architecture_adr_016_asset_visuals_i18n_alternativas_consideradas",
       "docs_architecture_adr_016_asset_visuals_i18n_consecuencias",
       "docs_architecture_adr_016_asset_visuals_i18n_contexto",
-      "docs_architecture_adr_016_asset_visuals_i18n_decisi\u00f3n"
+      "docs_architecture_adr_016_asset_visuals_i18n_decisión"
     ],
     "170": [
       "docs_architecture_adr_017_asset_hierarchy_location_assets",
-      "docs_architecture_adr_017_asset_hierarchy_location_assets_adr_jerarqu\u00eda_de_activos_activos_de_ubicaci\u00f3n_y_navegaci\u00f3n_arb\u00f3rea",
+      "docs_architecture_adr_017_asset_hierarchy_location_assets_adr_jerarquía_de_activos_activos_de_ubicación_y_navegación_arbórea",
       "docs_architecture_adr_017_asset_hierarchy_location_assets_alternativas_consideradas",
       "docs_architecture_adr_017_asset_hierarchy_location_assets_consecuencias",
       "docs_architecture_adr_017_asset_hierarchy_location_assets_contexto",
-      "docs_architecture_adr_017_asset_hierarchy_location_assets_decisi\u00f3n"
+      "docs_architecture_adr_017_asset_hierarchy_location_assets_decisión"
     ],
     "171": [
       "docs_architecture_adr_018_semantic_stack",
-      "docs_architecture_adr_018_semantic_stack_adr_stack_sem\u00e1ntico_81346_brick_haystack_rdf_shacl",
+      "docs_architecture_adr_018_semantic_stack_adr_stack_semántico_81346_brick_haystack_rdf_shacl",
       "docs_architecture_adr_018_semantic_stack_alternativas_consideradas",
       "docs_architecture_adr_018_semantic_stack_consecuencias",
       "docs_architecture_adr_018_semantic_stack_contexto",
-      "docs_architecture_adr_018_semantic_stack_decisi\u00f3n"
+      "docs_architecture_adr_018_semantic_stack_decisión"
     ],
     "172": [
       "docs_architecture_adr_019_dashboards_trend",
@@ -2663,7 +2663,7 @@
       "docs_architecture_adr_019_dashboards_trend_alternativas_consideradas",
       "docs_architecture_adr_019_dashboards_trend_consecuencias",
       "docs_architecture_adr_019_dashboards_trend_contexto",
-      "docs_architecture_adr_019_dashboards_trend_decisi\u00f3n"
+      "docs_architecture_adr_019_dashboards_trend_decisión"
     ],
     "173": [
       "docs_architecture_db_logical_model",
@@ -2671,22 +2671,22 @@
       "docs_architecture_db_logical_model_esquemas_recomendados",
       "docs_architecture_db_logical_model_integridad",
       "docs_architecture_db_logical_model_migraciones",
-      "docs_architecture_db_logical_model_modelo_l\u00f3gico_sql_y_owners"
+      "docs_architecture_db_logical_model_modelo_lógico_sql_y_owners"
     ],
     "174": [
       "docs_contracts_rest_ui_contract",
       "docs_contracts_rest_ui_contract_convenciones",
       "docs_contracts_rest_ui_contract_frontend_shell",
-      "docs_contracts_rest_ui_contract_pruebas_m\u00ednimas",
+      "docs_contracts_rest_ui_contract_pruebas_mínimas",
       "docs_contracts_rest_ui_contract_rest_realtime_y_frontend_plugin_contract",
       "docs_contracts_rest_ui_contract_seguridad"
     ],
     "175": [
       "docs_infrastructure_backup_restore_upgrades",
-      "docs_infrastructure_backup_restore_upgrades_backup_y_protecci\u00f3n",
+      "docs_infrastructure_backup_restore_upgrades_backup_y_protección",
       "docs_infrastructure_backup_restore_upgrades_dr_y_monitoreo",
-      "docs_infrastructure_backup_restore_upgrades_operaci\u00f3n_backup_restauraci\u00f3n_y_upgrades",
-      "docs_infrastructure_backup_restore_upgrades_restauraci\u00f3n_ensayada",
+      "docs_infrastructure_backup_restore_upgrades_operación_backup_restauración_y_upgrades",
+      "docs_infrastructure_backup_restore_upgrades_restauración_ensayada",
       "docs_infrastructure_backup_restore_upgrades_upgrade"
     ],
     "176": [
@@ -2699,7 +2699,7 @@
     ],
     "177": [
       "docs_infrastructure_venv_and_python",
-      "docs_infrastructure_venv_and_python_gesti\u00f3n_dependencias",
+      "docs_infrastructure_venv_and_python_gestión_dependencias",
       "docs_infrastructure_venv_and_python_github",
       "docs_infrastructure_venv_and_python_primer_comando_local",
       "docs_infrastructure_venv_and_python_python_venv_instrucciones_obligatorias_para_agentes",
@@ -2710,144 +2710,144 @@
       "docs_plugins_ai_assistant_database_and_migrations_ai_assistant_esquema_de_datos_constraints_y_migraciones",
       "docs_plugins_ai_assistant_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_ai_assistant_database_and_migrations_entidades_y_campos_de_negocio",
-      "docs_plugins_ai_assistant_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_ai_assistant_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_ai_assistant_database_and_migrations_transacciones_críticas",
+      "docs_plugins_ai_assistant_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "179": [
       "docs_plugins_analytics_database_and_migrations",
       "docs_plugins_analytics_database_and_migrations_analytics_esquema_de_datos_constraints_y_migraciones",
       "docs_plugins_analytics_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_analytics_database_and_migrations_entidades_y_campos_de_negocio",
-      "docs_plugins_analytics_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_analytics_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_analytics_database_and_migrations_transacciones_críticas",
+      "docs_plugins_analytics_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "180": [
       "docs_plugins_bacnet_database_and_migrations",
       "docs_plugins_bacnet_database_and_migrations_bacnet_esquema_de_datos_constraints_y_migraciones",
       "docs_plugins_bacnet_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_bacnet_database_and_migrations_entidades_y_campos_de_negocio",
-      "docs_plugins_bacnet_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_bacnet_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_bacnet_database_and_migrations_transacciones_críticas",
+      "docs_plugins_bacnet_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "181": [
       "docs_plugins_bms_database_and_migrations",
       "docs_plugins_bms_database_and_migrations_bms_esquema_de_datos_constraints_y_migraciones",
       "docs_plugins_bms_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_bms_database_and_migrations_entidades_y_campos_de_negocio",
-      "docs_plugins_bms_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_bms_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_bms_database_and_migrations_transacciones_críticas",
+      "docs_plugins_bms_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "182": [
       "docs_plugins_cmms_database_and_migrations",
       "docs_plugins_cmms_database_and_migrations_cmms_esquema_de_datos_constraints_y_migraciones",
       "docs_plugins_cmms_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_cmms_database_and_migrations_entidades_y_campos_de_negocio",
-      "docs_plugins_cmms_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_cmms_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_cmms_database_and_migrations_transacciones_críticas",
+      "docs_plugins_cmms_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "183": [
       "docs_plugins_dashboards_database_and_migrations",
       "docs_plugins_dashboards_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_dashboards_database_and_migrations_dashboards_esquema_de_datos_constraints_y_migraciones",
       "docs_plugins_dashboards_database_and_migrations_entidades_y_campos_de_negocio",
-      "docs_plugins_dashboards_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_dashboards_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_dashboards_database_and_migrations_transacciones_críticas",
+      "docs_plugins_dashboards_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "184": [
       "docs_plugins_edge_database_and_migrations",
       "docs_plugins_edge_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_edge_database_and_migrations_edge_esquema_de_datos_constraints_y_migraciones",
       "docs_plugins_edge_database_and_migrations_entidades_y_campos_de_negocio",
-      "docs_plugins_edge_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_edge_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_edge_database_and_migrations_transacciones_críticas",
+      "docs_plugins_edge_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "185": [
       "docs_plugins_ems_database_and_migrations",
       "docs_plugins_ems_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_ems_database_and_migrations_ems_esquema_de_datos_constraints_y_migraciones",
       "docs_plugins_ems_database_and_migrations_entidades_y_campos_de_negocio",
-      "docs_plugins_ems_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_ems_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_ems_database_and_migrations_transacciones_críticas",
+      "docs_plugins_ems_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "186": [
       "docs_plugins_erp_database_and_migrations",
       "docs_plugins_erp_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_erp_database_and_migrations_entidades_y_campos_de_negocio",
       "docs_plugins_erp_database_and_migrations_erp_esquema_de_datos_constraints_y_migraciones",
-      "docs_plugins_erp_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_erp_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_erp_database_and_migrations_transacciones_críticas",
+      "docs_plugins_erp_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "187": [
       "docs_plugins_http_ws_database_and_migrations",
       "docs_plugins_http_ws_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_http_ws_database_and_migrations_entidades_y_campos_de_negocio",
       "docs_plugins_http_ws_database_and_migrations_http_ws_esquema_de_datos_constraints_y_migraciones",
-      "docs_plugins_http_ws_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_http_ws_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_http_ws_database_and_migrations_transacciones_críticas",
+      "docs_plugins_http_ws_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "188": [
       "docs_plugins_inventory_database_and_migrations",
       "docs_plugins_inventory_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_inventory_database_and_migrations_entidades_y_campos_de_negocio",
       "docs_plugins_inventory_database_and_migrations_inventory_esquema_de_datos_constraints_y_migraciones",
-      "docs_plugins_inventory_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_inventory_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_inventory_database_and_migrations_transacciones_críticas",
+      "docs_plugins_inventory_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "189": [
       "docs_plugins_mcp_server_database_and_migrations",
       "docs_plugins_mcp_server_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_mcp_server_database_and_migrations_entidades_y_campos_de_negocio",
       "docs_plugins_mcp_server_database_and_migrations_mcp_server_esquema_de_datos_constraints_y_migraciones",
-      "docs_plugins_mcp_server_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_mcp_server_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_mcp_server_database_and_migrations_transacciones_críticas",
+      "docs_plugins_mcp_server_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "190": [
       "docs_plugins_modbus_database_and_migrations",
       "docs_plugins_modbus_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_modbus_database_and_migrations_entidades_y_campos_de_negocio",
       "docs_plugins_modbus_database_and_migrations_modbus_esquema_de_datos_constraints_y_migraciones",
-      "docs_plugins_modbus_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_modbus_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_modbus_database_and_migrations_transacciones_críticas",
+      "docs_plugins_modbus_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "191": [
       "docs_plugins_mqtt_database_and_migrations",
       "docs_plugins_mqtt_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_mqtt_database_and_migrations_entidades_y_campos_de_negocio",
       "docs_plugins_mqtt_database_and_migrations_mqtt_esquema_de_datos_constraints_y_migraciones",
-      "docs_plugins_mqtt_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_mqtt_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_mqtt_database_and_migrations_transacciones_críticas",
+      "docs_plugins_mqtt_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "192": [
       "docs_plugins_nodered_database_and_migrations",
       "docs_plugins_nodered_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_nodered_database_and_migrations_entidades_y_campos_de_negocio",
       "docs_plugins_nodered_database_and_migrations_nodered_esquema_de_datos_constraints_y_migraciones",
-      "docs_plugins_nodered_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_nodered_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_nodered_database_and_migrations_transacciones_críticas",
+      "docs_plugins_nodered_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "193": [
       "docs_plugins_protocol_extensions_database_and_migrations",
       "docs_plugins_protocol_extensions_database_and_migrations_convenciones_de_persistencia",
       "docs_plugins_protocol_extensions_database_and_migrations_entidades_y_campos_de_negocio",
       "docs_plugins_protocol_extensions_database_and_migrations_protocol_extensions_esquema_de_datos_constraints_y_migraciones",
-      "docs_plugins_protocol_extensions_database_and_migrations_transacciones_cr\u00edticas",
-      "docs_plugins_protocol_extensions_database_and_migrations_\u00edndices_y_pruebas_migratorias"
+      "docs_plugins_protocol_extensions_database_and_migrations_transacciones_críticas",
+      "docs_plugins_protocol_extensions_database_and_migrations_índices_y_pruebas_migratorias"
     ],
     "194": [
       "docs_quality_quality_plan",
-      "docs_quality_quality_plan_estrategia_de_verificaci\u00f3n_independiente",
-      "docs_quality_quality_plan_pir\u00e1mide_de_pruebas",
-      "docs_quality_quality_plan_pol\u00edtica_fail_closed",
+      "docs_quality_quality_plan_estrategia_de_verificación_independiente",
+      "docs_quality_quality_plan_pirámide_de_pruebas",
+      "docs_quality_quality_plan_política_fail_closed",
       "docs_quality_quality_plan_runbook_ci",
-      "docs_quality_quality_plan_verificaci\u00f3n_humana"
+      "docs_quality_quality_plan_verificación_humana"
     ],
     "195": [
       "docs_requirements_source_to_feature",
-      "docs_requirements_source_to_feature_atlas_cmms_grashjs_cmms_commit_06abfe35_clasificaci\u00f3n",
-      "docs_requirements_source_to_feature_c\u00f3mo_auditar_sin_inventar_procedimiento",
-      "docs_requirements_source_to_feature_funcionalidad_a_partir_de_fuentes_auditor\u00eda_ejecutada_2026_11_17",
+      "docs_requirements_source_to_feature_atlas_cmms_grashjs_cmms_commit_06abfe35_clasificación",
+      "docs_requirements_source_to_feature_cómo_auditar_sin_inventar_procedimiento",
+      "docs_requirements_source_to_feature_funcionalidad_a_partir_de_fuentes_auditoría_ejecutada_2026_11_17",
       "docs_requirements_source_to_feature_nuestro_producto_agrega_new_requirement",
-      "docs_requirements_source_to_feature_openremote_core_commit_6d46b473_clasificaci\u00f3n"
+      "docs_requirements_source_to_feature_openremote_core_commit_6d46b473_clasificación"
     ],
     "196": [
       "backend_assets_types_catalog_manifests",
@@ -2868,133 +2868,133 @@
       "docs_contracts_erp_integration_consistencia",
       "docs_contracts_erp_integration_contrato_outbound",
       "docs_contracts_erp_integration_estado_replicated_inbound",
-      "docs_contracts_erp_integration_integraci\u00f3n_erp_por_requisici\u00f3n_t\u00e9cnica"
+      "docs_contracts_erp_integration_integración_erp_por_requisición_técnica"
     ],
     "199": [
       "docs_contracts_event_catalog",
-      "docs_contracts_event_catalog_cat\u00e1logo_de_eventos_versionados",
-      "docs_contracts_event_catalog_envelope_com\u00fan",
+      "docs_contracts_event_catalog_catálogo_de_eventos_versionados",
+      "docs_contracts_event_catalog_envelope_común",
       "docs_contracts_event_catalog_eventos_iniciales_y_owners",
-      "docs_contracts_event_catalog_evoluci\u00f3n"
+      "docs_contracts_event_catalog_evolución"
     ],
     "200": [
       "docs_legal_licensing_and_clean_room",
-      "docs_legal_licensing_and_clean_room_auditor\u00eda_obligatoria",
+      "docs_legal_licensing_and_clean_room_auditoría_obligatoria",
       "docs_legal_licensing_and_clean_room_entregables_previos_a_release",
       "docs_legal_licensing_and_clean_room_gate",
-      "docs_legal_licensing_and_clean_room_pol\u00edtica_de_licencias_foss_ingenier\u00eda_limpia_y_publicaci\u00f3n_github"
+      "docs_legal_licensing_and_clean_room_política_de_licencias_foss_ingeniería_limpia_y_publicación_github"
     ],
     "201": [
       "docs_plugins_ai_assistant_manifest",
       "docs_plugins_ai_assistant_manifest_ciclo_de_vida",
-      "docs_plugins_ai_assistant_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_ai_assistant_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_ai_assistant_manifest_plugin_manifest_ai_assistant",
-      "docs_plugins_ai_assistant_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_ai_assistant_manifest_versión_datos_y_garantías"
     ],
     "202": [
       "docs_plugins_analytics_manifest",
       "docs_plugins_analytics_manifest_ciclo_de_vida",
-      "docs_plugins_analytics_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_analytics_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_analytics_manifest_plugin_manifest_analytics",
-      "docs_plugins_analytics_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_analytics_manifest_versión_datos_y_garantías"
     ],
     "203": [
       "docs_plugins_bacnet_manifest",
       "docs_plugins_bacnet_manifest_ciclo_de_vida",
-      "docs_plugins_bacnet_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_bacnet_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_bacnet_manifest_plugin_manifest_bacnet",
-      "docs_plugins_bacnet_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_bacnet_manifest_versión_datos_y_garantías"
     ],
     "204": [
       "docs_plugins_bms_manifest",
       "docs_plugins_bms_manifest_ciclo_de_vida",
-      "docs_plugins_bms_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_bms_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_bms_manifest_plugin_manifest_bms",
-      "docs_plugins_bms_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_bms_manifest_versión_datos_y_garantías"
     ],
     "205": [
       "docs_plugins_cmms_manifest",
       "docs_plugins_cmms_manifest_ciclo_de_vida",
-      "docs_plugins_cmms_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_cmms_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_cmms_manifest_plugin_manifest_cmms",
-      "docs_plugins_cmms_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_cmms_manifest_versión_datos_y_garantías"
     ],
     "206": [
       "docs_plugins_dashboards_manifest",
       "docs_plugins_dashboards_manifest_ciclo_de_vida",
-      "docs_plugins_dashboards_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_dashboards_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_dashboards_manifest_plugin_manifest_dashboards",
-      "docs_plugins_dashboards_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_dashboards_manifest_versión_datos_y_garantías"
     ],
     "207": [
       "docs_plugins_edge_manifest",
       "docs_plugins_edge_manifest_ciclo_de_vida",
-      "docs_plugins_edge_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_edge_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_edge_manifest_plugin_manifest_edge",
-      "docs_plugins_edge_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_edge_manifest_versión_datos_y_garantías"
     ],
     "208": [
       "docs_plugins_ems_manifest",
       "docs_plugins_ems_manifest_ciclo_de_vida",
-      "docs_plugins_ems_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_ems_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_ems_manifest_plugin_manifest_ems",
-      "docs_plugins_ems_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_ems_manifest_versión_datos_y_garantías"
     ],
     "209": [
       "docs_plugins_erp_manifest",
       "docs_plugins_erp_manifest_ciclo_de_vida",
-      "docs_plugins_erp_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_erp_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_erp_manifest_plugin_manifest_erp",
-      "docs_plugins_erp_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_erp_manifest_versión_datos_y_garantías"
     ],
     "210": [
       "docs_plugins_http_ws_manifest",
       "docs_plugins_http_ws_manifest_ciclo_de_vida",
-      "docs_plugins_http_ws_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_http_ws_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_http_ws_manifest_plugin_manifest_http_ws",
-      "docs_plugins_http_ws_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_http_ws_manifest_versión_datos_y_garantías"
     ],
     "211": [
       "docs_plugins_inventory_manifest",
       "docs_plugins_inventory_manifest_ciclo_de_vida",
-      "docs_plugins_inventory_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_inventory_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_inventory_manifest_plugin_manifest_inventory",
-      "docs_plugins_inventory_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_inventory_manifest_versión_datos_y_garantías"
     ],
     "212": [
       "docs_plugins_mcp_server_manifest",
       "docs_plugins_mcp_server_manifest_ciclo_de_vida",
-      "docs_plugins_mcp_server_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_mcp_server_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_mcp_server_manifest_plugin_manifest_mcp_server",
-      "docs_plugins_mcp_server_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_mcp_server_manifest_versión_datos_y_garantías"
     ],
     "213": [
       "docs_plugins_modbus_manifest",
       "docs_plugins_modbus_manifest_ciclo_de_vida",
-      "docs_plugins_modbus_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_modbus_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_modbus_manifest_plugin_manifest_modbus",
-      "docs_plugins_modbus_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_modbus_manifest_versión_datos_y_garantías"
     ],
     "214": [
       "docs_plugins_mqtt_manifest",
       "docs_plugins_mqtt_manifest_ciclo_de_vida",
-      "docs_plugins_mqtt_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_mqtt_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_mqtt_manifest_plugin_manifest_mqtt",
-      "docs_plugins_mqtt_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_mqtt_manifest_versión_datos_y_garantías"
     ],
     "215": [
       "docs_plugins_nodered_manifest",
       "docs_plugins_nodered_manifest_ciclo_de_vida",
-      "docs_plugins_nodered_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_nodered_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_nodered_manifest_plugin_manifest_nodered",
-      "docs_plugins_nodered_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_nodered_manifest_versión_datos_y_garantías"
     ],
     "216": [
       "docs_plugins_protocol_extensions_manifest",
       "docs_plugins_protocol_extensions_manifest_ciclo_de_vida",
-      "docs_plugins_protocol_extensions_manifest_declaraci\u00f3n_de_extensi\u00f3n_a_construir",
+      "docs_plugins_protocol_extensions_manifest_declaración_de_extensión_a_construir",
       "docs_plugins_protocol_extensions_manifest_plugin_manifest_protocol_extensions",
-      "docs_plugins_protocol_extensions_manifest_versi\u00f3n_datos_y_garant\u00edas"
+      "docs_plugins_protocol_extensions_manifest_versión_datos_y_garantías"
     ],
     "217": [
       "docs_quality_definition_of_done",
@@ -3005,16 +3005,16 @@
     ],
     "218": [
       "docs_research_graph_source_index",
-      "docs_research_graph_source_index_clasificaci\u00f3n_aplicada_en_las_matrices",
+      "docs_research_graph_source_index_clasificación_aplicada_en_las_matrices",
       "docs_research_graph_source_index_grashjs_cmms_atlas_cmms_06abfe35d09372ff80f889fcde73eb3cc71dc205",
       "docs_research_graph_source_index_openremote_core_6d46b473d353533ccfc3938956eed145a134f2d8",
-      "docs_research_graph_source_index_\u00edndice_de_fuentes_auditadas_2026_11_17"
+      "docs_research_graph_source_index_índice_de_fuentes_auditadas_2026_11_17"
     ],
     "219": [
       "docs_research_reference_lock",
       "docs_research_reference_lock_advertencia_funcional",
-      "docs_research_reference_lock_baselines_de_repositorios_y_est\u00e1ndares_fijar_antes_de_implementar_paridad",
-      "docs_research_reference_lock_est\u00e1ndares_y_docs_sin_cambio",
+      "docs_research_reference_lock_baselines_de_repositorios_y_estándares_fijar_antes_de_implementar_paridad",
+      "docs_research_reference_lock_estándares_y_docs_sin_cambio",
       "docs_research_reference_lock_registro_obligatorio"
     ],
     "220": [
@@ -3026,10 +3026,10 @@
     ],
     "221": [
       "prompts_system",
-      "prompts_system_coordinaci\u00f3n_kilo",
+      "prompts_system_coordinación_kilo",
       "prompts_system_entrega_por_historia",
-      "prompts_system_system_principal_para_agentes_de_construcci\u00f3n_oap",
-      "prompts_system_\u00f3rdenes_permanentes"
+      "prompts_system_system_principal_para_agentes_de_construcción_oap",
+      "prompts_system_órdenes_permanentes"
     ],
     "222": [
       "backend_connectivity_admin",
@@ -3057,121 +3057,121 @@
     ],
     "226": [
       "docs_architecture_feature_completeness_policy",
-      "docs_architecture_feature_completeness_policy_auditor\u00eda_y_cobertura",
-      "docs_architecture_feature_completeness_policy_c\u00f3mo_interpretar_reconstruir_todas_las_funcionalidades",
+      "docs_architecture_feature_completeness_policy_auditoría_y_cobertura",
+      "docs_architecture_feature_completeness_policy_cómo_interpretar_reconstruir_todas_las_funcionalidades",
       "docs_architecture_feature_completeness_policy_no_sustituir_completitud_por_atajos"
     ],
     "227": [
       "docs_contracts_openapi_contracts",
-      "docs_contracts_openapi_contracts_estado_por_m\u00f3dulo",
+      "docs_contracts_openapi_contracts_estado_por_módulo",
       "docs_contracts_openapi_contracts_procedimiento",
       "docs_contracts_openapi_contracts_registro_de_contratos_openapi_fase_1"
     ],
     "228": [
       "docs_plugins_ai_assistant_acceptance",
-      "docs_plugins_ai_assistant_acceptance_aceptaci\u00f3n_del_plugin_ai_assistant_g8",
+      "docs_plugins_ai_assistant_acceptance_aceptación_del_plugin_ai_assistant_g8",
       "docs_plugins_ai_assistant_acceptance_evidencia_requerida",
       "docs_plugins_ai_assistant_acceptance_negativos_obligatorios"
     ],
     "229": [
       "docs_plugins_analytics_acceptance",
-      "docs_plugins_analytics_acceptance_aceptaci\u00f3n_del_plugin_analytics_g9",
+      "docs_plugins_analytics_acceptance_aceptación_del_plugin_analytics_g9",
       "docs_plugins_analytics_acceptance_evidencia_requerida",
       "docs_plugins_analytics_acceptance_negativos_obligatorios"
     ],
     "230": [
       "docs_plugins_bacnet_acceptance",
-      "docs_plugins_bacnet_acceptance_aceptaci\u00f3n_del_plugin_bacnet_g7",
+      "docs_plugins_bacnet_acceptance_aceptación_del_plugin_bacnet_g7",
       "docs_plugins_bacnet_acceptance_evidencia_requerida",
       "docs_plugins_bacnet_acceptance_negativos_obligatorios"
     ],
     "231": [
       "docs_plugins_bms_acceptance",
-      "docs_plugins_bms_acceptance_aceptaci\u00f3n_del_plugin_bms_g7",
+      "docs_plugins_bms_acceptance_aceptación_del_plugin_bms_g7",
       "docs_plugins_bms_acceptance_evidencia_requerida",
       "docs_plugins_bms_acceptance_negativos_obligatorios"
     ],
     "232": [
       "docs_plugins_cmms_acceptance",
-      "docs_plugins_cmms_acceptance_aceptaci\u00f3n_del_plugin_cmms_g5",
+      "docs_plugins_cmms_acceptance_aceptación_del_plugin_cmms_g5",
       "docs_plugins_cmms_acceptance_evidencia_requerida",
       "docs_plugins_cmms_acceptance_negativos_obligatorios"
     ],
     "233": [
       "docs_plugins_dashboards_acceptance",
-      "docs_plugins_dashboards_acceptance_aceptaci\u00f3n_del_plugin_dashboards_g6",
+      "docs_plugins_dashboards_acceptance_aceptación_del_plugin_dashboards_g6",
       "docs_plugins_dashboards_acceptance_evidencia_requerida",
       "docs_plugins_dashboards_acceptance_negativos_obligatorios"
     ],
     "234": [
       "docs_plugins_edge_acceptance",
-      "docs_plugins_edge_acceptance_aceptaci\u00f3n_del_plugin_edge_g7",
+      "docs_plugins_edge_acceptance_aceptación_del_plugin_edge_g7",
       "docs_plugins_edge_acceptance_evidencia_requerida",
       "docs_plugins_edge_acceptance_negativos_obligatorios"
     ],
     "235": [
       "docs_plugins_ems_acceptance",
-      "docs_plugins_ems_acceptance_aceptaci\u00f3n_del_plugin_ems_g7",
+      "docs_plugins_ems_acceptance_aceptación_del_plugin_ems_g7",
       "docs_plugins_ems_acceptance_evidencia_requerida",
       "docs_plugins_ems_acceptance_negativos_obligatorios"
     ],
     "236": [
       "docs_plugins_erp_acceptance",
-      "docs_plugins_erp_acceptance_aceptaci\u00f3n_del_plugin_erp_g8",
+      "docs_plugins_erp_acceptance_aceptación_del_plugin_erp_g8",
       "docs_plugins_erp_acceptance_evidencia_requerida",
       "docs_plugins_erp_acceptance_negativos_obligatorios"
     ],
     "237": [
       "docs_plugins_http_ws_acceptance",
-      "docs_plugins_http_ws_acceptance_aceptaci\u00f3n_del_plugin_http_ws_g7",
+      "docs_plugins_http_ws_acceptance_aceptación_del_plugin_http_ws_g7",
       "docs_plugins_http_ws_acceptance_evidencia_requerida",
       "docs_plugins_http_ws_acceptance_negativos_obligatorios"
     ],
     "238": [
       "docs_plugins_inventory_acceptance",
-      "docs_plugins_inventory_acceptance_aceptaci\u00f3n_del_plugin_inventory_g5",
+      "docs_plugins_inventory_acceptance_aceptación_del_plugin_inventory_g5",
       "docs_plugins_inventory_acceptance_evidencia_requerida",
       "docs_plugins_inventory_acceptance_negativos_obligatorios"
     ],
     "239": [
       "docs_plugins_mcp_server_acceptance",
-      "docs_plugins_mcp_server_acceptance_aceptaci\u00f3n_del_plugin_mcp_server_g8",
+      "docs_plugins_mcp_server_acceptance_aceptación_del_plugin_mcp_server_g8",
       "docs_plugins_mcp_server_acceptance_evidencia_requerida",
       "docs_plugins_mcp_server_acceptance_negativos_obligatorios"
     ],
     "240": [
       "docs_plugins_modbus_acceptance",
-      "docs_plugins_modbus_acceptance_aceptaci\u00f3n_del_plugin_modbus_g7",
+      "docs_plugins_modbus_acceptance_aceptación_del_plugin_modbus_g7",
       "docs_plugins_modbus_acceptance_evidencia_requerida",
       "docs_plugins_modbus_acceptance_negativos_obligatorios"
     ],
     "241": [
       "docs_plugins_mqtt_acceptance",
-      "docs_plugins_mqtt_acceptance_aceptaci\u00f3n_del_plugin_mqtt_g4",
+      "docs_plugins_mqtt_acceptance_aceptación_del_plugin_mqtt_g4",
       "docs_plugins_mqtt_acceptance_evidencia_requerida",
       "docs_plugins_mqtt_acceptance_negativos_obligatorios"
     ],
     "242": [
       "docs_plugins_nodered_acceptance",
-      "docs_plugins_nodered_acceptance_aceptaci\u00f3n_del_plugin_nodered_g8",
+      "docs_plugins_nodered_acceptance_aceptación_del_plugin_nodered_g8",
       "docs_plugins_nodered_acceptance_evidencia_requerida",
       "docs_plugins_nodered_acceptance_negativos_obligatorios"
     ],
     "243": [
       "docs_plugins_protocol_extensions_acceptance",
-      "docs_plugins_protocol_extensions_acceptance_aceptaci\u00f3n_del_plugin_protocol_extensions_g9",
+      "docs_plugins_protocol_extensions_acceptance_aceptación_del_plugin_protocol_extensions_g9",
       "docs_plugins_protocol_extensions_acceptance_evidencia_requerida",
       "docs_plugins_protocol_extensions_acceptance_negativos_obligatorios"
     ],
     "244": [
       "docs_quality_gates",
-      "docs_quality_gates_bloqueos_expl\u00edcitos",
-      "docs_quality_gates_comandos_m\u00ednimos_propuestos_una_vez_que_exista_c\u00f3digo",
+      "docs_quality_gates_bloqueos_explícitos",
+      "docs_quality_gates_comandos_mínimos_propuestos_una_vez_que_exista_código",
       "docs_quality_gates_puertas_de_calidad_g0_g9_fail_closed"
     ],
     "245": [
       "docs_quality_telemetry_cases",
-      "docs_quality_telemetry_cases_casos_deterministas_para_almacenar_solo_cambios_y_m\u00e1ximo_n_t",
+      "docs_quality_telemetry_cases_casos_deterministas_para_almacenar_solo_cambios_y_máximo_n_t",
       "docs_quality_telemetry_cases_fixture_generator",
       "docs_quality_telemetry_cases_load_test"
     ],
@@ -3183,13 +3183,13 @@
     ],
     "247": [
       "docs_architecture_dependency_graph",
-      "docs_architecture_dependency_graph_grafo_de_dependencias_planificado_no_grafo_extra\u00eddo_del_c\u00f3digo_fuente",
+      "docs_architecture_dependency_graph_grafo_de_dependencias_planificado_no_grafo_extraído_del_código_fuente",
       "docs_architecture_dependency_graph_regla_de_dependencia"
     ],
     "248": [
       "docs_requirements_traceability",
       "docs_requirements_traceability_matriz_trazabilidad_de_requisitos_v2_esquema_oap_mod_nnn",
-      "docs_requirements_traceability_pol\u00edtica_de_seguimiento"
+      "docs_requirements_traceability_política_de_seguimiento"
     ],
     "249": [
       "frontend_tsconfig",
@@ -3268,7 +3268,7 @@
     ],
     "264": [
       "contributing",
-      "contributing_contribuci\u00f3n_al_proyecto_oap"
+      "contributing_contribución_al_proyecto_oap"
     ],
     "265": [
       "docs_agents_failure_recovery",
@@ -3300,11 +3300,11 @@
     ],
     "272": [
       "docs_research_verified_public_references",
-      "docs_research_verified_public_references_referencias_p\u00fablicas_comprobadas_en_dise\u00f1o_no_sustituyen_auditor\u00eda_del_c\u00f3digo"
+      "docs_research_verified_public_references_referencias_públicas_comprobadas_en_diseño_no_sustituyen_auditoría_del_código"
     ],
     "273": [
       "docs_start_here",
-      "docs_start_here_gu\u00eda_de_arranque_en_kilo_code"
+      "docs_start_here_guía_de_arranque_en_kilo_code"
     ],
     "274": [
       "frontend_src_test_setup",
@@ -3312,11 +3312,11 @@
     ],
     "275": [
       "kilo_commands_oap_audit",
-      "kilo_commands_oap_audit_auditor\u00eda_de_referencia"
+      "kilo_commands_oap_audit_auditoría_de_referencia"
     ],
     "276": [
       "kilo_commands_oap_build_all",
-      "kilo_commands_oap_build_all_construcci\u00f3n_integral_orquestada_oap_avanzar_mientras_gates_pass"
+      "kilo_commands_oap_build_all_construcción_integral_orquestada_oap_avanzar_mientras_gates_pass"
     ],
     "277": [
       "kilo_commands_oap_next",
@@ -3332,7 +3332,7 @@
     ],
     "280": [
       "kilo_commands_oap_telemetry",
-      "kilo_commands_oap_telemetry_prueba_obligatoria_pol\u00edtica_almacenamiento_mqtt"
+      "kilo_commands_oap_telemetry_prueba_obligatoria_política_almacenamiento_mqtt"
     ],
     "281": [
       "kilo_commands_oap_validate",
@@ -3344,7 +3344,7 @@
     ],
     "283": [
       "kilo_rules_02_architecture",
-      "kilo_rules_02_architecture_l\u00edmites_de_arquitectura"
+      "kilo_rules_02_architecture_límites_de_arquitectura"
     ],
     "284": [
       "kilo_rules_03_data",
@@ -3857,13 +3857,13 @@
       "degree": 40
     },
     {
-      "id": "backend_telemetry_storage_ingest_event",
-      "label": "ingest_event()",
+      "id": "backend_assets_models_assettype",
+      "label": "AssetType",
       "degree": 34
     },
     {
-      "id": "backend_assets_models_assettype",
-      "label": "AssetType",
+      "id": "backend_telemetry_storage_ingest_event",
+      "label": "ingest_event()",
       "degree": 34
     },
     {
@@ -3884,15 +3884,15 @@
   ],
   "surprises": [
     {
-      "source": "Estados y m\u00e9tricas",
-      "target": "AttributeCurrent",
+      "source": "Decisión",
+      "target": "Widget",
       "source_files": [
-        "docs/contracts/TELEMETRY_SCHEMA.md",
-        "backend/telemetry/models.py"
+        "docs/architecture/ADR-019-dashboards-trend.md",
+        "backend/dashboards/models.py"
       ],
       "confidence": "INFERRED",
       "relation": "references",
-      "why": "inferred connection - not explicitly stated in source; crosses file types (code \u2194 doc); connects across different repos/directories; bridges separate communities; peripheral node `Estados y m\u00e9tricas` unexpectedly reaches hub `AttributeCurrent`"
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code ↔ doc); connects across different repos/directories; bridges separate communities; peripheral node `Decisión` unexpectedly reaches hub `Widget`"
     },
     {
       "source": "Integridad",
@@ -3903,21 +3903,21 @@
       ],
       "confidence": "INFERRED",
       "relation": "references",
-      "why": "inferred connection - not explicitly stated in source; crosses file types (code \u2194 doc); connects across different repos/directories; bridges separate communities; peripheral node `Integridad` unexpectedly reaches hub `StoragePolicyState`"
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code ↔ doc); connects across different repos/directories; bridges separate communities; peripheral node `Integridad` unexpectedly reaches hub `StoragePolicyState`"
     },
     {
-      "source": "Decisi\u00f3n",
-      "target": "ingest_event()",
+      "source": "Estados y métricas",
+      "target": "AttributeCurrent",
       "source_files": [
-        "docs/architecture/ADR-014-connectivity-gateway-navigation.md",
-        "backend/telemetry/storage.py"
+        "docs/contracts/TELEMETRY_SCHEMA.md",
+        "backend/telemetry/models.py"
       ],
       "confidence": "INFERRED",
       "relation": "references",
-      "why": "inferred connection - not explicitly stated in source; crosses file types (code \u2194 doc); connects across different repos/directories; bridges separate communities; peripheral node `Decisi\u00f3n` unexpectedly reaches hub `ingest_event()`"
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code ↔ doc); connects across different repos/directories; bridges separate communities; peripheral node `Estados y métricas` unexpectedly reaches hub `AttributeCurrent`"
     },
     {
-      "source": "C2 \u2014 Cat\u00e1logo, Conectividad y UX de Activos (2026-11-18)",
+      "source": "C2 — Catálogo, Conectividad y UX de Activos (2026-11-18)",
       "target": "apiFetch()",
       "source_files": [
         "docs/evidence/IMPLEMENTATION_STATUS.md",
@@ -3925,22 +3925,55 @@
       ],
       "confidence": "INFERRED",
       "relation": "references",
-      "why": "inferred connection - not explicitly stated in source; crosses file types (doc \u2194 code); connects across different repos/directories; bridges separate communities; peripheral node `C2 \u2014 Cat\u00e1logo, Conectividad y UX de Activos (2026-11-18)` unexpectedly reaches hub `apiFetch()`"
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code ↔ doc); connects across different repos/directories; bridges separate communities; peripheral node `C2 — Catálogo, Conectividad y UX de Activos (2026-11-18)` unexpectedly reaches hub `apiFetch()`"
     },
     {
-      "source": "Decisi\u00f3n",
-      "target": "Widget",
+      "source": "Decisión",
+      "target": "ingest_event()",
       "source_files": [
-        "docs/architecture/ADR-019-dashboards-trend.md",
-        "backend/dashboards/models.py"
+        "docs/architecture/ADR-014-connectivity-gateway-navigation.md",
+        "backend/telemetry/storage.py"
       ],
       "confidence": "INFERRED",
       "relation": "references",
-      "why": "inferred connection - not explicitly stated in source; crosses file types (doc \u2194 code); connects across different repos/directories; bridges separate communities; peripheral node `Decisi\u00f3n` unexpectedly reaches hub `Widget`"
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code ↔ doc); connects across different repos/directories; bridges separate communities; peripheral node `Decisión` unexpectedly reaches hub `ingest_event()`"
     }
   ],
-  "tokens": {
-    "input": 0,
-    "output": 0
-  }
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Gateway` connect `Gateway` to `CanAdapter`, `platforms/views.py`, `telemetry/views.py`, `AttributeTelemetryViewSet`, `test_connectivity.py`, `AssetViewSet`, `connectivity/views.py`, `test_test_connection_waits_for_connack`, `ModbusAdapter`, `BaseAdapter`, `Dashboard`, `purge_project.py`, `assets/views.py`, `Command`, `connectivity/admin.py`, `GatewayBinding`?",
+      "why": "High betweenness centrality (0.016) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 32 inferred relationships involving `Gateway` (e.g. with `AssetViewSet` and `BacnetAdapter`) actually correct?",
+      "why": "`Gateway` has 32 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `Migration`, `Migration`, `Migration` to the rest of the system?",
+      "why": "1204 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `django_db` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.05660377358490566 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Membership` connect `platforms/views.py` to `UUIDPkModel`, `dashboards/views.py`, `viewsets.py`, `core/serializers.py`, `Tenant`, `AttributeTelemetryViewSet`, `AssetViewSet`, `spatial/views.py`, `conftest.py`, `assets/views.py`, `telemetry/views.py`, `User`, `TenantScopedViewSet`?",
+      "why": "High betweenness centrality (0.011) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 26 inferred relationships involving `Asset` (e.g. with `build_graph()` and `AssetSerializer`) actually correct?",
+      "why": "`Asset` has 26 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `endpoints.ts` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.07801418439716312 - nodes in this community are weakly interconnected."
+    }
+  ]
 }

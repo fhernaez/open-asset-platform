@@ -1,8 +1,27 @@
+# OAP — stack de producción desplegado con Komodo.
+#
+# Flujo de despliegue (Komodo es la ÚNICA vía de deploy):
+#   1. Komodo sincroniza este repositorio.
+#   2. Acción BUILD: construye las imágenes desde ./backend y ./frontend.
+#      Las dependencias (backend/requirements.txt con pip, frontend con npm ci)
+#      se instalan DENTRO del build del servicio; no hay pasos manuales.
+#   3. Acción DEPLOY: levanta los servicios con las imágenes recién buildadas.
+#
+# Seguridad e irreversibilidad:
+#   - NUNCA ejecutar `docker compose down -v` (destruye media_data).
+#   - Nunca ejecutar docker compose a mano sobre el server; todo por Komodo.
+#   - Migraciones y seeds son no destructivos e idempotentes
+#     (migrate --noinput + bootstrap_config --seed-missing-only +
+#     seed_asset_types --refresh; el refresh respeta tipos customizados).
+#   - Rollback: re-deploy en Komodo de la versión anterior (Build anterior).
+#   - Secrets solo por variables de entorno; nunca en este archivo.
 name: oap
 
 services:
   db-bootstrap:
-    image: ghcr.io/fhernaez/open-asset-platform/backend:latest
+    image: oap-backend:komodo
+    build:
+      context: ./backend
     command: ["python", "scripts/ensure_db.py"]
     environment:
       DB_HOST: ${DB_HOST}
@@ -17,7 +36,9 @@ services:
     restart: "no"
 
   migrate:
-    image: ghcr.io/fhernaez/open-asset-platform/backend:latest
+    image: oap-backend:komodo
+    build:
+      context: ./backend
     command: >
       sh -c "python manage.py migrate --noinput
       && python manage.py bootstrap_config --seed-missing-only
@@ -40,7 +61,9 @@ services:
     restart: "no"
 
   api:
-    image: ghcr.io/fhernaez/open-asset-platform/backend:latest
+    image: oap-backend:komodo
+    build:
+      context: ./backend
     environment:
       DJANGO_SETTINGS_MODULE: config.settings
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
@@ -68,7 +91,9 @@ services:
     restart: unless-stopped
 
   event-worker:
-    image: ghcr.io/fhernaez/open-asset-platform/backend:latest
+    image: oap-backend:komodo
+    build:
+      context: ./backend
     command: >
       sh -c "while true; do python manage.py dispatch_outbox; sleep 5; done"
     environment:
@@ -87,8 +112,17 @@ services:
     restart: unless-stopped
 
   telemetry-worker:
-    image: ghcr.io/fhernaez/open-asset-platform/backend:latest
+    image: oap-backend:komodo
+    build:
+      context: ./backend
     command: ["python", "manage.py", "connectivity_worker"]
+    # BACnet: broadcast UDP 47808 para whois/I-Am de gateways BACnet.
+    ports:
+      - "47808:47808/udp"
+    # Modbus RTU por puerto serie (descomentar si hay hardware serie):
+    # devices:
+    #   - "/dev/ttyUSB0:/dev/ttyUSB0"
+    #   - "/dev/ttyS0:/dev/ttyS0"
     environment:
       DJANGO_SETTINGS_MODULE: config.settings
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
@@ -107,7 +141,9 @@ services:
     restart: unless-stopped
 
   frontend:
-    image: ghcr.io/fhernaez/open-asset-platform/frontend:latest
+    image: oap-frontend:komodo
+    build:
+      context: ./frontend
     environment:
       OAP_DEFAULT_LOCALE: ${OAP_DEFAULT_LOCALE:-es}
       OAP_DEFAULT_TIMEZONE: ${OAP_DEFAULT_TIMEZONE:-America/Argentina/Buenos_Aires}
